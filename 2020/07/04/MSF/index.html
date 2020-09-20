@@ -1,84 +1,448 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.0.0-rc.4'>
   <meta charset="utf-8">
+  <!-- SEO相关 -->
   
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
 
+  <!-- 页面元数据 -->
   
   <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一.初识    MSF1.1什么是MetasploitMetasploit就是个漏洞框架。 它的全称叫做The Metasploit Framework ,简称MSF。是一个免费、可下载的框架,通过它可以很容易地获取、开发并对计算机软件漏洞实施攻击。它本身附带数百个已知软件漏洞的专业级漏洞攻击工具。当H.D. Moore在2003年发布MSF时,计算机安全状况也被永久性地改变了。仿佛一夜之间， 任">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/2020/07/04/MSF/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一.初识    MSF1.1什么是MetasploitMetasploit就是个漏洞框架。 它的全称叫做The Metasploit Framework ,简称MSF。是一个免费、可下载的框架,通过它可以很容易地获取、开发并对计算机软件漏洞实施攻击。它本身附带数百个已知软件漏洞的专业级漏洞攻击工具。当H.D. Moore在2003年发布MSF时,计算机安全状况也被永久性地改变了。仿佛一夜之间， 任">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-04T12:39:11.571Z">
-<meta property="article:modified_time" content="2020-09-14T11:18:48.097Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
   
+
+  <!-- feed -->
   
-    <link rel="icon" href="/favicon.png">
+
+  <!-- import meta -->
   
+
+  <!-- link -->
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css">
+
   
   
+
+  
+
+  
+
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
 <link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 5.1.1"></head>
+  
+  
+  
+  <!-- 脚本懒加载函数 -->
+  <script>
+  function loadScript(src, cb) {
+    var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
+    var script = document.createElement('script');
+    script.setAttribute('type','text/javascript');
+    if (cb) script.onload = cb;
+    script.setAttribute('src', src);
+    HEAD.appendChild(script);
+  }
+  //https://github.com/filamentgroup/loadCSS
+  !function(c){"use strict";var e=function(e,t,n,r){var o,i=c.document,a=i.createElement("link");if(t)o=t;else{var d=(i.body||i.getElementsByTagName("head")[0]).childNodes;o=d[d.length-1]}var f=i.styleSheets;if(r)for(var l in r)r.hasOwnProperty(l)&&a.setAttribute(l,r[l]);a.rel="stylesheet",a.href=e,a.media="only x",function e(t){if(i.body)return t();setTimeout(function(){e(t)})}(function(){o.parentNode.insertBefore(a,t?o:o.nextSibling)});var s=function(e){for(var t=a.href,n=f.length;n--;)if(f[n].href===t)return e();setTimeout(function(){s(e)})};function u(){a.addEventListener&&a.removeEventListener("load",u),a.media=n||"all"}return a.addEventListener&&a.addEventListener("load",u),(a.onloadcssdefined=s)(u),a};"undefined"!=typeof exports?exports.loadCSS=e:c.loadCSS=e}("undefined"!=typeof global?global:this);
+  </script>
+  <script id="loadcss"></script>
+</head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+  <header class="l_header auto shadow blur " style='opacity: 0' >
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+		<div class="nav-main">
+      
         
-          <a class="main-nav-link" href="/">Home</a>
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+  <div class="l_body">
+    <div class="l_cover">
+  
+    
+    
+        <div class='cover-wrapper post dock' style="display: none;">
+          
+            <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg"></div>
+          
+          <div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">Sculptor</p>
+    
+    
+  </div>
+  <div class='bottom'>
+    <div class='menu navigation'>
+      <div class='list-h'>
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          
+            <a href="/"
+              
+              
+              id="home">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg'><p>博客</p>
+            </a>
+          
+            <a href="/archives/"
+              
+              
+              id="archives">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg'><p>归档</p>
+            </a>
+          
+            <a href="/faqs/"
+              
+              
+              id="faqs">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg'><p>帮助</p>
+            </a>
+          
+            <a href="/examples/"
+              
+              
+              id="examples">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg'><p>示例</p>
+            </a>
+          
+            <a href="/contributors/"
+              
+              
+              id="contributors">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg'><p>社区</p>
+            </a>
+          
         
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
       </div>
     </div>
   </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-MSF" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/07/04/MSF/" class="article-date">
-  <time datetime="2020-07-04T12:39:11.571Z" itemprop="datePublished">2020-07-04</time>
-</a>
+</div>
+
+          <div class="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+        </div>
+    
+  
+  </div>
+  
+    <div class='safearea'>
+      <div class='body-wrapper' id="pjax-container">
+        
+          <!--此文件用来存放一些不方便取值的变量--> 
+<!--思路大概是将值藏到重加载的区域内--> 
+ 
+ 
+ 
+<div id="pjax-data" style="display: none"> 
+  <div id="pjax-ispage">false</div> 
+  <div id="pjax-pageTitle"></div> 
+  <div id="pjax-enable-cover">true</div> 
+  <div id="pjax-comment-path"></div> 
+  <div id="pjax-comment-placeholder"></div> 
+</div> 
+ 
+ 
+<script> 
+  // 处理封面 此时 jquery 还没加载 
+  if ("none" == "none") { // 移除封面 
+    document.getElementsByClassName('cover-wrapper')[0].style.display = "none"; 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show"); 
+  } else { 
+    if ("none" == "half") { // 半屏 
+      document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'half'); 
+      document.getElementsByClassName('scroll-down')[0].style.display = "none"; 
+    } else if ("none" == "full") { // 全屏 
+      document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'full'); 
+      document.getElementsByClassName('scroll-down')[0].style.display = ""; 
+    } 
+    document.getElementsByClassName('cover-wrapper')[0].style.display = ""; 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.remove("show"); 
+  } 
+</script> 
+ 
+
+        
+        
+
+<div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
+  
+
+
+  
+  <div class="article-meta" id="top">
+    
+    
     
   </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一-初识-MSF"><a href="#一-初识-MSF" class="headerlink" title="一.初识    MSF"></a>一.初识    MSF</h1><h2 id="1-1什么是Metasploit"><a href="#1-1什么是Metasploit" class="headerlink" title="1.1什么是Metasploit"></a>1.1什么是Metasploit</h2><p>Metasploit就是个漏洞框架。 它的全称叫做The Metasploit Framework ,简称MSF。是一个免费、可下载的框架,通过它可以很容易地获取、开发并对计算机软件漏洞实施攻击。它本身附带数百个已知软件漏洞的专业级漏洞攻击工具。当H.D. Moore在2003年发布MSF时,计算机安全状况也被永久性地改变了。仿佛一夜之间， 任何人都可以成为黑客,每个人都可以使用攻击工具来攻击那些未打过补丁或者刚刚打过补J的漏洞。软件厂商再也不能推迟发布针对已公布漏洞的补丁了，这是因为MSF团队一直都在努力开发各种攻击工具,并将它们贡献给所有MSF用户。<br>MSF的设计初衷是打造成一个攻击工具开发平台 ,然而在目前情况下,安全专家以及业余安全爱好者更多地将其当作种点几下 鼠标就可以利用其中附带的攻击工具进行成功攻击的环境。</p>
+
+
+  
+  <h1 id="一-初识-MSF"><a href="#一-初识-MSF" class="headerlink" title="一.初识    MSF"></a>一.初识    MSF</h1><h2 id="1-1什么是Metasploit"><a href="#1-1什么是Metasploit" class="headerlink" title="1.1什么是Metasploit"></a>1.1什么是Metasploit</h2><p>Metasploit就是个漏洞框架。 它的全称叫做The Metasploit Framework ,简称MSF。是一个免费、可下载的框架,通过它可以很容易地获取、开发并对计算机软件漏洞实施攻击。它本身附带数百个已知软件漏洞的专业级漏洞攻击工具。当H.D. Moore在2003年发布MSF时,计算机安全状况也被永久性地改变了。仿佛一夜之间， 任何人都可以成为黑客,每个人都可以使用攻击工具来攻击那些未打过补丁或者刚刚打过补J的漏洞。软件厂商再也不能推迟发布针对已公布漏洞的补丁了，这是因为MSF团队一直都在努力开发各种攻击工具,并将它们贡献给所有MSF用户。<br>MSF的设计初衷是打造成一个攻击工具开发平台 ,然而在目前情况下,安全专家以及业余安全爱好者更多地将其当作种点几下 鼠标就可以利用其中附带的攻击工具进行成功攻击的环境。</p>
 <h2 id="1-2MSF专业术语讲解"><a href="#1-2MSF专业术语讲解" class="headerlink" title="1.2MSF专业术语讲解"></a>1.2MSF专业术语讲解</h2><h3 id="1-2-1渗透攻击-Exploit"><a href="#1-2-1渗透攻击-Exploit" class="headerlink" title="1.2.1渗透攻击(Exploit)"></a>1.2.1渗透攻击(Exploit)</h3><p>渗透攻击是指由攻击者或者渗透测试者利用系统、应用或服务中的安全漏洞，所进行的攻击行为。<br>流行的攻击技术包括:缓冲区溢出、Web应用程序漏洞攻击,以及利用配置错误等。</p>
 <h3 id="1-2-2攻击载荷-Payload"><a href="#1-2-2攻击载荷-Payload" class="headerlink" title="1.2.2攻击载荷(Payload)"></a>1.2.2攻击载荷(Payload)</h3><p>攻击载何是我们期望目标系统在被渗透攻击后而执行的代码，在框架中可以自由的选择、传送和植入。比如，反弹式shell 是一种从目标主机到攻击主机创建网络连接,并提供命令行shell 的攻击载荷。bind shell 攻击载荷则在目标主机上将命令行shell 绑定到一个打开的监听端口,攻击者可以连接这些端口来取得shell交互。</p>
 <h3 id="1-2-3溢出代码-Shellcode"><a href="#1-2-3溢出代码-Shellcode" class="headerlink" title="1.2.3溢出代码(Shellcode)"></a>1.2.3溢出代码(Shellcode)</h3><p>shellcode是在渗透攻击时作为攻击载荷运行的一组机器指令。shellcode通常用汇编语言编写。在大多数情况下,目标系统执行了shellcode这一组指令后 才会提供一个命令行shell或者Meterpreter shell ,这也是shellcode名称的由来。</p>
@@ -565,95 +929,798 @@ read only = no</code></pre>
 <p>keyscan_stop       #结束键盘记录</p>
 <p>其他详细信息，查看：<a target="_blank" rel="noopener" href="http://xz.aliyun.com/t/2536%EF%BC%88%E5%88%AB%E4%BA%BA%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%89">http://xz.aliyun.com/t/2536（别人的博客）</a></p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/04/MSF/" data-id="ckf55olqx0000acw96yj2emcs" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
+  
   
     
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=http://example.com/2020/07/04/MSF/>http://example.com/2020/07/04/MSF/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-14T19:18:48+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Sep 14, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2020/07/04/MSF/&title= - Hexo&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2020/07/04/MSF/&title= - Hexo&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2020/07/04/MSF/&title= - Hexo&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i></p>
+          <p class='content'>一，漏洞扫描技术1.1扫描原理1.1.1. Ping 检测win+R -&gt; cmd -&gt; ping + 目标IP
+当 ping 通目标 IP 后 返回 TTL值判断目标 IP 的操作...</p>
+        </a>
+      
+      
+    </div>
   
 </article>
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
 
   
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
     
 
-  
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
-  
+  <header>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1%E4%BB%80%E4%B9%88%E6%98%AFMetasploit"><span class="toc-text">1.1什么是Metasploit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2MSF%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD%E8%AE%B2%E8%A7%A3"><span class="toc-text">1.2MSF专业术语讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB-Exploit"><span class="toc-text">1.2.1渗透攻击(Exploit)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2%E6%94%BB%E5%87%BB%E8%BD%BD%E8%8D%B7-Payload"><span class="toc-text">1.2.2攻击载荷(Payload)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3%E6%BA%A2%E5%87%BA%E4%BB%A3%E7%A0%81-Shellcode"><span class="toc-text">1.2.3溢出代码(Shellcode)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4%E6%A8%A1%E5%9D%97-Module"><span class="toc-text">1.2.4模块( Module)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-5%E7%9B%91%E5%90%AC%E5%99%A8-Listener"><span class="toc-text">1.2.5监听器(Listener)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0MSF"><span class="toc-text">2.1.如何更新MSF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-MSF%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">2.2.MSF的目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-Modules-%E6%A8%A1%E5%9D%97"><span class="toc-text">2.3.Modules(模块)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-Auxiliary"><span class="toc-text">2.3.1.Auxiliary</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-Encoders"><span class="toc-text">2.3.2.Encoders</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-Exploits"><span class="toc-text">2.3.3.Exploits</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-4-Nops"><span class="toc-text">2.3.4.Nops</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-5-Payloads"><span class="toc-text">2.3.5.Payloads</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-6-Post"><span class="toc-text">2.3.6.Post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-7-Data"><span class="toc-text">2.3.7.Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-8-Plugins"><span class="toc-text">2.3.8.Plugins</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-9-Scripts"><span class="toc-text">2.3.9.Scripts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-10-TOOLS"><span class="toc-text">2.3.10.TOOLS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Msfconsole%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="toc-text">3.1.Msfconsole控制台</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Msfconsole%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-text">3.2.Msfconsole的好处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Msfconsole%E5%91%BD%E4%BB%A4"><span class="toc-text">3.3.Msfconsole命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Exploits-%E6%A8%A1%E5%9D%97"><span class="toc-text">4.1.Exploits 模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-Payloads-%E6%A8%A1%E5%9D%97"><span class="toc-text">4.2.Payloads 模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%94%BB%E5%87%BB%E6%B8%97%E9%80%8F%EF%BC%88MS08-067"><span class="toc-text">5.1.网络服务器攻击渗透（MS08_067)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%94%BB%E5%87%BB%E6%B8%97%E9%80%8F%EF%BC%88MS10-018"><span class="toc-text">5.2.浏览器攻击渗透（MS10_018)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-%E5%BA%94%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%A0%BC%E5%BC%8F%E6%B8%97%E9%80%8F%EF%BC%8C%E5%88%A9%E7%94%A8word%E5%8E%BB%E6%B8%97%E9%80%8F%EF%BC%88MS10-087"><span class="toc-text">5.3.应用软件格式渗透，利用word去渗透（MS10_087)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-%E7%BD%91%E8%B7%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%94%BB%E5%87%BB%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%EF%BC%88MS17-010"><span class="toc-text">5.4.网路服务器攻击渗透测试（MS17_010)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-5-%E5%88%A9%E7%94%A8-samba-%E6%9C%8D%E5%8A%A1%E6%BC%8F%E6%B4%9E%E5%85%A5%E4%BE%B5-Linux-%E4%B8%BB%E6%9C%BA%EF%BC%88CVE-2017-7494-%E4%B8%8E-samba-%E4%BD%8E%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%EF%BC%89"><span class="toc-text">5.5.利用 samba 服务漏洞入侵 Linux 主机（CVE-2017-7494 与 samba 低版本漏洞利用）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-6-Bash-Shellshock-CVE-2014-6271%EF%BC%88%E7%A0%B4%E5%A3%B3%EF%BC%89"><span class="toc-text">5.6.Bash Shellshock CVE_2014_6271（破壳）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-7-PHP-CGI-%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-text">5.7.PHP CGI 漏洞利用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-8-Java-RMI-SERVER-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E4%B8%8E-java-cve-2013-0422"><span class="toc-text">5.8.Java RMI SERVER 命令执行漏洞与 java cve_2013_0422</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-9-Distcc-%E5%90%8E%E9%97%A8%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-text">5.9. Distcc 后门漏洞利用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-10-Druby-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-text">5.10.Druby 命令执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-11-CVE-2017-8464-%E9%9C%87%E7%BD%91%E4%B8%89%E4%BB%A3-%EF%BC%88%E8%BF%9C%E7%A8%8B%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F%E6%BC%8F%E6%B4%9E%EF%BC%89"><span class="toc-text">5.11. CVE_2017_8464 震网三代 （远程快捷方式漏洞）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-12-flash-0day-CVE-2018-4878"><span class="toc-text">5.12. flash 0day (CVE-2018-4878)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-13-%E7%94%9F%E6%88%90-exe-%E7%9A%84%E6%9C%A8%E9%A9%AC%E6%96%87%E4%BB%B6"><span class="toc-text">5.13. 生成 exe 的木马文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-14-%E6%B8%97%E9%80%8F-Android-%E7%B3%BB%E7%BB%9F"><span class="toc-text">5.14. 渗透 Android 系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-14-1-%E6%B8%97%E9%80%8F%E6%AD%A5%E9%AA%A4"><span class="toc-text">5.14.1. 渗透步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="toc-text">1. 内网渗透</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%A4%96%E7%BD%91%E6%B8%97%E9%80%8F"><span class="toc-text">2. 外网渗透</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-14-2-%E5%90%8E%E6%9C%9F-%E5%A4%84%E7%90%86"><span class="toc-text">5.14.2. 后期 处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-Syn-%E6%89%AB%E6%8F%8F"><span class="toc-text">7.1 Syn 扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-Tcp-%E6%89%AB%E6%8F%8F"><span class="toc-text">7.2 Tcp 扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-SMB-%E7%89%88%E6%9C%AC%E6%89%AB%E6%8F%8F"><span class="toc-text">8.1. SMB 版本扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-SSH-%E7%89%88%E6%9C%AC%E6%89%AB%E6%8F%8F"><span class="toc-text">8.2. SSH 版本扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-3-FTP-%E7%89%88%E6%9C%AC%E6%89%AB%E6%8F%8F"><span class="toc-text">8.3. FTP 版本扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%88%B0Windows%E4%B8%BB%E6%9C%BA"><span class="toc-text">9.1.上传文件到Windows主机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2-%E4%BB%8EWindows%E4%B8%BB%E6%9C%BA%E4%B8%8A%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6"><span class="toc-text">9.2.从Windows主机上下载文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-%E5%9C%A8%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BA%E4%B8%8A%E6%89%A7%E8%A1%8C-exe-%E6%96%87%E4%BB%B6"><span class="toc-text">9.3.在目标主机上执行 exe 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-4-%E5%88%9B%E5%BB%BACMD%E6%96%B0%E9%80%9A%E9%81%93"><span class="toc-text">9.4.创建CMD新通道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-5-%E6%98%BE%E7%A4%BA%E8%BF%9B%E7%A8%8B"><span class="toc-text">9.5.显示进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-6-%E8%8E%B7%E5%8F%96admin%E6%9D%83%E9%99%90"><span class="toc-text">9.6.获取admin权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-7-%E4%BD%BF%E7%94%A8-Hashdump-%E8%BD%AC%E5%82%A8%E6%89%80%E6%9C%89-hash-%E5%80%BC"><span class="toc-text">9.7.使用 Hashdump 转储所有 hash 值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-8-%E4%BD%BF%E7%94%A8-Credcollect-%E8%BD%AC%E5%82%A8-hash-%E5%80%BC"><span class="toc-text">9.8.使用 Credcollect 转储 hash 值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-9-%E5%88%9B%E5%BB%BA%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="toc-text">9.9.创建端口转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-10-%E5%88%A0%E9%99%A4%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="toc-text">9.10.删除端口转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-11-%E5%9C%A8%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BA%E4%B8%8A%E6%90%9C%E7%B4%A2%E6%96%87%E4%BB%B6"><span class="toc-text">9.11.在目标主机上搜索文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-12-%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7-ID"><span class="toc-text">9.12.获取用户 ID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-13-%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF"><span class="toc-text">9.13.获取系统信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-14-%E6%A8%A1%E6%8B%9F%E4%BB%BB%E4%BD%95%E7%94%A8%E6%88%B7%EF%BC%88token-%E6%93%8D%E4%BD%9C%EF%BC%89"><span class="toc-text">9.14.模拟任何用户（token 操作）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-15-webcam-%E6%91%84%E5%83%8F%E5%A4%B4%E5%91%BD%E4%BB%A4"><span class="toc-text">9.15 webcam 摄像头命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-16-execute-%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="toc-text">9.16. execute 执行文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-17-timestomp-%E4%BC%AA%E9%80%A0%E6%97%B6%E9%97%B4%E6%88%B3"><span class="toc-text">9.17. timestomp 伪造时间戳</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-18-%E6%9F%A5%E7%9C%8B%E7%9B%98%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%92%8C%E6%97%B6%E9%97%B4"><span class="toc-text">9.18. 查看盘的所有文件和时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-19-enable-rdp-%E8%84%9A%E6%9C%AC%E5%BC%80%E5%90%AF3389%EF%BC%88%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E8%BF%9E%E6%8E%A5%EF%BC%89"><span class="toc-text">9.19. enable_rdp 脚本开启3389（远程桌面连接）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-20-%E9%94%AE%E7%9B%98%E8%AE%B0%E5%BD%95%EF%BC%88%E8%BF%99%E4%B8%AA%E5%BE%97%E9%9D%A0%E8%BF%90%E6%B0%94%EF%BC%89"><span class="toc-text">9.20. 键盘记录（这个得靠运气）</span></a></li></ol>
     </div>
-  </div>
+  </section>
 
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/07/04/MSF/">(no title)</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
+
 </aside>
-        
+
+
+
       </div>
-      <footer id="footer">
+      
   
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+  <footer class="footer clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+          
+            
+          
+            
+          
+        </div>
+      
+    
+      
+        <div><p>Blog content follows the <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+      
+    
+      
+        
+          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+</div>
+        
+      
+    
+      
+        Use
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.0.0-rc.4" target="_blank" class="codename">Volantis</a>
+        as theme
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2017-2020 XXX</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+      <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
     </div>
   </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
+  <div>
+    <!-- required -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+<script>
+  function pjax_fancybox() {
+    $(".md .gallery").find("img").each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".md .gallery").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  function SCload_fancybox() {
+    if ($(".md .gallery").find("img").length == 0) return;
+    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
+    setTimeout(function() {
+      loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
+    }, 1);
+  };
+  $(function () {
+    SCload_fancybox();
+  });
+</script>
+
+
+<!-- internal -->
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+    <script>
+      window.FPConfig = {
+        delay: 0,
+        ignoreKeywords: [],
+        maxRPS: 5,
+        hoverDelay: 25
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
   
-</nav>
+
+
+
+
+
+
+
+
+
+
+  
+  
+<script src="/js/valine.js"></script>
+
+
+<script>
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link'.split(',').filter(function (item) {
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick', 'mail', 'link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function (item) {
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+
+  function pjax_valine() {
+    if(!document.querySelectorAll("#valine_container")[0])return;
+
+    let pagePlaceholder = $.trim($('#pjax-comment-placeholder').text()) || "快来评论吧~";
+
+    let path = $.trim($('#pjax-comment-path').text());
+    if (path.length == 0) {
+      let defaultPath = '';
+      path = defaultPath || decodeURI(window.location.pathname);
+    }
+
+    var valine = new Valine();
+    valine.init({
+      el: '#valine_container',
+      meta: meta,
+      placeholder: pagePlaceholder,
+      path: path,
+      appId: "",
+      appKey: "",
+      pageSize: '10',
+      avatar: 'robohash',
+      lang: 'zh-cn',
+      visitor: 'true',
+      highlight: 'true',
+      mathJax: 'false',
+      enableQQ: 'true',
+      requiredFields: requiredFields,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps
+    })
+  }
+
+  $(function () {
+    pjax_valine();
+  });
+</script>
+
+
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+
+  
     
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
+<script src="/js/search.js"></script>
 
   
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
+
+<!-- optional -->
+
+  <script>
+const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
+const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
+(function ($) {
   
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+    customSearch = new HexoSearch({
+      imagePath: SearchServiceimagePath
+    });
+  
+})(jQuery);
+
+</script>
 
 
 
 
-<script src="/js/script.js"></script>
 
 
 
 
+
+
+
+  <script defer>
+
+  const LCCounter = {
+    app_id: 'u9j57bwJod4EDmXWdxrwuqQT-MdYXbMMI',
+    app_key: 'jfHtEKVE24j0IVCGHbvuFClp',
+    custom_api_server: '',
+
+    // 查询存储的记录
+    getRecord(Counter, url, title) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {url, title: title, times: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    },
+
+    // 发起自增请求
+    increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    },
+
+    // 构建自增请求体
+    buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "times": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    },
+
+    // 校验是否为有效的 UV
+    validUV() {
+      var key = 'LeanCloudUVTimestamp';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    },
+
+    addCount(Counter) {
+      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
+      enableIncr = true;
+      var getterArr = [];
+      var incrArr = [];
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#lc-sv');
+      if (pvCtn || enableIncr) {
+        var pvGetter = this.getRecord(Counter, 'http://example.com' + '/#lc-sv', 'Visits').then((record) => {
+          incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-sv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + 1;
+              if (pvCtn) {
+                pvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#lc-uv');
+      if (uvCtn || enableIncr) {
+        var uvGetter = this.getRecord(Counter, 'http://example.com' + '/#lc-uv', 'Visitors').then((record) => {
+          var vuv = this.validUV();
+          vuv && incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-uv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + (vuv ? 1 : 0);
+              if (uvCtn) {
+                uvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 请求文章的浏览数，如果是当前页面就自增
+      var allPV = document.querySelectorAll('#lc-pv');
+      if (allPV.length > 0 || enableIncr) {
+        for (i = 0; i < allPV.length; i++) {
+          let pv = allPV[i];
+          let title = pv.getAttribute('data-title');
+          var url = 'http://example.com' + pv.getAttribute('data-path');
+          if (url) {
+            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
+              // 是当前页面就自增
+              let curPath = window.location.pathname;
+              if (curPath.includes('index.html')) {
+                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
+              }
+              if (pv.getAttribute('data-path') == curPath) {
+                incrArr.push(this.buildIncrement(record.objectId));
+              }
+              if (pv) {
+                var ele = pv.querySelector('#lc-pv #number');
+                if (ele) {
+                  if (pv.getAttribute('data-path') == curPath) {
+                    ele.innerText = (record.times || 0) + 1;
+                  } else {
+                    ele.innerText = record.times || 0;
+                  }
+                  pv.style.display = 'inline';
+                }
+              }
+            });
+            getterArr.push(viewGetter);
+          }
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && this.increment(Counter, incrArr);
+        })
+      }
+
+    },
+
+
+    fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': this.app_id,
+            'X-LC-Key': this.app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      this.addCount(Counter);
+    },
+
+    refreshCounter() {
+      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+      if (api_server) {
+        this.fetchData(api_server);
+      } else {
+        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
+          .then(resp => resp.json())
+          .then(({api_server}) => {
+            this.fetchData('https://' + api_server);
+          });
+      }
+    }
+
+  };
+
+  LCCounter.refreshCounter();
+
+  document.addEventListener('pjax:complete', function () {
+    LCCounter.refreshCounter();
+  });
+</script>
+
+
+
+<!-- more -->
+
+
+    
+      
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
+    <script>
+      window.ShowLoading = function() {
+        NProgress.start();
+      };
+      window.HideLoading = function() {
+        NProgress.done();
+      }
+    </script>
+  
+</div>
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+      if (typeof $.fancybox != "undefined") {
+        $.fancybox.close();    // 关闭弹窗
+      }
+      $('.l_header .switcher .s-search').removeClass('active'); // 关闭移动端激活的搜索框
+      $('.l_header').removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      $('.wrapper').removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      $('.s-top').unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+      window.ShowLoading();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 关于百度统计对 SPA 页面的处理：
+      // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
+      // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
+      // 
+
+      // 关于谷歌统计对 SPA 页面的处理：
+      // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
+      // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
+      
+
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+      try{
+          if (typeof $.fancybox == "undefined") {
+            SCload_fancybox();
+          } else {
+            pjax_fancybox();
+          }
+        
+        
+        
+        
+        
+        
+          pjax_valine();
+        
+        
+        
+        
+        
+      } catch (e) {
+        console.log(e);
+      }
+      window.HideLoading();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.HideLoading();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+
+    
   </div>
 </body>
 </html>
