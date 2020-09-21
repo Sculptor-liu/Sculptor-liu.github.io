@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/3.0.0'>
+<head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.0.0-rc.4'>
   <meta charset="utf-8">
   <!-- SEO相关 -->
   
@@ -15,11 +15,11 @@
   <meta name="HandheldFriendly" content="True" >
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
 
   <!-- 页面元数据 -->
   
-  <title>Archive - Sculptor</title>
+  <title>Archive - Sculptor的博客</title>
   
 
   
@@ -31,28 +31,18 @@
   
 
   <!-- link -->
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
   
     
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-fontawesome-pro@master/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css">
 
   
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css">
-
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
-
   
 
   
 
   
 
-  
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
   
 
   
@@ -68,16 +58,32 @@
   
   
   
+  <!-- 脚本懒加载函数 -->
+  <script>
+  function loadScript(src, cb) {
+    var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
+    var script = document.createElement('script');
+    script.setAttribute('type','text/javascript');
+    if (cb) script.onload = cb;
+    script.setAttribute('src', src);
+    HEAD.appendChild(script);
+  }
+  //https://github.com/filamentgroup/loadCSS
+  !function(c){"use strict";var e=function(e,t,n,r){var o,i=c.document,a=i.createElement("link");if(t)o=t;else{var d=(i.body||i.getElementsByTagName("head")[0]).childNodes;o=d[d.length-1]}var f=i.styleSheets;if(r)for(var l in r)r.hasOwnProperty(l)&&a.setAttribute(l,r[l]);a.rel="stylesheet",a.href=e,a.media="only x",function e(t){if(i.body)return t();setTimeout(function(){e(t)})}(function(){o.parentNode.insertBefore(a,t?o:o.nextSibling)});var s=function(e){for(var t=a.href,n=f.length;n--;)if(f[n].href===t)return e();setTimeout(function(){s(e)})};function u(){a.addEventListener&&a.removeEventListener("load",u),a.media=n||"all"}return a.addEventListener&&a.addEventListener("load",u),(a.onloadcssdefined=s)(u),a};"undefined"!=typeof exports?exports.loadCSS=e:c.loadCSS=e}("undefined"!=typeof global?global:this);
+  </script>
+  <script id="loadcss"></script>
 </head>
 
 <body>
-  <header class="l_header always shadow blur"  >
+  <header class="l_header auto shadow blur " style='opacity: 0' >
   <div class='container'>
   <div class='wrapper'>
     <div class='nav-sub'>
       <p class="title"></p>
       <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
-        <li><a class="s-comment fal fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
         
       </ul>
     </div>
@@ -86,7 +92,7 @@
         
         <a class="title flat-box" target="_self" href='/'>
           
-            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/Linhk1606/blog-cdn@0.0.7.5/img/lhk-logo.png'/>
+            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
           
           
           
@@ -101,18 +107,20 @@
             
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" 
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
                   
                   
+                  
+                    id="home"
                   >
-                  <i class='fal fa-cube fa-fw'></i>
-		  
-		  导航
+                  <i class='fas fa-rss fa-fw'></i>博客
                 </a>
                 
-                  <ul class="list-v">
-                    
-                      
+              </li>
+            
+          
+          
+            
             
               <li>
                 <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
@@ -121,16 +129,14 @@
                   
                     id="categories"
                   >
-                  <i class='fal fa-folder-open fa-fw'></i>
-		  
-		  分类
+                  <i class='fas fa-folder-open fa-fw'></i>分类
                 </a>
                 
               </li>
             
           
-                    
-                      
+          
+            
             
               <li>
                 <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
@@ -139,16 +145,14 @@
                   
                     id="tags"
                   >
-                  <i class='fal fa-hashtag fa-fw'></i>
-		  
-		  标签
+                  <i class='fas fa-tags fa-fw'></i>标签
                 </a>
                 
               </li>
             
           
-                    
-                      
+          
+            
             
               <li>
                 <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
@@ -157,16 +161,8 @@
                   
                     id="archives"
                   >
-                  <i class='fal fa-list fa-fw'></i>
-		  
-		  时间轴
+                  <i class='fas fa-archive fa-fw'></i>归档
                 </a>
-                
-              </li>
-            
-          
-                    
-                  </ul>
                 
               </li>
             
@@ -175,114 +171,14 @@
             
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" 
-                  
-                  
-                  >
-                  <i class='fal fa-info fa-fw'></i>
-		  
-		  关于
-                </a>
-                
-                  <ul class="list-v">
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/about
-                  
-                  
-                  
-                    id="about"
-                  >
-                  <i class='fal fa-user-circle fa-fw'></i>
-		  
-		  我&本站
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/friends
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
                   
                   
                   
                     id="friends"
                   >
-                  <i class='fal fa-link fa-fw'></i>
-		  
-		  友链
+                  <i class='fas fa-link fa-fw'></i>友链
                 </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/time-machine/
-                  
-                  
-                  
-                    id="time-machine"
-                  >
-                  <i class='fal fa-clock fa-fw'></i>
-		  
-		  时光鸡
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <hr>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=https://lhkstudio.me
-                  
-                  
-                  
-                    id="https:lhkstudiome"
-                  >
-                  <i class='fal fa-caret-square-right fa-fw'></i>
-		  
-		  个人主页
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=https://github.com/Linhk1606
-                  
-                  
-                  
-                    id="https:githubcomLinhk1606"
-                  >
-                  <i class='fal fa-code-branch fa-fw'></i>
-		  
-		  Follow Me
-                </a>
-                
-              </li>
-            
-          
-                    
-                  </ul>
                 
               </li>
             
@@ -291,219 +187,14 @@
             
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" 
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
                   
                   
+                  
+                    id="about"
                   >
-                  <i class='fal fa-shield-alt fa-fw'></i>
-		  
-		  管理
+                  <i class='fas fa-info-circle fa-fw'></i>关于我
                 </a>
-                
-                  <ul class="list-v">
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=https://status.lhkstudio.me
-                  
-                  
-                  
-                    id="https:statuslhkstudiome"
-                  >
-                  <i class='fal fa-telescope fa-fw'></i>
-		  
-		  站点监视
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=https://www.yuque.com/linhk1606/hexo
-                  
-                  
-                  
-                    id="https:wwwyuquecomlinhk1606hexo"
-                  >
-                  <i class='fal fa-edit fa-fw'></i>
-		  
-		  云端编辑
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=https://github.com/linhk1606/blog-source
-                  
-                  
-                  
-                    id="https:githubcomlinhk1606blog-source"
-                  >
-                  <i class='fal fa-file-code fa-fw'></i>
-		  
-		  博客源码
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=https://console.cloud.tencent.com/scf/list-detail?rid=1&amp;ns=default&amp;id=Hexo
-                  
-                  
-                  
-                    id="https:consolecloudtencentcomscflist-detail?rid=1&amp;ns=default&amp;id=Hexo"
-                  >
-                  <i class='fal fa-brackets-curly fa-fw'></i>
-		  
-		  腾讯云函数
-                </a>
-                
-              </li>
-            
-          
-                    
-                  </ul>
-                
-              </li>
-            
-          
-          
-            
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" 
-                  
-                  
-                  >
-                  <i class='fal fa-ellipsis-v fa-fw'></i>
-		  
-		  更多
-                </a>
-                
-                  <ul class="list-v">
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/2019-nCoV/
-                  
-                  
-                  
-                    id="2019-nCoV"
-                  >
-                  <i class='fal fa-biohazard fa-fw'></i>
-		  
-		  肺炎疫情图
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/atom.xml
-                  
-                  
-                  
-                    id="atomxml"
-                  >
-                  <i class='fal fa-rss fa-fw'></i>
-		  
-		  RSS订阅
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/sitemap.xml
-                  
-                  
-                  
-                    id="sitemapxml"
-                  >
-                  <i class='fal fa-sitemap fa-fw'></i>
-		  
-		  站点地图
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/Periodic-table
-                  
-                  
-                  
-                    id="Periodic-table"
-                  >
-                  <i class='fal fa-flask fa-fw'></i>
-		  
-		  3D元素周期表
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              
-                <li>
-                  <a class="flat-box">
-                    <i class='fal fa-compact-disc fa-fw music'></i>来点音乐
-                  </a>
-                  <ul class="list-v">
-                    <li>
-                      <div class="aplayer-container">
-                        
-
-  
-    <meting-js
-      theme='#734ae6'
-      autoplay='false'
-      volume='0.7'
-      loop='all'
-      order='random'
-      fixed='false'
-      list-max-height='320px'
-      server='netease'
-      type='playlist'
-      id='3194206062'
-      list-folded='true'>
-    </meting-js>
-  
-
-
-                      </div>
-                    </li>
-                  </ul>
-                <li>
-              
-            
-          
-                    
-                  </ul>
                 
               </li>
             
@@ -514,34 +205,36 @@
 
       <div class="m_search">
         <form name="searchform" class="form u-search-form">
-          <i class="icon fal fa-search fa-fw"></i>
+          <i class="icon fas fa-search fa-fw"></i>
           <input type="text" class="input u-search-input" placeholder="Search..." />
         </form>
       </div>
 
 			<ul class='switcher nav-list-h m-phone'>
 				
-					<li><a class="s-search fal fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
 				
 				<li>
-          <a class="s-menu fal fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
           <ul class="menu-phone list-v navigation white-box">
             
               
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" 
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
                   
                   
+                  
+                    id="home"
                   >
-                  <i class='fal fa-cube fa-fw'></i>
-		  
-		  导航
+                  <i class='fas fa-rss fa-fw'></i>博客
                 </a>
                 
-                  <ul class="list-v">
-                    
-                      
+              </li>
+            
+          
+            
+              
             
               <li>
                 <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
@@ -550,16 +243,14 @@
                   
                     id="categories"
                   >
-                  <i class='fal fa-folder-open fa-fw'></i>
-		  
-		  分类
+                  <i class='fas fa-folder-open fa-fw'></i>分类
                 </a>
                 
               </li>
             
           
-                    
-                      
+            
+              
             
               <li>
                 <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
@@ -568,16 +259,14 @@
                   
                     id="tags"
                   >
-                  <i class='fal fa-hashtag fa-fw'></i>
-		  
-		  标签
+                  <i class='fas fa-tags fa-fw'></i>标签
                 </a>
                 
               </li>
             
           
-                    
-                      
+            
+              
             
               <li>
                 <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
@@ -586,16 +275,8 @@
                   
                     id="archives"
                   >
-                  <i class='fal fa-list fa-fw'></i>
-		  
-		  时间轴
+                  <i class='fas fa-archive fa-fw'></i>归档
                 </a>
-                
-              </li>
-            
-          
-                    
-                  </ul>
                 
               </li>
             
@@ -604,114 +285,14 @@
               
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" 
-                  
-                  
-                  >
-                  <i class='fal fa-info fa-fw'></i>
-		  
-		  关于
-                </a>
-                
-                  <ul class="list-v">
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/about
-                  
-                  
-                  
-                    id="about"
-                  >
-                  <i class='fal fa-user-circle fa-fw'></i>
-		  
-		  我&本站
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/friends
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
                   
                   
                   
                     id="friends"
                   >
-                  <i class='fal fa-link fa-fw'></i>
-		  
-		  友链
+                  <i class='fas fa-link fa-fw'></i>友链
                 </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/time-machine/
-                  
-                  
-                  
-                    id="time-machine"
-                  >
-                  <i class='fal fa-clock fa-fw'></i>
-		  
-		  时光鸡
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <hr>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=https://lhkstudio.me
-                  
-                  
-                  
-                    id="https:lhkstudiome"
-                  >
-                  <i class='fal fa-caret-square-right fa-fw'></i>
-		  
-		  个人主页
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=https://github.com/Linhk1606
-                  
-                  
-                  
-                    id="https:githubcomLinhk1606"
-                  >
-                  <i class='fal fa-code-branch fa-fw'></i>
-		  
-		  Follow Me
-                </a>
-                
-              </li>
-            
-          
-                    
-                  </ul>
                 
               </li>
             
@@ -720,188 +301,14 @@
               
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" 
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
                   
                   
+                  
+                    id="about"
                   >
-                  <i class='fal fa-shield-alt fa-fw'></i>
-		  
-		  管理
+                  <i class='fas fa-info-circle fa-fw'></i>关于我
                 </a>
-                
-                  <ul class="list-v">
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=https://status.lhkstudio.me
-                  
-                  
-                  
-                    id="https:statuslhkstudiome"
-                  >
-                  <i class='fal fa-telescope fa-fw'></i>
-		  
-		  站点监视
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=https://www.yuque.com/linhk1606/hexo
-                  
-                  
-                  
-                    id="https:wwwyuquecomlinhk1606hexo"
-                  >
-                  <i class='fal fa-edit fa-fw'></i>
-		  
-		  云端编辑
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=https://github.com/linhk1606/blog-source
-                  
-                  
-                  
-                    id="https:githubcomlinhk1606blog-source"
-                  >
-                  <i class='fal fa-file-code fa-fw'></i>
-		  
-		  博客源码
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=https://console.cloud.tencent.com/scf/list-detail?rid=1&amp;ns=default&amp;id=Hexo
-                  
-                  
-                  
-                    id="https:consolecloudtencentcomscflist-detail?rid=1&amp;ns=default&amp;id=Hexo"
-                  >
-                  <i class='fal fa-brackets-curly fa-fw'></i>
-		  
-		  腾讯云函数
-                </a>
-                
-              </li>
-            
-          
-                    
-                  </ul>
-                
-              </li>
-            
-          
-            
-              
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" 
-                  
-                  
-                  >
-                  <i class='fal fa-ellipsis-v fa-fw'></i>
-		  
-		  更多
-                </a>
-                
-                  <ul class="list-v">
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/2019-nCoV/
-                  
-                  
-                  
-                    id="2019-nCoV"
-                  >
-                  <i class='fal fa-biohazard fa-fw'></i>
-		  
-		  肺炎疫情图
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/atom.xml
-                  
-                  
-                  
-                    id="atomxml"
-                  >
-                  <i class='fal fa-rss fa-fw'></i>
-		  
-		  RSS订阅
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/sitemap.xml
-                  
-                  
-                  
-                    id="sitemapxml"
-                  >
-                  <i class='fal fa-sitemap fa-fw'></i>
-		  
-		  站点地图
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/Periodic-table
-                  
-                  
-                  
-                    id="Periodic-table"
-                  >
-                  <i class='fal fa-flask fa-fw'></i>
-		  
-		  3D元素周期表
-                </a>
-                
-              </li>
-            
-          
-                    
-                      
-            
-              
-            
-          
-                    
-                  </ul>
                 
               </li>
             
@@ -917,17 +324,21 @@
 
   <div class="l_body">
     <div class="l_cover">
-
   
-  
-      <div class='cover-wrapper  featured' style="display: none;">
-        
-          <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist@1.0.0/2020/005.jpg"></div>
-        
-        <div class='cover-body'>
+    
+    
+        <div class='cover-wrapper  dock' style="display: none;">
+          
+            <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg"></div>
+          
+          <div class='cover-body'>
   <div class='top'>
     
     
+      <p class="title">Sculptor</p>
+    
+    
+      <p class="subtitle">不知名的陌生人</p>
     
   </div>
   <div class='bottom'>
@@ -939,42 +350,35 @@
               
               
               id="home">
-              <img src='https://cdn.jsdelivr.net/gh/Linhk1606/blog-cdn@0.0.8.0/img/home.png'><p>首页</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg'><p>博客</p>
+            </a>
+          
+            <a href="/categories/"
+              
+              
+              id="categories">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg'><p>分类</p>
+            </a>
+          
+            <a href="/tags/"
+              
+              
+              id="tags">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg'><p>标签</p>
             </a>
           
             <a href="/archives/"
               
               
               id="archives">
-              <img src='https://cdn.jsdelivr.net/gh/Linhk1606/blog-cdn@0.0.8.0/img/calendar.png'><p>归档</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg'><p>归档</p>
             </a>
           
-            <a href="/categories"
-              
-              
-              id="categories">
-              <img src='https://cdn.jsdelivr.net/gh/Linhk1606/blog-cdn@0.0.8.0/img/folder-invoices.png'><p>分类</p>
-            </a>
-          
-            <a href="/about"
-              
-              
-              id="about">
-              <img src='https://cdn.jsdelivr.net/gh/Linhk1606/blog-cdn@0.0.8.0/img/about.png'><p>关于</p>
-            </a>
-          
-            <a href="/friends"
+            <a href="/friends/"
               
               
               id="friends">
-              <img src='https://cdn.jsdelivr.net/gh/Linhk1606/blog-cdn@0.0.8.0/img/contacts.png'><p>通讯录</p>
-            </a>
-          
-            <a target="_blank" rel="noopener" href="https://www.lhkstudio.me"
-              
-              
-              id="https:wwwlhkstudiome">
-              <img src='https://cdn.jsdelivr.net/gh/Linhk1606/blog-cdn@0.0.8.0/img/external-link.png'><p>主页</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg'><p>友链</p>
             </a>
           
         
@@ -983,54 +387,54 @@
   </div>
 </div>
 
-        <div class="scroll-down" style="display: none;"><i class="fal fa-chevron-down scroll-down-effects"></i></div>
-      </div>
+          <div class="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+        </div>
+    
   
-
-</div>
-
+  </div>
+  
     <div class='safearea'>
       <div class='body-wrapper' id="pjax-container">
         
-          <!--此文件用来存放一些不方便取值的变量-->
-<!--思路大概是将值藏到重加载的区域内-->
-
-
-
-<div id="pjax-data" style="display: none">
-  <div id="pjax-ispage">false</div>
-  <div id="pjax-pageTitle"></div>
-  <div id="pjax-enable-cover">true</div>
-  <div id="pjax-comment-path">none</div>
-  <div id="pjax-comment-placeholder">none</div>
-</div>
-
-
-<script>
-  // 处理封面 此时 jquery 还没加载
-  if ("blog" == "none") { // 移除封面
-    document.getElementsByClassName('cover-wrapper')[0].style.display = "none";
-    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show");
-  } else {
-    if ("blog" == "blog") { // 半屏
-      document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'half');
-      document.getElementsByClassName('scroll-down')[0].style.display = "none";
-    } else if ("blog" == "docs") { // 全屏
-      document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'full');
-      document.getElementsByClassName('scroll-down')[0].style.display = "";
-    }
-    document.getElementsByClassName('cover-wrapper')[0].style.display = "";
-    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.remove("show");
-  }
-</script>
-
+          <!--此文件用来存放一些不方便取值的变量--> 
+<!--思路大概是将值藏到重加载的区域内--> 
+ 
+ 
+ 
+<div id="pjax-data" style="display: none"> 
+  <div id="pjax-ispage">false</div> 
+  <div id="pjax-pageTitle"></div> 
+  <div id="pjax-enable-cover">true</div> 
+  <div id="pjax-comment-path"></div> 
+  <div id="pjax-comment-placeholder"></div> 
+</div> 
+ 
+ 
+<script> 
+  // 处理封面 此时 jquery 还没加载 
+  if ("half" == "none") { // 移除封面 
+    document.getElementsByClassName('cover-wrapper')[0].style.display = "none"; 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show"); 
+  } else { 
+    if ("half" == "half") { // 半屏 
+      document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'half'); 
+      document.getElementsByClassName('scroll-down')[0].style.display = "none"; 
+    } else if ("half" == "full") { // 全屏 
+      document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'full'); 
+      document.getElementsByClassName('scroll-down')[0].style.display = ""; 
+    } 
+    document.getElementsByClassName('cover-wrapper')[0].style.display = ""; 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.remove("show"); 
+  } 
+</script> 
+ 
 
         
         
 
-<div class='l_main no_sidebar'>
+<div class='l_main'>
 	
-	  <article id="archive-page" class="post article white-box reveal ">
+	  <article id="arc" class="post article white-box reveal shadow">
 			
 			
 				
@@ -1040,9 +444,8 @@
 						<h2>2020</h2>
 					
 						<div class='timenode'>
-							<div class="meta">
-								<time>07-25</time>
-								<a href="/2020/07/25/SQL%20%E6%B3%A8%E5%85%A5/">
+								<a class="meta" href="/2020/07/25/SQL%20%E6%B3%A8%E5%85%A5/">
+									<time>07-25</time>
 									
 										2020-07-25
 									
@@ -1050,7 +453,6 @@
 									
 									
 								</a>
-							</div>
 						</div>
 				
 			
@@ -1058,9 +460,8 @@
 				
 					
 						<div class='timenode'>
-							<div class="meta">
-								<time>07-19</time>
-								<a href="/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/">
+								<a class="meta" href="/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/">
+									<time>07-19</time>
 									
 										2020-07-19
 									
@@ -1068,7 +469,6 @@
 									
 									
 								</a>
-							</div>
 						</div>
 				
 			
@@ -1076,9 +476,8 @@
 				
 					
 						<div class='timenode'>
-							<div class="meta">
-								<time>07-04</time>
-								<a href="/2020/07/04/MSF/">
+								<a class="meta" href="/2020/07/04/MSF/">
+									<time>07-04</time>
 									
 										2020-07-04
 									
@@ -1086,7 +485,6 @@
 									
 									
 								</a>
-							</div>
 						</div>
 				
 			
@@ -1095,82 +493,141 @@
 </div>
 <aside class='l_side'>
   
+  
+    
+    
+
+<section class="widget blogger shadow desktop mobile">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img no-lazy src='/images/logo.jpg'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+        
+        
+          <p><span id="jinrishici-sentence">Sculptor的博客</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:me@xxx.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/Sculptor-liu/"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+  
+
+  
+    
+    
+
+  
+
+  
+
 
 </aside>
-
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
 
 
       </div>
       
   
-  <footer class="clearfix">
+  <footer class="footer clearfix">
     <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+
+        </div>
+      
     
       
         <br>
         <div class="social-wrapper">
           
             
-              <a href="/atom.xml"
-                class="social fal fa-rss flat-btn"
-                target="_blank"
-                rel="external nofollow noopener noreferrer">
-              </a>
-            
           
             
-              <a href="mailto:lhkstudio2020@gmail.com"
-                class="social fal fa-envelope flat-btn"
-                target="_blank"
-                rel="external nofollow noopener noreferrer">
-              </a>
-            
           
-            
-              <a href="https://github.com/Linhk1606"
-                class="social fal fa-code-branch flat-btn"
-                target="_blank"
-                rel="external nofollow noopener noreferrer">
-              </a>
-            
-          
-            
-              <a href="https://music.163.com/#/user/home?id=2113078436"
-                class="social fal fa-headphones-alt flat-btn"
-                target="_blank"
-                rel="external nofollow noopener noreferrer">
-              </a>
-            
-          
-            
-              <a href="https://www.zhihu.com/people/linhk1606"
-                class="social fal fa-question-circle flat-btn"
-                target="_blank"
-                rel="external nofollow noopener noreferrer">
-              </a>
             
           
         </div>
       
     
       
+        <div><p>Blog content follows the <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+      
+    
+      
         
-          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fal fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fal fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
 </div>
         
       
     
       
+        Use
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.0.0-rc.4" target="_blank" class="codename">Volantis</a>
+        as theme
+      
+    
+      
         <div class='copyright'>
-        <p>Made with <i class="fas fa-heart faa-pulse animated fa-fw"></i> by <a target="_blank" rel="noopener" href="https://github.com/volantis-x">VolantisX</a></p>
+        <p><a href="/">Copyright © 2020-2020 XXX</a></p>
 
         </div>
       
@@ -1178,324 +635,17 @@
   </footer>
 
 
-      <a class="s-top fad fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+      <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
     </div>
   </div>
   <div>
-    
-      
-  
-
-  <div id="rightmenu-wrapper">
-    <ul class="list-v rightmenu" id="rightmenu-content">
-      <li class='option'>
-        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-text' onclick='document.execCommand("copy")'><i class='fal fa-copy fa-fw'></i>Copy Text</a>
-        <hr id='hr-text'>
-        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-href'><i class='fal fa-link fa-fw'></i>Copy Link</a>
-        <a class='vlts-menu opt fix-cursor-default' id='menu-open-href'><i class='fal fa-external-link-square-alt fa-fw'></i>Open Link in New Tab</a>
-        <hr id='hr-href'>
-        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-src'><i class='fal fa-image fa-fw'></i>Copy Image Link</a>
-        <hr id='hr-src'>
-      </li>
-      
-        <li class='navigation'>
-          <a class='nav icon-only fix-cursor-default' onclick='history.back()'><i class='fal fa-arrow-left fa-fw'></i></a>
-          <a class='nav icon-only fix-cursor-default' onclick='history.forward()'><i class='fal fa-arrow-right fa-fw'></i></a>
-          <a class='nav icon-only fix-cursor-default' onclick='window.location.reload()'><i class='fal fa-redo fa-fw'></i></a>
-          <a class='nav icon-only fix-cursor-default' href='/'><i class='fal fa-home fa-fw'></i></a>
-        </li>
-      
-      <hr>
-      
-        
-      
-        
-      
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=/tags
-        
-        
-        
-        
-          id="tags"
-        >
-        <i class='fal fa-hashtag fa-fw'></i> 前往标签页
-      </a>
-    </li>
-  
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=/categories
-        
-        
-        
-        
-          id="categories"
-        >
-        <i class='fal fa-folder-open fa-fw'></i> 前往分类页
-      </a>
-    </li>
-  
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=/about
-        
-        
-        
-        
-          id="about"
-        >
-        <i class='fal fa-user-circle fa-fw'></i> 关于我和本站
-      </a>
-    </li>
-  
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=/friends
-        
-        
-        
-        
-          id="friends"
-        >
-        <i class='fal fa-users fa-fw'></i> 查看我的朋友
-      </a>
-    </li>
-  
-        
-      
-        
-          <hr>
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=https://github.com/Linhk1606/blog-source
-        
-        
-        
-        
-          id="https:githubcomLinhk1606blog-source"
-        >
-        <i class='fal fa-code-branch fa-fw'></i> 本站源码
-      </a>
-    </li>
-  
-        
-      
-        
-          <hr>
-        
-      
-        
-          <li class='music name'>
-            <p class='nav music-title fix-cursor-default'></p>
-          </li>
-          <li class='music ctrl'>
-            <a class='nav icon-only backward fix-cursor-default' onclick='aplayerBackward()'><i class='fal fa-step-backward fa-fw'></i></a>
-            <a class='nav icon-only toggle fix-cursor-default' onclick='aplayerToggle()'><i class='fal fa-play fa-fw'></i></a>
-            <a class='nav icon-only forward fix-cursor-default' onclick='aplayerForward()'><i class='fal fa-step-forward fa-fw'></i></a>
-          </li>
-          <li class='music volume'>
-            <a class='nav volume'>
-              <div class="aplayer-volume-bar-wrap">
-                <div class="aplayer-volume-bar fix-cursor-pointer">
-                  <div class="aplayer-volume"></div>
-                  <i class='left fal fa-volume-off fa-fw'></i>
-                  <i class='right fal fa-volume-up fa-fw'></i>
-                </div>
-              </div>
-            </a>
-          </li>
-        
-      
-    </ul>
-  </div>
-
-  <script>
-    window.document.oncontextmenu = function (event) {
-      if (event.ctrlKey) return true;
-      if (/Android|webOS|BlackBerry/i.test(navigator.userAgent)) return true;
-      return popMenu(event);
-    };
-    document.addEventListener("click", function (event) {
-      var mymenu = document.getElementById('rightmenu-wrapper');
-      mymenu.style.display = "none";
-    });
-    function popMenu(event) {
-      var mymenu = document.getElementById('rightmenu-wrapper');
-      var menuContent = document.getElementById('rightmenu-content');
-      var screenWidth = document.documentElement.clientWidth || document.body.clientWidth;
-      var screenHeight = document.documentElement.clientHeight || document.body.clientHeight;
-      mymenu.style.left = event.clientX + "px"; // 获取鼠标位置
-      mymenu.style.top = event.clientY + "px";
-      mymenu.style.display = 'block';
-      if (event.clientX * 2 > screenWidth) {
-        menuContent.classList.add('left');
-      } else {
-        menuContent.classList.remove('left');
-      }
-      if (event.clientY * 2 > screenHeight) {
-        menuContent.classList.add('top');
-      } else {
-        menuContent.classList.remove('top');
-      }
-
-      let hrText = document.getElementById('hr-text');
-      let hrSrc = document.getElementById('hr-src');
-      let hrHref = document.getElementById('hr-href');
-
-      // 选中图片
-      let copySrc = document.getElementById('menu-copy-src');
-      if (copySrc != undefined) {
-        if (event.target.currentSrc) {
-          copySrc.style.display = 'block';
-          copySrc.addEventListener("click", function (e) {
-            copyString(event.target.currentSrc);
-          },{once: true});
-          hrSrc.style.display = 'block';
-        } else {
-          copySrc.style.display = 'none';
-          hrSrc.style.display = 'none';
-        }
-      }
-
-      // 选中按钮
-      // 判断是不是按钮
-      let href = '';
-      if (event.path) {
-        for (i = 0; i < event.path.length; i++) {
-          if (event.path[i].href != undefined && event.path[i].href.length > 0) {
-            href = event.path[i].href;
-          }
-        }
-      }
-
-      let copyText = document.getElementById('menu-copy-text');
-      copyText.style.display = 'none';
-      hrText.style.display = 'none';
-      if (href.length == 0) {
-        // 选中文本
-        if (window.getSelection().toString()) {
-          copyText.style.display = 'block';
-          hrText.style.display = 'block';
-        }
-      }
-
-      // 在新标签页打开
-      let openHref = document.getElementById('menu-open-href');
-      if (openHref != undefined) {
-        if (href.length > 0) {
-          openHref.style.display = 'block';
-          openHref.addEventListener("click", function (e) {
-            window.open(href);
-          },{once: true});
-          hrHref.style.display = 'block';
-        } else {
-          openHref.style.display = 'none';
-          hrHref.style.display = 'none';
-        }
-      }
-      // 复制链接
-      let copyHref = document.getElementById('menu-copy-href');
-      if (copyHref != undefined) {
-        if (href.length > 0) {
-          copyHref.style.display = 'block';
-          copyHref.addEventListener("click", function (e) {
-            copyString(href);
-          },{once: true});
-        } else {
-          copyHref.style.display = 'none';
-        }
-      }
-
-      // 有音乐播放器
-      if (true == true && ('copy_text,copy_src,navigation,tag,category,about,friend,hr,code,hr,music'||[]).includes('music')) {
-        // 如果有aplayer，初始化一下
-      	try {
-      		checkAPlayer();
-          updateTitle();
-      	} catch (error) {
-      		console.log(error);
-      	}
-      }
-
-      return false; // 该行代码确保系统自带的右键菜单不会被调出
-    }
-    function hideMenu() {
-      document.getElementById('rightmenu-wrapper').style.display = 'none';
-    }
-    function copyString(str) {
-      const input = document.createElement('input');
-      input.setAttribute('readonly', 'readonly');
-      document.body.appendChild(input);
-      input.setAttribute('value', str);
-      input.select();
-      document.execCommand('copy');
-      document.body.removeChild(input);
-    }
-    document.execCommand('click');
-  </script>
-
-
-    
     <!-- required -->
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
 
-
-
-<!-- optional -->
-
-
-
-  <script>
-  
-    var ALGOLIA_API_KEY = "3e9460bbaac6905c7e1eda81762b52f2";
-    var ALGOLIA_APP_ID = "QE7LMUJ22V";
-    var ALGOLIA_INDEX_NAME = "newSearch";
-  
-  var SEARCH_SERVICE = "algolia" || "hexo";
-  var ROOT = "/" || "/";
-  if (!ROOT.endsWith('/')) ROOT += '/';
-</script>
-
-
-
-
-
-
-
-
-<script>
-  window.FPConfig = {
-    delay: 0,
-    ignoreKeywords: [],
-    maxRPS: 5,
-    hoverDelay: 25
-  };
-</script>
-<script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
-
-
-<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 <script>
   function pjax_fancybox() {
-    $(".md").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+    $(".md .gallery").find("img").each(function () { //渲染 fancybox
       var element = document.createElement("a"); // a 标签
       $(element).attr("class", "fancybox");
       $(element).attr("pjax-fancybox", "");  // 过滤 pjax
@@ -1518,7 +668,7 @@
       $(this).after(span);  // 再套一层描述
       $(this).wrap(element);  // 最后套 a 标签
     })
-    $(".article-entry").find("img").fancybox({
+    $(".md .gallery").find("img").fancybox({
       selector: '[data-fancybox="images"]',
       hash: false,
       loop: false,
@@ -1532,196 +682,152 @@
       ]
     });
   };
-  $(function () {
-    pjax_fancybox();
-  });
-</script>
-
-
-  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-<script>
-    var clipboard = new ClipboardJS('.btn-copy', {
-        target: function (trigger) {
-            return trigger.nextElementSibling
-        }
-    });
-    function wait(callback, seconds) {
-        var timelag = null;
-        timelag = window.setTimeout(callback, seconds)
-    }
-    function pjax_initCopyCode() {
-        var copyHtml = '';
-        copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-        copyHtml += '<i class="fal fa-copy"></i><span>COPY</span>';
-        copyHtml += '</button>';
-        $(".highlight .code pre").before(copyHtml);
-        clipboard.off('success').on('success', function (e) {
-            let $btn = $(e.trigger);
-            $btn.addClass('copied');
-            let $icon = $($btn.find('i'));
-            $icon.removeClass('fa-copy');
-            $icon.addClass('fa-check-circle');
-            let $span = $($btn.find('span'));
-            $span[0].innerText = 'COPIED';
-            wait(function () {
-                $icon.removeClass('fa-check-circle');
-                $icon.addClass('fa-copy');
-                $span[0].innerText = 'COPY'
-            }, 2000)
-        });
-        clipboard.off('error').on('error', function (e) {
-            e.clearSelection();
-            let $btn = $(e.trigger);
-            $btn.addClass('copy-failed');
-            let $icon = $($btn.find('i'));
-            $icon.removeClass('fa-copy');
-            $icon.addClass('fa-times-circle');
-            let $span = $($btn.find('span'));
-            $span[0].innerText = 'COPY FAILED';
-            wait(function () {
-                $icon.removeClass('fa-times-circle');
-                $icon.addClass('fa-copy');
-                $span[0].innerText = 'COPY'
-            }, 2000)
-        })
-    }
-    $(function () {
-        pjax_initCopyCode()
-    });
-</script>
-
-
-
-   <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
-<script type="text/javascript">
-  function pjax_scrollrebeal() {
-    ScrollReveal().reveal('.l_main .reveal', {
-      distance: '32px',
-      duration: '800',
-      interval: '20',
-      scale: '1',
-      easing: 'ease-out'
-    });
-  }
-  $(function () {
-    pjax_scrollrebeal();
-  });
-</script>
-
-
-
-
-  <script>
-  let APlayerController = new Object();
-  APlayerController.id = '3194206062';  // 设定全局音乐播放ID
-  APlayerController.volume = '0.7';
-</script>
-
-  
-<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
-
-
-  
-<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
-
-
-
-
-  
-<script src="/js/aplayer.js"></script>
-
-
-
-
-
-
-  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-  function pjax_gitalk() {
-    if(!document.querySelectorAll("#gitalk-container")[0])return;
-    let pageUrl = $.trim($('#pjax-comment-path').text()) === "none" ? 
-      decodeURI(window.location.pathname) : $.trim($('#pjax-comment-path').text());
-    
-    let ALLPATH = '';
-    if(ALLPATH != '') pageUrl = ALLPATH;
-
-    if (document.getElementById('gitalk-container') != null) {
-      var gitalk = new Gitalk({
-        clientID: "b63e285f3442871f2b05",
-        clientSecret: "88a93465b758e9eb10c68aa80c199c83b13c2a80",
-        repo: "blog-source",
-        owner: "Linhk1606",
-        admin: "Linhk1606",
-        id: pageUrl,
-        distractionFreeMode: false  // Facebook-like distraction free mode
-      });
-      gitalk.render('gitalk-container');
-    }
-  }
-
-  $(function () {
-    pjax_gitalk();
-  });
-</script>
-
-
-
-
-  
-<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5/lib/darkmode-js.min.js" aysc></script>
-
-<script type="text/javascript">
-function getClientHeight(){
-  var clientHeight=0;
-  if(document.body.clientHeight&&document.documentElement.clientHeight){
-  var clientHeight = (document.body.clientHeight<document.documentElement.clientHeight)?document.body.clientHeight:document.documentElement.clientHeight;
-  }else{
-  var clientHeight = (document.body.clientHeight>document.documentElement.clientHeight)?document.body.clientHeight:document.documentElement.clientHeight;
-  }
-  return clientHeight;
-}
-function supportCss3(style) {
-  var prefix = ['webkit', 'Moz', 'ms', 'o'],
-  i,
-  humpString = [],
-  htmlStyle = document.documentElement.style,
-  _toHumb = function (string) {
-  return string.replace(/-(\w)/g, function ($0, $1) {
-  return $1.toUpperCase();
-  });
+  function SCload_fancybox() {
+    if ($(".md .gallery").find("img").length == 0) return;
+    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
+    setTimeout(function() {
+      loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
+    }, 1);
   };
-  for (i in prefix)
-  humpString.push(_toHumb(prefix[i] + '-' + style));
-  humpString.push(_toHumb(style));
-  for (i in humpString)
-  if (humpString[i] in htmlStyle) return true;
-  return false;
-};
-//配置信息
-var options = {
-  bottom: '32px',
-  right: 'unset',
-  left: '16px',
-  time: '.5s',
-  mixColor: '#e3ebff',
-  backgroundColor: '#e3ebff',
-  buttonColorDark: '#271638',
-  buttonColorLight: '#e3ebff',
-  saveInCookies: true,
-  label: '',
-  autoMatchOsTheme: true
-};
-// 卡片兼容处理 mix-blend-mode 与 effect: [shadow, floatable, blur] 冲突???
-function pjax_darkmodejs(){
-  
-}
-// mix-blend-mode support?
-if(supportCss3('mix-blend-mode')){
-  const darkmode = new Darkmode(options);
-  darkmode.showWidget();
-  pjax_darkmodejs();
-}
+  $(function () {
+    SCload_fancybox();
+  });
 </script>
+
+
+<!-- internal -->
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
+  
+  
+    <script>
+      window.FPConfig = {
+        delay: 0,
+        ignoreKeywords: [],
+        maxRPS: 5,
+        hoverDelay: 25
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+<script src="/js/valine.js"></script>
+
+
+<script>
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link'.split(',').filter(function (item) {
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick', 'mail', 'link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function (item) {
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+
+  function pjax_valine() {
+    if(!document.querySelectorAll("#valine_container")[0])return;
+
+    let pagePlaceholder = $.trim($('#pjax-comment-placeholder').text()) || "快来评论吧~";
+
+    let path = $.trim($('#pjax-comment-path').text());
+    if (path.length == 0) {
+      let defaultPath = '';
+      path = defaultPath || decodeURI(window.location.pathname);
+    }
+
+    var valine = new Valine();
+    valine.init({
+      el: '#valine_container',
+      meta: meta,
+      placeholder: pagePlaceholder,
+      path: path,
+      appId: "",
+      appKey: "",
+      pageSize: '10',
+      avatar: 'robohash',
+      lang: 'zh-cn',
+      visitor: 'true',
+      highlight: 'true',
+      mathJax: 'false',
+      enableQQ: 'true',
+      requiredFields: requiredFields,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps
+    })
+  }
+
+  $(function () {
+    pjax_valine();
+  });
+</script>
+
+
 
 
 
@@ -1735,9 +841,26 @@ if(supportCss3('mix-blend-mode')){
 
   
     
-<script src="https://cdn.jsdelivr.net/gh/Linhk1606/blog-cdn@0.0.0.5/js/search.js"></script>
+<script src="/js/search.js"></script>
 
   
+
+
+<!-- optional -->
+
+  <script>
+const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
+const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
+(function ($) {
+  
+    customSearch = new HexoSearch({
+      imagePath: SearchServiceimagePath
+    });
+  
+})(jQuery);
+
+</script>
+
 
 
 
@@ -1751,8 +874,8 @@ if(supportCss3('mix-blend-mode')){
   <script defer>
 
   const LCCounter = {
-    app_id: 'bL5ekqro8OTDzjNqFB36uwE4-MdYXbMMI',
-    app_key: '6BbOFSw7b2QF6EDvHIomO2Kq',
+    app_id: 'u9j57bwJod4EDmXWdxrwuqQT-MdYXbMMI',
+    app_key: 'jfHtEKVE24j0IVCGHbvuFClp',
     custom_api_server: '',
 
     // 查询存储的记录
@@ -1885,13 +1008,17 @@ if(supportCss3('mix-blend-mode')){
           if (url) {
             var viewGetter = this.getRecord(Counter, url, title).then((record) => {
               // 是当前页面就自增
-              if (pv.getAttribute('data-path') == window.location.pathname) {
+              let curPath = window.location.pathname;
+              if (curPath.includes('index.html')) {
+                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
+              }
+              if (pv.getAttribute('data-path') == curPath) {
                 incrArr.push(this.buildIncrement(record.objectId));
               }
               if (pv) {
                 var ele = pv.querySelector('#lc-pv #number');
                 if (ele) {
-                  if (pv.getAttribute('data-path') == window.location.pathname) {
+                  if (pv.getAttribute('data-path') == curPath) {
                     ele.innerText = (record.times || 0) + 1;
                   } else {
                     ele.innerText = record.times || 0;
@@ -2001,7 +1128,7 @@ if(supportCss3('mix-blend-mode')){
       try {
         var currentUrl = window.location.pathname;
         var targetUrl = e.triggerElement.href;
-        var banUrl = ["/time-machine/", "/time-machine/index.html"];
+        var banUrl = [""];
         if (banUrl[0] != "") {
           banUrl.forEach(item => {
             if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
@@ -2012,7 +1139,9 @@ if(supportCss3('mix-blend-mode')){
       } catch (error) {}
 
       window.subData = null; // 移除标题（用于一二级导航栏切换处）
-      $.fancybox.close();    // 关闭弹窗
+      if (typeof $.fancybox != "undefined") {
+        $.fancybox.close();    // 关闭弹窗
+      }
       $('.l_header .switcher .s-search').removeClass('active'); // 关闭移动端激活的搜索框
       $('.l_header').removeClass('z_search-open'); // 关闭移动端激活的搜索框
       $('.wrapper').removeClass('sub'); // 跳转页面时关闭二级导航
@@ -2045,23 +1174,22 @@ if(supportCss3('mix-blend-mode')){
         $(this).parent().append($(this).remove());
       });
       try{
-        pjax_fancybox();
+          if (typeof $.fancybox == "undefined") {
+            SCload_fancybox();
+          } else {
+            pjax_fancybox();
+          }
         
         
         
-          pjax_scrollrebeal();
-        
-        
-          pjax_initCopyCode();
         
         
         
-        
-          pjax_gitalk();
-        
+          pjax_valine();
         
         
-          pjax_darkmodejs();
+        
+        
         
       } catch (e) {
         console.log(e);
