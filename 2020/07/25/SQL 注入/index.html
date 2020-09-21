@@ -191,7 +191,7 @@
                   
                     id="about"
                   >
-                  <i class='fas fa-info-circle fa-fw'></i>关于
+                  <i class='fas fa-info-circle fa-fw'></i>关于我
                 </a>
                 
               </li>
@@ -305,7 +305,7 @@
                   
                     id="about"
                   >
-                  <i class='fas fa-info-circle fa-fw'></i>关于
+                  <i class='fas fa-info-circle fa-fw'></i>关于我
                 </a>
                 
               </li>
@@ -336,6 +336,8 @@
       <p class="title">Sculptor</p>
     
     
+      <p class="subtitle">不知名的陌生人</p>
+    
   </div>
   <div class='bottom'>
     <div class='menu navigation'>
@@ -349,6 +351,20 @@
               <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg'><p>博客</p>
             </a>
           
+            <a href="/categories/"
+              
+              
+              id="categories">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg'><p>分类</p>
+            </a>
+          
+            <a href="/tags/"
+              
+              
+              id="tags">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg'><p>标签</p>
+            </a>
+          
             <a href="/archives/"
               
               
@@ -356,25 +372,11 @@
               <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg'><p>归档</p>
             </a>
           
-            <a href="/faqs/"
+            <a href="/friends/"
               
               
-              id="faqs">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg'><p>帮助</p>
-            </a>
-          
-            <a href="/examples/"
-              
-              
-              id="examples">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg'><p>示例</p>
-            </a>
-          
-            <a href="/contributors/"
-              
-              
-              id="contributors">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg'><p>社区</p>
+              id="friends">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg'><p>友链</p>
             </a>
           
         
@@ -653,7 +655,7 @@
 <h3 id="1-6-1-union-注入"><a href="#1-6-1-union-注入" class="headerlink" title="1.6.1. union 注入"></a>1.6.1. union 注入</h3><p>union 操作符用于合并两个或者多个 SQL 语句集合起来，得到联合的查询结果，</p>
 <ol>
 <li><p>SQL 命令：</p>
-<p>mysql&gt; select id,username from member where username=’kevin’ union select email,<br>pw from member where id=1;<br>+——————-+———————————-+<br>| id                | username                         |<br>+——————-+———————————-+<br>| 5                 | kevin                            |<br>| <a href="mailto:&#118;&#x69;&#110;&#x63;&#101;&#64;&#x70;&#105;&#107;&#x61;&#x63;&#x68;&#117;&#46;&#x63;&#111;&#x6d;">&#118;&#x69;&#110;&#x63;&#101;&#64;&#x70;&#105;&#107;&#x61;&#x63;&#x68;&#117;&#46;&#x63;&#111;&#x6d;</a> | e10adc3949ba59abbe56e057f20f883e |<br>+——————-+———————————-+<br>2 rows in set (0.00 sec)</p>
+<p>mysql&gt; select id,username from member where username=’kevin’ union select email,<br>pw from member where id=1;<br>+——————-+———————————-+<br>| id                | username                         |<br>+——————-+———————————-+<br>| 5                 | kevin                            |<br>| <a href="mailto:&#x76;&#105;&#110;&#x63;&#101;&#x40;&#x70;&#105;&#x6b;&#x61;&#99;&#x68;&#117;&#46;&#x63;&#x6f;&#109;">&#x76;&#105;&#110;&#x63;&#101;&#x40;&#x70;&#105;&#x6b;&#x61;&#99;&#x68;&#117;&#46;&#x63;&#x6f;&#109;</a> | e10adc3949ba59abbe56e057f20f883e |<br>+——————-+———————————-+<br>2 rows in set (0.00 sec)</p>
 </li>
 <li><p>pikachu 平台</p>
 <p>搜索型注入：v’ union select username,pw from member where id=1#%</p>
@@ -1291,7 +1293,7 @@
     
       
         <div class='copyright'>
-        <p><a href="/">Copyright © 2017-2020 XXX</a></p>
+        <p><a href="/">Copyright © 2020-2020 XXX</a></p>
 
         </div>
       
