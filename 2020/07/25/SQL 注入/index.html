@@ -655,7 +655,7 @@
 <h3 id="1-6-1-union-注入"><a href="#1-6-1-union-注入" class="headerlink" title="1.6.1. union 注入"></a>1.6.1. union 注入</h3><p>union 操作符用于合并两个或者多个 SQL 语句集合起来，得到联合的查询结果，</p>
 <ol>
 <li><p>SQL 命令：</p>
-<p>mysql&gt; select id,username from member where username=’kevin’ union select email,<br>pw from member where id=1;<br>+——————-+———————————-+<br>| id                | username                         |<br>+——————-+———————————-+<br>| 5                 | kevin                            |<br>| <a href="mailto:&#x76;&#x69;&#x6e;&#99;&#101;&#x40;&#x70;&#x69;&#107;&#97;&#99;&#x68;&#x75;&#46;&#x63;&#111;&#109;">&#x76;&#x69;&#x6e;&#99;&#101;&#x40;&#x70;&#x69;&#107;&#97;&#99;&#x68;&#x75;&#46;&#x63;&#111;&#109;</a> | e10adc3949ba59abbe56e057f20f883e |<br>+——————-+———————————-+<br>2 rows in set (0.00 sec)</p>
+<p>mysql&gt; select id,username from member where username=’kevin’ union select email,<br>pw from member where id=1;<br>+——————-+———————————-+<br>| id                | username                         |<br>+——————-+———————————-+<br>| 5                 | kevin                            |<br>| <a href="mailto:&#118;&#105;&#110;&#99;&#101;&#64;&#112;&#x69;&#x6b;&#x61;&#x63;&#x68;&#x75;&#x2e;&#99;&#x6f;&#109;">&#118;&#105;&#110;&#99;&#101;&#64;&#112;&#x69;&#x6b;&#x61;&#x63;&#x68;&#x75;&#x2e;&#99;&#x6f;&#109;</a> | e10adc3949ba59abbe56e057f20f883e |<br>+——————-+———————————-+<br>2 rows in set (0.00 sec)</p>
 </li>
 <li><p>pikachu 平台</p>
 <p>搜索型注入：v’ union select username,pw from member where id=1#%</p>
@@ -1390,22 +1390,16 @@
       <hr>
       
         
-      
-        
-      
-        
-      
-        
           
     <li>
-      <a class='vlts-menu fix-cursor-default' href=/tags
+      <a class='vlts-menu fix-cursor-default' href=/
         
         
         
         
-          id="tags"
+          id="home"
         >
-        <i class='fal fa-hashtag fa-fw'></i> 前往标签页
+        <i class='fa fa-question fa-fw'></i> 前往首页
       </a>
     </li>
   
@@ -1414,14 +1408,14 @@
         
           
     <li>
-      <a class='vlts-menu fix-cursor-default' href=/categories
+      <a class='vlts-menu fix-cursor-default' href=https://sculptor-liu.github.io/categories/
         
         
         
         
-          id="categories"
+          id="https:sculptor-liugithubiocategories"
         >
-        <i class='fal fa-folder-open fa-fw'></i> 前往分类页
+        <i class='fa fa-rss fa-fw'></i> 前往分类页
       </a>
     </li>
   
@@ -1430,14 +1424,14 @@
         
           
     <li>
-      <a class='vlts-menu fix-cursor-default' href=/about
+      <a class='vlts-menu fix-cursor-default' href=https://sculptor-liu.github.io/achives/
         
         
         
         
-          id="about"
+          id="https:sculptor-liugithubioachives"
         >
-        <i class='fal fa-user-circle fa-fw'></i> 关于我和本站
+        <i class='fa fa-fan fa-spin fa-fw'></i> 前往归档页
       </a>
     </li>
   
@@ -1446,14 +1440,14 @@
         
           
     <li>
-      <a class='vlts-menu fix-cursor-default' href=/friends
+      <a class='vlts-menu fix-cursor-default' href=https://sculptor-liu.github.io/tags/
         
         
         
         
-          id="friends"
+          id="https:sculptor-liugithubiotags"
         >
-        <i class='fal fa-users fa-fw'></i> 查看我的朋友
+        <i class='fa fa-code-branch fa-fw'></i> 前往标签页
       </a>
     </li>
   
@@ -1463,6 +1457,40 @@
           <hr>
         
       
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' href=https://sculptor-liu.github.io/about/
+        
+        
+        
+        
+          id="https:sculptor-liugithubioabout"
+        >
+        <i class='fa fa-code-branch fa-fw'></i> 前往我的站
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' 
+        
+        
+        
+          onclick="document.execCommand('print')"
+        
+        >
+        <i class='fa fa-print fa-fw'></i> 打印页面
+      </a>
+    </li>
+  
         
       
         
@@ -1574,7 +1602,7 @@
       }
 
       // 有音乐播放器
-      if ('' == true && ('copy_text,copy_src,navigation,tag,category,about,friend,hr,code,hr,music'||[]).includes('music')) {
+      if ('' == true && ('home,categories,archives,tags,hr,about,hr,print,hr,music'||[]).includes('music')) {
         // 如果有aplayer，初始化一下
       	try {
       		checkAPlayer();
