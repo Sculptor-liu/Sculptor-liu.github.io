@@ -655,7 +655,7 @@
 <h3 id="1-6-1-union-注入"><a href="#1-6-1-union-注入" class="headerlink" title="1.6.1. union 注入"></a>1.6.1. union 注入</h3><p>union 操作符用于合并两个或者多个 SQL 语句集合起来，得到联合的查询结果，</p>
 <ol>
 <li><p>SQL 命令：</p>
-<p>mysql&gt; select id,username from member where username=’kevin’ union select email,<br>pw from member where id=1;<br>+——————-+———————————-+<br>| id                | username                         |<br>+——————-+———————————-+<br>| 5                 | kevin                            |<br>| <a href="mailto:&#118;&#105;&#110;&#99;&#101;&#64;&#112;&#x69;&#x6b;&#x61;&#x63;&#x68;&#x75;&#x2e;&#99;&#x6f;&#109;">&#118;&#105;&#110;&#99;&#101;&#64;&#112;&#x69;&#x6b;&#x61;&#x63;&#x68;&#x75;&#x2e;&#99;&#x6f;&#109;</a> | e10adc3949ba59abbe56e057f20f883e |<br>+——————-+———————————-+<br>2 rows in set (0.00 sec)</p>
+<p>mysql&gt; select id,username from member where username=’kevin’ union select email,<br>pw from member where id=1;<br>+——————-+———————————-+<br>| id                | username                         |<br>+——————-+———————————-+<br>| 5                 | kevin                            |<br>| <a href="mailto:&#x76;&#105;&#x6e;&#x63;&#101;&#64;&#x70;&#105;&#x6b;&#x61;&#x63;&#x68;&#117;&#x2e;&#99;&#111;&#x6d;">&#x76;&#105;&#x6e;&#x63;&#101;&#64;&#x70;&#105;&#x6b;&#x61;&#x63;&#x68;&#117;&#x2e;&#99;&#111;&#x6d;</a> | e10adc3949ba59abbe56e057f20f883e |<br>+——————-+———————————-+<br>2 rows in set (0.00 sec)</p>
 </li>
 <li><p>pikachu 平台</p>
 <p>搜索型注入：v’ union select username,pw from member where id=1#%</p>
@@ -1415,7 +1415,7 @@
         
           id="https:sculptor-liugithubiocategories"
         >
-        <i class='fa fa-rss fa-fw'></i> 前往分类页
+        <i class='fas fa-folder-open fa-fw'></i> 前往分类页
       </a>
     </li>
   
@@ -1431,7 +1431,7 @@
         
           id="https:sculptor-liugithubioachives"
         >
-        <i class='fa fa-fan fa-spin fa-fw'></i> 前往归档页
+        <i class='fas fa-archive fa-fw'></i> 前往归档页
       </a>
     </li>
   
@@ -1447,7 +1447,7 @@
         
           id="https:sculptor-liugithubiotags"
         >
-        <i class='fa fa-code-branch fa-fw'></i> 前往标签页
+        <i class='fas fa-tags fa-fw'></i> 前往标签页
       </a>
     </li>
   
