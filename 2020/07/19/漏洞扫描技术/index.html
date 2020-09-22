@@ -1,471 +1,82 @@
-<!DOCTYPE html>
-<html>
-<head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.0.0-rc.4'>
-  <meta charset="utf-8">
-  <!-- SEO相关 -->
-  
-    
-  
-  <!-- 渲染优化 -->
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="16x16"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="32x32"><meta name="description" content="一，漏洞扫描技术                           1.1扫描原理                           1.1.1. Ping 检测       win+R -&gt; cmd -&gt; ping + 目标IP 当 ping 通目标 IP 后 返回 TTL值判断目标 IP 的操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="漏洞扫描技术">
+<meta property="og:url" content="https://sculptor-liu.github.io/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="Sculptor&#39;s blog">
+<meta property="og:description" content="一，漏洞扫描技术                           1.1扫描原理                           1.1.1. Ping 检测       win+R -&gt; cmd -&gt; ping + 目标IP 当 ping 通目标 IP 后 返回 TTL值判断目标 IP 的操作系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-19T15:11:11.606Z">
+<meta property="article:modified_time" content="2020-09-22T13:58:24.271Z">
+<meta property="article:author" content="Sculptor">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary"><title>漏洞扫描技术 | Sculptor's blog</title><link ref="canonical" href="https://sculptor-liu.github.io/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.1.1"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
 
-  <!-- 页面元数据 -->
-  
-  <title>Sculptor的博客</title>
-  
-
-  
-
-  <!-- feed -->
-  
-
-  <!-- import meta -->
-  
-
-  <!-- link -->
-  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css">
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  <!-- import link -->
-  
-
-  
-  
-    
-<link rel="stylesheet" href="/css/style.css">
-
-  
-  
-  
-  <!-- 脚本懒加载函数 -->
-  <script>
-  function loadScript(src, cb) {
-    var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
-    var script = document.createElement('script');
-    script.setAttribute('type','text/javascript');
-    if (cb) script.onload = cb;
-    script.setAttribute('src', src);
-    HEAD.appendChild(script);
-  }
-  //https://github.com/filamentgroup/loadCSS
-  !function(c){"use strict";var e=function(e,t,n,r){var o,i=c.document,a=i.createElement("link");if(t)o=t;else{var d=(i.body||i.getElementsByTagName("head")[0]).childNodes;o=d[d.length-1]}var f=i.styleSheets;if(r)for(var l in r)r.hasOwnProperty(l)&&a.setAttribute(l,r[l]);a.rel="stylesheet",a.href=e,a.media="only x",function e(t){if(i.body)return t();setTimeout(function(){e(t)})}(function(){o.parentNode.insertBefore(a,t?o:o.nextSibling)});var s=function(e){for(var t=a.href,n=f.length;n--;)if(f[n].href===t)return e();setTimeout(function(){s(e)})};function u(){a.addEventListener&&a.removeEventListener("load",u),a.media=n||"all"}return a.addEventListener&&a.addEventListener("load",u),(a.onloadcssdefined=s)(u),a};"undefined"!=typeof exports?exports.loadCSS=e:c.loadCSS=e}("undefined"!=typeof global?global:this);
-  </script>
-  <script id="loadcss"></script>
-</head>
-
-<body>
-  <header class="l_header auto shadow blur " style='opacity: 0' >
-  <div class='container'>
-  <div class='wrapper'>
-    <div class='nav-sub'>
-      <p class="title"></p>
-      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
-        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
-        
-          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
-        
-      </ul>
-    </div>
-		<div class="nav-main">
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于我</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Sculptor's blog</div><div class="header-banner-info__subtitle">不知名的陌生人</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">漏洞扫描技术</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2020-07-19</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-09-22</span></span></div></header><div class="post-body">
+        <h1 id="一，漏洞扫描技术"   >
+          <a href="#一，漏洞扫描技术" class="heading-link"><i class="fas fa-link"></i></a>一，漏洞扫描技术</h1>
       
-        
-        <a class="title flat-box" target="_self" href='/'>
-          
-            <img no-lazy class='logo' src='/images/sculptor.png'/>
-          
-          
-          
-        </a>
+        <h2 id="1-1扫描原理"   >
+          <a href="#1-1扫描原理" class="heading-link"><i class="fas fa-link"></i></a>1.1扫描原理</h2>
       
-
-			<div class='menu navigation'>
-				<ul class='nav-list-h m-pc'>
-          
-          
-          
-            
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/
-                  
-                  
-                  
-                    id="home"
-                  >
-                  <i class='fas fa-rss fa-fw'></i>博客
-                </a>
-                
-              </li>
-            
-          
-          
-            
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
-                  
-                  
-                  
-                    id="categories"
-                  >
-                  <i class='fas fa-folder-open fa-fw'></i>分类
-                </a>
-                
-              </li>
-            
-          
-          
-            
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
-                  
-                  
-                  
-                    id="tags"
-                  >
-                  <i class='fas fa-tags fa-fw'></i>标签
-                </a>
-                
-              </li>
-            
-          
-          
-            
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
-                  
-                  
-                  
-                    id="archives"
-                  >
-                  <i class='fas fa-archive fa-fw'></i>归档
-                </a>
-                
-              </li>
-            
-          
-          
-            
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
-                  
-                  
-                  
-                    id="friends"
-                  >
-                  <i class='fas fa-link fa-fw'></i>友链
-                </a>
-                
-              </li>
-            
-          
-          
-            
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
-                  
-                  
-                  
-                    id="about"
-                  >
-                  <i class='fas fa-info-circle fa-fw'></i>关于我
-                </a>
-                
-              </li>
-            
-          
-          
-				</ul>
-			</div>
-
-      <div class="m_search">
-        <form name="searchform" class="form u-search-form">
-          <i class="icon fas fa-search fa-fw"></i>
-          <input type="text" class="input u-search-input" placeholder="Search..." />
-        </form>
-      </div>
-
-			<ul class='switcher nav-list-h m-phone'>
-				
-					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
-				
-				<li>
-          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
-          <ul class="menu-phone list-v navigation white-box">
-            
-              
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/
-                  
-                  
-                  
-                    id="home"
-                  >
-                  <i class='fas fa-rss fa-fw'></i>博客
-                </a>
-                
-              </li>
-            
-          
-            
-              
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
-                  
-                  
-                  
-                    id="categories"
-                  >
-                  <i class='fas fa-folder-open fa-fw'></i>分类
-                </a>
-                
-              </li>
-            
-          
-            
-              
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
-                  
-                  
-                  
-                    id="tags"
-                  >
-                  <i class='fas fa-tags fa-fw'></i>标签
-                </a>
-                
-              </li>
-            
-          
-            
-              
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
-                  
-                  
-                  
-                    id="archives"
-                  >
-                  <i class='fas fa-archive fa-fw'></i>归档
-                </a>
-                
-              </li>
-            
-          
-            
-              
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
-                  
-                  
-                  
-                    id="friends"
-                  >
-                  <i class='fas fa-link fa-fw'></i>友链
-                </a>
-                
-              </li>
-            
-          
-            
-              
-            
-              <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
-                  
-                  
-                  
-                    id="about"
-                  >
-                  <i class='fas fa-info-circle fa-fw'></i>关于我
-                </a>
-                
-              </li>
-            
-          
-            
-          </ul>
-        </li>
-			</ul>
-		</div>
-	</div>
-  </div>
-</header>
-
-  <div class="l_body">
-    <div class="l_cover">
-  
-    
-    
-        <div class='cover-wrapper post dock' style="display: none;">
-          
-            <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg"></div>
-          
-          <div class='cover-body'>
-  <div class='top'>
-    
-    
-      <p class="title">Sculptor</p>
-    
-    
-      <p class="subtitle">不知名的陌生人</p>
-    
-  </div>
-  <div class='bottom'>
-    <div class='menu navigation'>
-      <div class='list-h'>
-        
-          
-            <a href="/"
-              
-              
-              id="home">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg'><p>博客</p>
-            </a>
-          
-            <a href="/categories/"
-              
-              
-              id="categories">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg'><p>分类</p>
-            </a>
-          
-            <a href="/tags/"
-              
-              
-              id="tags">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg'><p>标签</p>
-            </a>
-          
-            <a href="/archives/"
-              
-              
-              id="archives">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg'><p>归档</p>
-            </a>
-          
-            <a href="/friends/"
-              
-              
-              id="friends">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg'><p>友链</p>
-            </a>
-          
-        
-      </div>
-    </div>
-  </div>
-</div>
-
-          <div class="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
-        </div>
-    
-  
-  </div>
-  
-    <div class='safearea'>
-      <div class='body-wrapper' id="pjax-container">
-        
-          <!--此文件用来存放一些不方便取值的变量--> 
-<!--思路大概是将值藏到重加载的区域内--> 
- 
- 
- 
-<div id="pjax-data" style="display: none"> 
-  <div id="pjax-ispage">false</div> 
-  <div id="pjax-pageTitle"></div> 
-  <div id="pjax-enable-cover">true</div> 
-  <div id="pjax-comment-path"></div> 
-  <div id="pjax-comment-placeholder"></div> 
-</div> 
- 
- 
-<script> 
-  // 处理封面 此时 jquery 还没加载 
-  if ("none" == "none") { // 移除封面 
-    document.getElementsByClassName('cover-wrapper')[0].style.display = "none"; 
-    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show"); 
-  } else { 
-    if ("none" == "half") { // 半屏 
-      document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'half'); 
-      document.getElementsByClassName('scroll-down')[0].style.display = "none"; 
-    } else if ("none" == "full") { // 全屏 
-      document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'full'); 
-      document.getElementsByClassName('scroll-down')[0].style.display = ""; 
-    } 
-    document.getElementsByClassName('cover-wrapper')[0].style.display = ""; 
-    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.remove("show"); 
-  } 
-</script> 
- 
-
-        
-        
-
-<div class='l_main'>
-  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
-  
-
-
-  
-  <div class="article-meta" id="top">
-    
-    
-    
-  </div>
-
-
-  
-  <h1 id="一，漏洞扫描技术"><a href="#一，漏洞扫描技术" class="headerlink" title="一，漏洞扫描技术"></a>一，漏洞扫描技术</h1><h2 id="1-1扫描原理"><a href="#1-1扫描原理" class="headerlink" title="1.1扫描原理"></a>1.1扫描原理</h2><h3 id="1-1-1-Ping-检测"><a href="#1-1-1-Ping-检测" class="headerlink" title="1.1.1. Ping 检测"></a>1.1.1. Ping 检测</h3><p>win+R -&gt; cmd -&gt; ping + 目标IP</p>
+        <h3 id="1-1-1-Ping-检测"   >
+          <a href="#1-1-1-Ping-检测" class="heading-link"><i class="fas fa-link"></i></a>1.1.1. Ping 检测</h3>
+      <p>win+R -&gt; cmd -&gt; ping + 目标IP</p>
 <p>当 ping 通目标 IP 后 返回 TTL值判断目标 IP 的操作系统</p>
+<a id="more"></a>
+
 <p>TTL=128：可能是 windows xp/2000/2003 系统</p>
 <p>TTL=64：可能是 windows 7/2008/10 系统，Linux系统</p>
 <p>TTL=255：可能是交换机，路由器设备</p>
-<h3 id="1-1-2-端口扫描"><a href="#1-1-2-端口扫描" class="headerlink" title="1.1.2. 端口扫描"></a>1.1.2. 端口扫描</h3><p>win+R -&gt; cmd -&gt; telnet + 目标IP + 目标端口号</p>
+
+        <h3 id="1-1-2-端口扫描"   >
+          <a href="#1-1-2-端口扫描" class="heading-link"><i class="fas fa-link"></i></a>1.1.2. 端口扫描</h3>
+      <p>win+R -&gt; cmd -&gt; telnet + 目标IP + 目标端口号</p>
 <p>注意：扫描器的运作是基于 TCP/IP 的，个人计算机，服务器主机或者防火墙和路由器都适用。扫描信息的来源基本都必须依赖于端口，即必须某端口对外开放，才可以以此判断主机上运行的操作系统，服务软件类型及版本等。例如：使用 ftp.exe 连接主机，判断主机 FTP 服务程序类型和版本，如果 FTP 服务对应的 21 端口无法访问，则得不到任何信息。</p>
-<h2 id="1-2-扫描分类"><a href="#1-2-扫描分类" class="headerlink" title="1.2. 扫描分类"></a>1.2. 扫描分类</h2><ol>
+
+        <h2 id="1-2-扫描分类"   >
+          <a href="#1-2-扫描分类" class="heading-link"><i class="fas fa-link"></i></a>1.2. 扫描分类</h2>
+      <ol>
 <li>开放扫描：</li>
 <li>半开放扫描：</li>
 <li>隐蔽扫描：</li>
 <li>扫射扫描：</li>
 <li>其他扫描：</li>
 </ol>
-<h2 id="1-3-扫描前准备"><a href="#1-3-扫描前准备" class="headerlink" title="1.3.扫描前准备"></a>1.3.扫描前准备</h2><ol>
+
+        <h2 id="1-3-扫描前准备"   >
+          <a href="#1-3-扫描前准备" class="heading-link"><i class="fas fa-link"></i></a>1.3.扫描前准备</h2>
+      <ol>
 <li>了解网络的部署情况，企业的 需要/不需要/不能 扫描（有些扫描可能造成网络瘫痪）</li>
 <li>扫描时间和方式（正常来说都是在凌晨，半夜进行扫描，这个时间段访问的用户比较少）</li>
 <li>定制好扫描策略（针对于 漏洞/端口/弱口令/全部 扫描）</li>
 <li>防火墙是否开启（防火墙开启的情况下，默认是扫描不到的）</li>
 <li>企业服务是否配置了相关的安全策略，以访锁死（注意）（比如说：数据库设置3次密码，针对那些弱口令的暴力破解）</li>
 </ol>
-<h2 id="1-4-常见的扫描工具"><a href="#1-4-常见的扫描工具" class="headerlink" title="1.4. 常见的扫描工具"></a>1.4. 常见的扫描工具</h2><ol>
+
+        <h2 id="1-4-常见的扫描工具"   >
+          <a href="#1-4-常见的扫描工具" class="heading-link"><i class="fas fa-link"></i></a>1.4. 常见的扫描工具</h2>
+      <ol>
 <li>SuperScan</li>
 <li>Fluxay（流光）</li>
 <li>X-Scan</li>
@@ -477,7 +88,10 @@
 </ol>
 <p>国外：Arachni（开源的，kali中自带），HP WebInspect，IBM AppScan，Acunetix WVS（AWVS），Nessus，Nexpose，Netspaker…</p>
 <p>国内：绿盟科技，杭州安恒，知道创宇，启明星辰…</p>
-<h2 id="1-5-X-scan-的简写使用"><a href="#1-5-X-scan-的简写使用" class="headerlink" title="1.5. X-scan 的简写使用"></a>1.5. X-scan 的简写使用</h2><ol>
+
+        <h2 id="1-5-X-scan-的简写使用"   >
+          <a href="#1-5-X-scan-的简写使用" class="heading-link"><i class="fas fa-link"></i></a>1.5. X-scan 的简写使用</h2>
+      <ol>
 <li><p>设置—&gt;扫描参数</p>
 <p>这里可以设置 扫描目标 IP 或者网段</p>
 <p>或者把要扫描的目标网址或者IP放到记事本里，通过”从文件获取主机列表”进行扫描</p>
@@ -499,12 +113,18 @@
 <p>Ping：和window自带的ping一样</p>
 </li>
 </ol>
-<h2 id="1-6-AppScan"><a href="#1-6-AppScan" class="headerlink" title="1.6. AppScan"></a>1.6. AppScan</h2><p><strong>功能介绍</strong></p>
+
+        <h2 id="1-6-AppScan"   >
+          <a href="#1-6-AppScan" class="heading-link"><i class="fas fa-link"></i></a>1.6. AppScan</h2>
+      <p><strong>功能介绍</strong></p>
 <p>AppScan 是 web 应用程序渗透测试舞台上使用最广泛的工具之一，它是一个桌面应用程序，有助于专业安全人员进行 web 应用程序自动化脆弱性评估。</p>
 <p>AppScan 其实是一个产品家族，包括众多的应用安全扫描产品，从开发阶段的源代码扫描的 AppScan source edition ，到针对 web 应用程序的快速扫描的 AppScan standard edition 以及进行安全管理和汇总整合的 AppScan enteprise edition 等，我们经常说的只是桌面的 AppScan ，即 AppScan standard edition ，其安装在 window 操作系统下，可以对网站等 web应用程序进行自动化的应用安全扫描和测试。</p>
 <p>它需要 微软 C++ 2017 和 微软 .NET Framework4 4.7.2 Full 框架（所以就下载到虚拟机里，但是虚拟机 win 下下载时也没单独下载这个框架）</p>
-<p>下载路径：<a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-1189130-1-1.html">https://www.52pojie.cn/thread-1189130-1-1.html</a></p>
-<h3 id="1-6-1-实例"><a href="#1-6-1-实例" class="headerlink" title="1.6.1.实例"></a>1.6.1.实例</h3><p>打开phpstudy，开启一台机器作为站点</p>
+<p>下载路径：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-1189130-1-1.html" >https://www.52pojie.cn/thread-1189130-1-1.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h3 id="1-6-1-实例"   >
+          <a href="#1-6-1-实例" class="heading-link"><i class="fas fa-link"></i></a>1.6.1.实例</h3>
+      <p>打开phpstudy，开启一台机器作为站点</p>
 <p>文件-&gt;新建-&gt;常规模块（一般来说的）</p>
 <ol>
 <li><p>AppScan（自动或手动）(一般常选)</p>
@@ -539,10 +159,19 @@
 <p>有的时候AppScan 扫描一个网站会导致这个网站崩溃（例如：银行，内容比较多，扫描的时间就比较久），或者扫描的过程中遇到错误，自动暂停了；这时我们就可以选择保存，这样我们就可以在下次扫描时接着上一次扫描的位置接着扫描。</p>
 <p><strong>缺点：</strong></p>
 <p>软件比较大，占内存。同时，它扫描速度也比较慢。它在国内的扫描力度不行，但是通用漏洞扫描比较强大。</p>
-<h2 id="1-7-AWVS"><a href="#1-7-AWVS" class="headerlink" title="1.7. AWVS"></a>1.7. AWVS</h2><p><strong>功能介绍</strong></p>
+
+        <h2 id="1-7-AWVS"   >
+          <a href="#1-7-AWVS" class="heading-link"><i class="fas fa-link"></i></a>1.7. AWVS</h2>
+      <p><strong>功能介绍</strong></p>
 <p>AWVS 是一个自动化的 web应用程序测试工具，通过检查可利用的漏洞，黑客可以审核 web 应用程序的安全性。</p>
-<h3 id="1-7-1-Dashboard-仪表板"><a href="#1-7-1-Dashboard-仪表板" class="headerlink" title="1.7.1. Dashboard 仪表板"></a>1.7.1. Dashboard 仪表板</h3><p>显示扫描的运行以及爬取状态，显示漏洞个数和级别</p>
-<h3 id="1-7-2-Targets-添加扫描目标"><a href="#1-7-2-Targets-添加扫描目标" class="headerlink" title="1.7.2. Targets 添加扫描目标"></a>1.7.2. Targets 添加扫描目标</h3><ol>
+
+        <h3 id="1-7-1-Dashboard-仪表板"   >
+          <a href="#1-7-1-Dashboard-仪表板" class="heading-link"><i class="fas fa-link"></i></a>1.7.1. Dashboard 仪表板</h3>
+      <p>显示扫描的运行以及爬取状态，显示漏洞个数和级别</p>
+
+        <h3 id="1-7-2-Targets-添加扫描目标"   >
+          <a href="#1-7-2-Targets-添加扫描目标" class="heading-link"><i class="fas fa-link"></i></a>1.7.2. Targets 添加扫描目标</h3>
+      <ol>
 <li><p>General</p>
 <p>Address：添加扫描IP</p>
 <p>Description：设置扫描描述。</p>
@@ -571,12 +200,21 @@
 <li><p>Schedule：可以保持不变（instant），也可以自己修改，可以在特定时间段反复扫描</p>
 </li>
 </ol>
-<h3 id="1-7-3-Settings"><a href="#1-7-3-Settings" class="headerlink" title="1.7.3. Settings"></a>1.7.3. Settings</h3><ol>
+
+        <h3 id="1-7-3-Settings"   >
+          <a href="#1-7-3-Settings" class="heading-link"><i class="fas fa-link"></i></a>1.7.3. Settings</h3>
+      <ol>
 <li>Notification Settings：设置邮件发送告知工作人员扫描完成。</li>
 </ol>
-<h2 id="1-8-HP-WebInspect"><a href="#1-8-HP-WebInspect" class="headerlink" title="1.8. HP WebInspect"></a>1.8. HP WebInspect</h2><p>HP WebInspect 是一款文件大，系统资源占用更大的扫描软件，在安装后会开机自启很多功能繁琐的进程和服务，所以尽量将其安装在虚拟机中，操作系统在 win7以上，确保其支持 .Net Framework 4.5x 和 SQL Server 2012，开启前还需运行 services.msc 工具检查 SQL 和 WebInspect 系列服务是否正确启动，以防扫描时出现致命的错误中断，10.30版本可能需要 VPN。</p>
+
+        <h2 id="1-8-HP-WebInspect"   >
+          <a href="#1-8-HP-WebInspect" class="heading-link"><i class="fas fa-link"></i></a>1.8. HP WebInspect</h2>
+      <p>HP WebInspect 是一款文件大，系统资源占用更大的扫描软件，在安装后会开机自启很多功能繁琐的进程和服务，所以尽量将其安装在虚拟机中，操作系统在 win7以上，确保其支持 .Net Framework 4.5x 和 SQL Server 2012，开启前还需运行 services.msc 工具检查 SQL 和 WebInspect 系列服务是否正确启动，以防扫描时出现致命的错误中断，10.30版本可能需要 VPN。</p>
 <p>优点：扫描 出来的报告是最全的。</p>
-<h3 id="1-8-1-实例"><a href="#1-8-1-实例" class="headerlink" title="1.8.1. 实例"></a>1.8.1. 实例</h3><ol>
+
+        <h3 id="1-8-1-实例"   >
+          <a href="#1-8-1-实例" class="heading-link"><i class="fas fa-link"></i></a>1.8.1. 实例</h3>
+      <ol>
 <li><p>文件 -&gt; 新建</p>
 </li>
 <li><p>Start URL：输入要扫描的网站</p>
@@ -613,10 +251,25 @@
 </li>
 </ol>
 <p>特点：一边扫描，一边爬取，而AppScan 是先爬取后扫描</p>
-<h2 id="1-9-Netspaker"><a href="#1-9-Netspaker" class="headerlink" title="1.9. Netspaker"></a>1.9. Netspaker</h2><p>效果比 AWVS 差很多。</p>
-<h2 id="1-10-WVSS"><a href="#1-10-WVSS" class="headerlink" title="1.10. WVSS"></a>1.10. WVSS</h2><p>绿盟的安全系统（要钱，没有破解版的）</p>
-<h2 id="1-11-安恒明鉴"><a href="#1-11-安恒明鉴" class="headerlink" title="1.11. 安恒明鉴"></a>1.11. 安恒明鉴</h2><p>安恒的漏洞弱口令扫描工具（要钱，没破解版的）</p>
-<h2 id="1-12-Nessus"><a href="#1-12-Nessus" class="headerlink" title="1.12. Nessus"></a>1.12. Nessus</h2><h3 id="1-12-1-功能"><a href="#1-12-1-功能" class="headerlink" title="1.12.1.功能"></a>1.12.1.功能</h3><ol>
+
+        <h2 id="1-9-Netspaker"   >
+          <a href="#1-9-Netspaker" class="heading-link"><i class="fas fa-link"></i></a>1.9. Netspaker</h2>
+      <p>效果比 AWVS 差很多。</p>
+
+        <h2 id="1-10-WVSS"   >
+          <a href="#1-10-WVSS" class="heading-link"><i class="fas fa-link"></i></a>1.10. WVSS</h2>
+      <p>绿盟的安全系统（要钱，没有破解版的）</p>
+
+        <h2 id="1-11-安恒明鉴"   >
+          <a href="#1-11-安恒明鉴" class="heading-link"><i class="fas fa-link"></i></a>1.11. 安恒明鉴</h2>
+      <p>安恒的漏洞弱口令扫描工具（要钱，没破解版的）</p>
+
+        <h2 id="1-12-Nessus"   >
+          <a href="#1-12-Nessus" class="heading-link"><i class="fas fa-link"></i></a>1.12. Nessus</h2>
+      
+        <h3 id="1-12-1-功能"   >
+          <a href="#1-12-1-功能" class="heading-link"><i class="fas fa-link"></i></a>1.12.1.功能</h3>
+      <ol>
 <li><p>Scan</p>
 <p>Advanced Scan：高级扫描(默认)</p>
 </li>
@@ -637,7 +290,10 @@
 </li>
 </ol>
 <p>点击 scan1 可以得到扫描结果。</p>
-<h3 id="1-12-2-实例"><a href="#1-12-2-实例" class="headerlink" title="1.12.2. 实例"></a>1.12.2. 实例</h3><p>步骤：</p>
+
+        <h3 id="1-12-2-实例"   >
+          <a href="#1-12-2-实例" class="heading-link"><i class="fas fa-link"></i></a>1.12.2. 实例</h3>
+      <p>步骤：</p>
 <ol>
 <li><p>Policies页面</p>
 <p>先 Advance Scan 新建一个策略模板</p>
@@ -655,32 +311,65 @@
 <p>launch：启动扫描任务，可看到任务正在running</p>
 </li>
 </ol>
-<h2 id="1-13-Nexpose"><a href="#1-13-Nexpose" class="headerlink" title="1.13. Nexpose"></a>1.13. Nexpose</h2><p>VM 虚拟机 ova 版本下载地址：<a target="_blank" rel="noopener" href="http://download2.rapid7.com/download/NeXpose-v4/NexposeVA.ova">http://download2.rapid7.com/download/NeXpose-v4/NexposeVA.ova</a> 或者 <a target="_blank" rel="noopener" href="http://www.rapid7.com/products/nexpose/download.jsp">http://www.rapid7.com/products/nexpose/download.jsp</a></p>
+
+        <h2 id="1-13-Nexpose"   >
+          <a href="#1-13-Nexpose" class="heading-link"><i class="fas fa-link"></i></a>1.13. Nexpose</h2>
+      <p>VM 虚拟机 ova 版本下载地址：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://download2.rapid7.com/download/NeXpose-v4/NexposeVA.ova" >http://download2.rapid7.com/download/NeXpose-v4/NexposeVA.ova</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 或者 <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.rapid7.com/products/nexpose/download.jsp" >http://www.rapid7.com/products/nexpose/download.jsp</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 <p>ova 版本的账户密码：nexpose</p>
 <p>最大的优点：这个软件和 MSF 一起使用（它们是同一个公司出的）</p>
-<h2 id="1-14-启明天镜（BS-版）"><a href="#1-14-启明天镜（BS-版）" class="headerlink" title="1.14. 启明天镜（BS 版）"></a>1.14. 启明天镜（BS 版）</h2><p>天镜脆弱性扫描与管理系统</p>
+
+        <h2 id="1-14-启明天镜（BS-版）"   >
+          <a href="#1-14-启明天镜（BS-版）" class="heading-link"><i class="fas fa-link"></i></a>1.14. 启明天镜（BS 版）</h2>
+      <p>天镜脆弱性扫描与管理系统</p>
 <p>免费 3 个月的使用，还原虚拟机（或者修改日期）又可以免费使用。（但是没有找到资源）</p>
-<h2 id="1-15-RSAS（绿盟）"><a href="#1-15-RSAS（绿盟）" class="headerlink" title="1.15. RSAS（绿盟）"></a>1.15. RSAS（绿盟）</h2><p>系统和 Web 可以同时扫描。</p>
-<h1 id="二，漏洞扫描评估方案讲解"><a href="#二，漏洞扫描评估方案讲解" class="headerlink" title="二，漏洞扫描评估方案讲解"></a>二，漏洞扫描评估方案讲解</h1><h2 id="2-1-测试目的"><a href="#2-1-测试目的" class="headerlink" title="2.1. 测试目的"></a>2.1. 测试目的</h2><h3 id="2-1-1-测试目的"><a href="#2-1-1-测试目的" class="headerlink" title="2.1.1. 测试目的"></a>2.1.1. 测试目的</h3><p>通过了解各家厂商的设备性能和功能是否能够满足当前业务需要。</p>
-<h3 id="2-1-2-测试对象"><a href="#2-1-2-测试对象" class="headerlink" title="2.1.2. 测试对象"></a>2.1.2. 测试对象</h3><ol>
+
+        <h2 id="1-15-RSAS（绿盟）"   >
+          <a href="#1-15-RSAS（绿盟）" class="heading-link"><i class="fas fa-link"></i></a>1.15. RSAS（绿盟）</h2>
+      <p>系统和 Web 可以同时扫描。</p>
+
+        <h1 id="二，漏洞扫描评估方案讲解"   >
+          <a href="#二，漏洞扫描评估方案讲解" class="heading-link"><i class="fas fa-link"></i></a>二，漏洞扫描评估方案讲解</h1>
+      
+        <h2 id="2-1-测试目的"   >
+          <a href="#2-1-测试目的" class="heading-link"><i class="fas fa-link"></i></a>2.1. 测试目的</h2>
+      
+        <h3 id="2-1-1-测试目的"   >
+          <a href="#2-1-1-测试目的" class="heading-link"><i class="fas fa-link"></i></a>2.1.1. 测试目的</h3>
+      <p>通过了解各家厂商的设备性能和功能是否能够满足当前业务需要。</p>
+
+        <h3 id="2-1-2-测试对象"   >
+          <a href="#2-1-2-测试对象" class="heading-link"><i class="fas fa-link"></i></a>2.1.2. 测试对象</h3>
+      <ol>
 <li>绿盟科技 Web 应用漏洞扫描系统</li>
 <li>杭州安恒网站安全监测平台</li>
 <li>知道创宇 WEBSOC 网站立体监控系统</li>
 <li>启明星辰</li>
 </ol>
-<h3 id="2-1-3-测试内容"><a href="#2-1-3-测试内容" class="headerlink" title="2.1.3. 测试内容"></a>2.1.3. 测试内容</h3><ol>
+
+        <h3 id="2-1-3-测试内容"   >
+          <a href="#2-1-3-测试内容" class="heading-link"><i class="fas fa-link"></i></a>2.1.3. 测试内容</h3>
+      <ol>
 <li>功能测试：包括扫描漏报测试，漏洞误报测试，页面发现测试，管理功能测试。</li>
 <li>性能测试：包括扫描速度测试，平均速率测试，最大速率测试。</li>
 <li>可靠性测试：包括断电恢复测试，断点续扫测试。</li>
 </ol>
-<h3 id="2-1-4-测试环境"><a href="#2-1-4-测试环境" class="headerlink" title="2.1.4. 测试环境"></a>2.1.4. 测试环境</h3><ol>
+
+        <h3 id="2-1-4-测试环境"   >
+          <a href="#2-1-4-测试环境" class="heading-link"><i class="fas fa-link"></i></a>2.1.4. 测试环境</h3>
+      <ol>
 <li><p>网络拓扑</p>
 </li>
 <li><p>测试目标机构</p>
 </li>
 </ol>
-<h2 id="2-2-测试案例"><a href="#2-2-测试案例" class="headerlink" title="2.2. 测试案例"></a>2.2. 测试案例</h2><p>首先要找那种漏洞多的网站进行测试</p>
-<h3 id="2-2-1-扫描功能和相关性能测试"><a href="#2-2-1-扫描功能和相关性能测试" class="headerlink" title="2.2.1. 扫描功能和相关性能测试"></a>2.2.1. 扫描功能和相关性能测试</h3><ol>
+
+        <h2 id="2-2-测试案例"   >
+          <a href="#2-2-测试案例" class="heading-link"><i class="fas fa-link"></i></a>2.2. 测试案例</h2>
+      <p>首先要找那种漏洞多的网站进行测试</p>
+
+        <h3 id="2-2-1-扫描功能和相关性能测试"   >
+          <a href="#2-2-1-扫描功能和相关性能测试" class="heading-link"><i class="fas fa-link"></i></a>2.2.1. 扫描功能和相关性能测试</h3>
+      <ol>
 <li>漏报数</li>
 <li>误报数</li>
 <li>页面发现数</li>
@@ -689,1115 +378,93 @@
 <li>最大速率</li>
 <li>…</li>
 </ol>
-<h3 id="2-2-2-管理功能测试"><a href="#2-2-2-管理功能测试" class="headerlink" title="2.2.2. 管理功能测试"></a>2.2.2. 管理功能测试</h3><p>按照工作流分别对任务管理，报表管理，分布式管理功能按照测试表逐项测试。</p>
-<h3 id="2-2-3-可靠性测试"><a href="#2-2-3-可靠性测试" class="headerlink" title="2.2.3. 可靠性测试"></a>2.2.3. 可靠性测试</h3><ol>
+
+        <h3 id="2-2-2-管理功能测试"   >
+          <a href="#2-2-2-管理功能测试" class="heading-link"><i class="fas fa-link"></i></a>2.2.2. 管理功能测试</h3>
+      <p>按照工作流分别对任务管理，报表管理，分布式管理功能按照测试表逐项测试。</p>
+
+        <h3 id="2-2-3-可靠性测试"   >
+          <a href="#2-2-3-可靠性测试" class="heading-link"><i class="fas fa-link"></i></a>2.2.3. 可靠性测试</h3>
+      <ol>
 <li>断电恢复测试：扫描过程突然断电，查看扫描引擎是否能够对任务信息，扫描过程信息，关键配置信息，模板信息等进行备份或保存。</li>
 <li>断点续扫测试：扫描任务暂停或意外中断后再恢复，查看任务是否正常。</li>
 </ol>
-<h2 id="2-3-测试结果"><a href="#2-3-测试结果" class="headerlink" title="2.3. 测试结果"></a>2.3. 测试结果</h2><h3 id="2-3-1-扫描功能和相关测试性能"><a href="#2-3-1-扫描功能和相关测试性能" class="headerlink" title="2.3.1. 扫描功能和相关测试性能"></a>2.3.1. 扫描功能和相关测试性能</h3><h3 id="2-3-2-管理功能测试"><a href="#2-3-2-管理功能测试" class="headerlink" title="2.3.2. 管理功能测试"></a>2.3.2. 管理功能测试</h3><h3 id="2-3-3-可靠性测试"><a href="#2-3-3-可靠性测试" class="headerlink" title="2.3.3. 可靠性测试"></a>2.3.3. 可靠性测试</h3><h2 id="2-4-相关扫描软件测试评估"><a href="#2-4-相关扫描软件测试评估" class="headerlink" title="2.4. 相关扫描软件测试评估"></a>2.4. 相关扫描软件测试评估</h2><p>国外软件：<a target="_blank" rel="noopener" href="http://sectoolmarket.com/wivet-score-unified-list.html%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%BE%88%E5%87%86%E7%A1%AE%EF%BC%89">http://sectoolmarket.com/wivet-score-unified-list.html（不一定很准确）</a></p>
 
-  
-  
-    
-    <div class='footer'>
+        <h2 id="2-3-测试结果"   >
+          <a href="#2-3-测试结果" class="heading-link"><i class="fas fa-link"></i></a>2.3. 测试结果</h2>
       
+        <h3 id="2-3-1-扫描功能和相关测试性能"   >
+          <a href="#2-3-1-扫描功能和相关测试性能" class="heading-link"><i class="fas fa-link"></i></a>2.3.1. 扫描功能和相关测试性能</h3>
       
+        <h3 id="2-3-2-管理功能测试"   >
+          <a href="#2-3-2-管理功能测试" class="heading-link"><i class="fas fa-link"></i></a>2.3.2. 管理功能测试</h3>
       
-        <div class='copyright'>
-          <blockquote>
-            
-              
-                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
-
-              
-            
-              
-                <p>本文永久链接是：<a href=https://sculptor-liu.github.io/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/>https://sculptor-liu.github.io/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/</a></p>
-              
-            
-          </blockquote>
-        </div>
+        <h3 id="2-3-3-可靠性测试"   >
+          <a href="#2-3-3-可靠性测试" class="heading-link"><i class="fas fa-link"></i></a>2.3.3. 可靠性测试</h3>
       
-      
-    </div>
-  
-  
-    
-
-
-  <div class='article-meta' id="bottom">
-    <div class='new-meta-box'>
-      
-        
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-25T00:13:58+08:00">
-  <a class='notlink'>
-    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Jul 25, 2020</p>
-  </a>
-</div>
-
-        
-      
-        
-          
-
-        
-      
-        
-          
-  <div class="new-meta-item share -mob-share-list">
-  <div class="-mob-share-list share-body">
-    
-      
-        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://sculptor-liu.github.io/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/&title= - Sculptor的博客&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://sculptor-liu.github.io/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/&title= - Sculptor的博客&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="http://service.weibo.com/share/share.php?url=https://sculptor-liu.github.io/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/&title= - Sculptor的博客&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
-          
-        </a>
-      
-    
-      
-    
-      
-    
-  </div>
-</div>
-
-
-
-        
-      
-    </div>
-  </div>
-
-
-  
-  
-
-  
-    <div class="prev-next">
-      
-        <a class='prev' href='/2020/07/25/SQL%20%E6%B3%A8%E5%85%A5/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i></p>
-          <p class='content'>Web 入侵先遣——SQL注入攻击技术初探前言SQL 注入式攻击技术，一般针对基本 Web 平台的应用程序，造成 SQL 注入 攻击漏洞的原因，是由于程序员在编写 Web 程序时，没有对浏览器端...</p>
-        </a>
-      
-      
-        <a class='next' href='/2020/07/04/MSF/'>
-          <p class='title'><i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>一.初识    MSF1.1什么是MetasploitMetasploit就是个漏洞框架。 它的全称叫做The Metasploit Framework ,简称MSF。是一个免费、可下载的框架,...</p>
-        </a>
-      
-    </div>
-  
-</article>
-
-
-  
-
-  <article class="post white-box reveal shadow" id="comments">
-    <p ct><i class='fas fa-comments'></i> 评论</p>
-    
-    <div id="gitalk-container"></div>
-
-  </article>
-
-
-
-
-
-
-</div>
-<aside class='l_side'>
-  
-  
-    
-    
-
-
-
-  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
-    
-  <header>
-    
-      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
-    
-  </header>
-
-
-    <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1%E6%89%AB%E6%8F%8F%E5%8E%9F%E7%90%86"><span class="toc-text">1.1扫描原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-Ping-%E6%A3%80%E6%B5%8B"><span class="toc-text">1.1.1. Ping 检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-text">1.1.2. 端口扫描</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%89%AB%E6%8F%8F%E5%88%86%E7%B1%BB"><span class="toc-text">1.2. 扫描分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E6%89%AB%E6%8F%8F%E5%89%8D%E5%87%86%E5%A4%87"><span class="toc-text">1.3.扫描前准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E5%B8%B8%E8%A7%81%E7%9A%84%E6%89%AB%E6%8F%8F%E5%B7%A5%E5%85%B7"><span class="toc-text">1.4. 常见的扫描工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-X-scan-%E7%9A%84%E7%AE%80%E5%86%99%E4%BD%BF%E7%94%A8"><span class="toc-text">1.5. X-scan 的简写使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-AppScan"><span class="toc-text">1.6. AppScan</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-1-%E5%AE%9E%E4%BE%8B"><span class="toc-text">1.6.1.实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-AWVS"><span class="toc-text">1.7. AWVS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-1-Dashboard-%E4%BB%AA%E8%A1%A8%E6%9D%BF"><span class="toc-text">1.7.1. Dashboard 仪表板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-2-Targets-%E6%B7%BB%E5%8A%A0%E6%89%AB%E6%8F%8F%E7%9B%AE%E6%A0%87"><span class="toc-text">1.7.2. Targets 添加扫描目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-3-Settings"><span class="toc-text">1.7.3. Settings</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-8-HP-WebInspect"><span class="toc-text">1.8. HP WebInspect</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8-1-%E5%AE%9E%E4%BE%8B"><span class="toc-text">1.8.1. 实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-9-Netspaker"><span class="toc-text">1.9. Netspaker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-10-WVSS"><span class="toc-text">1.10. WVSS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-11-%E5%AE%89%E6%81%92%E6%98%8E%E9%89%B4"><span class="toc-text">1.11. 安恒明鉴</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-12-Nessus"><span class="toc-text">1.12. Nessus</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-12-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">1.12.1.功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-12-2-%E5%AE%9E%E4%BE%8B"><span class="toc-text">1.12.2. 实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-13-Nexpose"><span class="toc-text">1.13. Nexpose</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-14-%E5%90%AF%E6%98%8E%E5%A4%A9%E9%95%9C%EF%BC%88BS-%E7%89%88%EF%BC%89"><span class="toc-text">1.14. 启明天镜（BS 版）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-15-RSAS%EF%BC%88%E7%BB%BF%E7%9B%9F%EF%BC%89"><span class="toc-text">1.15. RSAS（绿盟）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E6%B5%8B%E8%AF%95%E7%9B%AE%E7%9A%84"><span class="toc-text">2.1. 测试目的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-%E6%B5%8B%E8%AF%95%E7%9B%AE%E7%9A%84"><span class="toc-text">2.1.1. 测试目的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E6%B5%8B%E8%AF%95%E5%AF%B9%E8%B1%A1"><span class="toc-text">2.1.2. 测试对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-%E6%B5%8B%E8%AF%95%E5%86%85%E5%AE%B9"><span class="toc-text">2.1.3. 测试内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-4-%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83"><span class="toc-text">2.1.4. 测试环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%B5%8B%E8%AF%95%E6%A1%88%E4%BE%8B"><span class="toc-text">2.2. 测试案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-%E6%89%AB%E6%8F%8F%E5%8A%9F%E8%83%BD%E5%92%8C%E7%9B%B8%E5%85%B3%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">2.2.1. 扫描功能和相关性能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E7%AE%A1%E7%90%86%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">2.2.2. 管理功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-%E5%8F%AF%E9%9D%A0%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-text">2.2.3. 可靠性测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="toc-text">2.3. 测试结果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-%E6%89%AB%E6%8F%8F%E5%8A%9F%E8%83%BD%E5%92%8C%E7%9B%B8%E5%85%B3%E6%B5%8B%E8%AF%95%E6%80%A7%E8%83%BD"><span class="toc-text">2.3.1. 扫描功能和相关测试性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-%E7%AE%A1%E7%90%86%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">2.3.2. 管理功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-%E5%8F%AF%E9%9D%A0%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-text">2.3.3. 可靠性测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E7%9B%B8%E5%85%B3%E6%89%AB%E6%8F%8F%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%AF%84%E4%BC%B0"><span class="toc-text">2.4. 相关扫描软件测试评估</span></a></li></ol>
-    </div>
-  </section>
-
-
-  
-
-
-</aside>
-
-
-
-      </div>
-      
-  
-  <footer class="footer clearfix">
-    <br><br>
-    
-      
-        <div class="aplayer-container">
-          
-
-
-        </div>
-      
-    
-      
-        <br>
-        <div class="social-wrapper">
-          
-            
-          
-            
-          
-            
-          
-        </div>
-      
-    
-      
-        <div><p>Blog content follows the <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
-</div>
-      
-    
-      
-        
-          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
-</div>
-        
-      
-    
-      
-        Use
-        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.0.0-rc.4" target="_blank" class="codename">Volantis</a>
-        as theme
-      
-    
-      
-        <div class='copyright'>
-        <p><a href="/">Copyright © 2020-2020 XXX</a></p>
-
-        </div>
-      
-    
-  </footer>
-
-
-      <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
-    </div>
-  </div>
-  <div>
-    <!-- required -->
-
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
-
-<script>
-  function pjax_fancybox() {
-    $(".md .gallery").find("img").each(function () { //渲染 fancybox
-      var element = document.createElement("a"); // a 标签
-      $(element).attr("class", "fancybox");
-      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
-      $(element).attr("href", $(this).attr("src"));
-      if ($(this).attr("data-original")) {
-        $(element).attr("href", $(this).attr("data-original"));
-      }
-      $(element).attr("data-fancybox", "images");
-      var caption = "";   // 描述信息
-      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
-        $(element).attr('data-caption', $(this).attr('alt'));
-        caption = $(this).attr('alt');
-      }
-      var div = document.createElement("div");
-      $(div).addClass("fancybox");
-      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
-      var span = document.createElement("span");
-      $(span).addClass("image-caption");
-      $(span).text(caption); // 加描述
-      $(this).after(span);  // 再套一层描述
-      $(this).wrap(element);  // 最后套 a 标签
-    })
-    $(".md .gallery").find("img").fancybox({
-      selector: '[data-fancybox="images"]',
-      hash: false,
-      loop: false,
-      closeClick: true,
-      helpers: {
-        overlay: {closeClick: true}
-      },
-      buttons: [
-        "zoom",
-        "close"
-      ]
-    });
-  };
-  function SCload_fancybox() {
-    if ($(".md .gallery").find("img").length == 0) return;
-    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
-    setTimeout(function() {
-      loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
-    }, 1);
-  };
-  $(function () {
-    SCload_fancybox();
-  });
-</script>
-
-
-<!-- internal -->
-
-
-
-  
-  
-
-  <div id="rightmenu-wrapper">
-    <ul class="list-v rightmenu" id="rightmenu-content">
-      <li class='option'>
-        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-text' onclick="document.execCommand('copy')"><i class='fa fa-copy fa-fw'></i>Copy Text</a>
-        <hr id='hr-text'>
-        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-href'><i class='fa fa-link fa-fw'></i>Copy Link</a>
-        <a class='vlts-menu opt fix-cursor-default' id='menu-open-href'><i class='fa fa-external-link-square-alt fa-fw'></i>Open Link in New Tab</a>
-        <hr id='hr-href'>
-        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-src'><i class='fa fa-image fa-fw'></i>Copy Image Link</a>
-        <hr id='hr-src'>
-      </li>
-      
-        <li class='navigation'>
-          <a class='nav icon-only fix-cursor-default' onclick='history.back()'><i class='fa fa-arrow-left fa-fw'></i></a>
-          <a class='nav icon-only fix-cursor-default' onclick='history.forward()'><i class='fa fa-arrow-right fa-fw'></i></a>
-          <a class='nav icon-only fix-cursor-default' onclick='window.location.reload()'><i class='fa fa-redo fa-fw'></i></a>
-          <a class='nav icon-only fix-cursor-default' href='/'><i class='fa fa-home fa-fw'></i></a>
-        </li>
-      
-      <hr>
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=/
-        
-        
-        
-        
-          id="home"
-        >
-        <i class='fa fa-home fa-fw'></i> 前往首页
-      </a>
-    </li>
-  
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=https://sculptor-liu.github.io/categories/
-        
-        
-        
-        
-          id="https:sculptor-liugithubiocategories"
-        >
-        <i class='fas fa-folder-open fa-fw'></i> 前往分类页
-      </a>
-    </li>
-  
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=https://sculptor-liu.github.io/achives/
-        
-        
-        
-        
-          id="https:sculptor-liugithubioachives"
-        >
-        <i class='fas fa-archive fa-fw'></i> 前往归档页
-      </a>
-    </li>
-  
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=https://sculptor-liu.github.io/tags/
-        
-        
-        
-        
-          id="https:sculptor-liugithubiotags"
-        >
-        <i class='fas fa-tags fa-fw'></i> 前往标签页
-      </a>
-    </li>
-  
-        
-      
-        
-          <hr>
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=https://sculptor-liu.github.io/about/
-        
-        
-        
-        
-          id="https:sculptor-liugithubioabout"
-        >
-        <i class='fa fa-code-branch fa-fw'></i> 前往我的站
-      </a>
-    </li>
-  
-        
-      
-        
-          <hr>
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' 
-        
-        
-        
-          onclick="document.execCommand('print')"
-        
-        >
-        <i class='fa fa-print fa-fw'></i> 打印页面
-      </a>
-    </li>
-  
-        
-      
-        
-          <hr>
-        
-      
-        
-      
-    </ul>
-  </div>
-
-  <script>
-    window.document.oncontextmenu = function (event) {
-      if (event.ctrlKey) return true;
-      if (/Android|webOS|BlackBerry/i.test(navigator.userAgent)) return true;
-      return popMenu(event);
-    };
-    document.addEventListener("click", function (event) {
-      var mymenu = document.getElementById('rightmenu-wrapper');
-      mymenu.style.display = "none";
-    });
-    function popMenu(event) {
-      var mymenu = document.getElementById('rightmenu-wrapper');
-      var menuContent = document.getElementById('rightmenu-content');
-      var screenWidth = document.documentElement.clientWidth || document.body.clientWidth;
-      var screenHeight = document.documentElement.clientHeight || document.body.clientHeight;
-      mymenu.style.left = event.clientX + "px"; // 获取鼠标位置
-      mymenu.style.top = event.clientY + "px";
-      mymenu.style.display = 'block';
-      if (event.clientX * 2 > screenWidth) {
-        menuContent.classList.add('left');
-      } else {
-        menuContent.classList.remove('left');
-      }
-      if (event.clientY * 2 > screenHeight) {
-        menuContent.classList.add('top');
-      } else {
-        menuContent.classList.remove('top');
-      }
-
-      let hrText = document.getElementById('hr-text');
-      let hrSrc = document.getElementById('hr-src');
-      let hrHref = document.getElementById('hr-href');
-
-      // 选中图片
-      let copySrc = document.getElementById('menu-copy-src');
-      if (copySrc != undefined) {
-        if (event.target.currentSrc) {
-          copySrc.style.display = 'block';
-          copySrc.addEventListener("click", function (e) {
-            copyString(event.target.currentSrc);
-          },{once: true});
-          hrSrc.style.display = 'block';
-        } else {
-          copySrc.style.display = 'none';
-          hrSrc.style.display = 'none';
-        }
-      }
-
-      // 选中按钮
-      // 判断是不是按钮
-      let href = '';
-      if (event.path) {
-        for (i = 0; i < event.path.length; i++) {
-          if (event.path[i].href != undefined && event.path[i].href.length > 0) {
-            href = event.path[i].href;
-          }
-        }
-      }
-
-      let copyText = document.getElementById('menu-copy-text');
-      copyText.style.display = 'none';
-      hrText.style.display = 'none';
-      if (href.length == 0) {
-        // 选中文本
-        if (window.getSelection().toString()) {
-          if ('' == 'true') {
-            copyText.style.display = 'block';
-            hrText.style.display = 'block';
-          }
-        }
-      }
-
-      // 在新标签页打开
-      let openHref = document.getElementById('menu-open-href');
-      if (openHref != undefined) {
-        if (href.length > 0) {
-          openHref.style.display = 'block';
-          openHref.addEventListener("click", function (e) {
-            window.open(href);
-          },{once: true});
-          hrHref.style.display = 'block';
-        } else {
-          openHref.style.display = 'none';
-          hrHref.style.display = 'none';
-        }
-      }
-      // 复制链接
-      let copyHref = document.getElementById('menu-copy-href');
-      if (copyHref != undefined) {
-        if (href.length > 0) {
-          copyHref.style.display = 'block';
-          copyHref.addEventListener("click", function (e) {
-            copyString(href);
-          },{once: true});
-        } else {
-          copyHref.style.display = 'none';
-        }
-      }
-
-      // 有音乐播放器
-      if ('' == true && ('home,categories,archives,tags,hr,about,hr,print,hr,music'||[]).includes('music')) {
-        // 如果有aplayer，初始化一下
-      	try {
-      		checkAPlayer();
-          updateTitle();
-      	} catch (error) {
-      		console.log(error);
-      	}
-      }
-
-      return false; // 该行代码确保系统自带的右键菜单不会被调出
-    }
-    function hideMenu() {
-      document.getElementById('rightmenu-wrapper').style.display = 'none';
-    }
-    function copyString(str) {
-      const input = document.createElement('input');
-      input.setAttribute('readonly', 'readonly');
-      document.body.appendChild(input);
-      input.setAttribute('value', str);
-      input.select();
-      document.execCommand('copy');
-      document.body.removeChild(input);
-    }
-    document.execCommand('click');
-  </script>
-
-
-
-
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
-<script>
-  // https://www.npmjs.com/package/vanilla-lazyload
-  // Set the options globally
-  // to make LazyLoad self-initialize
-  window.lazyLoadOptions = {
-    elements_selector: ".lazyload",
-    threshold: 0
-  };
-  // Listen to the initialization event
-  // and get the instance of LazyLoad
-  window.addEventListener(
-    "LazyLoad::Initialized",
-    function (event) {
-      window.lazyLoadInstance = event.detail.instance;
-    },
-    false
-  );
-  document.addEventListener('DOMContentLoaded', function () {
-    lazyLoadInstance.update();
-  });
-  document.addEventListener('pjax:complete', function () {
-    lazyLoadInstance.update();
-  });
-</script>
-
-
-
-
-  
-  
-    <script>
-      window.FPConfig = {
-        delay: 0,
-        ignoreKeywords: [],
-        maxRPS: 5,
-        hoverDelay: 25
-      };
-    </script>
-    <script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
-  
-
-
-
-
-
-
-
-
-
-
-  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-  function pjax_gitalk() {
-    if(!document.querySelectorAll("#gitalk-container")[0])return;
-
-    let path = $.trim($('#pjax-comment-path').text());
-    if (path.length == 0) {
-      let defaultPath = '';
-      path = defaultPath || decodeURI(window.location.pathname);
-    }
-
-    if (document.getElementById('gitalk-container') != null) {
-      var gitalk = new Gitalk({
-        clientID: "28f6b94423100cc8a01d",
-        clientSecret: "812ec412a6abb31e41feedc3fa3ba97eefa1a882",
-        repo: "Sculptor-liu.github.io/",
-        owner: "Sculptor-liu",
-        admin: "Sculptor-liu",
-        id: path,
-        distractionFreeMode: false  // Facebook-like distraction free mode
-      });
-      gitalk.render('gitalk-container');
-    }
+        <h2 id="2-4-相关扫描软件测试评估"   >
+          <a href="#2-4-相关扫描软件测试评估" class="heading-link"><i class="fas fa-link"></i></a>2.4. 相关扫描软件测试评估</h2>
+      <p>国外软件：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://sectoolmarket.com/wivet-score-unified-list.html%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%BE%88%E5%87%86%E7%A1%AE%EF%BC%89" >http://sectoolmarket.com/wivet-score-unified-list.html（不一定很准确）</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://sculptor-liu.github.io">Sculptor</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://sculptor-liu.github.io/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/">https://sculptor-liu.github.io/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/Web/">Web</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/ali_pay.png"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/wechat_pay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/07/25/SQL%20%E6%B3%A8%E5%85%A5/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">SQL注入</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/07/04/MSF/"><span class="paginator-prev__text">MSF框架</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%EF%BC%8C%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">
+          一，漏洞扫描技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1%E6%89%AB%E6%8F%8F%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">
+          1.1扫描原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-Ping-%E6%A3%80%E6%B5%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">
+          1.1.1. Ping 检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">
+          1.1.2. 端口扫描</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%89%AB%E6%8F%8F%E5%88%86%E7%B1%BB"><span class="toc-number">1.2.</span> <span class="toc-text">
+          1.2. 扫描分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E6%89%AB%E6%8F%8F%E5%89%8D%E5%87%86%E5%A4%87"><span class="toc-number">1.3.</span> <span class="toc-text">
+          1.3.扫描前准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E5%B8%B8%E8%A7%81%E7%9A%84%E6%89%AB%E6%8F%8F%E5%B7%A5%E5%85%B7"><span class="toc-number">1.4.</span> <span class="toc-text">
+          1.4. 常见的扫描工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-X-scan-%E7%9A%84%E7%AE%80%E5%86%99%E4%BD%BF%E7%94%A8"><span class="toc-number">1.5.</span> <span class="toc-text">
+          1.5. X-scan 的简写使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-AppScan"><span class="toc-number">1.6.</span> <span class="toc-text">
+          1.6. AppScan</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-1-%E5%AE%9E%E4%BE%8B"><span class="toc-number">1.6.1.</span> <span class="toc-text">
+          1.6.1.实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-AWVS"><span class="toc-number">1.7.</span> <span class="toc-text">
+          1.7. AWVS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-1-Dashboard-%E4%BB%AA%E8%A1%A8%E6%9D%BF"><span class="toc-number">1.7.1.</span> <span class="toc-text">
+          1.7.1. Dashboard 仪表板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-2-Targets-%E6%B7%BB%E5%8A%A0%E6%89%AB%E6%8F%8F%E7%9B%AE%E6%A0%87"><span class="toc-number">1.7.2.</span> <span class="toc-text">
+          1.7.2. Targets 添加扫描目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-3-Settings"><span class="toc-number">1.7.3.</span> <span class="toc-text">
+          1.7.3. Settings</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-8-HP-WebInspect"><span class="toc-number">1.8.</span> <span class="toc-text">
+          1.8. HP WebInspect</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8-1-%E5%AE%9E%E4%BE%8B"><span class="toc-number">1.8.1.</span> <span class="toc-text">
+          1.8.1. 实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-9-Netspaker"><span class="toc-number">1.9.</span> <span class="toc-text">
+          1.9. Netspaker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-10-WVSS"><span class="toc-number">1.10.</span> <span class="toc-text">
+          1.10. WVSS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-11-%E5%AE%89%E6%81%92%E6%98%8E%E9%89%B4"><span class="toc-number">1.11.</span> <span class="toc-text">
+          1.11. 安恒明鉴</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-12-Nessus"><span class="toc-number">1.12.</span> <span class="toc-text">
+          1.12. Nessus</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-12-1-%E5%8A%9F%E8%83%BD"><span class="toc-number">1.12.1.</span> <span class="toc-text">
+          1.12.1.功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-12-2-%E5%AE%9E%E4%BE%8B"><span class="toc-number">1.12.2.</span> <span class="toc-text">
+          1.12.2. 实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-13-Nexpose"><span class="toc-number">1.13.</span> <span class="toc-text">
+          1.13. Nexpose</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-14-%E5%90%AF%E6%98%8E%E5%A4%A9%E9%95%9C%EF%BC%88BS-%E7%89%88%EF%BC%89"><span class="toc-number">1.14.</span> <span class="toc-text">
+          1.14. 启明天镜（BS 版）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-15-RSAS%EF%BC%88%E7%BB%BF%E7%9B%9F%EF%BC%89"><span class="toc-number">1.15.</span> <span class="toc-text">
+          1.15. RSAS（绿盟）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%EF%BC%8C%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E8%AF%84%E4%BC%B0%E6%96%B9%E6%A1%88%E8%AE%B2%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">
+          二，漏洞扫描评估方案讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E6%B5%8B%E8%AF%95%E7%9B%AE%E7%9A%84"><span class="toc-number">2.1.</span> <span class="toc-text">
+          2.1. 测试目的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-%E6%B5%8B%E8%AF%95%E7%9B%AE%E7%9A%84"><span class="toc-number">2.1.1.</span> <span class="toc-text">
+          2.1.1. 测试目的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E6%B5%8B%E8%AF%95%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.1.2.</span> <span class="toc-text">
+          2.1.2. 测试对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-%E6%B5%8B%E8%AF%95%E5%86%85%E5%AE%B9"><span class="toc-number">2.1.3.</span> <span class="toc-text">
+          2.1.3. 测试内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-4-%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83"><span class="toc-number">2.1.4.</span> <span class="toc-text">
+          2.1.4. 测试环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%B5%8B%E8%AF%95%E6%A1%88%E4%BE%8B"><span class="toc-number">2.2.</span> <span class="toc-text">
+          2.2. 测试案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-%E6%89%AB%E6%8F%8F%E5%8A%9F%E8%83%BD%E5%92%8C%E7%9B%B8%E5%85%B3%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-number">2.2.1.</span> <span class="toc-text">
+          2.2.1. 扫描功能和相关性能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E7%AE%A1%E7%90%86%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-number">2.2.2.</span> <span class="toc-text">
+          2.2.2. 管理功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-%E5%8F%AF%E9%9D%A0%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-number">2.2.3.</span> <span class="toc-text">
+          2.2.3. 可靠性测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="toc-number">2.3.</span> <span class="toc-text">
+          2.3. 测试结果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-%E6%89%AB%E6%8F%8F%E5%8A%9F%E8%83%BD%E5%92%8C%E7%9B%B8%E5%85%B3%E6%B5%8B%E8%AF%95%E6%80%A7%E8%83%BD"><span class="toc-number">2.3.1.</span> <span class="toc-text">
+          2.3.1. 扫描功能和相关测试性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-%E7%AE%A1%E7%90%86%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-number">2.3.2.</span> <span class="toc-text">
+          2.3.2. 管理功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-%E5%8F%AF%E9%9D%A0%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-number">2.3.3.</span> <span class="toc-text">
+          2.3.3. 可靠性测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E7%9B%B8%E5%85%B3%E6%89%AB%E6%8F%8F%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%AF%84%E4%BC%B0"><span class="toc-number">2.4.</span> <span class="toc-text">
+          2.4. 相关扫描软件测试评估</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">1</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">1</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-md5@latest/src/md5.min.js"></script><script>function loadGitalk () {
+  if (!document.getElementById('gitalk-container')) {
+    return;
   }
 
-  $(function () {
-    pjax_gitalk();
+  var gitalk = new Gitalk({
+    id: md5(window.location.pathname.slice(1)),
+    clientID: '28f6b94423100cc8a01d',
+    clientSecret: '812ec412a6abb31e41feedc3fa3ba97eefa1a882',
+    repo: 'Sculptor-liu.github.io/',
+    owner: 'Sculptor-liu',
+    admin: ['Sculptor-liu'],
+    distractionFreeMode: 'false',
+    language: 'zh-CN'
   });
-</script>
-
-
-
-
-  
-<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5/lib/darkmode-js.min.js" aysc></script>
-
-<script type="text/javascript">
-function getClientHeight(){
-  var clientHeight=0;
-  if(document.body.clientHeight&&document.documentElement.clientHeight){
-  var clientHeight = (document.body.clientHeight<document.documentElement.clientHeight)?document.body.clientHeight:document.documentElement.clientHeight;
-  }else{
-  var clientHeight = (document.body.clientHeight>document.documentElement.clientHeight)?document.body.clientHeight:document.documentElement.clientHeight;
-  }
-  return clientHeight;
+  gitalk.render('gitalk-container');
 }
-function supportCss3(style) {
-  var prefix = ['webkit', 'Moz', 'ms', 'o'],
-  i,
-  humpString = [],
-  htmlStyle = document.documentElement.style,
-  _toHumb = function (string) {
-  return string.replace(/-(\w)/g, function ($0, $1) {
-  return $1.toUpperCase();
-  });
-  };
-  for (i in prefix)
-  humpString.push(_toHumb(prefix[i] + '-' + style));
-  humpString.push(_toHumb(style));
-  for (i in humpString)
-  if (humpString[i] in htmlStyle) return true;
-  return false;
-};
-//配置信息
-var options = {
-  bottom: '32px',
-  right: 'unset',
-  left: '16px',
-  time: '0s',
-  mixColor: '#f4f4f4',
-  backgroundColor: '#f4f4f4',
-  buttonColorDark: '#333',
-  buttonColorLight: '#ddd',
-  saveInCookies: true,
-  label: '',
-  autoMatchOsTheme: true
-};
-// 卡片兼容处理 mix-blend-mode 与 effect: [blur] 冲突
 
-function pjax_darkmodejs(){
-  
-  if(!supportCss3('mix-blend-mode'))return;
-  var checkExist2 = setInterval(function() {
-     if (typeof jQuery == 'undefined'){return;}
-     clearInterval(checkExist2);
-     var TopFlag=getClientHeight();
-    $(window).scroll(function(){
-      var top = $(document).scrollTop();
-      if(top > TopFlag) {
-        $(".darkmode-layer").css("mix-blend-mode","normal");
-        $(".darkmode-layer").css("background-color","#222");
-      }else{
-        $(".darkmode-layer").css("mix-blend-mode","difference");
-        $(".darkmode-layer").css("background-color","");
-      }
-    })
-  }, 100);
-  
-}
-// mix-blend-mode support?
-if(supportCss3('mix-blend-mode')){
-  window.darkmode = new Darkmode(options);
-  
-  window.darkmode.showWidget();
-  
-  pjax_darkmodejs();
-}
-////////////////Development///////////////////////
-//////////////darkmode模式切换////////////////////
-//window.darkmode.toggle();                     //
-//////////////darkmode模式判断////////////////////
-//console.log(window.darkmode.isActivated())    //
-//////////////////////////////////////////////////
-</script>
-
-
-
-
-
-  
-<script src="/js/app.js"></script>
-
-
-
-
-  
-    
-<script src="/js/search.js"></script>
-
-  
-
-
-<!-- optional -->
-
-  <script>
-const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
-const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
-(function ($) {
-  
-    customSearch = new HexoSearch({
-      imagePath: SearchServiceimagePath
-    });
-  
-})(jQuery);
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-  <script defer>
-
-  const LCCounter = {
-    app_id: 'u9j57bwJod4EDmXWdxrwuqQT-MdYXbMMI',
-    app_key: 'jfHtEKVE24j0IVCGHbvuFClp',
-    custom_api_server: '',
-
-    // 查询存储的记录
-    getRecord(Counter, url, title) {
-      return new Promise(function (resolve, reject) {
-        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
-          .then(resp => resp.json())
-          .then(({results, code, error}) => {
-            if (code === 401) {
-              throw error;
-            }
-            if (results && results.length > 0) {
-              var record = results[0];
-              resolve(record);
-            } else {
-              Counter('post', '/classes/Counter', {url, title: title, times: 0})
-                .then(resp => resp.json())
-                .then((record, error) => {
-                  if (error) {
-                    throw error;
-                  }
-                  resolve(record);
-                }).catch(error => {
-                console.error('Failed to create', error);
-                reject(error);
-              });
-            }
-          }).catch((error) => {
-          console.error('LeanCloud Counter Error:', error);
-          reject(error);
-        });
-      })
-    },
-
-    // 发起自增请求
-    increment(Counter, incrArr) {
-      return new Promise(function (resolve, reject) {
-        Counter('post', '/batch', {
-          "requests": incrArr
-        }).then((res) => {
-          res = res.json();
-          if (res.error) {
-            throw res.error;
-          }
-          resolve(res);
-        }).catch((error) => {
-          console.error('Failed to save visitor count', error);
-          reject(error);
-        });
-      });
-    },
-
-    // 构建自增请求体
-    buildIncrement(objectId) {
-      return {
-        "method": "PUT",
-        "path": `/1.1/classes/Counter/${ objectId }`,
-        "body": {
-          "times": {
-            '__op': 'Increment',
-            'amount': 1
-          }
-        }
-      }
-    },
-
-    // 校验是否为有效的 UV
-    validUV() {
-      var key = 'LeanCloudUVTimestamp';
-      var flag = localStorage.getItem(key);
-      if (flag) {
-        // 距离标记小于 24 小时则不计为 UV
-        if (new Date().getTime() - parseInt(flag) <= 86400000) {
-          return false;
-        }
-      }
-      localStorage.setItem(key, new Date().getTime().toString());
-      return true;
-    },
-
-    addCount(Counter) {
-      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
-      enableIncr = true;
-      var getterArr = [];
-      var incrArr = [];
-      // 请求 PV 并自增
-      var pvCtn = document.querySelector('#lc-sv');
-      if (pvCtn || enableIncr) {
-        var pvGetter = this.getRecord(Counter, 'https://sculptor-liu.github.io' + '/#lc-sv', 'Visits').then((record) => {
-          incrArr.push(this.buildIncrement(record.objectId))
-          var eles = document.querySelectorAll('#lc-sv #number');
-          if (eles.length > 0) {
-            eles.forEach((el,index,array)=>{
-              el.innerText = record.times + 1;
-              if (pvCtn) {
-                pvCtn.style.display = 'inline';
-              }
-            })
-          }
-        });
-        getterArr.push(pvGetter);
-      }
-
-      // 请求 UV 并自增
-      var uvCtn = document.querySelector('#lc-uv');
-      if (uvCtn || enableIncr) {
-        var uvGetter = this.getRecord(Counter, 'https://sculptor-liu.github.io' + '/#lc-uv', 'Visitors').then((record) => {
-          var vuv = this.validUV();
-          vuv && incrArr.push(this.buildIncrement(record.objectId))
-          var eles = document.querySelectorAll('#lc-uv #number');
-          if (eles.length > 0) {
-            eles.forEach((el,index,array)=>{
-              el.innerText = record.times + (vuv ? 1 : 0);
-              if (uvCtn) {
-                uvCtn.style.display = 'inline';
-              }
-            })
-          }
-        });
-        getterArr.push(uvGetter);
-      }
-
-      // 请求文章的浏览数，如果是当前页面就自增
-      var allPV = document.querySelectorAll('#lc-pv');
-      if (allPV.length > 0 || enableIncr) {
-        for (i = 0; i < allPV.length; i++) {
-          let pv = allPV[i];
-          let title = pv.getAttribute('data-title');
-          var url = 'https://sculptor-liu.github.io' + pv.getAttribute('data-path');
-          if (url) {
-            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
-              // 是当前页面就自增
-              let curPath = window.location.pathname;
-              if (curPath.includes('index.html')) {
-                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
-              }
-              if (pv.getAttribute('data-path') == curPath) {
-                incrArr.push(this.buildIncrement(record.objectId));
-              }
-              if (pv) {
-                var ele = pv.querySelector('#lc-pv #number');
-                if (ele) {
-                  if (pv.getAttribute('data-path') == curPath) {
-                    ele.innerText = (record.times || 0) + 1;
-                  } else {
-                    ele.innerText = record.times || 0;
-                  }
-                  pv.style.display = 'inline';
-                }
-              }
-            });
-            getterArr.push(viewGetter);
-          }
-        }
-      }
-
-      // 如果启动计数自增，批量发起自增请求
-      if (enableIncr) {
-        Promise.all(getterArr).then(() => {
-          incrArr.length > 0 && this.increment(Counter, incrArr);
-        })
-      }
-
-    },
-
-
-    fetchData(api_server) {
-      var Counter = (method, url, data) => {
-        return fetch(`${ api_server }/1.1${ url }`, {
-          method,
-          headers: {
-            'X-LC-Id': this.app_id,
-            'X-LC-Key': this.app_key,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-      };
-      this.addCount(Counter);
-    },
-
-    refreshCounter() {
-      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
-      if (api_server) {
-        this.fetchData(api_server);
-      } else {
-        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
-          .then(resp => resp.json())
-          .then(({api_server}) => {
-            this.fetchData('https://' + api_server);
-          });
-      }
-    }
-
-  };
-
-  LCCounter.refreshCounter();
-
-  document.addEventListener('pjax:complete', function () {
-    LCCounter.refreshCounter();
-  });
-</script>
-
-
-
-<!-- more -->
-
-
-    
-      
-
-
-<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
-
-<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
-
-<div class="pjax-animate">
-  
-    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
-    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
-    <script>
-      window.ShowLoading = function() {
-        NProgress.start();
-      };
-      window.HideLoading = function() {
-        NProgress.done();
-      }
-    </script>
-  
-</div>
-
-<script>
-    var pjax;
-    document.addEventListener('DOMContentLoaded', function () {
-      pjax = new Pjax({
-        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
-        selectors: [
-          "title",
-          "#pjax-container",
-          "#pjax-header-nav-list"
-        ],
-        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
-        timeout: 5000
-      });
-    });
-
-    document.addEventListener('pjax:send', function (e) {
-      window.stop(); // 相当于点击了浏览器的停止按钮
-
-      try {
-        var currentUrl = window.location.pathname;
-        var targetUrl = e.triggerElement.href;
-        var banUrl = [""];
-        if (banUrl[0] != "") {
-          banUrl.forEach(item => {
-            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
-              window.location.href = targetUrl;
-            }
-          });
-        }
-      } catch (error) {}
-
-      window.subData = null; // 移除标题（用于一二级导航栏切换处）
-      if (typeof $.fancybox != "undefined") {
-        $.fancybox.close();    // 关闭弹窗
-      }
-      $('.l_header .switcher .s-search').removeClass('active'); // 关闭移动端激活的搜索框
-      $('.l_header').removeClass('z_search-open'); // 关闭移动端激活的搜索框
-      $('.wrapper').removeClass('sub'); // 跳转页面时关闭二级导航
-
-      // 解绑事件 避免重复监听
-      $('.s-top').unbind('click');
-      $('.menu a').unbind('click');
-      $(window).unbind('resize');
-      $(window).unbind('scroll');
-      $(document).unbind('scroll');
-      $(document).unbind('click');
-      $('body').unbind('click');
-      window.ShowLoading();
-    });
-
-    document.addEventListener('pjax:complete', function () {
-      // 关于百度统计对 SPA 页面的处理：
-      // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
-      // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
-      // 
-
-      // 关于谷歌统计对 SPA 页面的处理：
-      // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
-      // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
-      
-
-      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
-      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
-      $('script[data-pjax], .pjax-reload script').each(function () {
-        $(this).parent().append($(this).remove());
-      });
-      try{
-          if (typeof $.fancybox == "undefined") {
-            SCload_fancybox();
-          } else {
-            pjax_fancybox();
-          }
-        
-        
-        
-        
-        
-        
-        
-        
-          pjax_gitalk();
-        
-        
-        
-          pjax_darkmodejs();
-        
-      } catch (e) {
-        console.log(e);
-      }
-      window.HideLoading();
-    });
-
-    document.addEventListener('pjax:error', function (e) {
-      window.HideLoading();
-      window.location.href = e.triggerElement.href;
-    });
-</script>
-
-    
-  </div>
-</body>
-</html>
+if (false) {
+  loadGitalk();
+} else {
+  window.addEventListener('DOMContentLoaded', loadGitalk, false);
+}</script><script src="/js/utils.js?v=2.1.1"></script><script src="/js/stun-boot.js?v=2.1.1"></script><script src="/js/scroll.js?v=2.1.1"></script><script src="/js/header.js?v=2.1.1"></script><script src="/js/sidebar.js?v=2.1.1"></script></body></html>
