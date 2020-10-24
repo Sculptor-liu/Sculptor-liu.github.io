@@ -6,52 +6,52 @@
 <meta property="og:description" content="XSS闯关小游戏                           前言：       XSS的介绍：https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_45798017&#x2F;article&#x2F;details&#x2F;105343314                     准备：       在线游戏：http:&#x2F;&#x2F;test.xss.tv 自己搭建： 下载phpstudy-&amp;g">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/1.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C2.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C2.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C3.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C3.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C3.3.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C4.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C4.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C5.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C5.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C6.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C7.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C8.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C8.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C8.3.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C9.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C9.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C10.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C10.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C10.3.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C11.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C11.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C11.3.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C11.4.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C12.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C12.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C12.3.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C13.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C13.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C13.3.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C15.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C15.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C16.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C16.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C17.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C18.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C18.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C19.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C19.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C19.3.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C19.4.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C19.5.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C20.1.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C20.2.png">
-<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C20.3.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/2.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/2.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/3.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/3.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/3.3.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/4.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/4.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/5.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/5.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/6.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/7.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/8.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/8.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/8.3.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/9.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/9.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/10.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/10.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/10.3.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/11.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/11.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/11.3.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/11.4.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/12.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/12.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/12.3.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/13.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/13.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/13.3.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/15.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/15.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/16.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/16.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/17.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/18.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/18.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/19.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/19.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/19.3.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/19.4.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/19.5.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/20.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/20.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/20.3.png">
 <meta property="article:published_time" content="2020-10-24T11:37:16.316Z">
-<meta property="article:modified_time" content="2020-10-24T12:13:26.351Z">
+<meta property="article:modified_time" content="2020-10-24T12:57:01.128Z">
 <meta property="article:author" content="Sculptor">
 <meta property="article:tag" content="XSS">
 <meta name="twitter:card" content="summary">
@@ -109,22 +109,22 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
         <h3 id="level-2">
           <a href="#level-2" class="heading-link"><i class="fas fa-link"></i></a>level 2</h3>
       <p>尝试level 1的方法，不行，F12查看源代码，发现方框里的被“ ”当作字符串了</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C2.1.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/2.1.png"></p>
 <p>想办法把value后面的“过滤掉，或者闭合</p>
 <p>payload</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;&gt;&lt;script&gt;alert()&lt;&#x2F;script&gt;</span><br><span class="line">或者  &quot;onclick&#x3D;alert()&gt;    需要点击一下输入框。</span><br><span class="line">或者  &quot;onmouseover&#x3D;alert()&gt;需要要鼠标滑过输入框</span><br></pre></td></tr></table></div></figure>
 
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C2.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/2.2.png"></p>
 
         <h3 id="level-3">
           <a href="#level-3" class="heading-link"><i class="fas fa-link"></i></a>level 3</h3>
-      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C3.1.png"></p>
+      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/3.1.png"></p>
 <p>同样的直接输入payload执行语句会被当做value的字符串，用”闭合，然后无法执行</p>
 <p>查看php中的源代码，显示value最后的是 ‘ 结尾的</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C3.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/3.2.png"></p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name&#x3D;keyword  value&#x3D;&#39;&quot;.htmlspecialchars($str).&quot;&#39;&gt;    &#x2F;&#x2F;可以从这个看到value值也被实体化，value的值执行了htmlspecialchars($str)函数，它的作用是把预定义的字符 “&lt;” （小于）和 “&gt;” （大于）转换为 HTML 实体，所以不能使用尖括号</span><br></pre></td></tr></table></div></figure>
 
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C3.3.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/3.3.png"></p>
 <p>但是htmlspecialchars默认配置是不过滤单引号。只有设置了：quotestyle选项为ENT_QUOTES，才可以；那么可以用单引号闭合并且不能包含&lt;&gt;则</p>
 <p>payload</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#39;onclick&#x3D;alert()&#x2F;&#x2F;    &#x2F;&#x2F;是把后面的语句注释了</span><br><span class="line">或者 &#39;onmouseover&#x3D;alert()&#x2F;&#x2F;</span><br></pre></td></tr></table></div></figure>
@@ -134,8 +134,8 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
           <a href="#level-4" class="heading-link"><i class="fas fa-link"></i></a>level 4</h3>
       <p>level 4和level 3原理类似</p>
 <p>只是value后面以双引号结束，同时发生了替换函数</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C4.1.png"></p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C4.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/4.1.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/4.2.png"></p>
 <p>将输入的&lt;和&gt;替换过滤了</p>
 <p>可以利用和level 3类似的方法</p>
 <p>执行payload</p>
@@ -144,17 +144,17 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 
         <h3 id="level-5">
           <a href="#level-5" class="heading-link"><i class="fas fa-link"></i></a>level 5</h3>
-      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C5.1.png"></p>
+      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/5.1.png"></p>
 <p>查看源码，发现执行了两个替换函数，将script和on都替换了，所以script和onclick还有onmouseover的标签都没法使用。</p>
 <p>尝试执行a的标签</p>
 <p>payload</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&gt;&lt;a href&#x3D;javascript:alert()&gt;test&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></div></figure>
 
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C5.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/5.2.png"></p>
 
         <h3 id="level-6">
           <a href="#level-6" class="heading-link"><i class="fas fa-link"></i></a>level 6</h3>
-      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C6.1.png"></p>
+      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/6.1.png"></p>
 <p>过滤了script，on，src，data，href，但由于是用str_replace函数来过滤的，所以可以用大小写绕过</p>
 <p>payload</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;&gt;&lt;a Href&#x3D;javascript:alert()&gt;test&lt;&#x2F;a&gt;</span><br><span class="line">或者&quot;&gt;&lt;Script&gt;alert()&lt;&#x2F;Script&gt;</span><br><span class="line">或者&quot;Onclick&#x3D;alert()&gt;</span><br><span class="line">或者&quot;Onmouseover&#x3D;alert()&gt;</span><br></pre></td></tr></table></div></figure>
@@ -162,7 +162,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 
         <h3 id="level-7">
           <a href="#level-7" class="heading-link"><i class="fas fa-link"></i></a>level 7</h3>
-      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C7.1.png"></p>
+      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/7.1.png"></p>
 <p>很显然，过滤了script，on，src，data，href，尝试通过重叠拼写进行绕过注入</p>
 <p>payload</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;&gt;&lt;a hhrefref&#x3D;javasscriptcript:alert()&gt;test&lt;&#x2F;a&gt;</span><br><span class="line">或者&quot;&gt;&lt;sscriptcript&gt;alert()&lt;&#x2F;sscriptcript&gt;</span><br><span class="line">或者&quot;oonnclick&#x3D;alert()&gt;</span><br><span class="line">或者&quot;oonnmouseover&#x3D;alert()&gt;</span><br></pre></td></tr></table></div></figure>
@@ -170,21 +170,21 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 
         <h3 id="level-8">
           <a href="#level-8" class="heading-link"><i class="fas fa-link"></i></a>level 8</h3>
-      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C8.1.png"></p>
+      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/8.1.png"></p>
 <p>随便输入数值，F12查看源码，可以看出下面的href友情链接显示的为输入的值，那么直接用javascript的标签</p>
 <p>但是，</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C8.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/8.2.png"></p>
 <p>很显然过滤了script，on，src，data，href还有双引号，尝试利用html编码绕过</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C8.3.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/8.3.png"></p>
 <p>payload</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javascri&amp;#112;t:alert()</span><br></pre></td></tr></table></div></figure>
 
 
         <h3 id="level-9">
           <a href="#level-9" class="heading-link"><i class="fas fa-link"></i></a>level 9</h3>
-      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C9.1.png"></p>
+      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/9.1.png"></p>
 <p>很显然过滤了script，on，src，data，href还有双引号，同时对value的值进行了htmlspecialchars($str)函数的转换，上题相似</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C9.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/9.2.png"></p>
 <p>同时，多了一个url检测，如果发现没有带http:// 内容则会显示不合法， 那么怎么可以既有它，又不让它执行呢?只需填加个注释，（可选择多行注释和单行注释）包含http://就行了</p>
 <p>payload</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javascri&amp;#112;t:alert()&#x2F;&#x2F;http:&#x2F;&#x2F;</span><br></pre></td></tr></table></div></figure>
@@ -193,43 +193,43 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
         <h3 id="level-10">
           <a href="#level-10" class="heading-link"><i class="fas fa-link"></i></a>level 10</h3>
       <p>F12查看网页源代码，同时查看php中的源代码</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C10.1.png"></p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C10.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/10.1.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/10.2.png"></p>
 <p>可以看出有三个参数的属性是hidden，同时t_sort是传参的</p>
 <p>所以构建payload</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?t_sort&#x3D;&quot; onclick&#x3D;alert() type&#x3D;&quot;button&quot;</span><br><span class="line">或者 ?t_sort&#x3D;&quot; onclick&#x3D;alert() type&#x3D;&quot;text&quot;</span><br><span class="line">或者直接在上面的url栏的最后添加&amp;t_sort&#x3D;&quot; onclick&#x3D;alert() type&#x3D;&quot;text&quot;（或者button属性的）</span><br></pre></td></tr></table></div></figure>
 
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C10.3.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/10.3.png"></p>
 
         <h3 id="level-11">
           <a href="#level-11" class="heading-link"><i class="fas fa-link"></i></a>level 11</h3>
-      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C11.1.png"></p>
+      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/11.1.png"></p>
 <p>分析源码可得知t_ref字段是http referer的值，根据http_referer 参数想到了HTTP头，那么我们可以在请求头进行XSS注入，这一关很显然注入点在Referer所以可以利用burpsuite抓包修改Referer的值(hackbar没有成功)</p>
 <p>修改前：</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C11.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/11.2.png"></p>
 <p>修改后：</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C11.3.png"></p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C11.4.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/11.3.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/11.4.png"></p>
 
         <h3 id="level-12">
           <a href="#level-12" class="heading-link"><i class="fas fa-link"></i></a>level 12</h3>
-      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C12.1.png"></p>
+      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/12.1.png"></p>
 <p>根据HTTP_USER_AGENT参数还是想到了HTTP请求头中的user-agent，那么，同理可以按照第十一关的方法来做:</p>
 <p>这里直接利用hackbar就成功了</p>
 <p>payload</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot; onclick&#x3D;alert() type&#x3D;&quot;button&quot;</span><br><span class="line">或者 &quot; onclick&#x3D;alert() type&#x3D;&quot;text&quot;</span><br><span class="line">onclick换成onmouseover都可以</span><br></pre></td></tr></table></div></figure>
 
 <p>或者burpsuite抓包修改</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C12.2.png"></p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C12.3.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/12.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/12.3.png"></p>
 
         <h3 id="level-13">
           <a href="#level-13" class="heading-link"><i class="fas fa-link"></i></a>level 13</h3>
-      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C13.1.png"></p>
+      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/13.1.png"></p>
 <p>和上面的方法类似，只不过这里变成了cookie了，hackbar没法用，所以用burpsuite</p>
 <p>payload和上面的一样</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C13.2.png"></p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C13.3.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/13.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/13.3.png"></p>
 
         <h3 id="level-14">
           <a href="#level-14" class="heading-link"><i class="fas fa-link"></i></a>level 14</h3>
@@ -238,9 +238,9 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
         <h3 id="level-15">
           <a href="#level-15" class="heading-link"><i class="fas fa-link"></i></a>level 15</h3>
       <p>查看源码</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C15.1.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/15.1.png"></p>
 <p>注意到了ng-include，ng-include相当于php的include函数，然后src参数被转义了，最终我们<br>可以include leve1然后再用img标签传xss</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C15.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/15.2.png"></p>
 <p>payload</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url栏最后添加</span><br><span class="line">?src&#x3D;&#39;level1.php?name&#x3D;&lt;img src&#x3D;1 onerror&#x3D;alert()&gt;&#39;</span><br></pre></td></tr></table></div></figure>
 
@@ -248,52 +248,52 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
         <h3 id="level-16">
           <a href="#level-16" class="heading-link"><i class="fas fa-link"></i></a>level 16</h3>
       <p>查看源码</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C16.1.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/16.1.png"></p>
 <p>输入的东西经过了大小写的转换并且通过四次的替换检查，分别对script，空格，/，进行了替换，但是有一点很重要，尖括号没有被替换，这给我们留下很大的利用空间。</p>
 <p>另外script被替代，我们可以使用img标签，剩下我们就需要考虑如何把空格的影响给去掉，这时候就需要使用url编码来进行绕过了，可以选择<code>%0d</code> <code>%0a</code> （表会回车换行）进行绕过，构造出最后的payload</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&lt;img%0dsrc&#x3D;1%0donclick&#x3D;alert()&gt;</span><br></pre></td></tr></table></div></figure>
 
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C16.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/16.2.png"></p>
 
         <h3 id="level-17">
           <a href="#level-17" class="heading-link"><i class="fas fa-link"></i></a>level 17</h3>
       <p>这关做了个寂寞，点击直接进入下一关了</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C17.1.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/17.1.png"></p>
 
         <h3 id="level-18">
           <a href="#level-18" class="heading-link"><i class="fas fa-link"></i></a>level 18</h3>
-      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C18.1.png"></p>
+      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/18.1.png"></p>
 <p>有两个get类型的参数，可以直接构建payload</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%20onmouseover&#x3D;alert()      &#x2F;&#x2F;%20是空格</span><br><span class="line">或者直接在url后面添加%20onmouseover&#x3D;alert()</span><br></pre></td></tr></table></div></figure>
 
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C18.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/18.2.png"></p>
 
         <h3 id="level-19">
           <a href="#level-19" class="heading-link"><i class="fas fa-link"></i></a>level 19</h3>
       <p>查看源码</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C19.1.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/19.1.png"></p>
 <p>flash xss，需要对flash的反编译对源码进行分析，这里使用<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://github.com/jindrapetrik/jpexs-decompiler">jpexs-decompiler</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>来分析，首先定位getURL函数</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C19.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/19.2.png"></p>
 <p>然后追踪到sIFR的内容</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C19.3.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/19.3.png"></p>
 <p>得知version参数可以传入loc4变量中，即sIFR的内容中，但是getURL只在内容为link时打开，所以分析contentIsLink函数</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C19.4.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/19.4.png"></p>
 <p>所以我们可以构造<a> </a> 标签来传值，构建payload</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?arg01&#x3D;version&amp;arg02&#x3D;&lt;a%20href&#x3D;&quot;javascript:alert()&quot;&gt;test&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></div></figure>
 
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C19.5.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/19.5.png"></p>
 
         <h3 id="level-20">
           <a href="#level-20" class="heading-link"><i class="fas fa-link"></i></a>level 20</h3>
-      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C20.1.png"></p>
+      <p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/20.1.png"></p>
 <p>将xsf04.swf文件分析得知分析得知是zeroclipboard.swf</p>
 <p>这一题用到了zeroclipboard xss，具体可以参考这篇文章：<br><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.freebuf.com/sectool/108568.html">https://www.freebuf.com/sectool/108568.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>国内广泛使用了zeroclipboard.swf，主要的功能是复制内容到剪切板，中间由flash进行中转保证兼容主流浏览器，具体做法就是使这个透明的flash漂浮在复制按钮之上</p>
 <p>看一下源码：<br>使用jpexs反编译(swf反编译工具：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://github.com/jindrapetrik/jpexs-decompiler">https://github.com/jindrapetrik/jpexs-decompiler</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>)<br>原因显而易见，Externalinterface.call第二个参数传回来的id没有正确过滤导致xss</p>
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C20.2.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/20.2.png"></p>
 <p>构建payload</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?arg01&#x3D;id&amp;arg02&#x3D;\%22))&#125;catch(e)&#123;&#125;if(!self.a)self.a&#x3D;!alert(1)&#x2F;&#x2F;%26width%26height</span><br></pre></td></tr></table></div></figure>
 
-<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/.%5Cxss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F%5C20.3.png"></p>
+<p><img src="/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/20.3.png"></p>
 </div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://sculptor-liu.github.io">Sculptor</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/">https://sculptor-liu.github.io/2020/10/24/xss%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/XSS/">XSS</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/ali_pay.png"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/wechat_pay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2020/08/27/MD5%E7%BB%95%E8%BF%87/"><span class="paginator-prev__text">MD5绕过</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#XSS%E9%97%AF%E5%85%B3%E5%B0%8F%E6%B8%B8%E6%88%8F"><span class="toc-number">1.</span> <span class="toc-text">
           XSS闯关小游戏</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">
           前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">
