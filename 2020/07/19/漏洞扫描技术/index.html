@@ -33,13 +33,13 @@ var CONFIG = {
 };
 
 window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于我</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Sculptor's blog</div><div class="header-banner-info__subtitle">不知名的陌生人</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">漏洞扫描技术</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2020-07-19</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-09-23</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
-        <h1 id="一，漏洞扫描技术"   >
+        <h1 id="一，漏洞扫描技术">
           <a href="#一，漏洞扫描技术" class="heading-link"><i class="fas fa-link"></i></a>一，漏洞扫描技术</h1>
       
-        <h2 id="1-1扫描原理"   >
+        <h2 id="1-1扫描原理">
           <a href="#1-1扫描原理" class="heading-link"><i class="fas fa-link"></i></a>1.1扫描原理</h2>
       
-        <h3 id="1-1-1-Ping-检测"   >
+        <h3 id="1-1-1-Ping-检测">
           <a href="#1-1-1-Ping-检测" class="heading-link"><i class="fas fa-link"></i></a>1.1.1. Ping 检测</h3>
       <p>win+R -&gt; cmd -&gt; ping + 目标IP</p>
 <p>当 ping 通目标 IP 后 返回 TTL值判断目标 IP 的操作系统</p>
@@ -49,12 +49,12 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>TTL=64：可能是 windows 7/2008/10 系统，Linux系统</p>
 <p>TTL=255：可能是交换机，路由器设备</p>
 
-        <h3 id="1-1-2-端口扫描"   >
+        <h3 id="1-1-2-端口扫描">
           <a href="#1-1-2-端口扫描" class="heading-link"><i class="fas fa-link"></i></a>1.1.2. 端口扫描</h3>
       <p>win+R -&gt; cmd -&gt; telnet + 目标IP + 目标端口号</p>
 <p>注意：扫描器的运作是基于 TCP/IP 的，个人计算机，服务器主机或者防火墙和路由器都适用。扫描信息的来源基本都必须依赖于端口，即必须某端口对外开放，才可以以此判断主机上运行的操作系统，服务软件类型及版本等。例如：使用 ftp.exe 连接主机，判断主机 FTP 服务程序类型和版本，如果 FTP 服务对应的 21 端口无法访问，则得不到任何信息。</p>
 
-        <h2 id="1-2-扫描分类"   >
+        <h2 id="1-2-扫描分类">
           <a href="#1-2-扫描分类" class="heading-link"><i class="fas fa-link"></i></a>1.2. 扫描分类</h2>
       <ol>
 <li>开放扫描：</li>
@@ -64,7 +64,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <li>其他扫描：</li>
 </ol>
 
-        <h2 id="1-3-扫描前准备"   >
+        <h2 id="1-3-扫描前准备">
           <a href="#1-3-扫描前准备" class="heading-link"><i class="fas fa-link"></i></a>1.3.扫描前准备</h2>
       <ol>
 <li>了解网络的部署情况，企业的 需要/不需要/不能 扫描（有些扫描可能造成网络瘫痪）</li>
@@ -74,7 +74,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <li>企业服务是否配置了相关的安全策略，以访锁死（注意）（比如说：数据库设置3次密码，针对那些弱口令的暴力破解）</li>
 </ol>
 
-        <h2 id="1-4-常见的扫描工具"   >
+        <h2 id="1-4-常见的扫描工具">
           <a href="#1-4-常见的扫描工具" class="heading-link"><i class="fas fa-link"></i></a>1.4. 常见的扫描工具</h2>
       <ol>
 <li>SuperScan</li>
@@ -89,7 +89,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>国外：Arachni（开源的，kali中自带），HP WebInspect，IBM AppScan，Acunetix WVS（AWVS），Nessus，Nexpose，Netspaker…</p>
 <p>国内：绿盟科技，杭州安恒，知道创宇，启明星辰…</p>
 
-        <h2 id="1-5-X-scan-的简写使用"   >
+        <h2 id="1-5-X-scan-的简写使用">
           <a href="#1-5-X-scan-的简写使用" class="heading-link"><i class="fas fa-link"></i></a>1.5. X-scan 的简写使用</h2>
       <ol>
 <li><p>设置—&gt;扫描参数</p>
@@ -114,15 +114,15 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h2 id="1-6-AppScan"   >
+        <h2 id="1-6-AppScan">
           <a href="#1-6-AppScan" class="heading-link"><i class="fas fa-link"></i></a>1.6. AppScan</h2>
       <p><strong>功能介绍</strong></p>
 <p>AppScan 是 web 应用程序渗透测试舞台上使用最广泛的工具之一，它是一个桌面应用程序，有助于专业安全人员进行 web 应用程序自动化脆弱性评估。</p>
 <p>AppScan 其实是一个产品家族，包括众多的应用安全扫描产品，从开发阶段的源代码扫描的 AppScan source edition ，到针对 web 应用程序的快速扫描的 AppScan standard edition 以及进行安全管理和汇总整合的 AppScan enteprise edition 等，我们经常说的只是桌面的 AppScan ，即 AppScan standard edition ，其安装在 window 操作系统下，可以对网站等 web应用程序进行自动化的应用安全扫描和测试。</p>
 <p>它需要 微软 C++ 2017 和 微软 .NET Framework4 4.7.2 Full 框架（所以就下载到虚拟机里，但是虚拟机 win 下下载时也没单独下载这个框架）</p>
-<p>下载路径：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-1189130-1-1.html" >https://www.52pojie.cn/thread-1189130-1-1.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>下载路径：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-1189130-1-1.html">https://www.52pojie.cn/thread-1189130-1-1.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 
-        <h3 id="1-6-1-实例"   >
+        <h3 id="1-6-1-实例">
           <a href="#1-6-1-实例" class="heading-link"><i class="fas fa-link"></i></a>1.6.1.实例</h3>
       <p>打开phpstudy，开启一台机器作为站点</p>
 <p>文件-&gt;新建-&gt;常规模块（一般来说的）</p>
@@ -160,16 +160,16 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p><strong>缺点：</strong></p>
 <p>软件比较大，占内存。同时，它扫描速度也比较慢。它在国内的扫描力度不行，但是通用漏洞扫描比较强大。</p>
 
-        <h2 id="1-7-AWVS"   >
+        <h2 id="1-7-AWVS">
           <a href="#1-7-AWVS" class="heading-link"><i class="fas fa-link"></i></a>1.7. AWVS</h2>
       <p><strong>功能介绍</strong></p>
 <p>AWVS 是一个自动化的 web应用程序测试工具，通过检查可利用的漏洞，黑客可以审核 web 应用程序的安全性。</p>
 
-        <h3 id="1-7-1-Dashboard-仪表板"   >
+        <h3 id="1-7-1-Dashboard-仪表板">
           <a href="#1-7-1-Dashboard-仪表板" class="heading-link"><i class="fas fa-link"></i></a>1.7.1. Dashboard 仪表板</h3>
       <p>显示扫描的运行以及爬取状态，显示漏洞个数和级别</p>
 
-        <h3 id="1-7-2-Targets-添加扫描目标"   >
+        <h3 id="1-7-2-Targets-添加扫描目标">
           <a href="#1-7-2-Targets-添加扫描目标" class="heading-link"><i class="fas fa-link"></i></a>1.7.2. Targets 添加扫描目标</h3>
       <ol>
 <li><p>General</p>
@@ -201,18 +201,18 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h3 id="1-7-3-Settings"   >
+        <h3 id="1-7-3-Settings">
           <a href="#1-7-3-Settings" class="heading-link"><i class="fas fa-link"></i></a>1.7.3. Settings</h3>
       <ol>
 <li>Notification Settings：设置邮件发送告知工作人员扫描完成。</li>
 </ol>
 
-        <h2 id="1-8-HP-WebInspect"   >
+        <h2 id="1-8-HP-WebInspect">
           <a href="#1-8-HP-WebInspect" class="heading-link"><i class="fas fa-link"></i></a>1.8. HP WebInspect</h2>
       <p>HP WebInspect 是一款文件大，系统资源占用更大的扫描软件，在安装后会开机自启很多功能繁琐的进程和服务，所以尽量将其安装在虚拟机中，操作系统在 win7以上，确保其支持 .Net Framework 4.5x 和 SQL Server 2012，开启前还需运行 services.msc 工具检查 SQL 和 WebInspect 系列服务是否正确启动，以防扫描时出现致命的错误中断，10.30版本可能需要 VPN。</p>
 <p>优点：扫描 出来的报告是最全的。</p>
 
-        <h3 id="1-8-1-实例"   >
+        <h3 id="1-8-1-实例">
           <a href="#1-8-1-实例" class="heading-link"><i class="fas fa-link"></i></a>1.8.1. 实例</h3>
       <ol>
 <li><p>文件 -&gt; 新建</p>
@@ -252,22 +252,22 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </ol>
 <p>特点：一边扫描，一边爬取，而AppScan 是先爬取后扫描</p>
 
-        <h2 id="1-9-Netspaker"   >
+        <h2 id="1-9-Netspaker">
           <a href="#1-9-Netspaker" class="heading-link"><i class="fas fa-link"></i></a>1.9. Netspaker</h2>
       <p>效果比 AWVS 差很多。</p>
 
-        <h2 id="1-10-WVSS"   >
+        <h2 id="1-10-WVSS">
           <a href="#1-10-WVSS" class="heading-link"><i class="fas fa-link"></i></a>1.10. WVSS</h2>
       <p>绿盟的安全系统（要钱，没有破解版的）</p>
 
-        <h2 id="1-11-安恒明鉴"   >
+        <h2 id="1-11-安恒明鉴">
           <a href="#1-11-安恒明鉴" class="heading-link"><i class="fas fa-link"></i></a>1.11. 安恒明鉴</h2>
       <p>安恒的漏洞弱口令扫描工具（要钱，没破解版的）</p>
 
-        <h2 id="1-12-Nessus"   >
+        <h2 id="1-12-Nessus">
           <a href="#1-12-Nessus" class="heading-link"><i class="fas fa-link"></i></a>1.12. Nessus</h2>
       
-        <h3 id="1-12-1-功能"   >
+        <h3 id="1-12-1-功能">
           <a href="#1-12-1-功能" class="heading-link"><i class="fas fa-link"></i></a>1.12.1.功能</h3>
       <ol>
 <li><p>Scan</p>
@@ -291,7 +291,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </ol>
 <p>点击 scan1 可以得到扫描结果。</p>
 
-        <h3 id="1-12-2-实例"   >
+        <h3 id="1-12-2-实例">
           <a href="#1-12-2-实例" class="heading-link"><i class="fas fa-link"></i></a>1.12.2. 实例</h3>
       <p>步骤：</p>
 <ol>
@@ -312,32 +312,32 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h2 id="1-13-Nexpose"   >
+        <h2 id="1-13-Nexpose">
           <a href="#1-13-Nexpose" class="heading-link"><i class="fas fa-link"></i></a>1.13. Nexpose</h2>
-      <p>VM 虚拟机 ova 版本下载地址：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://download2.rapid7.com/download/NeXpose-v4/NexposeVA.ova" >http://download2.rapid7.com/download/NeXpose-v4/NexposeVA.ova</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 或者 <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.rapid7.com/products/nexpose/download.jsp" >http://www.rapid7.com/products/nexpose/download.jsp</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+      <p>VM 虚拟机 ova 版本下载地址：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://download2.rapid7.com/download/NeXpose-v4/NexposeVA.ova">http://download2.rapid7.com/download/NeXpose-v4/NexposeVA.ova</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 或者 <span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.rapid7.com/products/nexpose/download.jsp">http://www.rapid7.com/products/nexpose/download.jsp</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 <p>ova 版本的账户密码：nexpose</p>
 <p>最大的优点：这个软件和 MSF 一起使用（它们是同一个公司出的）</p>
 
-        <h2 id="1-14-启明天镜（BS-版）"   >
+        <h2 id="1-14-启明天镜（BS-版）">
           <a href="#1-14-启明天镜（BS-版）" class="heading-link"><i class="fas fa-link"></i></a>1.14. 启明天镜（BS 版）</h2>
       <p>天镜脆弱性扫描与管理系统</p>
 <p>免费 3 个月的使用，还原虚拟机（或者修改日期）又可以免费使用。（但是没有找到资源）</p>
 
-        <h2 id="1-15-RSAS（绿盟）"   >
+        <h2 id="1-15-RSAS（绿盟）">
           <a href="#1-15-RSAS（绿盟）" class="heading-link"><i class="fas fa-link"></i></a>1.15. RSAS（绿盟）</h2>
       <p>系统和 Web 可以同时扫描。</p>
 
-        <h1 id="二，漏洞扫描评估方案讲解"   >
+        <h1 id="二，漏洞扫描评估方案讲解">
           <a href="#二，漏洞扫描评估方案讲解" class="heading-link"><i class="fas fa-link"></i></a>二，漏洞扫描评估方案讲解</h1>
       
-        <h2 id="2-1-测试目的"   >
+        <h2 id="2-1-测试目的">
           <a href="#2-1-测试目的" class="heading-link"><i class="fas fa-link"></i></a>2.1. 测试目的</h2>
       
-        <h3 id="2-1-1-测试目的"   >
+        <h3 id="2-1-1-测试目的">
           <a href="#2-1-1-测试目的" class="heading-link"><i class="fas fa-link"></i></a>2.1.1. 测试目的</h3>
       <p>通过了解各家厂商的设备性能和功能是否能够满足当前业务需要。</p>
 
-        <h3 id="2-1-2-测试对象"   >
+        <h3 id="2-1-2-测试对象">
           <a href="#2-1-2-测试对象" class="heading-link"><i class="fas fa-link"></i></a>2.1.2. 测试对象</h3>
       <ol>
 <li>绿盟科技 Web 应用漏洞扫描系统</li>
@@ -346,7 +346,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <li>启明星辰</li>
 </ol>
 
-        <h3 id="2-1-3-测试内容"   >
+        <h3 id="2-1-3-测试内容">
           <a href="#2-1-3-测试内容" class="heading-link"><i class="fas fa-link"></i></a>2.1.3. 测试内容</h3>
       <ol>
 <li>功能测试：包括扫描漏报测试，漏洞误报测试，页面发现测试，管理功能测试。</li>
@@ -354,7 +354,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <li>可靠性测试：包括断电恢复测试，断点续扫测试。</li>
 </ol>
 
-        <h3 id="2-1-4-测试环境"   >
+        <h3 id="2-1-4-测试环境">
           <a href="#2-1-4-测试环境" class="heading-link"><i class="fas fa-link"></i></a>2.1.4. 测试环境</h3>
       <ol>
 <li><p>网络拓扑</p>
@@ -363,11 +363,11 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </li>
 </ol>
 
-        <h2 id="2-2-测试案例"   >
+        <h2 id="2-2-测试案例">
           <a href="#2-2-测试案例" class="heading-link"><i class="fas fa-link"></i></a>2.2. 测试案例</h2>
       <p>首先要找那种漏洞多的网站进行测试</p>
 
-        <h3 id="2-2-1-扫描功能和相关性能测试"   >
+        <h3 id="2-2-1-扫描功能和相关性能测试">
           <a href="#2-2-1-扫描功能和相关性能测试" class="heading-link"><i class="fas fa-link"></i></a>2.2.1. 扫描功能和相关性能测试</h3>
       <ol>
 <li>漏报数</li>
@@ -379,32 +379,32 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <li>…</li>
 </ol>
 
-        <h3 id="2-2-2-管理功能测试"   >
+        <h3 id="2-2-2-管理功能测试">
           <a href="#2-2-2-管理功能测试" class="heading-link"><i class="fas fa-link"></i></a>2.2.2. 管理功能测试</h3>
       <p>按照工作流分别对任务管理，报表管理，分布式管理功能按照测试表逐项测试。</p>
 
-        <h3 id="2-2-3-可靠性测试"   >
+        <h3 id="2-2-3-可靠性测试">
           <a href="#2-2-3-可靠性测试" class="heading-link"><i class="fas fa-link"></i></a>2.2.3. 可靠性测试</h3>
       <ol>
 <li>断电恢复测试：扫描过程突然断电，查看扫描引擎是否能够对任务信息，扫描过程信息，关键配置信息，模板信息等进行备份或保存。</li>
 <li>断点续扫测试：扫描任务暂停或意外中断后再恢复，查看任务是否正常。</li>
 </ol>
 
-        <h2 id="2-3-测试结果"   >
+        <h2 id="2-3-测试结果">
           <a href="#2-3-测试结果" class="heading-link"><i class="fas fa-link"></i></a>2.3. 测试结果</h2>
       
-        <h3 id="2-3-1-扫描功能和相关测试性能"   >
+        <h3 id="2-3-1-扫描功能和相关测试性能">
           <a href="#2-3-1-扫描功能和相关测试性能" class="heading-link"><i class="fas fa-link"></i></a>2.3.1. 扫描功能和相关测试性能</h3>
       
-        <h3 id="2-3-2-管理功能测试"   >
+        <h3 id="2-3-2-管理功能测试">
           <a href="#2-3-2-管理功能测试" class="heading-link"><i class="fas fa-link"></i></a>2.3.2. 管理功能测试</h3>
       
-        <h3 id="2-3-3-可靠性测试"   >
+        <h3 id="2-3-3-可靠性测试">
           <a href="#2-3-3-可靠性测试" class="heading-link"><i class="fas fa-link"></i></a>2.3.3. 可靠性测试</h3>
       
-        <h2 id="2-4-相关扫描软件测试评估"   >
+        <h2 id="2-4-相关扫描软件测试评估">
           <a href="#2-4-相关扫描软件测试评估" class="heading-link"><i class="fas fa-link"></i></a>2.4. 相关扫描软件测试评估</h2>
-      <p>国外软件：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://sectoolmarket.com/wivet-score-unified-list.html%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%BE%88%E5%87%86%E7%A1%AE%EF%BC%89" >http://sectoolmarket.com/wivet-score-unified-list.html（不一定很准确）</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+      <p>国外软件：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://sectoolmarket.com/wivet-score-unified-list.html%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%BE%88%E5%87%86%E7%A1%AE%EF%BC%89">http://sectoolmarket.com/wivet-score-unified-list.html（不一定很准确）</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 </div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://sculptor-liu.github.io">Sculptor</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://sculptor-liu.github.io/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/">https://sculptor-liu.github.io/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F/">漏洞扫描</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/ali_pay.png"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/wechat_pay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/07/25/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E7%B1%BB%20Burpsuite/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">漏洞扫描类 Burpsuite</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/07/08/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"><span class="paginator-prev__text">信息收集</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%EF%BC%8C%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">
           一，漏洞扫描技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1%E6%89%AB%E6%8F%8F%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">
           1.1扫描原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-Ping-%E6%A3%80%E6%B5%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">
@@ -445,7 +445,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
           2.3.1. 扫描功能和相关测试性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-%E7%AE%A1%E7%90%86%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-number">2.3.2.</span> <span class="toc-text">
           2.3.2. 管理功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-%E5%8F%AF%E9%9D%A0%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-number">2.3.3.</span> <span class="toc-text">
           2.3.3. 可靠性测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E7%9B%B8%E5%85%B3%E6%89%AB%E6%8F%8F%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%AF%84%E4%BC%B0"><span class="toc-number">2.4.</span> <span class="toc-text">
-          2.4. 相关扫描软件测试评估</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">9</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">8</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+          2.4. 相关扫描软件测试评估</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">10</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">9</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
   var isXML = true;
   var search_path = 'search.xml';
 

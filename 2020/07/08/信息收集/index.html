@@ -33,20 +33,20 @@ var CONFIG = {
 };
 
 window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于我</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Sculptor's blog</div><div class="header-banner-info__subtitle">不知名的陌生人</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">信息收集</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2020-07-08</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-09-23</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
-        <h1 id="一-信息收集"   >
+        <h1 id="一-信息收集">
           <a href="#一-信息收集" class="heading-link"><i class="fas fa-link"></i></a>一. 信息收集</h1>
       
-        <h2 id="1-1-第一步：域名探测"   >
+        <h2 id="1-1-第一步：域名探测">
           <a href="#1-1-第一步：域名探测" class="heading-link"><i class="fas fa-link"></i></a>1.1. 第一步：域名探测</h2>
       <p>当我们对一个站点进行渗透探测之前，一般渗透测试人员直接通过漏洞扫描器对指定目标站点进行渗透，当指定目标站点无漏洞时，渗透测试人员就需要进行信息收集工作来完成后期的渗透。</p>
 <p>目前一般域名漏洞扫描工具  ：AWVS，APPSCAN，Netspark，Webinspect，Nmap，Nessus，天镜，明鉴，WVSS，RSAS，等。</p>
 <a id="more"></a>
 
-        <h2 id="1-2-第二步：子域名探测"   >
+        <h2 id="1-2-第二步：子域名探测">
           <a href="#1-2-第二步：子域名探测" class="heading-link"><i class="fas fa-link"></i></a>1.2. 第二步：子域名探测</h2>
       <p>根据主域名，可以获得二级域名，三级域名，。。。主要姿势可以有：</p>
 
-        <h3 id="1-2-1-DNS域-传送漏洞"   >
+        <h3 id="1-2-1-DNS域-传送漏洞">
           <a href="#1-2-1-DNS域-传送漏洞" class="heading-link"><i class="fas fa-link"></i></a>1.2.1. DNS域 传送漏洞</h3>
       <p>如果存在，不仅能搜索到子域名，还能轻松找到一个枚举，这样的好事百试不厌；如果 SRC 一级域名不多，直接在 kali 下 dnsenum + 域名（比如说：dnsenum oldboy.com -f /dns.txt –dnsserver 114.114.114.114 )</p>
 <p><strong>工具说明及用法可参考如下:</strong></p>
@@ -54,88 +54,88 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p><strong>参数说明:</strong></p>
 <ol>
 <li>-h：查看工具使用帮助</li>
-<li>–dnsserver <server> ：指定域名服务器</li>
+<li>–dnsserver <server> ：指定域名服务器</server></li>
 <li>–enum ：快捷选项，相当于”-threads -s 15 -w”</li>
 <li>–noreverse ：跳过反向查询操作</li>
 <li>–nocolor ：无彩色输出</li>
 <li>–private ：显示并在”domain_ips.txt”文件结尾保存私有的ips</li>
-<li>–subfile <file> ：写入所有有效的子域名到指定文件</li>
-<li>–t，–timeout <value> ：tcp或者udp的连接超时时间。默认为10s (时间单位:秒)。</li>
-<li>–threads <vaue> ：查询线程数</li>
+<li>–subfile <file> ：写入所有有效的子域名到指定文件</file></li>
+<li>–t，–timeout <value> ：tcp或者udp的连接超时时间。默认为10s (时间单位:秒)。</value></li>
+<li>–threads <vaue> ：查询线程数</vaue></li>
 <li>-v，–verbose ：显示所有的进度和错误消息</li>
-<li>-o，–output <file> ：输出选项，将输出信息保存到指定文件。</li>
-<li>-e，–exclude <regexp> ：反向查询选项，从反向查询结果中排除与正则表达式相符的PTR 记录，在排查无效主机上非常有用。</li>
+<li>-o，–output <file> ：输出选项，将输出信息保存到指定文件。</file></li>
+<li>-e，–exclude <regexp> ：反向查询选项，从反向查询结果中排除与正则表达式相符的PTR 记录，在排查无效主机上非常有用。</regexp></li>
 <li>-w，–whois ：在一个C段网络地址范围提供whois查询</li>
 <li>-f dns.txt ：指定字典文件，可以换成dns-big.txt也可以自定义字典</li>
 </ol>
-<p>相关解析记录说明可参考：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://wenku.baidu.com/view/d2d597b669dc5022aaea0030.html" >https://wenku.baidu.com/view/d2d597b669dc5022aaea0030.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>相关解析记录说明可参考：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://wenku.baidu.com/view/d2d597b669dc5022aaea0030.html">https://wenku.baidu.com/view/d2d597b669dc5022aaea0030.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 
-        <h3 id="1-2-2-备案号查询"   >
+        <h3 id="1-2-2-备案号查询">
           <a href="#1-2-2-备案号查询" class="heading-link"><i class="fas fa-link"></i></a>1.2.2.备案号查询</h3>
       <p>这算是奇招吧，通过查询系统域名备案号，再反查备案号相关的域名，收获颇丰。</p>
-<p>网站备案查询地址：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.beianbeian.com/" >http://www.beianbeian.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>网站备案查询地址：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.beianbeian.com/">http://www.beianbeian.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 
-        <h3 id="1-2-3-SSL-证书"   >
+        <h3 id="1-2-3-SSL-证书">
           <a href="#1-2-3-SSL-证书" class="heading-link"><i class="fas fa-link"></i></a>1.2.3. SSL 证书</h3>
       <p>通过查询 SSL 证书（现在很多网站都是 https），获取的域名存活率很高，这应该也是不错的思路。</p>
-<p>查询网址：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://myssl.com/ssl.html" >https://myssl.com/ssl.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 或者 <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.chinassl.net/ssltools/ssl-checker.html" >https://www.chinassl.net/ssltools/ssl-checker.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>查询网址：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://myssl.com/ssl.html">https://myssl.com/ssl.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 或者 <span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.chinassl.net/ssltools/ssl-checker.html">https://www.chinassl.net/ssltools/ssl-checker.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 
-        <h3 id="1-2-4-Google-搜索-C-段"   >
+        <h3 id="1-2-4-Google-搜索-C-段">
           <a href="#1-2-4-Google-搜索-C-段" class="heading-link"><i class="fas fa-link"></i></a>1.2.4. Google 搜索 C 段</h3>
       <p>这招比较少，国内 Google 没法用，国内的用 bin 或者 百度 都可以，在没有什么进展的情况下或许会有惊喜。（比如说，网站被挂码了）</p>
 <p>方法一：参照 Google hacking 的方法</p>
 <p>方法二：用 k8 工具，前提条件是要注册 bing（必应） 接口。（k8_C段旁注工具）</p>
 <p>什么是C段:比如在：127.127.127.4这个IP上面有一个网站127.4 这个服务器上面有网站，我们可以想想，他是一个非常大的站几乎没什么漏洞，但是在他同C段 127.127.127.1<del>127.127.127.255这1</del>255上面也有服务器而且也有网站并且存在漏洞,那么我们就可以来渗透1~255 任何一个站之后提权来嗅探得到127.4这台服务器的密码甚至3389连接的密码后台登录的密码如果运气好会得到很多的密码。</p>
 
-        <h3 id="1-2-5-APP-提取"   >
+        <h3 id="1-2-5-APP-提取">
           <a href="#1-2-5-APP-提取" class="heading-link"><i class="fas fa-link"></i></a>1.2.5. APP 提取</h3>
       <p>反编译APP进行提取相关IP地址，此外在APP上挖洞的时候，可以发现前面招式找不到的域名，在APP里面有大量的接口IP和内网IP, 同时可获取不少安全漏洞。（其实 app 的漏洞比 web 多一些）</p>
 <p>Andriod Killer，当网站有app，然后把app下载下来，进行反编译分析，就会有一系列IP</p>
 
-        <h3 id="1-2-6-微信公众号"   >
+        <h3 id="1-2-6-微信公众号">
           <a href="#1-2-6-微信公众号" class="heading-link"><i class="fas fa-link"></i></a>1.2.6. 微信公众号</h3>
       <p>企业的另一通道，渗透相关公众号，绝对会有意外收获，：不少漏洞+域名，有关 Burp 抓取 app</p>
 
-        <h3 id="1-2-7-字典枚举法"   >
+        <h3 id="1-2-7-字典枚举法">
           <a href="#1-2-7-字典枚举法" class="heading-link"><i class="fas fa-link"></i></a>1.2.7. 字典枚举法</h3>
       <p>字典枚举法是一种传统的查找子域名的技术，这类技术涉及的工具有：DNSReconcile，Layer 子域名挖掘机，DirBuster，Demon二级域名爆破</p>
 
-        <h3 id="1-2-8-公开-DNS-源"   >
+        <h3 id="1-2-8-公开-DNS-源">
           <a href="#1-2-8-公开-DNS-源" class="heading-link"><i class="fas fa-link"></i></a>1.2.8. 公开 DNS 源</h3>
-      <p>Rapid 7 下 Sonor 项目发布的：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://scans.io/study/sonar.fdns_v2" >https://scans.io/study/sonar.fdns_v2</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p>DNS 历史解析： <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://dnsdb.io/zh-cn/" >https://dnsdb.io/zh-cn/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+      <p>Rapid 7 下 Sonor 项目发布的：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://scans.io/study/sonar.fdns_v2">https://scans.io/study/sonar.fdns_v2</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>DNS 历史解析： <span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://dnsdb.io/zh-cn/">https://dnsdb.io/zh-cn/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 
-        <h3 id="1-2-9-威胁情报查询"   >
+        <h3 id="1-2-9-威胁情报查询">
           <a href="#1-2-9-威胁情报查询" class="heading-link"><i class="fas fa-link"></i></a>1.2.9. 威胁情报查询</h3>
-      <p>华为安全情报：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://isecurity.huawei.com/" >https://isecurity.huawei.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+      <p>华为安全情报：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://isecurity.huawei.com/">https://isecurity.huawei.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 
-        <h2 id="1-3-敏感信息收集"   >
+        <h2 id="1-3-敏感信息收集">
           <a href="#1-3-敏感信息收集" class="heading-link"><i class="fas fa-link"></i></a>1.3. 敏感信息收集</h2>
       
-        <h3 id="1-3-1-web源代码泄露"   >
+        <h3 id="1-3-1-web源代码泄露">
           <a href="#1-3-1-web源代码泄露" class="heading-link"><i class="fas fa-link"></i></a>1.3.1. web源代码泄露</h3>
       <p>通过相关工具暴力破解相关 Web 源码。</p>
 <p>最强调的是 GitHub 信息泄露了，直接取GitHub 上搜索，可能有人不自信认为自己没有能力去 SRC 挖洞。</p>
 <p>信息泄露收集可能会用到以下地址：</p>
 <ol>
-<li>网盘搜索：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.pansou.com/" >http://www.pansou.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>网盘密码破解可参考：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-763130-1-1.html" >https://www.52pojie.cn/thread-763130-1-1.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>社工信息泄露：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.instantcheckmate.com/" >https://www.instantcheckmate.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>源码搜索：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://searchcode.com,https//gitee.com%EF%BC%8Chttps://gitcafe.com%EF%BC%8Chttps://code.csdn.net" >https://searchcode.com，https://gitee.com，https://gitcafe.com，https://code.csdn.net</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>钟馗之眼：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www/zoomeye.org" >https://www/zoomeye.org</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>天眼查：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.tianyancha.com/" >https://www.tianyancha.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>网盘搜索：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.pansou.com/">http://www.pansou.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>网盘密码破解可参考：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-763130-1-1.html">https://www.52pojie.cn/thread-763130-1-1.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>社工信息泄露：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.instantcheckmate.com/">https://www.instantcheckmate.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>源码搜索：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://searchcode.com,https//gitee.com%EF%BC%8Chttps://gitcafe.com%EF%BC%8Chttps://code.csdn.net">https://searchcode.com，https://gitee.com，https://gitcafe.com，https://code.csdn.net</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>钟馗之眼：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www/zoomeye.org">https://www/zoomeye.org</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>天眼查：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.tianyancha.com/">https://www.tianyancha.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
 <li>其他：威胁情报，微步在线，ti.360.cn，Virustotal</li>
 </ol>
 
-        <h3 id="1-3-2-邮箱信息收集"   >
+        <h3 id="1-3-2-邮箱信息收集">
           <a href="#1-3-2-邮箱信息收集" class="heading-link"><i class="fas fa-link"></i></a>1.3.2. 邮箱信息收集</h3>
       <p>收集邮箱信息主要有两个作用: </p>
 <ol>
 <li>通过发现目标系统账号的命名规律，可以用来后期登入其他子系统。</li>
 <li>爆破登入邮箱用。</li>
 </ol>
-<p>通常，邮箱的账号有如下几种生成规律:比如某公司有员工名叫做“张小三”，它的邮箱可能如下:<br><span class="exturl"><a class="exturl__link"   href="mailto:&#x7a;&#104;&#x61;&#110;&#103;&#x78;&#x69;&#x61;&#111;&#115;&#x61;&#110;&#x40;&#x78;&#111;&#120;&#46;&#99;&#111;&#109;" >&#x7a;&#104;&#x61;&#110;&#103;&#x78;&#x69;&#x61;&#111;&#115;&#x61;&#110;&#x40;&#x78;&#111;&#120;&#46;&#99;&#111;&#109;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>     <span class="exturl"><a class="exturl__link"   href="mailto:&#x78;&#x69;&#x61;&#111;&#x73;&#97;&#x6e;&#46;&#x7a;&#104;&#x61;&#110;&#103;&#x40;&#x6f;&#120;&#x2e;&#x63;&#111;&#109;" >&#x78;&#x69;&#x61;&#111;&#x73;&#97;&#x6e;&#46;&#x7a;&#104;&#x61;&#110;&#103;&#x40;&#x6f;&#120;&#x2e;&#x63;&#111;&#109;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>    <span class="exturl"><a class="exturl__link"   href="mailto:&#x7a;&#x78;&#105;&#97;&#x6f;&#x73;&#97;&#x6e;&#64;&#x78;&#120;&#46;&#99;&#111;&#x6d;" >&#x7a;&#x78;&#105;&#97;&#x6f;&#x73;&#97;&#x6e;&#64;&#x78;&#120;&#46;&#99;&#111;&#x6d;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p>当我们收集几个邮箱之后，便会大致猜出对方邮箱的命名规律。除了员工的邮箱之外，通过公司会有一些共有的邮箱，比如人力的邮箱、客服的邮箱，<span class="exturl"><a class="exturl__link"   href="mailto:&#x68;&#x72;&#x40;&#x78;&#120;&#46;&#x63;&#x6f;&#109;" >&#x68;&#x72;&#x40;&#x78;&#120;&#46;&#x63;&#x6f;&#109;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>/kefu@xx.com 这种邮箱有时会存在弱口令，在渗透时可额外留意下， 我们可以通过手工或者工具的方式来确定搜索邮箱。</p>
+<p>通常，邮箱的账号有如下几种生成规律:比如某公司有员工名叫做“张小三”，它的邮箱可能如下:<br><span class="exturl"><a class="exturl__link" href="mailto:&#122;&#x68;&#97;&#110;&#103;&#120;&#x69;&#97;&#x6f;&#x73;&#x61;&#x6e;&#x40;&#x78;&#111;&#x78;&#x2e;&#x63;&#111;&#x6d;">&#122;&#x68;&#97;&#110;&#103;&#120;&#x69;&#97;&#x6f;&#x73;&#x61;&#x6e;&#x40;&#x78;&#111;&#x78;&#x2e;&#x63;&#111;&#x6d;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>     <span class="exturl"><a class="exturl__link" href="mailto:&#x78;&#x69;&#97;&#111;&#115;&#97;&#x6e;&#x2e;&#122;&#x68;&#x61;&#x6e;&#x67;&#64;&#111;&#120;&#x2e;&#99;&#x6f;&#x6d;">&#x78;&#x69;&#97;&#111;&#115;&#97;&#x6e;&#x2e;&#122;&#x68;&#x61;&#x6e;&#x67;&#64;&#111;&#120;&#x2e;&#99;&#x6f;&#x6d;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>    <span class="exturl"><a class="exturl__link" href="mailto:&#x7a;&#120;&#x69;&#97;&#111;&#115;&#97;&#110;&#64;&#120;&#120;&#x2e;&#99;&#x6f;&#x6d;">&#x7a;&#120;&#x69;&#97;&#111;&#115;&#97;&#110;&#64;&#120;&#120;&#x2e;&#99;&#x6f;&#x6d;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>当我们收集几个邮箱之后，便会大致猜出对方邮箱的命名规律。除了员工的邮箱之外，通过公司会有一些共有的邮箱，比如人力的邮箱、客服的邮箱，<span class="exturl"><a class="exturl__link" href="mailto:&#x68;&#114;&#x40;&#x78;&#120;&#46;&#99;&#x6f;&#x6d;">&#x68;&#114;&#x40;&#x78;&#120;&#46;&#99;&#x6f;&#x6d;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>/kefu@xx.com 这种邮箱有时会存在弱口令，在渗透时可额外留意下， 我们可以通过手工或者工具的方式来确定搜索邮箱。</p>
 <p><strong>手工方式：</strong></p>
 <ol>
 <li>可以到百度等搜索引擎上搜索邮箱信息</li>
@@ -143,88 +143,88 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <li>社工库</li>
 </ol>
 <p><strong>工具方式：</strong></p>
-<p>在邮箱收集领域不得不提一个工具：The Harvester，The Harvester 可用于搜索Google，Bing 和 PGP 服务器的电子邮件. 主机 . 子域名，因此需要翻墙运用此工具。工具下载地址：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/laramies/theHarvester" >https://github.com/laramies/theHarvester</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>在邮箱收集领域不得不提一个工具：The Harvester，The Harvester 可用于搜索Google，Bing 和 PGP 服务器的电子邮件. 主机 . 子域名，因此需要翻墙运用此工具。工具下载地址：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://github.com/laramies/theHarvester">https://github.com/laramies/theHarvester</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 <p><strong>注：</strong></p>
 <p>python -m pip install -r requirements.txt  导入相关配置，python3.7版本（其他的可能不行）</p>
 <p>使用方法很简单：./theHarvester.py -d 域名 -l 1000 -b all（-l 是搜索页数，-b 是指把所有搜索引擎都使用一遍，看哪个可以）</p>
 
-        <h3 id="1-3-3-历史漏洞收集"   >
+        <h3 id="1-3-3-历史漏洞收集">
           <a href="#1-3-3-历史漏洞收集" class="heading-link"><i class="fas fa-link"></i></a>1.3.3. 历史漏洞收集</h3>
       <p>仔细分析，大胆验证，发散思维，对企业的运维，开发习惯了解绝对是有很大帮助的。可以把漏洞保存下来进行统计。这些漏洞，企业可能没有修复，或者没有修复完整。</p>
 <ol>
-<li>wooyun 历史漏洞库：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.anquan.us/%EF%BC%88%E7%8E%B0%E5%9C%A8%E6%89%93%E4%B8%8D%E5%BC%80%E4%BA%86%EF%BC%89" >https://www.anquan.us/（现在打不开了）</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>漏洞银行：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.bugbank.cn/" >https://www.bugbank.cn/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>360补天：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.butian.net/" >https://www.butian.net/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>教育行业漏洞报告平台(Beta)：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://src.edu-info.edu.cn/login/" >https://src.edu-info.edu.cn/login/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>wooyun 历史漏洞库：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.anquan.us/%EF%BC%88%E7%8E%B0%E5%9C%A8%E6%89%93%E4%B8%8D%E5%BC%80%E4%BA%86%EF%BC%89">https://www.anquan.us/（现在打不开了）</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>漏洞银行：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.bugbank.cn/">https://www.bugbank.cn/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>360补天：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.butian.net/">https://www.butian.net/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>教育行业漏洞报告平台(Beta)：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://src.edu-info.edu.cn/login/">https://src.edu-info.edu.cn/login/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
 </ol>
 
-        <h2 id="1-4-指纹识别"   >
+        <h2 id="1-4-指纹识别">
           <a href="#1-4-指纹识别" class="heading-link"><i class="fas fa-link"></i></a>1.4. 指纹识别</h2>
       <p>在这个过程可以加入端口扫描，敏感文件扫描之类的操作，用到的工具，如：御剑，whatweb，Wapplyzer等工具。</p>
-<p>推荐一篇文章：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://anquanke.com/post/id/178230/" >https://anquanke.com/post/id/178230/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>推荐一篇文章：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://anquanke.com/post/id/178230/">https://anquanke.com/post/id/178230/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 
-        <h2 id="1-5-资产梳理"   >
+        <h2 id="1-5-资产梳理">
           <a href="#1-5-资产梳理" class="heading-link"><i class="fas fa-link"></i></a>1.5. 资产梳理</h2>
       <p>有了庞大的域名，接下来就是帮助SRC梳理资产了。城名可以先判断存活，活着的维续进行确定IP环节。根据IP的分布，确定企业的公网网段。这其实是一项不小的工程， 精准度比较难以拿捏。不过通过不断实战，肯定可以琢磨出一些东西，所以有人称白帽子可能会比企业的运维更了解资产信息。资产梳理过程中可能需要对相关资产漏洞进行查询、利用、发布等，可能会用到已下相关链接地址:</p>
 
-        <h3 id="1-5-1-SRC众测平台"   >
+        <h3 id="1-5-1-SRC众测平台">
           <a href="#1-5-1-SRC众测平台" class="heading-link"><i class="fas fa-link"></i></a>1.5.1.SRC众测平台</h3>
       <ol>
-<li>国际漏洞提交平台：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www/hackerone.com/" >https://www/hackerone.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>BugX 区块链漏洞平台：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.bugx.org/" >http://www.bugx.org/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>Gsrc 瓜子 src ：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://security.guazi.com/" >https://security.guazi.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>区块链安全相应中心：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://dvpnet.io/" >https://dvpnet.io/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>CNVD 国家信息安全漏洞平台：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.cnvd.org.cn/" >http://www.cnvd.org.cn/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>漏洞银行：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.bugbank.cn/" >https://www.bugbank.cn/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>360 补天：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.butain.net/" >https://www.butain.net/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> </li>
-<li>教育行业漏洞报告平台(Beta)：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://src.edu-info.edu.cn/login/" >https://src.edu-info.edu.cn/login/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>国际漏洞提交平台：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www/hackerone.com/">https://www/hackerone.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>BugX 区块链漏洞平台：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.bugx.org/">http://www.bugx.org/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>Gsrc 瓜子 src ：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://security.guazi.com/">https://security.guazi.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>区块链安全相应中心：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://dvpnet.io/">https://dvpnet.io/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>CNVD 国家信息安全漏洞平台：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.cnvd.org.cn/">http://www.cnvd.org.cn/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>漏洞银行：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.bugbank.cn/">https://www.bugbank.cn/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>360 补天：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.butain.net/">https://www.butain.net/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> </li>
+<li>教育行业漏洞报告平台(Beta)：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://src.edu-info.edu.cn/login/">https://src.edu-info.edu.cn/login/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
 </ol>
 
-        <h3 id="1-5-2-国内平台"   >
+        <h3 id="1-5-2-国内平台">
           <a href="#1-5-2-国内平台" class="heading-link"><i class="fas fa-link"></i></a>1.5.2.国内平台</h3>
       <ol>
-<li>知道创宇 Seebug 漏洞平台：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.seebug.org/" >https://www.seebug.org/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>工控系统行业漏洞平台：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://ivd.winicssec.com/" >http://ivd.winicssec.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>打造中文最大 exploit 库：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.expku.com/" >http://www.expku.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>为数不多的漏洞管理插件收集平台：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.bugscan.net/source/template/vulns/" >http://www.bugscan.net/source/template/vulns/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>一家管理漏洞收集平台：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.0daybank.org/" >http://www.0daybank.org/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>知道创宇 Seebug 漏洞平台：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.seebug.org/">https://www.seebug.org/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>工控系统行业漏洞平台：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://ivd.winicssec.com/">http://ivd.winicssec.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>打造中文最大 exploit 库：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.expku.com/">http://www.expku.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>为数不多的漏洞管理插件收集平台：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.bugscan.net/source/template/vulns/">http://www.bugscan.net/source/template/vulns/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>一家管理漏洞收集平台：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.0daybank.org/">http://www.0daybank.org/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
 </ol>
 
-        <h3 id="1-5-3-国外平台"   >
+        <h3 id="1-5-3-国外平台">
           <a href="#1-5-3-国外平台" class="heading-link"><i class="fas fa-link"></i></a>1.5.3.国外平台</h3>
       <ol>
-<li>国际漏洞提交平台：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.hackerone.com/" >https://www.hackerone.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>xss poc ：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://xssor.io/" >http://xssor.io/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>0day 漏洞库：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.0day.today/" >https://www.0day.today/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>路由器漏洞库：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://routerpwn.com/" >http://routerpwn.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>cve 漏洞平台：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://cve.mitre.org/" >http://cve.mitre.org/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>国际漏洞提交平台：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.hackerone.com/">https://www.hackerone.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>xss poc ：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://xssor.io/">http://xssor.io/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>0day 漏洞库：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.0day.today/">https://www.0day.today/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>路由器漏洞库：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://routerpwn.com/">http://routerpwn.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>cve 漏洞平台：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://cve.mitre.org/">http://cve.mitre.org/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
 </ol>
 
-        <h3 id="1-5-4-威胁情报"   >
+        <h3 id="1-5-4-威胁情报">
           <a href="#1-5-4-威胁情报" class="heading-link"><i class="fas fa-link"></i></a>1.5.4.威胁情报</h3>
       <ol>
-<li>安全数据交流平台：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.secsilo.com/" >https://www.secsilo.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>华为安全情报：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://isecurity.huawei.com/sec/web//intelligencePortal.do" >https://isecurity.huawei.com/sec/web//intelligencePortal.do</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>威胁情报共享平台：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.threatcrowd.org/" >https://www.threatcrowd.org/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>被黑站点统计：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.hacked.com.cn/" >http://www.hacked.com.cn/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>安全数据交流平台：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.secsilo.com/">https://www.secsilo.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>华为安全情报：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://isecurity.huawei.com/sec/web//intelligencePortal.do">https://isecurity.huawei.com/sec/web//intelligencePortal.do</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>威胁情报共享平台：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.threatcrowd.org/">https://www.threatcrowd.org/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>被黑站点统计：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.hacked.com.cn/">http://www.hacked.com.cn/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
 </ol>
 
-        <h3 id="1-5-5-社工库"   >
+        <h3 id="1-5-5-社工库">
           <a href="#1-5-5-社工库" class="heading-link"><i class="fas fa-link"></i></a>1.5.5.社工库</h3>
       <ol>
-<li>微信伪造：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.jietuyun.com/" >http://www.jietuyun.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>任意邮箱发送：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://tool.chacuo.net/mailanonymous" >http://tool.chacuo.net/mailanonymous</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 和 <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://emkei.cz/" >https://emkei.cz/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>临时邮箱：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.yopmail.com/" >http://www.yopmail.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>邮箱池群：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://veryvp.com/" >http://veryvp.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>社工库：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.uneihan.com/" >http://www.uneihan.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>微信伪造：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.jietuyun.com/">http://www.jietuyun.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>任意邮箱发送：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://tool.chacuo.net/mailanonymous">http://tool.chacuo.net/mailanonymous</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 和 <span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://emkei.cz/">https://emkei.cz/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>临时邮箱：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.yopmail.com/">http://www.yopmail.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>邮箱池群：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://veryvp.com/">http://veryvp.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>社工库：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.uneihan.com/">http://www.uneihan.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
 </ol>
 
-        <h2 id="1-6-Google-Hack"   >
+        <h2 id="1-6-Google-Hack">
           <a href="#1-6-Google-Hack" class="heading-link"><i class="fas fa-link"></i></a>1.6. Google Hack</h2>
       
-        <h3 id="1-6-3-实战"   >
+        <h3 id="1-6-3-实战">
           <a href="#1-6-3-实战" class="heading-link"><i class="fas fa-link"></i></a>1.6.3.实战</h3>
-      <p>Google搜索引擎之所以强大，关键在于它详细的搜素关键词，以下是几个常用的搜素关键词: (更多详细教里，参见：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://user.qzone.qq.com/568311803/main)%E3%80%82" >http://user.qzone.qq.com/568311803/main)。</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+      <p>Google搜索引擎之所以强大，关键在于它详细的搜素关键词，以下是几个常用的搜素关键词: (更多详细教里，参见：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://user.qzone.qq.com/568311803/main)%E3%80%82">http://user.qzone.qq.com/568311803/main)。</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 <ol>
 <li>inurl:用于搜索网页上包含的URL，这个语法对寻找网页上的搜索，帮助之类的很有用。</li>
 <li>intext:只搜索网页部分中包含的文字(例如：管理后台，也就是忽略了标题， URL等的文字) </li>
@@ -235,18 +235,18 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <li>link:可以得到一个所有包含了某个指定URL的页面列表，例如： link :www. google. com就可以得到所有连接到Google的页面。</li>
 </ol>
 
-        <h2 id="1-7-Nmap-端扫"   >
+        <h2 id="1-7-Nmap-端扫">
           <a href="#1-7-Nmap-端扫" class="heading-link"><i class="fas fa-link"></i></a>1.7 Nmap 端扫</h2>
-      <p>功能介绍：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_811d9fdd0101ey07.html" >http://blog.sina.com.cn/s/blog_811d9fdd0101ey07.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> </p>
-<p>10种扫描解释：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.cnblogs.com/c4isr/archive/2012/12/07/2807491.html" >http://www.cnblogs.com/c4isr/archive/2012/12/07/2807491.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>  </p>
+      <p>功能介绍：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_811d9fdd0101ey07.html">http://blog.sina.com.cn/s/blog_811d9fdd0101ey07.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> </p>
+<p>10种扫描解释：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.cnblogs.com/c4isr/archive/2012/12/07/2807491.html">http://www.cnblogs.com/c4isr/archive/2012/12/07/2807491.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>  </p>
 
-        <h3 id="1-7-1-功能介绍"   >
+        <h3 id="1-7-1-功能介绍">
           <a href="#1-7-1-功能介绍" class="heading-link"><i class="fas fa-link"></i></a>1.7.1 功能介绍</h3>
       <p>Nmap 是一个网路连接端口扫描软件，用来扫描网上电脑开放的网络连接端口，确定哪些服务器运行在哪些连接端口，并且推断计算机运行哪个操作系统。它是网络管理员必用的软件之一，以及用以评估网络系统安全。</p>
 <p><strong>功能架构图：</strong></p>
 <p>主机发现 —&gt; 端口扫描 —&gt; 版本侦测 —&gt; OS 侦测</p>
 
-        <h3 id="1-7-2-主机发现"   >
+        <h3 id="1-7-2-主机发现">
           <a href="#1-7-2-主机发现" class="heading-link"><i class="fas fa-link"></i></a>1.7.2.主机发现</h3>
       <p><strong>1）主机发现原理：</strong></p>
 <p>主机发现的原理和ping 命令类似，发送探测包给目标主机，如果收到回复，说明目标主机是开启的。Nmap 支持十多种不同的主机探测方式，比如：发送 ICMPECHO / TIMESTAMP / NETMASK 报文，发送 SCTP INIT / COOKIE-ECHO 包，用户可以在不同的条件下灵活选用不同的方式来探测目标主机。</p>
@@ -267,7 +267,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>扫描局域网 192.168.0.1-192.168.0.250 范围内哪些 IP 的主机是活动的。</p>
 <p>命令如下：nmap -sn 192.168.0.1-250</p>
 
-        <h3 id="1-7-3-端口扫描"   >
+        <h3 id="1-7-3-端口扫描">
           <a href="#1-7-3-端口扫描" class="heading-link"><i class="fas fa-link"></i></a>1.7.3. 端口扫描</h3>
       <p>端口扫描时 Nmap 最基本核心的功能，用于确定目标主机的 TCP / UDP 端口开放情况。默认情况下，Nmap 会扫描1000 个最有可能开放的 TCP 端口。Nmap 通过探测将端口划分为6个状态。</p>
 <ol>
@@ -292,17 +292,17 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <li>-sS/sT/sA/sW/sM：指定使用 TCP SYN/Connect()/ACK/Window/Maimon scans 的方式来对目标主机进行扫描。</li>
 <li>-sU：指定使用 UDP 扫描方式确定目标主机的 UDP 端口状态。</li>
 <li>-sN/sF/sX：指定使用 TCP Null，FIN，and Xmas scans 秘密扫描方式来协助探测对方的 TCP 端口状态。</li>
-<li>–scanflags <flags>：定制 TCP 包的 flags。</li>
+<li>–scanflags <flags>：定制 TCP 包的 flags。</flags></li>
 <li>-sI &lt;zombiehost[:probeport]：指定使用 idle scan 方式来扫描目标主机（前提需要找到合适的 zombie host）。</li>
 <li>-sY/sZ：使用 SCTP INIT/COOKIE-ECHO 来扫描 SCTP 协议端口的开放情况。</li>
 <li>-sO：使用 IP protocol 扫描确定目标主机支持的协议类型。</li>
-<li>-b <FTP relay host>：使用 FTP bounce scan 扫描方式。</li>
+<li>-b <FTP relay host>：使用 FTP bounce scan 扫描方式。</FTP></li>
 </ol>
 <p><strong>3）使用演示：</strong></p>
 <p>在此，我们以主机 192.168.0.100 为例。</p>
 <p>命令如下：nmap -sS -sU -T4 -top-ports 300 192.168.0.100</p>
 
-        <h3 id="1-7-4-版本侦测"   >
+        <h3 id="1-7-4-版本侦测">
           <a href="#1-7-4-版本侦测" class="heading-link"><i class="fas fa-link"></i></a>1.7.4. 版本侦测</h3>
       <p><strong>1）版本侦测原理：</strong></p>
 <p>简要地介绍版本的侦测原理。版本 侦测主要分为以下几个步骤：</p>
@@ -324,7 +324,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>对主机 192.168.0.100 进行版本侦测</p>
 <p>命令如下：nmap -sV 192.168.0.100</p>
 
-        <h3 id="1-7-5-OS-侦测"   >
+        <h3 id="1-7-5-OS-侦测">
           <a href="#1-7-5-OS-侦测" class="heading-link"><i class="fas fa-link"></i></a>1.7.5. OS 侦测</h3>
       <p><strong>1）OS 侦测原理：</strong></p>
 <p>Nmap 使用 TCP/IP 协议栈指纹来识别不同的操作系统和设备。在RFC 规范中，有些地方对 TCP/IP 的实现并没有强制规定，由此不同的 TCP/IP 方案中有可能都有自己的特定方式。Nmap 主要是根据这些细节上的差异来判断操作系统的类型的。</p>
@@ -339,10 +339,10 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p><strong>3）使用演示：</strong></p>
 <p>命令：nmap -O 192.168.0.100</p>
 
-        <h2 id="1-8-DisBuster"   >
+        <h2 id="1-8-DisBuster">
           <a href="#1-8-DisBuster" class="heading-link"><i class="fas fa-link"></i></a>1.8 DisBuster</h2>
       
-        <h2 id="1-10-扩展-BurpAPP-抓包"   >
+        <h2 id="1-10-扩展-BurpAPP-抓包">
           <a href="#1-10-扩展-BurpAPP-抓包" class="heading-link"><i class="fas fa-link"></i></a>1.10 扩展 BurpAPP 抓包</h2>
       <p><strong>一. 手机端配置：</strong></p>
 <ol>
@@ -359,24 +359,24 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <li>打开 Burpsuite ,设置代理代理服务器，设置的IP 和端口要和 手机上设置的一致</li>
 </ol>
 
-        <h2 id="1-11-扩展-常见信息泄露利用方法"   >
+        <h2 id="1-11-扩展-常见信息泄露利用方法">
           <a href="#1-11-扩展-常见信息泄露利用方法" class="heading-link"><i class="fas fa-link"></i></a>1.11. 扩展:常见信息泄露利用方法</h2>
       
-        <h3 id="1-11-1-Git-导致文件泄露"   >
+        <h3 id="1-11-1-Git-导致文件泄露">
           <a href="#1-11-1-Git-导致文件泄露" class="heading-link"><i class="fas fa-link"></i></a>1.11.1. Git 导致文件泄露</h3>
       <p>由于目前的web项目的开发采用前后端完全分离的架构:前端全部使用静态文件，和后端代码完全分离，隶属两个不同的项目。表态文件使用git 来进行同步发布到服务器，然后使用nginx指向到指定目录，以达到被公网访问的目的。</p>
 <p>在运行git init初始化代码库的时候，会在当前目录下面产生一个.git的隐藏文件，用来记录代码的变更记录等等。在发布代码的时候，把.git这个目录没有删除，直接发布了。使用这个文件，可以用来恢复源代码。</p>
 <p>例如：192.168.133.130/zvuldrill-git/.git/config</p>
 
-        <h3 id="1-11-2-DS-store-导致文件泄露"   >
+        <h3 id="1-11-2-DS-store-导致文件泄露">
           <a href="#1-11-2-DS-store-导致文件泄露" class="heading-link"><i class="fas fa-link"></i></a>1.11.2. DS_store 导致文件泄露</h3>
       <p>Ds_store 是 Mac 下 Finder 用来保存如何展示文件/文件夹的数据文件，每个文件下对应一个。由于开发/设计成员在发布代码时未删除文件夹中隐藏的 Ds_store ，可能造成文件目录结构泄露，源代码文件等敏感信息的泄露。</p>
 <p>我们可以模仿一个环境，利用 phphstudy 搭建 PHP 环境，把 Ds_store 文件传到相关的目录，然后利用工具进行相关检测。</p>
-<p>工具：ds_store_exp，下载地址：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/lijiejie/ds_store_exp" >https://github.com/lijiejie/ds_store_exp</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>工具：ds_store_exp，下载地址：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://github.com/lijiejie/ds_store_exp">https://github.com/lijiejie/ds_store_exp</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 <p>为了让实验显得更加真实，我们在本地搭建环境，然后建立一个 admin 和 hello 文件夹，利用该工具运行完成后，查看工具文件夹有什么结果。</p>
 <p>这是一个.DS_Store文件泄漏利用脚本，它解析.DS_Store文件并递归下载文件到本地。</p>
 
-        <h3 id="1-11-3-SVN-导致文件泄露"   >
+        <h3 id="1-11-3-SVN-导致文件泄露">
           <a href="#1-11-3-SVN-导致文件泄露" class="heading-link"><i class="fas fa-link"></i></a>1.11.3. SVN 导致文件泄露</h3>
       <p>Subversion.简称svn ,是一个开放源代码的版本控制系统，相对于的 RCS, CVS，采用了分支管理系统，它的设计目标就是取代cvs，互联网上越来越多的控制服务从cvs 转移到Subversion。</p>
 <p>Subversion使用服务端–客户端的结构 ，当然服务端与客户端可以都运行在同一台服务器上。在服务端是存放着所有受控制数据的Subversion仓库，另一端是Subversion的客户端程序，管理着受控数据的一部分在本地的映射时(称为“工作副本”)。在这两端之间是通过各种仓库存取层(Repository Acess，简称RA)的多条通道进行访问的。这些通道中，可以通过不同的网络协议，例如HTTP，SSH等，或本地文件的方式来对仓库进行操作。</p>
@@ -387,7 +387,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <li>在被利用的网址后面加 /.svn/entries，列出网站目录，甚至载整站。</li>
 </ol>
 
-        <h3 id="1-11-4-WEB-INF-web-xml-泄露"   >
+        <h3 id="1-11-4-WEB-INF-web-xml-泄露">
           <a href="#1-11-4-WEB-INF-web-xml-泄露" class="heading-link"><i class="fas fa-link"></i></a>1.11.4. WEB-INF/web.xml 泄露</h3>
       <p>WEB-INF 是Java的WEB应用的安全目录，如果想在页面中直接访问其中的文件，必须通过web.xml文件对要访问的文件进行相应映射才能访问。</p>
 <p>WEB-INF主现包含一下文件或目录。</p>
@@ -399,7 +399,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p><strong>原因:</strong></p>
 <p>通常一些web应用我们会使用多个web服务器搭配使用,解决其中的一个web服务器的性能缺陷以及做均衡负载的优点和完成一些分层结构的安全策略等， 在使用这种架构的时候，由于对静态资源目录或映射文件配置不当，可能会引发一些安全问题，导致 web.xml 等文件能够被读取。</p>
 
-        <h2 id="1-12-扩展-ZoomEye-hack"   >
+        <h2 id="1-12-扩展-ZoomEye-hack">
           <a href="#1-12-扩展-ZoomEye-hack" class="heading-link"><i class="fas fa-link"></i></a>1.12 扩展: ZoomEye hack</h2>
       <p>ZoomEye支持公网设备指纹检素和Web指纹检索的网站，指纹检索包括应用名称，版本，前端框架，后端框架，服务端语言、服务器操作系统，网站容器，内容管理系统和数据库等.</p>
 <p>设备指纹包括：应用名、版本开放端口，操作系统，服务名，地理位置等。</p>
@@ -420,14 +420,14 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>例9：搜索标题中包含该字符的网站：title:weblogic</p>
 <p>例10：keywords:Nginx</p>
 
-        <h2 id="1-13-扩展：fofa-hack"   >
+        <h2 id="1-13-扩展：fofa-hack">
           <a href="#1-13-扩展：fofa-hack" class="heading-link"><i class="fas fa-link"></i></a>1.13. 扩展：fofa hack</h2>
       <p>domin=”” || ip=”” || host=”” || title=”” || header=”” ;</p>
 <p>protocol=”https”，搜索指定协议类型</p>
 <p>app=”phpinfo”，搜索某些组件相关系统</p>
 <p>host=”baidu.com”，搜索包含有特定字符的 URL</p>
 <p>title=”powered by” &amp;&amp; os=windows 搜索网页标题中包含有特定字符并且系统是 windows 的网页</p>
-<p>详细看官方详细文档：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://fofa.so/help_articles/" >https://fofa.so/help_articles/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>详细看官方详细文档：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://fofa.so/help_articles/">https://fofa.so/help_articles/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 <p>​    </p>
 </div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://sculptor-liu.github.io">Sculptor</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://sculptor-liu.github.io/2020/07/08/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">https://sculptor-liu.github.io/2020/07/08/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/ali_pay.png"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/wechat_pay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/07/19/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">漏洞扫描技术</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/07/04/MSF/"><span class="paginator-prev__text">MSF框架</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">
           一. 信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%9F%9F%E5%90%8D%E6%8E%A2%E6%B5%8B"><span class="toc-number">1.1.</span> <span class="toc-text">
@@ -469,7 +469,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
           1.11.3. SVN 导致文件泄露</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-11-4-WEB-INF-web-xml-%E6%B3%84%E9%9C%B2"><span class="toc-number">1.10.4.</span> <span class="toc-text">
           1.11.4. WEB-INF&#x2F;web.xml 泄露</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-12-%E6%89%A9%E5%B1%95-ZoomEye-hack"><span class="toc-number">1.11.</span> <span class="toc-text">
           1.12 扩展: ZoomEye hack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-13-%E6%89%A9%E5%B1%95%EF%BC%9Afofa-hack"><span class="toc-number">1.12.</span> <span class="toc-text">
-          1.13. 扩展：fofa hack</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">9</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">8</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+          1.13. 扩展：fofa hack</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">10</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">9</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
   var isXML = true;
   var search_path = 'search.xml';
 

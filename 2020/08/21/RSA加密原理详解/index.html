@@ -38,10 +38,10 @@ var CONFIG = {
 };
 
 window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于我</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Sculptor's blog</div><div class="header-banner-info__subtitle">不知名的陌生人</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">RSA加密原理详解</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2020-08-21</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-09-23</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
-        <h1 id="RSA加密原理详解"   >
+        <h1 id="RSA加密原理详解">
           <a href="#RSA加密原理详解" class="heading-link"><i class="fas fa-link"></i></a>RSA加密原理详解</h1>
       
-        <h2 id="一、算法介绍"   >
+        <h2 id="一、算法介绍">
           <a href="#一、算法介绍" class="heading-link"><i class="fas fa-link"></i></a>一、算法介绍</h2>
       <p><strong>一、RSA加密简介</strong></p>
 <a id="more"></a>
@@ -63,13 +63,13 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>　　但是，综合两个场景你会发现，第一个场景虽然被截获的消息没有泄露，但是可以利用截获的公钥，将假指令进行加密，然后传递给A。第二个场景虽然截获的消息不能被篡改，但是消息的内容可以利用公钥验签来获得，并不能防止泄露。所以在实际应用中，要根据情况使用，也可以同时使用加密和签名，比如A和B都有一套自己的公钥和私钥，当A要给B发送消息时，先用B的公钥对消息加密，再对加密的消息使用A的私钥加签名，达到既不泄露也不被篡改，更能保证消息的安全性。</p>
 <p>　　<strong>总结：公钥加密、私钥解密、私钥签名、公钥验签。</strong></p>
 
-        <h2 id="1-什么是RSA"   >
+        <h2 id="1-什么是RSA">
           <a href="#1-什么是RSA" class="heading-link"><i class="fas fa-link"></i></a>1. 什么是RSA</h2>
       <p>RSA算法是现今使用最广泛的公钥密码算法，也是号称地球上最安全的加密算法。在了解RSA算法之前，先熟悉下几个术语<br> 根据密钥的使用方法，可以将密码分为对称密码和公钥密码<br> 对称密码：加密和解密使用同一种密钥的方式<br> 公钥密码：加密和解密使用不同的密码的方式，因此公钥密码通常也称为非对称密码。</p>
 
-        <h3 id="1-1-互质关系"   >
+        <h3 id="1-1-互质关系">
           <a href="#1-1-互质关系" class="heading-link"><i class="fas fa-link"></i></a>1.1 互质关系</h3>
-      <p>如果两个正整数，除了1以外，没有其他公因子，我们就称这两个数是<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://zh.wikipedia.org/zh-cn/%E4%BA%92%E7%B4%A0" >互质关系</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>（coprime）。比如，15和32没有公因子，所以它们是互质关系。这说明，不是质数也可以构成互质关系。</p>
+      <p>如果两个正整数，除了1以外，没有其他公因子，我们就称这两个数是<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://zh.wikipedia.org/zh-cn/%E4%BA%92%E7%B4%A0">互质关系</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>（coprime）。比如，15和32没有公因子，所以它们是互质关系。这说明，不是质数也可以构成互质关系。</p>
 <p>关于互质关系，不难得到以下结论：</p>
 <blockquote>
 <p>　　1. 任意两个质数构成互质关系，比如13和61。</p>
@@ -80,13 +80,13 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>　　6. p是大于1的奇数，则p和p-2构成互质关系，比如17和15。</p>
 </blockquote>
 
-        <h3 id="1-2-欧拉函数"   >
+        <h3 id="1-2-欧拉函数">
           <a href="#1-2-欧拉函数" class="heading-link"><i class="fas fa-link"></i></a>1.2 欧拉函数</h3>
       <p>请思考以下问题：</p>
 <blockquote>
 <p>任意给定正整数n，请问在小于等于n的正整数之中，有多少个与n构成互质关系？（比如，在1到8之中，有多少个数与8构成互质关系？）</p>
 </blockquote>
-<p>计算这个值的方法就叫做<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://zh.wikipedia.org/wiki/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0" >欧拉函数</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，以φ(n)表示。在1到8之中，与8形成互质关系的是1、3、5、7，所以 φ(n) = 4。</p>
+<p>计算这个值的方法就叫做<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://zh.wikipedia.org/wiki/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0">欧拉函数</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，以φ(n)表示。在1到8之中，与8形成互质关系的是1、3、5、7，所以 φ(n) = 4。</p>
 <p>φ(n) 的计算方法并不复杂，但是为了得到最后那个公式，需要一步步讨论。 </p>
 <p><strong>第一种情况</strong></p>
 <p>如果n=1，则 φ(1) = 1 。因为1与任何数（包括自身）都构成互质关系。</p>
@@ -106,13 +106,13 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <p>　　φ(n) = φ(p1p2) = φ(p1)φ(p2)</p>
 </blockquote>
 <p>即积的欧拉函数等于各个因子的欧拉函数之积。比如，φ(56)=φ(8×7)=φ(8)×φ(7)=4×6=24。</p>
-<p>这一条的证明要用到<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Chinese_remainder_theorem" >“中国剩余定理”</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，这里就不展开了，只简单说一下思路：如果a与p1互质(a&lt;p1)，b与p2互质(b&lt;p2)，c与p1p2互质(c&lt;p1p2)，则c与数对 (a,b) 是一一对应关系。由于a的值有φ(p1)种可能，b的值有φ(p2)种可能，则数对 (a,b) 有φ(p1)φ(p2)种可能，而c的值有φ(p1p2)种可能，所以φ(p1p2)就等于φ(p1)φ(p2)。</p>
+<p>这一条的证明要用到<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Chinese_remainder_theorem">“中国剩余定理”</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，这里就不展开了，只简单说一下思路：如果a与p1互质(a&lt;p1)，b与p2互质(b&lt;p2)，c与p1p2互质(c&lt;p1p2)，则c与数对 (a,b) 是一一对应关系。由于a的值有φ(p1)种可能，b的值有φ(p2)种可能，则数对 (a,b) 有φ(p1)φ(p2)种可能，而c的值有φ(p1p2)种可能，所以φ(p1p2)就等于φ(p1)φ(p2)。</p>
 <p><strong>第五种情况</strong></p>
 <p>因为任意一个大于1的正整数，都可以写成一系列质数的积。</p>
 
-        <h3 id="1-3-欧拉定理"   >
+        <h3 id="1-3-欧拉定理">
           <a href="#1-3-欧拉定理" class="heading-link"><i class="fas fa-link"></i></a>1.3 欧拉定理</h3>
-      <p>欧拉函数的用处，在于<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://zh.wikipedia.org/wiki/%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86_(%E6%95%B0%E8%AE%BA)" >欧拉定理</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。”欧拉定理”指的是：</p>
+      <p>欧拉函数的用处，在于<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://zh.wikipedia.org/wiki/%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86_(%E6%95%B0%E8%AE%BA)">欧拉定理</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。”欧拉定理”指的是：</p>
 <blockquote>
 <p>如果两个正整数a和n互质，则n的欧拉函数 φ(n) 可以让下面的等式成立：</p>
 </blockquote>
@@ -125,34 +125,34 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <blockquote>
 <p>假设正整数a与质数p互质，因为质数p的φ(p)等于p-1，则欧拉定理可以写成</p>
 </blockquote>
-<p>这就是著名的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://zh.wikipedia.org/wiki/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86" >费马小定理</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。它是欧拉定理的特例。</p>
+<p>这就是著名的<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://zh.wikipedia.org/wiki/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86">费马小定理</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。它是欧拉定理的特例。</p>
 <p>欧拉定理是RSA算法的核心。理解了这个定理，就可以理解RSA。</p>
 
-        <h3 id="1-4-模反元素"   >
+        <h3 id="1-4-模反元素">
           <a href="#1-4-模反元素" class="heading-link"><i class="fas fa-link"></i></a>1.4 模反元素</h3>
       <p>还剩下最后一个概念：</p>
 <blockquote>
 <p>如果两个正整数a和n互质，那么一定可以找到整数b，使得 ab-1 被n整除，或者说ab被n除的余数是1。</p>
-<p>这时，b就叫做a的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://zh.wikipedia.org/wiki/%E6%A8%A1%E5%8F%8D%E5%85%83%E7%B4%A0" >“模反元素”</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。</p>
+<p>这时，b就叫做a的<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://zh.wikipedia.org/wiki/%E6%A8%A1%E5%8F%8D%E5%85%83%E7%B4%A0">“模反元素”</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。</p>
 </blockquote>
 <p>比如，3和11互质，那么3的模反元素就是4，因为 (3 × 4)-1 可以被11整除。显然，模反元素不止一个， 4加减11的整数倍都是3的模反元素 {…,-18,-7,4,15,26,…}，即如果b是a的模反元素，则 b+kn 都是a的模反元素。</p>
 <p>欧拉定理可以用来证明模反元素必然存在。</p>
 <p>可以看到，a的 φ(n)-1 次方，就是a的模反元素。</p>
 
-        <h2 id="2-RSA加密"   >
+        <h2 id="2-RSA加密">
           <a href="#2-RSA加密" class="heading-link"><i class="fas fa-link"></i></a>2. RSA加密</h2>
       <p>RSA的加密过程可以使用一个通式来表达</p>
-<p><img   src="https://upload-images.jianshu.io/upload_images/3274507-1a2f6947c2fc8f9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/352/format/webp" style=""  alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3274507-1a2f6947c2fc8f9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/352/format/webp" style alt="img"></p>
 <p>也就是说RSA加密是对明文的E次方后除以N后求余数的过程。就这么简单？对，就是这么简单。<br> 从通式可知，只要知道E和N任何人都可以进行RSA加密了，所以说E、N是RSA加密的密钥，也就是说<strong>E和N的组合就是公钥</strong>，我们用(E,N)来表示公钥</p>
-<p><img   src="https://upload-images.jianshu.io/upload_images/3274507-7017df85daaa0d5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/327/format/webp" style=""  alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3274507-7017df85daaa0d5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/327/format/webp" style alt="img"></p>
 <p>不过E和N不并不是随便什么数都可以的，它们都是经过严格的数学计算得出的，关于E和N拥有什么样的要求及其特性后面会讲到。顺便啰嗦一句E是加密（Encryption）的首字母，N是数字（Number）的首字母</p>
 
-        <h2 id="3-RSA解密"   >
+        <h2 id="3-RSA解密">
           <a href="#3-RSA解密" class="heading-link"><i class="fas fa-link"></i></a>3. RSA解密</h2>
       <p>RSA的解密同样可以使用一个通式来表达</p>
-<p><img   src="https://upload-images.jianshu.io/upload_images/3274507-e2b53cccd699aff1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/318/format/webp" style=""  alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3274507-e2b53cccd699aff1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/318/format/webp" style alt="img"></p>
 <p>也就是说对密文进行D次方后除以N的余数就是明文，这就是RSA解密过程。知道D和N就能进行解密密文了，所以D和N的组合就是私钥</p>
-<p><img   src="https://upload-images.jianshu.io/upload_images/3274507-3e379a1e8ed76d9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/282/format/webp" style=""  alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3274507-3e379a1e8ed76d9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/282/format/webp" style alt="img"></p>
 <p>从上述可以看出RSA的加密方式和解密方式是相同的，加密是求“E次方的mod N”;解密是求“D次方的mod N”<br> 此处D是解密（Decryption）的首字母；N是数字（Number）的首字母。</p>
 <p>小结下</p>
 <div class="table-container"><table>
@@ -177,7 +177,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </tbody></table></div>
 <p>此处D是解密（Decryption）的首字母；N是数字（Number）的首字母。</p>
 
-        <h2 id="4-生成密钥对"   >
+        <h2 id="4-生成密钥对">
           <a href="#4-生成密钥对" class="heading-link"><i class="fas fa-link"></i></a>4. 生成密钥对</h2>
       <p>既然公钥是（E，N），私钥是（D，N）所以密钥对即为（E，D，N）但密钥对是怎样生成的？步骤如下：</p>
 <ol>
@@ -187,49 +187,49 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 <li>求D</li>
 </ol>
 
-        <h3 id="4-1-求N"   >
+        <h3 id="4-1-求N">
           <a href="#4-1-求N" class="heading-link"><i class="fas fa-link"></i></a>4.1 求N</h3>
       <p>准备两个质数p，q。这两个数不能太小，太小则会容易破解，将p乘以q就是N</p>
 <blockquote>
 
-        <h4 id="N-p-q"   >
+        <h4 id="N-p-q">
           <a href="#N-p-q" class="heading-link"><i class="fas fa-link"></i></a>N = p * q</h4>
       </blockquote>
 
-        <h3 id="4-2-求L"   >
+        <h3 id="4-2-求L">
           <a href="#4-2-求L" class="heading-link"><i class="fas fa-link"></i></a>4.2 求L</h3>
       <p>L 是 p－1 和 q－1的最小公倍数，可用如下表达式表示</p>
 <blockquote>
 
-        <h4 id="L-lcm（p－1，q－1）"   >
+        <h4 id="L-lcm（p－1，q－1）">
           <a href="#L-lcm（p－1，q－1）" class="heading-link"><i class="fas fa-link"></i></a>L=lcm（p－1，q－1）</h4>
       </blockquote>
 
-        <h3 id="4-3-求E"   >
+        <h3 id="4-3-求E">
           <a href="#4-3-求E" class="heading-link"><i class="fas fa-link"></i></a>4.3 求E</h3>
       <p>E必须满足两个条件：E是一个比1大比L小的数，E和L的最大公约数为1<br> 用gcd(X,Y)来表示X，Y的最大公约数则E条件如下：</p>
 <blockquote>
 
-        <h4 id="1-lt-E-lt-L"   >
+        <h4 id="1-lt-E-lt-L">
           <a href="#1-lt-E-lt-L" class="heading-link"><i class="fas fa-link"></i></a>1 &lt; E &lt; L</h4>
       
-        <h4 id="gcd（E，L）-1"   >
+        <h4 id="gcd（E，L）-1">
           <a href="#gcd（E，L）-1" class="heading-link"><i class="fas fa-link"></i></a>gcd（E，L）=1</h4>
       </blockquote>
 <p>之所以需要E和L的最大公约数为1是为了保证一定存在解密时需要使用的数D。现在我们已经求出了E和N也就是说我们已经生成了密钥对中的公钥了。</p>
 
-        <h3 id="4-4-求D"   >
+        <h3 id="4-4-求D">
           <a href="#4-4-求D" class="heading-link"><i class="fas fa-link"></i></a>4.4 求D</h3>
       <p>数D是由数E计算出来的，D与L互质。D、E和L之间必须满足以下关系：</p>
 <blockquote>
 
-        <h4 id="1-lt-D-lt-L"   >
+        <h4 id="1-lt-D-lt-L">
           <a href="#1-lt-D-lt-L" class="heading-link"><i class="fas fa-link"></i></a>1 &lt; D &lt; L</h4>
       
-        <h4 id="E＊D-mod-L-＝-1"   >
+        <h4 id="E＊D-mod-L-＝-1">
           <a href="#E＊D-mod-L-＝-1" class="heading-link"><i class="fas fa-link"></i></a>E＊D mod L ＝ 1</h4>
       
-        <h3 id="D-gmpy2-invert-E-L"   >
+        <h3 id="D-gmpy2-invert-E-L">
           <a href="#D-gmpy2-invert-E-L" class="heading-link"><i class="fas fa-link"></i></a>D=gmpy2.invert(E,L)</h3>
       </blockquote>
 <p>只要D满足上述2个条件，则通过E和N进行加密的密文就可以用D和N进行解密。<br> 简单地说条件2是为了保证密文解密后的数据就是明文。<br> 现在私钥自然也已经生成了，密钥对也就自然生成了。<br> 小结下：</p>
@@ -258,181 +258,181 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
 </tr>
 </tbody></table></div>
 
-        <h3 id="4-5-加密"   >
+        <h3 id="4-5-加密">
           <a href="#4-5-加密" class="heading-link"><i class="fas fa-link"></i></a>4.5 加密</h3>
       <p><strong>密文＝明文^E mod N</strong></p>
 <p><strong>C=M^E mod N</strong></p>
 <p><strong>C=pow(M,E,N)</strong></p>
 
-        <h3 id="4-6-解密"   >
+        <h3 id="4-6-解密">
           <a href="#4-6-解密" class="heading-link"><i class="fas fa-link"></i></a>4.6 解密</h3>
       <p><strong>明文＝密文^D mod N</strong></p>
 <p><strong>M=C^D mod N</strong></p>
 <p><strong>M=pow(C,D,N)</strong></p>
 
-        <h1 id="二，RSA-解密常用库和函数"   >
+        <h1 id="二，RSA-解密常用库和函数">
           <a href="#二，RSA-解密常用库和函数" class="heading-link"><i class="fas fa-link"></i></a>二，RSA 解密常用库和函数</h1>
       
-        <h2 id="1-gmpy2-库"   >
+        <h2 id="1-gmpy2-库">
           <a href="#1-gmpy2-库" class="heading-link"><i class="fas fa-link"></i></a>1. gmpy2 库</h2>
       
-        <h3 id="1-1-gmpy2-mpz-x"   >
+        <h3 id="1-1-gmpy2-mpz-x">
           <a href="#1-1-gmpy2-mpz-x" class="heading-link"><i class="fas fa-link"></i></a>1.1  gmpy2.mpz(x)</h3>
       <p>初始化一个大整数x</p>
 
-        <h3 id="1-2-gmpy2-mpfr-x"   >
+        <h3 id="1-2-gmpy2-mpfr-x">
           <a href="#1-2-gmpy2-mpfr-x" class="heading-link"><i class="fas fa-link"></i></a>1.2 gmpy2.mpfr(x)</h3>
       <p>初始化一个高精度浮点数x</p>
 
-        <h3 id="1-3-C-gmpy2-powmod-M-e-n"   >
+        <h3 id="1-3-C-gmpy2-powmod-M-e-n">
           <a href="#1-3-C-gmpy2-powmod-M-e-n" class="heading-link"><i class="fas fa-link"></i></a>1.3 C = gmpy2.powmod(M,e,n)</h3>
       <p>幂取模，结果是 C = (M^e) mod n</p>
 
-        <h3 id="1-4-d-gmpy2-invert-e-L"   >
+        <h3 id="1-4-d-gmpy2-invert-e-L">
           <a href="#1-4-d-gmpy2-invert-e-L" class="heading-link"><i class="fas fa-link"></i></a>1.4 d = gmpy2.invert(e,L)</h3>
       <p>求逆元，de = 1 mod L（D和L互质，D和E互为逆元）</p>
 
-        <h3 id="1-5-gmpy2-is-prime-n"   >
+        <h3 id="1-5-gmpy2-is-prime-n">
           <a href="#1-5-gmpy2-is-prime-n" class="heading-link"><i class="fas fa-link"></i></a>1.5 gmpy2.is_prime(n)</h3>
       <p>判断n是不是素数</p>
 
-        <h3 id="1-6-gmpy2-gcd-a-b"   >
+        <h3 id="1-6-gmpy2-gcd-a-b">
           <a href="#1-6-gmpy2-gcd-a-b" class="heading-link"><i class="fas fa-link"></i></a>1.6 gmpy2.gcd(a,b)</h3>
       <p>欧几里得算法，最大公约数</p>
 
-        <h3 id="1-7-gmpy2-gcdext-a-b"   >
+        <h3 id="1-7-gmpy2-gcdext-a-b">
           <a href="#1-7-gmpy2-gcdext-a-b" class="heading-link"><i class="fas fa-link"></i></a>1.7 gmpy2.gcdext(a,b)</h3>
       <p>扩展欧几里得算法</p>
 
-        <h3 id="1-8-gmpy2-iroot-x-n"   >
+        <h3 id="1-8-gmpy2-iroot-x-n">
           <a href="#1-8-gmpy2-iroot-x-n" class="heading-link"><i class="fas fa-link"></i></a>1.8 gmpy2.iroot(x,n)</h3>
       <p>x开n次根</p>
 
-        <h2 id="2-libnum-库"   >
+        <h2 id="2-libnum-库">
           <a href="#2-libnum-库" class="heading-link"><i class="fas fa-link"></i></a>2. libnum 库</h2>
       
-        <h3 id="2-1-libnum-s2n-s"   >
+        <h3 id="2-1-libnum-s2n-s">
           <a href="#2-1-libnum-s2n-s" class="heading-link"><i class="fas fa-link"></i></a>2.1 libnum.s2n(s)</h3>
       <p>字符串转换为数字。</p>
 <figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line">s = <span class="string">&quot;ab12&quot;</span></span><br><span class="line">print(libnum.s2n(s))</span><br><span class="line"></span><br><span class="line">result: <span class="number">1633825074</span></span><br><span class="line"><span class="number">12345</span></span><br></pre></td></tr></table></div></figure>
 
 
-        <h3 id="2-2-libnum-s2n-n"   >
+        <h3 id="2-2-libnum-s2n-n">
           <a href="#2-2-libnum-s2n-n" class="heading-link"><i class="fas fa-link"></i></a>2.2 libnum.s2n(n)</h3>
       <p>数字转换为字符串。</p>
 <figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line">n = <span class="number">1633825074</span></span><br><span class="line">print(libnum.n2s(n))</span><br><span class="line"></span><br><span class="line">result: ab12</span><br><span class="line"><span class="number">12345</span></span><br></pre></td></tr></table></div></figure>
 
 
-        <h3 id="2-3-libnum-s2b-s"   >
+        <h3 id="2-3-libnum-s2b-s">
           <a href="#2-3-libnum-s2b-s" class="heading-link"><i class="fas fa-link"></i></a>2.3 libnum.s2b(s)</h3>
       <p>字符串转换为二进制字符串。</p>
 <figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line">s = <span class="string">&quot;ab12&quot;</span></span><br><span class="line">print(libnum.s2b(s))</span><br><span class="line"></span><br><span class="line">result: <span class="number">01100001011000100011000100110010</span></span><br><span class="line"><span class="number">12345</span></span><br></pre></td></tr></table></div></figure>
 
 
-        <h3 id="2-4-libnum-b2s-b"   >
+        <h3 id="2-4-libnum-b2s-b">
           <a href="#2-4-libnum-b2s-b" class="heading-link"><i class="fas fa-link"></i></a>2.4 libnum.b2s(b)</h3>
       <p>二进制字符串转换为字符串。</p>
 <figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line">b = <span class="string">&quot;01100001011000100011000100110010&quot;</span></span><br><span class="line">print(libnum.b2s(b))</span><br><span class="line"></span><br><span class="line">result: ab12</span><br><span class="line"><span class="number">12345</span></span><br></pre></td></tr></table></div></figure>
 
 
-        <h3 id="2-5-Primes"   >
+        <h3 id="2-5-Primes">
           <a href="#2-5-Primes" class="heading-link"><i class="fas fa-link"></i></a>2.5 Primes</h3>
       
-        <h4 id="2-5-1-libnum-primes-n"   >
+        <h4 id="2-5-1-libnum-primes-n">
           <a href="#2-5-1-libnum-primes-n" class="heading-link"><i class="fas fa-link"></i></a>2.5.1 libnum.primes(n)</h4>
       <p>返回不大于n的素数列表。</p>
 <figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line">print(libnum.primes(<span class="number">19</span>))</span><br><span class="line"></span><br><span class="line">result: [<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">17</span>, <span class="number">19</span>]</span><br><span class="line"><span class="number">1234</span></span><br></pre></td></tr></table></div></figure>
 
 
-        <h4 id="2-5-2-libnum-generate-prime-n"   >
+        <h4 id="2-5-2-libnum-generate-prime-n">
           <a href="#2-5-2-libnum-generate-prime-n" class="heading-link"><i class="fas fa-link"></i></a>2.5.2 libnum.generate_prime(n)</h4>
       <p>产生长度为n位的伪素数。</p>
 <figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line">print(libnum.generate_prime(<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">result: <span class="number">1021</span></span><br><span class="line"><span class="number">1234</span></span><br></pre></td></tr></table></div></figure>
 
 
-        <h3 id="2-6-其它"   >
+        <h3 id="2-6-其它">
           <a href="#2-6-其它" class="heading-link"><i class="fas fa-link"></i></a>2.6 其它</h3>
       
-        <h4 id="2-6-1-libnum-factorize-n"   >
+        <h4 id="2-6-1-libnum-factorize-n">
           <a href="#2-6-1-libnum-factorize-n" class="heading-link"><i class="fas fa-link"></i></a>2.6.1 libnum.factorize(n)</h4>
       <p>返回n的所有素因子及每个素因子的个数。</p>
 <figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line">print(libnum.factorize(<span class="number">60</span>))</span><br><span class="line"></span><br><span class="line">result: &#123;<span class="number">2</span>: <span class="number">2</span>, <span class="number">3</span>: <span class="number">1</span>, <span class="number">5</span>: <span class="number">1</span>&#125;</span><br><span class="line"><span class="number">1234</span></span><br></pre></td></tr></table></div></figure>
 
 
-        <h4 id="2-6-2-libnum-modular-invmod-e-m"   >
+        <h4 id="2-6-2-libnum-modular-invmod-e-m">
           <a href="#2-6-2-libnum-modular-invmod-e-m" class="heading-link"><i class="fas fa-link"></i></a>2.6.2 libnum.modular.invmod(e,m)</h4>
       <p>返回e模m的逆元。</p>
 <figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line">print(libnum.modular.invmod(<span class="number">5</span>,<span class="number">24</span>))</span><br><span class="line"></span><br><span class="line">result: <span class="number">5</span></span><br></pre></td></tr></table></div></figure>
 
-<p><strong>其他查看：</strong><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/hellman/libnum" >https://github.com/hellman/libnum</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><strong>其他查看：</strong><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://github.com/hellman/libnum">https://github.com/hellman/libnum</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 
-        <h2 id="3-Crypto-Util-number-库"   >
+        <h2 id="3-Crypto-Util-number-库">
           <a href="#3-Crypto-Util-number-库" class="heading-link"><i class="fas fa-link"></i></a>3. Crypto.Util.number 库</h2>
       
-        <h3 id="3-1-long-to-bytes"   >
+        <h3 id="3-1-long-to-bytes">
           <a href="#3-1-long-to-bytes" class="heading-link"><i class="fas fa-link"></i></a>3.1 long_to_bytes()</h3>
       <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">long_to_bytes(0x41424344)</span><br><span class="line"></span><br><span class="line"># 整数转字节</span><br></pre></td></tr></table></div></figure>
 
 
-        <h3 id="3-2-bytes-to-long"   >
+        <h3 id="3-2-bytes-to-long">
           <a href="#3-2-bytes-to-long" class="heading-link"><i class="fas fa-link"></i></a>3.2 bytes_to_long()</h3>
       <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bytes_to_long(b&#39;hello&#39;)</span><br><span class="line"></span><br><span class="line"># 字节转整数</span><br></pre></td></tr></table></div></figure>
 
 
-        <h3 id="3-3-GCD"   >
+        <h3 id="3-3-GCD">
           <a href="#3-3-GCD" class="heading-link"><i class="fas fa-link"></i></a>3.3 GCD</h3>
       <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GCD(a,b)</span><br><span class="line"></span><br><span class="line"># a和b最大公约数</span><br></pre></td></tr></table></div></figure>
 
 
-        <h3 id="3-4-inverse"   >
+        <h3 id="3-4-inverse">
           <a href="#3-4-inverse" class="heading-link"><i class="fas fa-link"></i></a>3.4 inverse()</h3>
       <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">inverse(10,5)</span><br><span class="line"></span><br><span class="line"># 求逆元</span><br></pre></td></tr></table></div></figure>
 
 
-        <h3 id="3-5-getRandomRange"   >
+        <h3 id="3-5-getRandomRange">
           <a href="#3-5-getRandomRange" class="heading-link"><i class="fas fa-link"></i></a>3.5 getRandomRange()</h3>
       
-        <h3 id="3-6-isPrime"   >
+        <h3 id="3-6-isPrime">
           <a href="#3-6-isPrime" class="heading-link"><i class="fas fa-link"></i></a>3.6 isPrime()</h3>
       <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">isPrime(1227)</span><br><span class="line"></span><br><span class="line"># 判断是不是素数</span><br></pre></td></tr></table></div></figure>
 
 
-        <h3 id="3-7-size"   >
+        <h3 id="3-7-size">
           <a href="#3-7-size" class="heading-link"><i class="fas fa-link"></i></a>3.7 size()</h3>
       
-        <h3 id="3-8-getStrongPrime"   >
+        <h3 id="3-8-getStrongPrime">
           <a href="#3-8-getStrongPrime" class="heading-link"><i class="fas fa-link"></i></a>3.8 getStrongPrime()</h3>
       <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getStrongPrime(512)</span><br><span class="line"></span><br><span class="line"># 返回强素数</span><br></pre></td></tr></table></div></figure>
 
 
-        <h3 id="3-9-ceil-div"   >
+        <h3 id="3-9-ceil-div">
           <a href="#3-9-ceil-div" class="heading-link"><i class="fas fa-link"></i></a>3.9 ceil_div()</h3>
       
-        <h3 id="3-10-ceil-shift"   >
+        <h3 id="3-10-ceil-shift">
           <a href="#3-10-ceil-shift" class="heading-link"><i class="fas fa-link"></i></a>3.10 ceil_shift()</h3>
       
-        <h3 id="3-11-floor-div"   >
+        <h3 id="3-11-floor-div">
           <a href="#3-11-floor-div" class="heading-link"><i class="fas fa-link"></i></a>3.11 floor_div()</h3>
       
-        <h3 id="3-12-exact-div"   >
+        <h3 id="3-12-exact-div">
           <a href="#3-12-exact-div" class="heading-link"><i class="fas fa-link"></i></a>3.12 exact_div()</h3>
       
-        <h3 id="3-13-exact-log2"   >
+        <h3 id="3-13-exact-log2">
           <a href="#3-13-exact-log2" class="heading-link"><i class="fas fa-link"></i></a>3.13 exact_log2()</h3>
       
-        <h3 id="3-14-getPrime"   >
+        <h3 id="3-14-getPrime">
           <a href="#3-14-getPrime" class="heading-link"><i class="fas fa-link"></i></a>3.14 getPrime()</h3>
       <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getPrime(16)</span><br><span class="line"></span><br><span class="line"># 返回一个最大为 N bit 的随机素数</span><br></pre></td></tr></table></div></figure>
 
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/pcheng/p/9629621.html" >https://www.cnblogs.com/pcheng/p/9629621.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42876636/article/details/87559366" >https://blog.csdn.net/qq_42876636/article/details/87559366</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/685cfeffe703" >https://www.jianshu.com/p/685cfeffe703</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/a745233700/article/details/102341542?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param" >https://blog.csdn.net/a745233700/article/details/102341542?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p>套路：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://err0rzz.github.io/2017/11/14/CTF%E4%B8%ADRSA%E5%A5%97%E8%B7%AF/index.html" >https://err0rzz.github.io/2017/11/14/CTF%E4%B8%ADRSA%E5%A5%97%E8%B7%AF/index.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/84632" >https://www.anquanke.com/post/id/84632</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p>题型总结：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/vhkjhwbs/article/details/101160822" >https://blog.csdn.net/vhkjhwbs/article/details/101160822</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p>欧几里得：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.sohu.com/a/243246344_472906" >https://www.sohu.com/a/243246344_472906</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<p>典型RSA题解：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://beiyuouo.github.io/blog/ctf-buuctf/" >https://beiyuouo.github.io/blog/ctf-buuctf/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.cnblogs.com/pcheng/p/9629621.html">https://www.cnblogs.com/pcheng/p/9629621.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42876636/article/details/87559366">https://blog.csdn.net/qq_42876636/article/details/87559366</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.jianshu.com/p/685cfeffe703">https://www.jianshu.com/p/685cfeffe703</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://blog.csdn.net/a745233700/article/details/102341542?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param">https://blog.csdn.net/a745233700/article/details/102341542?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>套路：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://err0rzz.github.io/2017/11/14/CTF%E4%B8%ADRSA%E5%A5%97%E8%B7%AF/index.html">https://err0rzz.github.io/2017/11/14/CTF%E4%B8%ADRSA%E5%A5%97%E8%B7%AF/index.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/84632">https://www.anquanke.com/post/id/84632</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>题型总结：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://blog.csdn.net/vhkjhwbs/article/details/101160822">https://blog.csdn.net/vhkjhwbs/article/details/101160822</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>欧几里得：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.sohu.com/a/243246344_472906">https://www.sohu.com/a/243246344_472906</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>典型RSA题解：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://beiyuouo.github.io/blog/ctf-buuctf/">https://beiyuouo.github.io/blog/ctf-buuctf/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 </div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://sculptor-liu.github.io">Sculptor</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://sculptor-liu.github.io/2020/08/21/RSA%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">https://sculptor-liu.github.io/2020/08/21/RSA%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/RSA/">RSA</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/ali_pay.png"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/wechat_pay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/08/27/MD5%E7%BB%95%E8%BF%87/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">MD5绕过</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/07/31/%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%80%E6%A6%82%E8%A6%81/"><span class="paginator-prev__text">逆向基础概要</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#RSA%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">
           RSA加密原理详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">
           一、算法介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFRSA"><span class="toc-number">1.2.</span> <span class="toc-text">
@@ -492,7 +492,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></he
           3.11 floor_div()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-12-exact-div"><span class="toc-number">2.3.12.</span> <span class="toc-text">
           3.12 exact_div()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-13-exact-log2"><span class="toc-number">2.3.13.</span> <span class="toc-text">
           3.13 exact_log2()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-14-getPrime"><span class="toc-number">2.3.14.</span> <span class="toc-text">
-          3.14 getPrime()</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">9</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">8</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+          3.14 getPrime()</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">10</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">9</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
   var isXML = true;
   var search_path = 'search.xml';
 
