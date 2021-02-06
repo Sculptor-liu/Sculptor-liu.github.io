@@ -1,0 +1,436 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="16x16"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="32x32"><meta name="description" content="防火墙HA                           0. 前言       HA(High Available)，高可用性集群，是保证业务连续性的有效解决方案，一般有两个或两个以上的节点，且分为活动节点及备用节点。通常把正在执行业务的称为活动节点，而作为活动节点的一个备份的则称为备用节点。当活动节点出现问题，导致正在运行的业务（任务）不能正常运行时，备用节点此时就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="防火墙HA">
+<meta property="og:url" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/index.html">
+<meta property="og:site_name" content="Sculptor&#39;s blog">
+<meta property="og:description" content="防火墙HA                           0. 前言       HA(High Available)，高可用性集群，是保证业务连续性的有效解决方案，一般有两个或两个以上的节点，且分为活动节点及备用节点。通常把正在执行业务的称为活动节点，而作为活动节点的一个备份的则称为备用节点。当活动节点出现问题，导致正在运行的业务（任务）不能正常运行时，备用节点此时就">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.1.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.1.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.2.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.3.1.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.3.1.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.3.2.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.3.2.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.4.1.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.4.1.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.4.2.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.4.2.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.4.3.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.4.3.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.5.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.7.1.png">
+<meta property="article:published_time" content="2021-02-06T15:04:40.000Z">
+<meta property="article:modified_time" content="2021-02-06T15:08:06.122Z">
+<meta property="article:author" content="Sculptor">
+<meta property="article:tag" content="FireWall">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.1.1.png"><title>防火墙HA | Sculptor's blog</title><link ref="canonical" href="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.1.1"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于我</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Sculptor's blog</div><div class="header-banner-info__subtitle">不知名的陌生人</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">防火墙HA</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-02-06</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-02-06</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h1 id="防火墙HA">
+          <a href="#防火墙HA" class="heading-link"><i class="fas fa-link"></i></a>防火墙HA</h1>
+      
+        <h2 id="0-前言">
+          <a href="#0-前言" class="heading-link"><i class="fas fa-link"></i></a>0. 前言</h2>
+      <p>HA(High Available)，高可用性集群，是保证业务连续性的有效解决方案，一般有两个或两个以上的节点，且分为活动节点及备用节点。通常把正在执行业务的称为活动节点，而作为活动节点的一个备份的则称为备用节点。当活动节点出现问题，导致正在运行的业务（任务）不能正常运行时，备用节点此时就会侦测到，并立即接续活动节点来执行业务。从而实现业务的不中断或短暂中断。</p>
+<a id="more"></a>
+
+<p>只有两个节点的高可用集群又称为双机热备，即使用两台服务器互相备份。当一台服务器出现故障时，可由另一台服务器承担服务任务，从而在不需要人工干预的情况下，自动保证系统能持续对外提供服务。双机热备只是高可用集群的一种，高可用集群系统更可以支持两个以上的节点，提供比双机热备更多、更高级的功能， 更能满足用户不断出现的需求变化。</p>
+<p>通过配置两个防火墙实现有两个出口，一个作为主出口，另一个作为备份，若主损坏了，可以走备份出口。</p>
+<p>HA的主要作用：实现两个防火墙互为备份，实现总出口的高可用性。</p>
+<p>高可用性集群配置的三个要点：</p>
+<ul>
+<li>CARP用于IP地址冗余</li>
+<li>XMLRPC用于配置同步</li>
+<li>pfsync用于状态表同步</li>
+</ul>
+<p>通过配置，两个节点充当“主动/被动”集群，一个节点用作主节点，另一个辅助节点用作备份角色，如果主节点出现故障，辅助节点则根据需要接管。</p>
+
+        <h2 id="1-准备">
+          <a href="#1-准备" class="heading-link"><i class="fas fa-link"></i></a>1. 准备</h2>
+      <p>两台pfsense防火墙，一台作为主，另一台作为备份；</p>
+<p>一台win XP作为内网PC;</p>
+<p>一台win server2003作为外网PC。</p>
+
+        <h2 id="2-配置">
+          <a href="#2-配置" class="heading-link"><i class="fas fa-link"></i></a>2. 配置</h2>
+      
+        <h3 id="2-1-两台防火墙接口配置">
+          <a href="#2-1-两台防火墙接口配置" class="heading-link"><i class="fas fa-link"></i></a>2.1 两台防火墙接口配置</h3>
+      <p>主(192.168.64.130)：</p>
+<p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.1.1.png"></p>
+<p>备份(192.168.64.131)：</p>
+<p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.1.2.png"></p>
+
+        <h3 id="2-2-防火墙规则设置">
+          <a href="#2-2-防火墙规则设置" class="heading-link"><i class="fas fa-link"></i></a>2.2 防火墙规则设置</h3>
+      <p>两台主机通信的同步接口HA的防火墙规则如下（只用配置主防火墙）：</p>
+<p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.2.1.png"></p>
+
+        <h3 id="2-3-HA同步配置">
+          <a href="#2-3-HA同步配置" class="heading-link"><i class="fas fa-link"></i></a>2.3 HA同步配置</h3>
+      
+        <h4 id="2-3-1-主pfsense">
+          <a href="#2-3-1-主pfsense" class="heading-link"><i class="fas fa-link"></i></a>2.3.1 主pfsense</h4>
+      <p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.3.1.1.png"></p>
+<p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.3.1.2.png"></p>
+
+        <h4 id="2-3-2-次pfsense">
+          <a href="#2-3-2-次pfsense" class="heading-link"><i class="fas fa-link"></i></a>2.3.2 次pfsense</h4>
+      <p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.3.2.1.png"></p>
+<p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.3.2.2.png"></p>
+
+        <h3 id="2-4-CARP设置">
+          <a href="#2-4-CARP设置" class="heading-link"><i class="fas fa-link"></i></a>2.4 CARP设置</h3>
+      
+        <h4 id="2-4-1-主pfsense">
+          <a href="#2-4-1-主pfsense" class="heading-link"><i class="fas fa-link"></i></a>2.4.1 主pfsense</h4>
+      
+        <h5 id="LAN和WAN接口虚拟IP">
+          <a href="#LAN和WAN接口虚拟IP" class="heading-link"><i class="fas fa-link"></i></a>LAN和WAN接口虚拟IP</h5>
+      <p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.4.1.1.png"></p>
+<p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.4.1.2.png"></p>
+
+        <h4 id="2-4-2-次pfsense">
+          <a href="#2-4-2-次pfsense" class="heading-link"><i class="fas fa-link"></i></a>2.4.2 次pfsense</h4>
+      
+        <h5 id="LAN和WAN接口虚拟IP-1">
+          <a href="#LAN和WAN接口虚拟IP-1" class="heading-link"><i class="fas fa-link"></i></a>LAN和WAN接口虚拟IP</h5>
+      <p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.4.2.1.png"></p>
+<p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.4.2.2.png"></p>
+
+        <h4 id="2-4-3-查看CARP状态">
+          <a href="#2-4-3-查看CARP状态" class="heading-link"><i class="fas fa-link"></i></a>2.4.3 查看CARP状态</h4>
+      <p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.4.3.1.png"></p>
+<p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.4.3.2.png"></p>
+
+        <h3 id="2-5-手动出站NAT配置">
+          <a href="#2-5-手动出站NAT配置" class="heading-link"><i class="fas fa-link"></i></a>2.5 手动出站NAT配置</h3>
+      <p>在外网PCwin2003没有配置默认网关时（模拟真实网络），要想内网访问外网，需要配置NAT出站。</p>
+<p>这里只要主pfsense配置就可以了，因为我们一开始就配置了HA同步，所以次pfsense就不需要配置了（如果在后面实验无法成功，次pfsense可以把NAT配置一下，我是不需要的）</p>
+<p>共享的CARP虚拟IP地址作为转发地址（映射地址）</p>
+<p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.5.1.png"></p>
+
+        <h3 id="2-6-两台PC-IP配置">
+          <a href="#2-6-两台PC-IP配置" class="heading-link"><i class="fas fa-link"></i></a>2.6 两台PC IP配置</h3>
+      <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">win XP(内网PC)：</span><br><span class="line">IP地址：192.168.64.135</span><br><span class="line">子网掩码：255.255.255.0</span><br><span class="line">默认网关：192.168.64.200（这个就是我们共享的CARP的lan接口的虚拟IP）</span><br></pre></td></tr></table></div></figure>
+
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">win server2003（外网）：</span><br><span class="line">IP地址：100.1.1.2</span><br><span class="line">子网掩码：255.255.255.0</span><br><span class="line">默认网关不用配置，模拟真实网络</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="2-7-验证结果">
+          <a href="#2-7-验证结果" class="heading-link"><i class="fas fa-link"></i></a>2.7 验证结果</h3>
+      <p>主次pfsense都开启，但是默认情况下在主pfsense没有出现故障时，数据只从主pfsense的接口走，当主pfsense出现故障时，才从次pfsense走。</p>
+<p>内网PC winXP ping通外网PC win server2003，中途把主pfsense关闭；</p>
+<p>实验结果如下：</p>
+<p><img src="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/2.7.1.png"></p>
+
+        <h3 id="2-8-参考">
+          <a href="#2-8-参考" class="heading-link"><i class="fas fa-link"></i></a>2.8 参考</h3>
+      <p>访问：</p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://blog.51cto.com/fxn2025/1966556">https://blog.51cto.com/fxn2025/1966556</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://blog.51cto.com/fxn2025/1952978">https://blog.51cto.com/fxn2025/1952978</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://sculptor-liu.github.io">Sculptor</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/">https://sculptor-liu.github.io/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99HA/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/FireWall/">FireWall</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/ali_pay.png"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/wechat_pay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/02/06/%E9%98%B2%E7%81%AB%E5%A2%99OPNsense%E5%AE%89%E8%A3%85/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">防火墙OPNsense安装</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/02/06/PKI/"><span class="paginator-prev__text">PKI技术</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99HA"><span class="toc-number">1.</span> <span class="toc-text">
+          防火墙HA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">
+          0. 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%87%86%E5%A4%87"><span class="toc-number">1.2.</span> <span class="toc-text">
+          1. 准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">
+          2. 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%B8%A4%E5%8F%B0%E9%98%B2%E7%81%AB%E5%A2%99%E6%8E%A5%E5%8F%A3%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">
+          2.1 两台防火墙接口配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%98%B2%E7%81%AB%E5%A2%99%E8%A7%84%E5%88%99%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.2.</span> <span class="toc-text">
+          2.2 防火墙规则设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-HA%E5%90%8C%E6%AD%A5%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.3.</span> <span class="toc-text">
+          2.3 HA同步配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-%E4%B8%BBpfsense"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">
+          2.3.1 主pfsense</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-%E6%AC%A1pfsense"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">
+          2.3.2 次pfsense</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-CARP%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.4.</span> <span class="toc-text">
+          2.4 CARP设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-1-%E4%B8%BBpfsense"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">
+          2.4.1 主pfsense</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#LAN%E5%92%8CWAN%E6%8E%A5%E5%8F%A3%E8%99%9A%E6%8B%9FIP"><span class="toc-number">1.3.4.1.1.</span> <span class="toc-text">
+          LAN和WAN接口虚拟IP</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-2-%E6%AC%A1pfsense"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">
+          2.4.2 次pfsense</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#LAN%E5%92%8CWAN%E6%8E%A5%E5%8F%A3%E8%99%9A%E6%8B%9FIP-1"><span class="toc-number">1.3.4.2.1.</span> <span class="toc-text">
+          LAN和WAN接口虚拟IP</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-3-%E6%9F%A5%E7%9C%8BCARP%E7%8A%B6%E6%80%81"><span class="toc-number">1.3.4.3.</span> <span class="toc-text">
+          2.4.3 查看CARP状态</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E6%89%8B%E5%8A%A8%E5%87%BA%E7%AB%99NAT%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.5.</span> <span class="toc-text">
+          2.5 手动出站NAT配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E4%B8%A4%E5%8F%B0PC-IP%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.6.</span> <span class="toc-text">
+          2.6 两台PC IP配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-%E9%AA%8C%E8%AF%81%E7%BB%93%E6%9E%9C"><span class="toc-number">1.3.7.</span> <span class="toc-text">
+          2.7 验证结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8-%E5%8F%82%E8%80%83"><span class="toc-number">1.3.8.</span> <span class="toc-text">
+          2.8 参考</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">31</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">18</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-md5@latest/src/md5.min.js"></script><script>function loadGitalk () {
+  if (!document.getElementById('gitalk-container')) {
+    return;
+  }
+
+  var gitalk = new Gitalk({
+    id: md5(window.location.pathname.slice(1)),
+    clientID: '28f6b94423100cc8a01d',
+    clientSecret: '812ec412a6abb31e41feedc3fa3ba97eefa1a882',
+    repo: 'Sculptor-liu.github.io',
+    owner: 'Sculptor-liu',
+    admin: ['Sculptor-liu'],
+    distractionFreeMode: 'false',
+    language: 'zh-CN'
+  });
+  gitalk.render('gitalk-container');
+}
+
+if (false) {
+  loadGitalk();
+} else {
+  window.addEventListener('DOMContentLoaded', loadGitalk, false);
+}</script><script src="/js/utils.js?v=2.1.1"></script><script src="/js/stun-boot.js?v=2.1.1"></script><script src="/js/scroll.js?v=2.1.1"></script><script src="/js/header.js?v=2.1.1"></script><script src="/js/sidebar.js?v=2.1.1"></script><script type="application/json" src="/search.xml"></script></body></html>

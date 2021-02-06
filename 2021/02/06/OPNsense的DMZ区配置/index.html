@@ -1,0 +1,490 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="16x16"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="32x32"><meta name="description" content="在防火墙OPNsense中创建DMZ区并写策略                           0. 前言                           0.1 介绍       DMZ是非军事区的缩写，是一种网络（物理或逻辑），用于连接主机，这些主机提供与不受信任的外部网络（通常是Internet）的接口，同时保持内部，专用网络（通常是公司网络）分离和隔离形成外部">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OPNsense的DMZ区配置">
+<meta property="og:url" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="Sculptor&#39;s blog">
+<meta property="og:description" content="在防火墙OPNsense中创建DMZ区并写策略                           0. 前言                           0.1 介绍       DMZ是非军事区的缩写，是一种网络（物理或逻辑），用于连接主机，这些主机提供与不受信任的外部网络（通常是Internet）的接口，同时保持内部，专用网络（通常是公司网络）分离和隔离形成外部">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/1.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.0.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.1.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.1.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.2.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.2.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.3.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.3.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.4.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.4.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.1.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.1.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.1.3.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.1.4.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.1.5.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.1.6.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.1.7.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.2.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.2.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.2.3.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/3.1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/3.2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/3.3.png">
+<meta property="article:published_time" content="2021-02-06T14:55:42.000Z">
+<meta property="article:modified_time" content="2021-02-06T14:59:53.581Z">
+<meta property="article:author" content="Sculptor">
+<meta property="article:tag" content="FireWall">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/1.1.png"><title>OPNsense的DMZ区配置 | Sculptor's blog</title><link ref="canonical" href="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.1.1"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于我</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Sculptor's blog</div><div class="header-banner-info__subtitle">不知名的陌生人</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">OPNsense的DMZ区配置</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-02-06</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-02-06</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h1 id="在防火墙OPNsense中创建DMZ区并写策略">
+          <a href="#在防火墙OPNsense中创建DMZ区并写策略" class="heading-link"><i class="fas fa-link"></i></a>在防火墙OPNsense中创建DMZ区并写策略</h1>
+      
+        <h2 id="0-前言">
+          <a href="#0-前言" class="heading-link"><i class="fas fa-link"></i></a>0. 前言</h2>
+      
+        <h3 id="0-1-介绍">
+          <a href="#0-1-介绍" class="heading-link"><i class="fas fa-link"></i></a>0.1 介绍</h3>
+      <p>DMZ是非军事区的缩写，是一种网络（物理或逻辑），用于连接主机，这些主机提供与不受信任的外部网络（通常是Internet）的接口，同时保持内部，专用网络（通常是公司网络）分离和隔离形成外部网络。</p>
+<a id="more"></a>
+
+<p>由于最容易受到攻击的系统是为局域网之外的用户提供服务的系统，例如电子邮件，Web和域名系统（DNS）服务器，因此它们在DMZ内部被“隔离”，从那里对专用网络的访问受到限制。DMZ中的主机可以与内部和外部网络进行通信，但是与内部网络主机的通信受到严格限制。</p>
+<p>使用安全网关（即防火墙）隔离DMZ，以过滤DMZ和专用网络之间的流量。DMZ本身前面还有一个安全网关，用于过滤来自外部网络的传入流量。</p>
+<p>DMZ的最终目标是允许从不受信任的网络访问资源，同时保持私有网络的安全。DMZ中通常放置的资源包括Web服务器，邮件服务器，FTP服务器和VoIP服务器。</p>
+
+        <h3 id="0-2-DMZ的好处">
+          <a href="#0-2-DMZ的好处" class="heading-link"><i class="fas fa-link"></i></a>0.2 DMZ的好处</h3>
+      <p>DMZ是不安全的网络，它允许从不受信任的外部网络访问其上的主机/系统，同时使专用网络上的其他主机/系统与外部网络隔离并保护其安全。</p>
+<p>DMZ的目的是允许从外部不受信任的网络（即Internet）访问某些主机/系统，同时将网络的其余部分（专用网络）保护在防火墙之后。</p>
+<p>通过配置一定的规则策略可以把DMZ区域当作中转站，很大程度上降低了安全问题。</p>
+
+        <h3 id="0-3-其他">
+          <a href="#0-3-其他" class="heading-link"><i class="fas fa-link"></i></a>0.3 其他</h3>
+      <p>对于当下比较流行的思科防火墙或者是天融信防火墙来说，它们都有自带的DMZ区域；而作为开源防火墙的opnsense没有自带的DMZ区域，所以不少人在第一次使用这个开源的防火墙会遇到不少困难，DMZ无法轻松地配置，所以我写这篇文章来记录，防止其他人入坑，避免不必要的绕弯子。</p>
+
+        <h2 id="1-实验要求">
+          <a href="#1-实验要求" class="heading-link"><i class="fas fa-link"></i></a>1. 实验要求</h2>
+      
+        <h3 id="1-0-建立三个不同网络">
+          <a href="#1-0-建立三个不同网络" class="heading-link"><i class="fas fa-link"></i></a>1.0 建立三个不同网络</h3>
+      <p>不同网络作为不同区域</p>
+<p>内网区域：192.168.64.0/24</p>
+<p>外网区域：100.1.1.0/24</p>
+<p>停火区域：172.16.1.0/24</p>
+
+        <h3 id="1-1-网络拓扑图">
+          <a href="#1-1-网络拓扑图" class="heading-link"><i class="fas fa-link"></i></a>1.1 网络拓扑图</h3>
+      <p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/1.1.png"></p>
+
+        <h3 id="1-2-实验所需设备">
+          <a href="#1-2-实验所需设备" class="heading-link"><i class="fas fa-link"></i></a>1.2 实验所需设备</h3>
+      <p>一台win XP作为内网PC；一台win server 2003作为外网服务器；一台win server 2008作为停火区服务器；这三台机器在虚拟机VMware上进行操作。</p>
+
+        <h3 id="1-3-要求实现的结果">
+          <a href="#1-3-要求实现的结果" class="heading-link"><i class="fas fa-link"></i></a>1.3 要求实现的结果</h3>
+      <p>内网区域任何主机可以访问外网，同时可以访问dmz区域；</p>
+<p>dmz区域主机可以访问外网，但不可以访问内网；</p>
+<p>外网不可以访问内网，同时外网也不可以访问dmz区域。</p>
+
+        <h2 id="2-实验过程">
+          <a href="#2-实验过程" class="heading-link"><i class="fas fa-link"></i></a>2. 实验过程</h2>
+      
+        <h3 id="2-0-opnsense网络适配器配置">
+          <a href="#2-0-opnsense网络适配器配置" class="heading-link"><i class="fas fa-link"></i></a>2.0 opnsense网络适配器配置</h3>
+      <p>由于防火墙需要连接三方，所以我们需要三个接口，在虚拟机中就需要配置三个网络适配器，一个作为lan(内网)，一个作为wan(外网)，一个作为dmz(停火区)；同时，需要把三个网络适配器分配在不同的虚拟网络中。</p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.0.png"></p>
+
+        <h3 id="2-1-三台机器网络适配器配置">
+          <a href="#2-1-三台机器网络适配器配置" class="heading-link"><i class="fas fa-link"></i></a>2.1 三台机器网络适配器配置</h3>
+      <p>另外三台机器需要分别和opnsense的三个网络适配器配在同一个虚拟网络中；</p>
+<p>win XP 放在VM1中；win server2003放在VM0中；win server2008放在VM2中。</p>
+
+        <h3 id="2-1-DMZ接口创建">
+          <a href="#2-1-DMZ接口创建" class="heading-link"><i class="fas fa-link"></i></a>2.1 DMZ接口创建</h3>
+      <p>访问opnsense的web网页端，在左侧找到“接口”–&gt;”分配“–&gt;添加</p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.1.1.png"></p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.1.2.png"></p>
+
+        <h3 id="2-2-接口配置">
+          <a href="#2-2-接口配置" class="heading-link"><i class="fas fa-link"></i></a>2.2 接口配置</h3>
+      
+        <h4 id="2-2-1-lan接口配置">
+          <a href="#2-2-1-lan接口配置" class="heading-link"><i class="fas fa-link"></i></a>2.2.1 lan接口配置</h4>
+      <p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.2.1.png"></p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.2.2.png"></p>
+<p>“保存”后右上角“应用更改”（切莫忘记）</p>
+
+        <h4 id="2-2-2-wan接口配置">
+          <a href="#2-2-2-wan接口配置" class="heading-link"><i class="fas fa-link"></i></a>2.2.2 wan接口配置</h4>
+      <p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.3.1.png"></p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.3.2.png"></p>
+<p>“保存”后右上角“应用更改”（切莫忘记）</p>
+
+        <h4 id="2-2-3-dmz接口配置">
+          <a href="#2-2-3-dmz接口配置" class="heading-link"><i class="fas fa-link"></i></a>2.2.3 dmz接口配置</h4>
+      <p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.4.1.png"></p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.4.2.png"></p>
+<p>“保存”后右上角“应用更改”（切莫忘记）</p>
+
+        <h3 id="2-5-三台机器IP以及默认网关配置">
+          <a href="#2-5-三台机器IP以及默认网关配置" class="heading-link"><i class="fas fa-link"></i></a>2.5 三台机器IP以及默认网关配置</h3>
+      <p>默认网关配置对应的同一虚拟网络防火墙接口IP</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">winXP(inside):</span><br><span class="line">ip地址：192.168.64.135</span><br><span class="line">子网掩码：255.255.255.0</span><br><span class="line">默认网关：192.168.64.131</span><br></pre></td></tr></table></div></figure>
+
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">win2003(outside):</span><br><span class="line">ip地址：100.1.1.2</span><br><span class="line">子网掩码：255.255.255.0</span><br><span class="line">默认网关：100.1.1.1</span><br></pre></td></tr></table></div></figure>
+
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">win2008(DMZ):</span><br><span class="line">ip地址：172.16.1.1</span><br><span class="line">子网掩码：255.255.255.0</span><br><span class="line">默认网关：172.16.1.254</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="2-6-防火墙规则配置">
+          <a href="#2-6-防火墙规则配置" class="heading-link"><i class="fas fa-link"></i></a>2.6 防火墙规则配置</h3>
+      
+        <h4 id="2-6-1-inside规则配置">
+          <a href="#2-6-1-inside规则配置" class="heading-link"><i class="fas fa-link"></i></a>2.6.1 inside规则配置</h4>
+      <p>inside可以访问dmz区域，同时可以访问outside区域。</p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.1.1.png"></p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.1.2.png"></p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.1.3.png"></p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.1.4.png"></p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.1.5.png"></p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.1.6.png"></p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.1.7.png"></p>
+
+        <h4 id="2-6-2-dmz规则配置">
+          <a href="#2-6-2-dmz规则配置" class="heading-link"><i class="fas fa-link"></i></a>2.6.2 dmz规则配置</h4>
+      <p>dmz可以访问outside区域，但是不可以访问inside区域。</p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.2.1.png"></p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.2.2.png"></p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/2.6.2.3.png"></p>
+
+        <h4 id="2-6-3-outside规则配置">
+          <a href="#2-6-3-outside规则配置" class="heading-link"><i class="fas fa-link"></i></a>2.6.3 outside规则配置</h4>
+      <p>outside区域不做配置，默认阻拦一切对外Internet访问。</p>
+
+        <h2 id="3-实验结果">
+          <a href="#3-实验结果" class="heading-link"><i class="fas fa-link"></i></a>3. 实验结果</h2>
+      
+        <h3 id="3-1-对于win-XP">
+          <a href="#3-1-对于win-XP" class="heading-link"><i class="fas fa-link"></i></a>3.1 对于win XP</h3>
+      <p>win xp 可以访问 win server2008和win server2003。</p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/3.1.png"></p>
+
+        <h3 id="3-2-对于win-server2008">
+          <a href="#3-2-对于win-server2008" class="heading-link"><i class="fas fa-link"></i></a>3.2 对于win server2008</h3>
+      <p>win server2008可以访问win server2003,但是不能访问win XP。</p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/3.2.png"></p>
+
+        <h3 id="3-3-对于win-server2003">
+          <a href="#3-3-对于win-server2003" class="heading-link"><i class="fas fa-link"></i></a>3.3 对于win server2003</h3>
+      <p>win server2003无法访问win XP和win server2008。</p>
+<p><img src="/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/3.3.png"></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://sculptor-liu.github.io">Sculptor</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/">https://sculptor-liu.github.io/2021/02/06/OPNsense%E7%9A%84DMZ%E5%8C%BA%E9%85%8D%E7%BD%AE/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/FireWall/">FireWall</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/ali_pay.png"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/wechat_pay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/02/06/PKI/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">PKI技术</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/12/22/SQL%E6%B3%A8%E5%85%A5%E4%B9%8B%E7%9B%B2%E6%B3%A8/"><span class="paginator-prev__text">'SQL注入之盲注'</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8%E9%98%B2%E7%81%AB%E5%A2%99OPNsense%E4%B8%AD%E5%88%9B%E5%BB%BADMZ%E5%8C%BA%E5%B9%B6%E5%86%99%E7%AD%96%E7%95%A5"><span class="toc-number">1.</span> <span class="toc-text">
+          在防火墙OPNsense中创建DMZ区并写策略</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">
+          0. 前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-1-%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.1.</span> <span class="toc-text">
+          0.1 介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0-2-DMZ%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-number">1.1.2.</span> <span class="toc-text">
+          0.2 DMZ的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0-3-%E5%85%B6%E4%BB%96"><span class="toc-number">1.1.3.</span> <span class="toc-text">
+          0.3 其他</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82"><span class="toc-number">1.2.</span> <span class="toc-text">
+          1. 实验要求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-0-%E5%BB%BA%E7%AB%8B%E4%B8%89%E4%B8%AA%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C"><span class="toc-number">1.2.1.</span> <span class="toc-text">
+          1.0 建立三个不同网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91%E5%9B%BE"><span class="toc-number">1.2.2.</span> <span class="toc-text">
+          1.1 网络拓扑图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%AE%9E%E9%AA%8C%E6%89%80%E9%9C%80%E8%AE%BE%E5%A4%87"><span class="toc-number">1.2.3.</span> <span class="toc-text">
+          1.2 实验所需设备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E8%A6%81%E6%B1%82%E5%AE%9E%E7%8E%B0%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="toc-number">1.2.4.</span> <span class="toc-text">
+          1.3 要求实现的结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">
+          2. 实验过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-0-opnsense%E7%BD%91%E7%BB%9C%E9%80%82%E9%85%8D%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">
+          2.0 opnsense网络适配器配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%B8%89%E5%8F%B0%E6%9C%BA%E5%99%A8%E7%BD%91%E7%BB%9C%E9%80%82%E9%85%8D%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.2.</span> <span class="toc-text">
+          2.1 三台机器网络适配器配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-DMZ%E6%8E%A5%E5%8F%A3%E5%88%9B%E5%BB%BA"><span class="toc-number">1.3.3.</span> <span class="toc-text">
+          2.1 DMZ接口创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%8E%A5%E5%8F%A3%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.4.</span> <span class="toc-text">
+          2.2 接口配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-lan%E6%8E%A5%E5%8F%A3%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">
+          2.2.1 lan接口配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-wan%E6%8E%A5%E5%8F%A3%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">
+          2.2.2 wan接口配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3-dmz%E6%8E%A5%E5%8F%A3%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.4.3.</span> <span class="toc-text">
+          2.2.3 dmz接口配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E4%B8%89%E5%8F%B0%E6%9C%BA%E5%99%A8IP%E4%BB%A5%E5%8F%8A%E9%BB%98%E8%AE%A4%E7%BD%91%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.5.</span> <span class="toc-text">
+          2.5 三台机器IP以及默认网关配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E9%98%B2%E7%81%AB%E5%A2%99%E8%A7%84%E5%88%99%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.6.</span> <span class="toc-text">
+          2.6 防火墙规则配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6-1-inside%E8%A7%84%E5%88%99%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.6.1.</span> <span class="toc-text">
+          2.6.1 inside规则配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6-2-dmz%E8%A7%84%E5%88%99%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.6.2.</span> <span class="toc-text">
+          2.6.2 dmz规则配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6-3-outside%E8%A7%84%E5%88%99%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.6.3.</span> <span class="toc-text">
+          2.6.3 outside规则配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">1.4.</span> <span class="toc-text">
+          3. 实验结果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%AF%B9%E4%BA%8Ewin-XP"><span class="toc-number">1.4.1.</span> <span class="toc-text">
+          3.1 对于win XP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%AF%B9%E4%BA%8Ewin-server2008"><span class="toc-number">1.4.2.</span> <span class="toc-text">
+          3.2 对于win server2008</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%AF%B9%E4%BA%8Ewin-server2003"><span class="toc-number">1.4.3.</span> <span class="toc-text">
+          3.3 对于win server2003</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">31</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">18</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-md5@latest/src/md5.min.js"></script><script>function loadGitalk () {
+  if (!document.getElementById('gitalk-container')) {
+    return;
+  }
+
+  var gitalk = new Gitalk({
+    id: md5(window.location.pathname.slice(1)),
+    clientID: '28f6b94423100cc8a01d',
+    clientSecret: '812ec412a6abb31e41feedc3fa3ba97eefa1a882',
+    repo: 'Sculptor-liu.github.io',
+    owner: 'Sculptor-liu',
+    admin: ['Sculptor-liu'],
+    distractionFreeMode: 'false',
+    language: 'zh-CN'
+  });
+  gitalk.render('gitalk-container');
+}
+
+if (false) {
+  loadGitalk();
+} else {
+  window.addEventListener('DOMContentLoaded', loadGitalk, false);
+}</script><script src="/js/utils.js?v=2.1.1"></script><script src="/js/stun-boot.js?v=2.1.1"></script><script src="/js/scroll.js?v=2.1.1"></script><script src="/js/header.js?v=2.1.1"></script><script src="/js/sidebar.js?v=2.1.1"></script><script type="application/json" src="/search.xml"></script></body></html>
