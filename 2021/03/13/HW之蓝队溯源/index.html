@@ -1,0 +1,425 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="16x16"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="32x32"><meta name="description" content="HW之蓝队溯源                           1. 前言       HW中蓝队得分，需要完整的还原攻击链条，溯源到攻击者的虚拟身份，真实身份，溯源到攻击队员，甚至反控攻击方主机，并根据程度阶梯给分。 溯源报告需要提交以下要素：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HW之蓝队溯源">
+<meta property="og:url" content="https://sculptor-liu.github.io/2021/03/13/HW%E4%B9%8B%E8%93%9D%E9%98%9F%E6%BA%AF%E6%BA%90/index.html">
+<meta property="og:site_name" content="Sculptor&#39;s blog">
+<meta property="og:description" content="HW之蓝队溯源                           1. 前言       HW中蓝队得分，需要完整的还原攻击链条，溯源到攻击者的虚拟身份，真实身份，溯源到攻击队员，甚至反控攻击方主机，并根据程度阶梯给分。 溯源报告需要提交以下要素：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/03/13/HW%E4%B9%8B%E8%93%9D%E9%98%9F%E6%BA%AF%E6%BA%90/1.jpg">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/03/13/HW%E4%B9%8B%E8%93%9D%E9%98%9F%E6%BA%AF%E6%BA%90/2.jpg">
+<meta property="article:published_time" content="2021-03-13T15:24:50.000Z">
+<meta property="article:modified_time" content="2021-03-13T15:26:33.168Z">
+<meta property="article:author" content="Sculptor">
+<meta property="article:tag" content="HW蓝队">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sculptor-liu.github.io/2021/03/13/HW%E4%B9%8B%E8%93%9D%E9%98%9F%E6%BA%AF%E6%BA%90/1.jpg"><title>HW之蓝队溯源 | Sculptor's blog</title><link ref="canonical" href="https://sculptor-liu.github.io/2021/03/13/HW%E4%B9%8B%E8%93%9D%E9%98%9F%E6%BA%AF%E6%BA%90/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.1.1"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于我</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Sculptor's blog</div><div class="header-banner-info__subtitle">不知名的陌生人</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">HW之蓝队溯源</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-03-13</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-03-13</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h2 id="HW之蓝队溯源">
+          <a href="#HW之蓝队溯源" class="heading-link"><i class="fas fa-link"></i></a>HW之蓝队溯源</h2>
+      
+        <h2 id="1-前言">
+          <a href="#1-前言" class="heading-link"><i class="fas fa-link"></i></a>1. 前言</h2>
+      <p>HW中蓝队得分，需要完整的还原攻击链条，溯源到攻击者的虚拟身份，真实身份，溯源到攻击队员，甚至反控攻击方主机，并根据程度阶梯给分。</p>
+<p>溯源报告需要提交以下要素：</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">姓名&#x2F;ID：</span><br><span class="line">攻击IP：</span><br><span class="line">地理位置：</span><br><span class="line">QQ：</span><br><span class="line">IP地址所属公司：</span><br><span class="line">IP地址关联域名</span><br><span class="line">邮箱：</span><br><span class="line">手机号：</span><br><span class="line">微信&#x2F;微博&#x2F;src&#x2F;id证明：</span><br><span class="line">人物照片：</span><br><span class="line">跳板机（可选）：</span><br><span class="line">关联攻击事件：</span><br></pre></td></tr></table></div></figure>
+
+<ol>
+<li>通过梳理，攻击溯源的技术手段，主要包括IP定位，ID定位与攻击者定位。</li>
+<li>通过IP可定位攻击者所在位置，以及通过IP反查域名等手段，查询域名的注册信息，域名注册人及邮箱等信息。</li>
+<li>通过ID定位可获得攻击者常用的网络ID，查询攻击者使用同类ID注册过的微博或者博客，论坛等网站，通过对网络ID注册以及使用情况的查询，定位攻击者所在公司，手机号，邮箱，QQ等信息。</li>
+<li>或通过其他手段定位攻击者，如反制攻击者vps，获取攻击者vps中的敏感信息，反钓鱼，恶意程序分析溯源等手段。</li>
+<li>通过对手机号码定位，一是通过添加某信好友查看头像，昵称，城市等；而是通过添加某宝，可以查看其部分实名信息，头像，城市，动态等；三是可以假装送外卖，送快递的，询问是不是某人，某地址等，进一步核实信息。</li>
+<li>通过对邮箱定位，意识通添加某宝，查看其部分实名信息，头像，城市，动态等（可以未通过邮箱主持）；二是发送钓鱼邮件，控制邮箱或者掌握IP地址。</li>
+<li>过程中若掌握攻击者的照片，可以通过百度，Google等以图搜图的方式关联攻击者其他图片信息。</li>
+</ol>
+
+        <h2 id="2-IP定位技术">
+          <a href="#2-IP定位技术" class="heading-link"><i class="fas fa-link"></i></a>2. IP定位技术</h2>
+      <p>通过安全设备或者其他技术手段抓取攻击者的IP，对IP进行定位，查询此IP为IDC的IP，CDN的IP还是普通运营商的出口IP，通过IP反查可能会查询到攻击者使用的web域名，注册人，邮箱等信息。一般常用的IP查询工具及开源情报，开发端口分析工具如下：</p>
+
+        <h3 id="2-1-IP-定位工具">
+          <a href="#2-1-IP-定位工具" class="heading-link"><i class="fas fa-link"></i></a>2.1 IP 定位工具</h3>
+      <ol>
+<li>高精度IP定位：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.opengps.cn/Data/IP/LocHighAcc.aspx">https://www.opengps.cn/Data/IP/LocHighAcc.aspx</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>rtbasia（IP 查询）：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://ip.rtbasia.com/">https://ip.rtbasia.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>ipplus360（IP查询）：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.ipplus360.com/ip/">http://www.ipplus360.com/ip/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>IP信息查询：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.ipip.net/ip.html/">https://www.ipip.net/ip.html/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>IP地址查询在线工具：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://tool.lu/ip/">https://tool.lu/ip/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ol>
+
+        <h3 id="2-2-威胁情报工具">
+          <a href="#2-2-威胁情报工具" class="heading-link"><i class="fas fa-link"></i></a>2.2 威胁情报工具</h3>
+      <ol>
+<li>微步在线：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://x.threatbook.cn/">https://x.threatbook.cn/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>奇安信：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://ti.qianxin.com/">https://ti.qianxin.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>360：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://ti.360.cn/">https://ti.360.cn/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.venuseye.com.cn/">https://www.venuseye.com.cn/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://community.riskiq.com/">https://community.riskiq.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.zoomeye.org/">https://www.zoomeye.org/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.shodan.io/">https://www.shodan.io/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ol>
+<p>当发现某些IP的攻击后，可以尝试通过此IP去溯源攻击者，具体实现过程如下：</p>
+<ul>
+<li>首先通过ipip.net 网站或者其他接口，查询此IP为 IDC 的 IP ，CDN 的IP 还是 普通运营商的出口 IP。</li>
+<li>如果 IP反查到域名就可以去<strong>站长之家</strong>或者 <strong>whois.domaintools.com</strong> 等网站去查询域名的注册信息。</li>
+</ul>
+<p>通过收集到的这些信息，就比较容易定位到人。</p>
+<p>在通过IP定位技术溯源过程中，应注意以下情况：</p>
+<ul>
+<li>假如 IP 反查的域名过多，考虑的就是 CDN，就没有必要继续去查了。</li>
+<li>如果是普通运营商的出口IP就只能使用一些高精度IP定位工具粗略估计攻击者的地址，如果需要具体定位到人，则需要更多的信息。</li>
+</ul>
+
+        <h2 id="3-ID追踪技术">
+          <a href="#3-ID追踪技术" class="heading-link"><i class="fas fa-link"></i></a>3. ID追踪技术</h2>
+      <p>在通过IP定位后技术追踪攻击者，可通过指纹库，社工库等或其他技术手段抓取到攻击者的微博账号，百度ID等信息，一般通过以下技术手段实现：</p>
+<ol>
+<li>进行QQ同名方式去搜索，进行论坛等同名方式搜索，社工库匹配。</li>
+<li>如果 ID 是邮箱，则通过社工库匹配密码，以往注册信息等。</li>
+<li>如果 ID 是手机号，则通过手机号搜索相关注册信息，以及手机号使用者姓名。</li>
+</ol>
+<p>例如，当通过 ID 追踪技术手段定位到某攻击者的QQ 号，QQ 网名等信息，通过专业社工库可以进一步追踪攻击者使用的 QQ 号注册过的其他网络 ID ，从而获得更多攻击者信息，从而确丁攻击者的身份。</p>
+
+        <h2 id="4-攻击程序分析">
+          <a href="#4-攻击程序分析" class="heading-link"><i class="fas fa-link"></i></a>4. 攻击程序分析</h2>
+      <p>攻击者如果在攻击过程中对攻击目标上传攻击程序（如钓鱼软件），可通过对攻击者上传的而已程序进行分析，并结合 IP 定位，ID 追踪等技术手段对攻击进行分析溯源，常用的而已程序分析网站有：</p>
+<ol>
+<li>微步在线云沙箱：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://s.threatbook.cn/">https://s.threatbook.cn/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>Virustotal：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.virustotal.com/gui/home/upload">https://www.virustotal.com/gui/home/upload</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>火眼：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://fireeye.ijinshan.com/">https://fireeye.ijinshan.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>Anubis：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://anubis.iseclab.org/">http://anubis.iseclab.org</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>joe：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://www.joesecurity.org/">http://www.joesecurity.org</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ol>
+
+        <h2 id="5-蜜罐">
+          <a href="#5-蜜罐" class="heading-link"><i class="fas fa-link"></i></a>5. 蜜罐</h2>
+      <p>蜜罐技术为网络安全中的一种入侵诱饵，目的是引诱黑客前来攻击，并收集黑客相关的证据和信息。</p>
+<p>蜜罐溯源实战参考：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/246060.html">https://www.freebuf.com/articles/web/246060.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h3 id="5-1-介绍">
+          <a href="#5-1-介绍" class="heading-link"><i class="fas fa-link"></i></a>5.1 介绍</h3>
+      <p><strong>从被动防御到主动防御</strong></p>
+<p>一直以来，被动防御是通过面向已知特征的威胁，基于特征库精确匹配来发现可疑行为，将目标程序与特征库进行逐一比对，实现对异常行为进行监控和阻断，这些特征库是建立在已经发生的基础之上，这就很好的解释了为什么被动防御是一种“事后”行为。典型的行为有防火墙，入侵检测等。但是对于未知的攻击如 0day ，依赖于特征库匹配的防御是有效应对的，为了应对这种攻防不对等的格局，主动防御出现了，典型的技术有网络空间拟态防御。</p>
+<p><strong>引入主动防御策略</strong></p>
+<p>随着攻击技术的进一步提高，越来越多的方法可以绕过传统的被动防御技术对目标系统发起攻击，传统的被动防御技术也引进了主动防御策略，如各大厂推出的智能防火墙，思科的下一代防火墙，山石网科的智能防火墙，将人工智能技术引入防火墙来主动发现恶意行为。除此之外，也有新型的主动防御技术如沙箱，蜜罐等相继出现，进一步弥补了攻防不对称的局面。这类技术主要解决“已知的未知威胁”，例如，蜜罐通过构建伪装的业务主动引诱攻击者，从而迷惑攻击者，通过捕获IP进行封堵来提高攻击者的时间成本，也可对攻击者进行溯源，但是蜜罐技术还是无法应对 0day漏洞。</p>
+<p><strong>沙箱技术</strong></p>
+<p>沙箱技术源于软件错误隔离技术。SFI主要思想是隔离。沙箱通过采用虚拟化等技术构造一个隔离的运行环境，并且为其中运行的程序提供基本的计算资源抽象，通过对目标程序进行检测分析，准确发现程序中的恶意代码等，进而达到保护宿主机的目的。如默安的架构采用 kvm，长亭采用的是 docker。</p>
+<p>由于沙箱具有隔离性，恶意程序不会影响到沙箱隔离外的系统，而且沙箱还具有检测分析的功能，来分析程序是否为恶意程序。但是还存在隐患，沙箱只能监控常见的操作系统应用接口程序，使一些恶意代码能够轻松绕过从而攻击宿主外的环境。</p>
+<p>基于虚拟机的沙箱为不可信资源提供了虚拟化的运行环境，保证原功能的同时提供了相应的安全防护，对宿主机不会造成影响。基于虚拟机的沙箱采用虚拟化和恶意行为检测两种技术，恶意行为检测技术采用了特征码检测法和行为检测法来进行检测，特征码检测对检测 0day 漏洞无能为了，行为检测可以检测出 0day ，但误报率高。</p>
+<p><img src="/2021/03/13/HW%E4%B9%8B%E8%93%9D%E9%98%9F%E6%BA%AF%E6%BA%90/1.jpg"></p>
+<p><strong>蜜罐技术</strong></p>
+<p>蜜罐技术起源20世纪90年代，它通过部署一套模拟真实的网络系统来引诱攻击者攻击，进而在预设的环境中对入侵行为进行检测，分析，还原攻击者的攻击途径，方法，过程等，并将获取的信息用于保护真实的系统。广泛应用于恶意代码检测与样本捕获，入侵检测与攻击特征提取，网络攻击取证，僵尸网络追踪等。</p>
+<p>蜜罐之所以称为蜜罐，是因为设计之初是为了攻击者量身定做的包含大量漏洞的系统，是用于捕获攻击者的一个陷阱，本质上是一种对攻击者的欺骗技术，只用蜜罐在处于不断被扫描被攻击甚至被攻破的时候，才能体现出蜜罐的价值。蜜罐其实不包括任何敏感数据。可以这么说，能够访问蜜罐的，都是可疑行为，都可以确认为黑客，从而采取下一步动作。</p>
+<p>通过以上的分析，推出蜜罐具有的三种能力：</p>
+<p><strong>伪装：</strong>通过模拟各种含有漏洞的应用系统来引诱攻击者入侵以减少对实际系统的威胁。</p>
+<p><strong>数据诱捕：</strong>攻击者如果攻入蜜罐，那么可以通过蜜罐日志记录来还原攻击者从进入到离开蜜罐期内的所有活动过程及其他信息。</p>
+<p><strong>威胁数据分析：</strong>对攻击者的数据进行分析，还原攻击者的攻击手法，并对此进行溯源等。</p>
+<p>但同时，蜜罐也有它的局限性，只有被攻击时才能发挥它的价值。</p>
+<p>如果攻击者没有触发蜜罐，那么蜜罐是毫无意义的，所以现在我们更要关注如何让攻击者能有效地触碰到蜜罐，然后利用相关技术对此开展溯源。同样，如果攻击者识别了该蜜罐，并且成功进入，利用相关逃逸 0day 对蜜罐展开攻击（蜜罐记录不到），那么蜜罐将被作为跳板机对其他真实业务展开攻击，危害巨大。</p>
+<p><img src="/2021/03/13/HW%E4%B9%8B%E8%93%9D%E9%98%9F%E6%BA%AF%E6%BA%90/2.jpg"></p>
+
+        <h3 id="5-2-分类">
+          <a href="#5-2-分类" class="heading-link"><i class="fas fa-link"></i></a>5.2 分类</h3>
+      <p><strong>低交互式蜜罐</strong></p>
+<p>通常指与操作系统交互程度较低的蜜罐系统，仅开放一些简单的 服务或端口，用来检测扫描和连接，这种容易被识别。</p>
+<p><strong>中交互式蜜罐</strong></p>
+<p>介于低交互式和高交互式之间，能够模拟操作系统更多的服务，让攻击者看起来更像一个真实的业务，从而对它发动攻击，这样蜜罐就能获取到更多有价值的信息。</p>
+<p><strong>高交互式蜜罐</strong></p>
+<p>指的是与操作系统交互很高的蜜罐，它会提供一个更真实的环境，这样更容易吸引入侵者，有利于掌握新的攻击方式和类型，但同样也会存在隐患，会对真实网络造成攻击。</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://sculptor-liu.github.io">Sculptor</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://sculptor-liu.github.io/2021/03/13/HW%E4%B9%8B%E8%93%9D%E9%98%9F%E6%BA%AF%E6%BA%90/">https://sculptor-liu.github.io/2021/03/13/HW%E4%B9%8B%E8%93%9D%E9%98%9F%E6%BA%AF%E6%BA%90/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/HW%E8%93%9D%E9%98%9F/">HW蓝队</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/ali_pay.png"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/wechat_pay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2021/03/13/2021HW%E5%B9%B2%E8%B4%A7-%E8%93%9D%E9%98%9F/"><span class="paginator-prev__text">2021HW干货--蓝队</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HW%E4%B9%8B%E8%93%9D%E9%98%9F%E6%BA%AF%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">
+          HW之蓝队溯源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%89%8D%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">
+          1. 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-IP%E5%AE%9A%E4%BD%8D%E6%8A%80%E6%9C%AF"><span class="toc-number">3.</span> <span class="toc-text">
+          2. IP定位技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-IP-%E5%AE%9A%E4%BD%8D%E5%B7%A5%E5%85%B7"><span class="toc-number">3.1.</span> <span class="toc-text">
+          2.1 IP 定位工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5%E5%B7%A5%E5%85%B7"><span class="toc-number">3.2.</span> <span class="toc-text">
+          2.2 威胁情报工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-ID%E8%BF%BD%E8%B8%AA%E6%8A%80%E6%9C%AF"><span class="toc-number">4.</span> <span class="toc-text">
+          3. ID追踪技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%94%BB%E5%87%BB%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90"><span class="toc-number">5.</span> <span class="toc-text">
+          4. 攻击程序分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%9C%9C%E7%BD%90"><span class="toc-number">6.</span> <span class="toc-text">
+          5. 蜜罐</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E4%BB%8B%E7%BB%8D"><span class="toc-number">6.1.</span> <span class="toc-text">
+          5.1 介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%88%86%E7%B1%BB"><span class="toc-number">6.2.</span> <span class="toc-text">
+          5.2 分类</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">42</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">5</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">22</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-md5@latest/src/md5.min.js"></script><script>function loadGitalk () {
+  if (!document.getElementById('gitalk-container')) {
+    return;
+  }
+
+  var gitalk = new Gitalk({
+    id: md5(window.location.pathname.slice(1)),
+    clientID: '28f6b94423100cc8a01d',
+    clientSecret: '812ec412a6abb31e41feedc3fa3ba97eefa1a882',
+    repo: 'Sculptor-liu.github.io',
+    owner: 'Sculptor-liu',
+    admin: ['Sculptor-liu'],
+    distractionFreeMode: 'false',
+    language: 'zh-CN'
+  });
+  gitalk.render('gitalk-container');
+}
+
+if (false) {
+  loadGitalk();
+} else {
+  window.addEventListener('DOMContentLoaded', loadGitalk, false);
+}</script><script src="/js/utils.js?v=2.1.1"></script><script src="/js/stun-boot.js?v=2.1.1"></script><script src="/js/scroll.js?v=2.1.1"></script><script src="/js/header.js?v=2.1.1"></script><script src="/js/sidebar.js?v=2.1.1"></script><script type="application/json" src="/search.xml"></script></body></html>

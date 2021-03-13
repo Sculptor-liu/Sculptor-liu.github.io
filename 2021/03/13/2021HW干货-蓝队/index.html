@@ -1,0 +1,595 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="16x16"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="32x32"><meta name="description" content="2021HW干货–蓝队                           0. 前言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021HW干货--蓝队">
+<meta property="og:url" content="https://sculptor-liu.github.io/2021/03/13/2021HW%E5%B9%B2%E8%B4%A7-%E8%93%9D%E9%98%9F/index.html">
+<meta property="og:site_name" content="Sculptor&#39;s blog">
+<meta property="og:description" content="2021HW干货–蓝队                           0. 前言">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/03/13/2021HW%E5%B9%B2%E8%B4%A7-%E8%93%9D%E9%98%9F/0.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/03/13/2021HW%E5%B9%B2%E8%B4%A7-%E8%93%9D%E9%98%9F/1.jpg">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/03/13/2021HW%E5%B9%B2%E8%B4%A7-%E8%93%9D%E9%98%9F/2.png">
+<meta property="article:published_time" content="2021-03-13T15:20:05.000Z">
+<meta property="article:modified_time" content="2021-03-13T15:24:28.183Z">
+<meta property="article:author" content="Sculptor">
+<meta property="article:tag" content="HW蓝队">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sculptor-liu.github.io/2021/03/13/2021HW%E5%B9%B2%E8%B4%A7-%E8%93%9D%E9%98%9F/0.png"><title>2021HW干货--蓝队 | Sculptor's blog</title><link ref="canonical" href="https://sculptor-liu.github.io/2021/03/13/2021HW%E5%B9%B2%E8%B4%A7-%E8%93%9D%E9%98%9F/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.1.1"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于我</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Sculptor's blog</div><div class="header-banner-info__subtitle">不知名的陌生人</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">2021HW干货--蓝队</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-03-13</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-03-13</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h1 id="2021HW干货–蓝队">
+          <a href="#2021HW干货–蓝队" class="heading-link"><i class="fas fa-link"></i></a>2021HW干货–蓝队</h1>
+      
+        <h2 id="0-前言">
+          <a href="#0-前言" class="heading-link"><i class="fas fa-link"></i></a>0. 前言</h2>
+      <a id="more"></a>
+
+<p><img src="/2021/03/13/2021HW%E5%B9%B2%E8%B4%A7-%E8%93%9D%E9%98%9F/0.png"></p>
+
+        <h2 id="1-护网前">
+          <a href="#1-护网前" class="heading-link"><i class="fas fa-link"></i></a>1. 护网前</h2>
+      
+        <h3 id="1-1-红队角度">
+          <a href="#1-1-红队角度" class="heading-link"><i class="fas fa-link"></i></a>1.1 红队角度</h3>
+      <p>对抗！对抗！对抗！</p>
+<p>在打目标的时候，一般用的都是迂回战术！</p>
+<p>因为目标的系统多而杂，有些企业甚至不知道自己有哪些系统，利用这点从底往上摸，但凡有交互的地方都会摸一遍，只要给个口，里外摸个透。</p>
+<p>外紧内松，门户网站或重要系统，多个防护设备，蜜罐。而内网为了办公的便利，防护巨差，甚至内网0防护，一旦从外面打进去，内网横向去打，就会发现一片光明。</p>
+<p>什么运维机，什么密码.xls xxx拓扑，里外翻个遍。</p>
+
+        <h3 id="1-2-上帝视角">
+          <a href="#1-2-上帝视角" class="heading-link"><i class="fas fa-link"></i></a>1.2 上帝视角</h3>
+      <p>防守方报告基本是防御，处置，溯源。（真实HW中，如果自身溯源能力很差的话，尽早找外援。某行业的HW，红队被反控，这个都能去搞情报）</p>
+
+        <h3 id="1-3-前期排查">
+          <a href="#1-3-前期排查" class="heading-link"><i class="fas fa-link"></i></a>1.3 前期排查</h3>
+      <p>HW的准备阶段尤为重要，HW前开展一次小的HW，发现问题，解决问题。</p>
+<p>主要分为外网渗透测试和内网渗透测试两部分，外网和内网测试不一样，外网需要结合客户相关业务来，比如政企客户，你需要使用 WordPress，Drupal 的payload去打，不能说百分之百没有，但是成功的概率相当低，要有针对性去测试，因为时间不允许去这么做。</p>
+
+        <h4 id="外网渗透测试">
+          <a href="#外网渗透测试" class="heading-link"><i class="fas fa-link"></i></a>外网渗透测试</h4>
+      <p>根据实际情况主要关注哪些能直接获取主机权限的漏洞和泄露大量数据的漏洞即可，比如：</p>
+<p>弱口令：数据库，SSH，RDP，后台。</p>
+<p>命令执行：Solr，Jenkins，Weblogic，Struct2，RMI，JBoss，Tomcat，Spring，ActiveMQ，Zabbix</p>
+<p>文件操作：文件上传，文件读取</p>
+<p>未授权访问：Redis，Hadoop，Docker，K8C</p>
+
+        <h4 id="内网渗透测试">
+          <a href="#内网渗透测试" class="heading-link"><i class="fas fa-link"></i></a>内网渗透测试</h4>
+      <p>内网渗透测试和外网渗透测试区别很大，因为外网不仅有我们，还有其他合作伙伴，各种 WAF ，防火墙，APT，IDS，IPS，以及办公网的 EDR ，杀毒什么的各种安全设备一顿操作。</p>
+
+        <h4 id="资产梳理">
+          <a href="#资产梳理" class="heading-link"><i class="fas fa-link"></i></a>资产梳理</h4>
+      <p>对废弃边角的资产梳理是重中之重，在HW开展前，企业要对自身的资产进行梳理，减少被攻击面。</p>
+<p>排查服务器补丁情况，业务系统安全性自查。</p>
+<p>排查企业自身信息是否泄露，如：csdn，GitHub，码云，百度文库，百度网盘。。。</p>
+<p><strong>对于云平台：</strong></p>
+<p>因为云平台都是在专有云上，所以写个脚本爬一下资产就可以全部获取到了。</p>
+<p>这里需要注意下爬的字段，因为后期涉及到漏洞修复，安全时间等问题的对接。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">| IP |项目|部门|状态|</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>指纹梳理</strong></p>
+<p>因为主机数量太大了，如果每个资产都单独去测试的话，时间代价太大，所以很有必要进行资产指纹梳理，这样如果发现某个漏洞，直接就可以为后面的批量漏洞利用提供条件了。</p>
+<p>资产指纹根据业务情况进行有针对性的收集，主要搜集有：</p>
+<p>21，22，23，1090，1099，2049，2181，3000，3306，4848，5000，5900，5901，6379，70</p>
+
+        <h4 id="漏洞发现">
+          <a href="#漏洞发现" class="heading-link"><i class="fas fa-link"></i></a>漏洞发现</h4>
+      <p>漏洞发现就是常规的渗透测试，但是内网的渗透区别于外网，内网主要是快速，尽可能的发现更多的漏洞，所以不需要进一步利用，比如发现了Redis未授权访问，就不要去浪费时间反弹 shell ，写密钥之类的。</p>
+<p><strong>Example 1：</strong></p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;192.168.2.11:8888&#x2F;</span><br><span class="line">PS：前期资产发现阶段发现8888端口对应的主机有1800多台</span><br><span class="line"></span><br><span class="line">1、直接访问提示403</span><br><span class="line">2、Fuzz目录</span><br><span class="line">发现存在taskFile，https:&#x2F;&#x2F;192.168.2.11:8888&#x2F;taskFile</span><br><span class="line">3、访问https:&#x2F;&#x2F;192.168.2.11:8888&#x2F;taskFile提示参数不对</span><br><span class="line">4、Fuzz参数</span><br><span class="line">发现参数tId，https:&#x2F;&#x2F;192.168.2.11:8888&#x2F;taskFile?tId&#x3D;</span><br><span class="line">5、输入值，访问https:&#x2F;&#x2F;192.168.2.11:8888&#x2F;taskFile?tId&#x3D;1</span><br><span class="line">发现提示tId&#x3D;1不存在</span><br><span class="line">6、删除值访问https:&#x2F;&#x2F;192.168.2.11:8888&#x2F;taskFile?tId&#x3D;</span><br><span class="line">发现提示&#x2F;root&#x2F;xxx&#x2F;xxx任务不存在</span><br><span class="line">7、Fuzz漏洞，成功发现本地文件包含https:&#x2F;&#x2F;192.168.2.11:8888&#x2F;taskFile?</span><br><span class="line">tId&#x3D;..&#x2F;..&#x2F;..&#x2F;..&#x2F;etc&#x2F;passwd</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>Example2：</strong></p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;192.168.2.11:8006&#x2F;</span><br><span class="line">PS：前期资产发现阶段发现8006端口对应的主机有180多台</span><br><span class="line"></span><br><span class="line">1、直接访问https:&#x2F;&#x2F;192.168.2.11:8006&#x2F;env，发现存在SpringBoot Actuator</span><br><span class="line">信息泄漏</span><br><span class="line">&#x2F;autoconfig</span><br><span class="line">&#x2F;beans</span><br><span class="line">&#x2F;env</span><br><span class="line">&#x2F;configprop</span><br><span class="line">&#x2F;dump</span><br><span class="line">&#x2F;health</span><br><span class="line">&#x2F;info</span><br><span class="line">&#x2F;mappings</span><br><span class="line">&#x2F;metrics</span><br><span class="line">&#x2F;shutdown</span><br><span class="line">&#x2F;trace</span><br><span class="line">&#x2F;env</span><br><span class="line">2、访问https:&#x2F;&#x2F;192.168.2.11:8006&#x2F;trace，发现存在访问</span><br><span class="line">URL：&#x2F;application.wadl</span><br><span class="line">3、直接访问发现信息泄漏，可直接看到整站的目录结构</span><br><span class="line">&#x2F;war</span><br><span class="line">&#x2F;war&#x2F;path</span><br><span class="line">...</span><br><span class="line">4、一层一层访问目录接口发现&#x2F;war&#x2F;WEB-INF&#x2F;classes目录下存在</span><br><span class="line">redis.properties文件，直接访问提示403</span><br><span class="line">5、根据前期漏洞信息、收集信息关联分析，发现在对应文件下加入content即可进行</span><br><span class="line">文件读取：&#x2F;war&#x2F;WEB-INF&#x2F;classes&#x2F;redis.properties&#x2F;content</span><br><span class="line">这样就可以直接导致web目录下任意文件读取了，批量利用发发现8006端口全部主机均</span><br><span class="line">存在此漏洞</span><br><span class="line">6、访问https:&#x2F;&#x2F;192.168.2.11:8006&#x2F;war&#x2F;WEB-INF&#x2F;classes&#x2F;</span><br><span class="line">redis.properties&#x2F;content读取到redis密码，为弱口令：Nb123456</span><br><span class="line">7、根据整理的资产指纹信息编写批量利用脚本，发现60多台Redis存在此弱口令</span><br></pre></td></tr></table></div></figure>
+
+
+        <h4 id="批量利用">
+          <a href="#批量利用" class="heading-link"><i class="fas fa-link"></i></a>批量利用</h4>
+      <p>这部分就是批量发现问题主机了，大部分事需要写脚本，如果有相关工具就更好。</p>
+<p>比如我们在上面发现的漏洞，利用收集的资产指纹信息直接编写脚本批量跑一遍就可以了。</p>
+<p><img src="/2021/03/13/2021HW%E5%B9%B2%E8%B4%A7-%E8%93%9D%E9%98%9F/1.jpg"></p>
+<p>当然其他漏洞也一样，这里主要为测试的几个典型批量为例：</p>
+<p>SSH，FTP，MySQL，Zoomkeeper，MongoDB，Hadoop，Redis，Struct2，Weblogic，Docker，OpneSSL，Werkzeug，Jboss，ActiveMQ，Zabbix，K8S，Druid 等。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">├── IP.txt</span><br><span class="line">├── Zookeeper</span><br><span class="line">│   ├── vul.txt</span><br><span class="line">│   └── zookeeper_unauth_access.py</span><br><span class="line">├── bash</span><br><span class="line">├── ftp</span><br><span class="line">├── memcache</span><br><span class="line">├── mongodb</span><br><span class="line">├── mssql</span><br><span class="line">├── openssl</span><br><span class="line">├── postgresql</span><br><span class="line">├── redis</span><br><span class="line">├── smb</span><br><span class="line">├── ssh</span><br><span class="line">├── st2</span><br><span class="line">├── weblogic</span><br><span class="line">├── druid</span><br><span class="line">├── zabbix</span><br><span class="line">├── docker</span><br><span class="line">...</span><br><span class="line">└── all_poc.py</span><br></pre></td></tr></table></div></figure>
+
+<p>这是做过的基线检查的相关脚本，然后根据需求改了一下，也可以用POC-T，Pocsuite 等这些框架，反正能用就行了。</p>
+
+        <h4 id="信息清理">
+          <a href="#信息清理" class="heading-link"><i class="fas fa-link"></i></a>信息清理</h4>
+      <p>梳理出来的资产进行分组，无用资产该关就关。</p>
+
+        <h4 id="蜜罐">
+          <a href="#蜜罐" class="heading-link"><i class="fas fa-link"></i></a>蜜罐</h4>
+      <p>蜜罐是个好东西，能多则多，能否得分还得靠蜜罐。</p>
+
+        <h4 id="防钓鱼">
+          <a href="#防钓鱼" class="heading-link"><i class="fas fa-link"></i></a>防钓鱼</h4>
+      <p>加强对员工的安全意识培训！！！</p>
+<p>划重点，很多目标被沦陷，入口点在钓鱼直接控制运维机。。</p>
+<p>包括不限于：邮件，QQ，微信，电话等手段进行钓鱼社工；exe就别说了，不要乱点！！！</p>
+<p>办公PC机可以安装火绒。</p>
+
+        <h4 id="防不甚防">
+          <a href="#防不甚防" class="heading-link"><i class="fas fa-link"></i></a>防不甚防</h4>
+      <p>各种防护设备放上去就觉得可以了？？？</p>
+<p>一般能参加HW的都是国内渗透能力较强的大佬，手里有一些0day漏洞也很常见，甚至可能会遭受APT攻击，而大多数企业针对定向 0day，1day，APT攻击毫无还手之力，尽管手里购买了很多设备，也只能被动进行防御。</p>
+
+        <h4 id="心态">
+          <a href="#心态" class="heading-link"><i class="fas fa-link"></i></a>心态</h4>
+      <p><strong>比赛 &amp;&amp; 发现问题</strong></p>
+<p>如果本着打个比赛的目的，该撸穿撸穿。。。</p>
+<p>如果本着发现问题的心态，那么可以发现如今的HW已经实战化，在实战中发现全面问题，这大概才是HW的真正意义。</p>
+
+        <h4 id="应急小组">
+          <a href="#应急小组" class="heading-link"><i class="fas fa-link"></i></a>应急小组</h4>
+      <p>明确应急小组的职责，定期排查邮件系统，个人PC机是否被控。</p>
+
+        <h4 id="面对的问题">
+          <a href="#面对的问题" class="heading-link"><i class="fas fa-link"></i></a>面对的问题</h4>
+      <p>防火墙或者网闸买的再多，访问控制策略做的再细致和规范，若它们自身就存在 0day 漏洞或者 1day 漏洞没有被修补，，则可以全部被攻破。</p>
+<p>业务系统接入了云防御，即使云端防御再好，一旦攻击者找到了未作信任策略的源站地址，一切防御都全部失效。</p>
+<p>内网部署了很好的防御产品和策略，包括防病毒，反垃圾邮件等，但内部员工被鱼叉攻击依然会泄露重要和敏感信息。</p>
+<p>业务系统防范严密，却在某个具有出口的测试环境中存在暗资产，或者在 GitHub 上泄露了数据，导致其成为跳板甚至被进行内网漫游或攻击者直接获得了某些重要资料和信息等等。</p>
+<p>守住自身系统后，也该拿点分数证明实力。</p>
+
+        <h3 id="1-4-加固">
+          <a href="#1-4-加固" class="heading-link"><i class="fas fa-link"></i></a>1.4 加固</h3>
+      
+        <h4 id="运维相关">
+          <a href="#运维相关" class="heading-link"><i class="fas fa-link"></i></a>运维相关</h4>
+      <ol>
+<li><p>测试，开发服务器全部关停</p>
+</li>
+<li><p>敏感端口安全组隔离</p>
+</li>
+<li><p>使用堡垒机，跳板机运维</p>
+</li>
+<li><p>用户，权限隔离</p>
+<p><strong>特别说明：</strong>比如：MySQL不使用默认的root用户，使用业务/项目名中间用下划线连接的方式，因为爆破都是默认用户的，这样即使存在弱口令，也将安全性提升一大截。</p>
+</li>
+<li><p>认证策略：密钥，双因子认证</p>
+</li>
+<li><p>最小化权限原则</p>
+</li>
+<li><p>补丁</p>
+</li>
+</ol>
+
+        <h4 id="安全设备">
+          <a href="#安全设备" class="heading-link"><i class="fas fa-link"></i></a>安全设备</h4>
+      <p><strong>WAF：</strong>使用防火墙，防御大多数攻击。</p>
+<p><strong>流量，日志，数据库审计：</strong>流量，日志，数据库方面一旦出现安全事故，能够快速响应，溯源分析找到问题源头。</p>
+<p><strong>态势感知：</strong></p>
+<p><strong>安骑士：</strong>主机安全，能够第一时间发现异常登录，异常进程，异常网络连接，后门，账户等高危安全问题，并且能够快速定位问题所在。</p>
+<p><strong>蜜罐：</strong>攻击者进入内网后会进行内网渗透，收集信息，攻击靶标，所以部署蜜罐是发现内网异常的必要手段。主要部署了常用的服务，比如：SSH，MySQL，FTP，MongoDB，Redis，Weblogic，Struct2，Tomcat，Joomla，PostgreSQL，Shellshock，SMB，Memcache，Telnet。</p>
+<p><strong>扫描器：</strong>由于主机量巨大，手工总会有遗漏，所以在不同网段部署扫描器，每天在0点到1点自动给开始巡检。</p>
+
+        <h4 id="环境隔离">
+          <a href="#环境隔离" class="heading-link"><i class="fas fa-link"></i></a>环境隔离</h4>
+      <p><strong>防火墙策略：</strong>虽然安全组也可以做，但是内网业务层面还需要在防火墙做策略。</p>
+<p><strong>堡垒机：</strong>使用堡垒机是为了保证运维安全，同时保障重要系统及靶标隔离。堡垒机的登录也是用访问控制的，只允许白名单IP访问，同时堡垒机使用<strong>强口令+随机KEY登录</strong>。</p>
+<p><strong>双因子认证</strong>：重要系统（控制台，总控系统，运维系统等）有必要的均采用堡垒机登录，无法使用的采用 <strong>白名单IP+强口令策略+随机验证码</strong> 组合策略。</p>
+<p><strong>靶标：</strong>靶标是重中之重，一旦被攻破，直接可以收拾收拾回家，脸面不说，monkey还可能没了。靶标是只允许堡垒机IP能够访问；同时在前期要花很大功夫渗透一波，删除不必要的账户，所有账户使用 **十六位随机密码+随机6位KEY **登录。</p>
+
+        <h3 id="1-5-得分点">
+          <a href="#1-5-得分点" class="heading-link"><i class="fas fa-link"></i></a>1.5 得分点</h3>
+      
+        <h4 id="发现">
+          <a href="#发现" class="heading-link"><i class="fas fa-link"></i></a>发现</h4>
+      <p>通过日志审计，蜜罐发现攻击日志及路径，快速响应攻击者是否已被攻破。</p>
+
+        <h4 id="处置">
+          <a href="#处置" class="heading-link"><i class="fas fa-link"></i></a>处置</h4>
+      <p>尽可能在未攻破时，将漏洞修复，或者清除webshell。</p>
+<p>发现钓鱼邮件后分析回连IP，由应急小组进行通知并排查分析是否被钓鱼。</p>
+
+        <h4 id="溯源">
+          <a href="#溯源" class="heading-link"><i class="fas fa-link"></i></a>溯源</h4>
+      <p>蜜罐，威胁情报设备，此项可以帮助获得N+分，自动化设备会通过攻击者指纹，结合社会关系，溯源到QQ，姓名，手机号等一系列信息。</p>
+
+        <h4 id="反制">
+          <a href="#反制" class="heading-link"><i class="fas fa-link"></i></a>反制</h4>
+      
+        <h2 id="2-护网时">
+          <a href="#2-护网时" class="heading-link"><i class="fas fa-link"></i></a>2. 护网时</h2>
+      
+        <h3 id="2-1-查漏补缺">
+          <a href="#2-1-查漏补缺" class="heading-link"><i class="fas fa-link"></i></a>2.1 查漏补缺</h3>
+      <ol>
+<li><p>虽然前期做了渗透测试，但毕竟也过了一段时间，所以护网期间重新找端口对应的主机，然后寻找漏洞。</p>
+</li>
+<li><p>数据库查看端口对应主机也可以发现一些非标准端口，比如MySQL 数据库的3303，3304，3305，3307，Redis的6377，6378等，存在弱口令。</p>
+</li>
+<li><p>通过日志检索，流量分析等可以发现一些弱口令问题，利用这些弱口令批量测试主机，可以发现一些MySQL，SSH，Redis弱口令。</p>
+</li>
+<li><p>在进行全量日志检索的时候，可以发现一些运维直接将一些敏感字段直接写在命令行中，比如MySQL连接是直接将密码写在命令行中，这样如果一台主机被入侵，那么 history 是必看的。如果该密码是通用的将直接或间接的影响更多的主机，所以统一安排将 history 命令历史清空，再统一改了下相关配置。</p>
+</li>
+<li><p>新建主机风险，在查看主机对应业务的时候发现了在护网开始后还是会有新主机的创建，那么这些新建的主机就存在较大的安全风险。</p>
+</li>
+<li><p>堡垒机安全问题，堡垒机一般是采用 白名单IP+强密码+令牌的登录方式，但是也存在 0day 漏洞。部分接口也存在直接获取全部用户包括明文密码等全部敏感信息，重置任意用户密码，更换认证方式及客户端限制等。此外，堡垒机登陆后还可以绕过沙箱限制，做一些限制的操作。</p>
+<p><img src="/2021/03/13/2021HW%E5%B9%B2%E8%B4%A7-%E8%93%9D%E9%98%9F/2.png"></p>
+</li>
+</ol>
+
+        <h3 id="2-2-安全告警">
+          <a href="#2-2-安全告警" class="heading-link"><i class="fas fa-link"></i></a>2.2 安全告警</h3>
+      <p>主要就是安全设备上的安全告警了，比如蜜罐的端口探测告警，蜜罐入侵事件；态势感知的暴力破解，攻击事件；安骑士的后门，网络连接，进程，账户；WAF 封IP一把梭。</p>
+
+        <h3 id="2-3-事件分析">
+          <a href="#2-3-事件分析" class="heading-link"><i class="fas fa-link"></i></a>2.3 事件分析</h3>
+      <p>这就是应急响应，事件分析和溯源的范畴了。</p>
+<p>当厂商告警存在恶意文件下载，地址是我们OSS的一个地址，OSS是一个静态存储服务器，供业务应用上传媒体文件，静态资源文件等使用，对于这类安全事件处理：</p>
+<ol>
+<li><p>如果访问的IP是业务服务器</p>
+<ul>
+<li>要么AK泄露了直接利用AK进行的文件增删改查；</li>
+</ul>
+<ul>
+<li>要么业务上传的地方没有做严格限制，导致任意格式文件上传；</li>
+<li>该服务器应该不光存在XSS，还存在SSRF漏洞。</li>
+</ul>
+</li>
+<li><p>如果访问的IP不是业务服务器</p>
+<p>由于OSS上传后会生成随机字符串的URL，根本是无法猜到的，那么谁访问了这个URL，那么就是这个IP上传的，这个IP就有问题。</p>
+</li>
+</ol>
+
+        <h3 id="2-4-防火墙策略">
+          <a href="#2-4-防火墙策略" class="heading-link"><i class="fas fa-link"></i></a>2.4 防火墙策略</h3>
+      <p>对于云平台防护来说，主要找一些和云平台有直接交互的业务，然后就需要在防火墙上做策略。</p>
+
+        <h3 id="2-5-WAF等">
+          <a href="#2-5-WAF等" class="heading-link"><i class="fas fa-link"></i></a>2.5 WAF等</h3>
+      <p>不管三七二十一，先封为敬；另外一定要及时关注安全预警，直接在WAF上做自定义规则，比如 weblogic 的，直接拦截 <code>_async ，bea_wls_internal</code> 等URL路径即可。</p>
+
+        <h3 id="2-6-安全组">
+          <a href="#2-6-安全组" class="heading-link"><i class="fas fa-link"></i></a>2.6 安全组</h3>
+      <p>发现敏感端口，高危漏洞，先把安全组做了。</p>
+
+        <h3 id="2-7-护网神操作">
+          <a href="#2-7-护网神操作" class="heading-link"><i class="fas fa-link"></i></a>2.7 护网神操作</h3>
+      <p>护网期间的神操作：</p>
+<ul>
+<li>无人机搞WIFI的</li>
+<li>挖下水道进内部的（这个怕是拍电影吧）</li>
+<li>BadUSB钓鱼的</li>
+<li>提前半个月混入甲方的</li>
+<li>望远镜看密码的</li>
+<li>红队伪装蓝队进行木马钓鱼的</li>
+<li>利用深信服0day伪装进入的</li>
+<li>首页开局一张图片的</li>
+<li>美人计的</li>
+</ul>
+
+        <h2 id="3-问题思考">
+          <a href="#3-问题思考" class="heading-link"><i class="fas fa-link"></i></a>3. 问题思考</h2>
+      
+        <h3 id="3-1-蜜罐的局限性">
+          <a href="#3-1-蜜罐的局限性" class="heading-link"><i class="fas fa-link"></i></a>3.1 蜜罐的局限性</h3>
+      <p>市面上的蜜罐和业务基本是国内都是无关联，无数据的，对于攻击队那些资深大佬来说，个人觉得应该采用的是“深度优先原则”的方式进行攻击，因为这种方式内网动作更小，更不易被察觉。</p>
+<p>基于这个局限性，蜜罐很容易就被识破了，比如查看 hosts文件，history，网段，数据，业务等。</p>
+
+        <h3 id="3-2-安全产品">
+          <a href="#3-2-安全产品" class="heading-link"><i class="fas fa-link"></i></a>3.2 安全产品</h3>
+      <p>堡垒机，VPN，蜜罐，扫描器等这些安全产品，比如说扫描器，基本上告警源是扫描器，都肯定是忽略的，但是如果扫描器被搞了，就很尴尬了。</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://sculptor-liu.github.io">Sculptor</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://sculptor-liu.github.io/2021/03/13/2021HW%E5%B9%B2%E8%B4%A7-%E8%93%9D%E9%98%9F/">https://sculptor-liu.github.io/2021/03/13/2021HW%E5%B9%B2%E8%B4%A7-%E8%93%9D%E9%98%9F/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/HW%E8%93%9D%E9%98%9F/">HW蓝队</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/ali_pay.png"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/wechat_pay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/03/13/HW%E4%B9%8B%E8%93%9D%E9%98%9F%E6%BA%AF%E6%BA%90/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">HW之蓝队溯源</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/03/13/HW%E8%93%9D%E9%98%9F%E6%B5%81%E7%A8%8B/"><span class="paginator-prev__text">HW蓝队流程</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2021HW%E5%B9%B2%E8%B4%A7%E2%80%93%E8%93%9D%E9%98%9F"><span class="toc-number">1.</span> <span class="toc-text">
+          2021HW干货–蓝队</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">
+          0. 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%8A%A4%E7%BD%91%E5%89%8D"><span class="toc-number">1.2.</span> <span class="toc-text">
+          1. 护网前</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BA%A2%E9%98%9F%E8%A7%92%E5%BA%A6"><span class="toc-number">1.2.1.</span> <span class="toc-text">
+          1.1 红队角度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E4%B8%8A%E5%B8%9D%E8%A7%86%E8%A7%92"><span class="toc-number">1.2.2.</span> <span class="toc-text">
+          1.2 上帝视角</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%89%8D%E6%9C%9F%E6%8E%92%E6%9F%A5"><span class="toc-number">1.2.3.</span> <span class="toc-text">
+          1.3 前期排查</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%96%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">
+          外网渗透测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">
+          内网渗透测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%84%E4%BA%A7%E6%A2%B3%E7%90%86"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">
+          资产梳理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">
+          漏洞发现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E5%88%A9%E7%94%A8"><span class="toc-number">1.2.3.5.</span> <span class="toc-text">
+          批量利用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%B8%85%E7%90%86"><span class="toc-number">1.2.3.6.</span> <span class="toc-text">
+          信息清理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%9C%9C%E7%BD%90"><span class="toc-number">1.2.3.7.</span> <span class="toc-text">
+          蜜罐</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E9%92%93%E9%B1%BC"><span class="toc-number">1.2.3.8.</span> <span class="toc-text">
+          防钓鱼</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E4%B8%8D%E7%94%9A%E9%98%B2"><span class="toc-number">1.2.3.9.</span> <span class="toc-text">
+          防不甚防</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%83%E6%80%81"><span class="toc-number">1.2.3.10.</span> <span class="toc-text">
+          心态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%B0%8F%E7%BB%84"><span class="toc-number">1.2.3.11.</span> <span class="toc-text">
+          应急小组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%A2%E5%AF%B9%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.3.12.</span> <span class="toc-text">
+          面对的问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%8A%A0%E5%9B%BA"><span class="toc-number">1.2.4.</span> <span class="toc-text">
+          1.4 加固</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E7%BB%B4%E7%9B%B8%E5%85%B3"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">
+          运维相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E8%AE%BE%E5%A4%87"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">
+          安全设备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">
+          环境隔离</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E5%BE%97%E5%88%86%E7%82%B9"><span class="toc-number">1.2.5.</span> <span class="toc-text">
+          1.5 得分点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%91%E7%8E%B0"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">
+          发现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%BD%AE"><span class="toc-number">1.2.5.2.</span> <span class="toc-text">
+          处置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BA%AF%E6%BA%90"><span class="toc-number">1.2.5.3.</span> <span class="toc-text">
+          溯源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%88%B6"><span class="toc-number">1.2.5.4.</span> <span class="toc-text">
+          反制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%8A%A4%E7%BD%91%E6%97%B6"><span class="toc-number">1.3.</span> <span class="toc-text">
+          2. 护网时</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%9F%A5%E6%BC%8F%E8%A1%A5%E7%BC%BA"><span class="toc-number">1.3.1.</span> <span class="toc-text">
+          2.1 查漏补缺</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%AE%89%E5%85%A8%E5%91%8A%E8%AD%A6"><span class="toc-number">1.3.2.</span> <span class="toc-text">
+          2.2 安全告警</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90"><span class="toc-number">1.3.3.</span> <span class="toc-text">
+          2.3 事件分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E9%98%B2%E7%81%AB%E5%A2%99%E7%AD%96%E7%95%A5"><span class="toc-number">1.3.4.</span> <span class="toc-text">
+          2.4 防火墙策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-WAF%E7%AD%89"><span class="toc-number">1.3.5.</span> <span class="toc-text">
+          2.5 WAF等</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E5%AE%89%E5%85%A8%E7%BB%84"><span class="toc-number">1.3.6.</span> <span class="toc-text">
+          2.6 安全组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-%E6%8A%A4%E7%BD%91%E7%A5%9E%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.7.</span> <span class="toc-text">
+          2.7 护网神操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%97%AE%E9%A2%98%E6%80%9D%E8%80%83"><span class="toc-number">1.4.</span> <span class="toc-text">
+          3. 问题思考</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E8%9C%9C%E7%BD%90%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-number">1.4.1.</span> <span class="toc-text">
+          3.1 蜜罐的局限性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%AE%89%E5%85%A8%E4%BA%A7%E5%93%81"><span class="toc-number">1.4.2.</span> <span class="toc-text">
+          3.2 安全产品</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">42</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">5</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">22</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-md5@latest/src/md5.min.js"></script><script>function loadGitalk () {
+  if (!document.getElementById('gitalk-container')) {
+    return;
+  }
+
+  var gitalk = new Gitalk({
+    id: md5(window.location.pathname.slice(1)),
+    clientID: '28f6b94423100cc8a01d',
+    clientSecret: '812ec412a6abb31e41feedc3fa3ba97eefa1a882',
+    repo: 'Sculptor-liu.github.io',
+    owner: 'Sculptor-liu',
+    admin: ['Sculptor-liu'],
+    distractionFreeMode: 'false',
+    language: 'zh-CN'
+  });
+  gitalk.render('gitalk-container');
+}
+
+if (false) {
+  loadGitalk();
+} else {
+  window.addEventListener('DOMContentLoaded', loadGitalk, false);
+}</script><script src="/js/utils.js?v=2.1.1"></script><script src="/js/stun-boot.js?v=2.1.1"></script><script src="/js/scroll.js?v=2.1.1"></script><script src="/js/header.js?v=2.1.1"></script><script src="/js/sidebar.js?v=2.1.1"></script><script type="application/json" src="/search.xml"></script></body></html>
