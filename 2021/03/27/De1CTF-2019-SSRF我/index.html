@@ -1,0 +1,380 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="16x16"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="32x32"><meta name="description" content="1. 首页">
+<meta property="og:type" content="article">
+<meta property="og:title" content="De1CTF-2019-SSRF我">
+<meta property="og:url" content="https://sculptor-liu.github.io/2021/03/27/De1CTF-2019-SSRF%E6%88%91/index.html">
+<meta property="og:site_name" content="Sculptor&#39;s blog">
+<meta property="og:description" content="1. 首页">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/03/27/De1CTF-2019-SSRF%E6%88%91/1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/03/27/De1CTF-2019-SSRF%E6%88%91/2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/03/27/De1CTF-2019-SSRF%E6%88%91/3.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/03/27/De1CTF-2019-SSRF%E6%88%91/4.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/03/27/De1CTF-2019-SSRF%E6%88%91/5.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/03/27/De1CTF-2019-SSRF%E6%88%91/6.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/03/27/De1CTF-2019-SSRF%E6%88%91/7.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/03/27/De1CTF-2019-SSRF%E6%88%91/8.png">
+<meta property="article:published_time" content="2021-03-26T17:20:18.000Z">
+<meta property="article:modified_time" content="2021-03-26T17:23:27.937Z">
+<meta property="article:author" content="Sculptor">
+<meta property="article:tag" content="代码审计">
+<meta property="article:tag" content="文件包含">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sculptor-liu.github.io/2021/03/27/De1CTF-2019-SSRF%E6%88%91/1.png"><title>De1CTF-2019-SSRF我 | Sculptor's blog</title><link ref="canonical" href="https://sculptor-liu.github.io/2021/03/27/De1CTF-2019-SSRF%E6%88%91/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.1.1"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于我</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Sculptor's blog</div><div class="header-banner-info__subtitle">不知名的陌生人</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">De1CTF-2019-SSRF我</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-03-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-03-27</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h2 id="1-首页">
+          <a href="#1-首页" class="heading-link"><i class="fas fa-link"></i></a>1. 首页</h2>
+      <p><img src="/2021/03/27/De1CTF-2019-SSRF%E6%88%91/1.png"></p>
+<a id="more"></a>
+
+<p>源码已给，自己美化：</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python </span></span><br><span class="line"><span class="comment">#encoding=utf-8 </span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask </span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request </span><br><span class="line"><span class="keyword">import</span> socket </span><br><span class="line"><span class="keyword">import</span> hashlib </span><br><span class="line"><span class="keyword">import</span> urllib </span><br><span class="line"><span class="keyword">import</span> sys </span><br><span class="line"><span class="keyword">import</span> os </span><br><span class="line"><span class="keyword">import</span> json </span><br><span class="line">reload(sys) </span><br><span class="line">sys.setdefaultencoding(<span class="string">&#x27;latin1&#x27;</span>) </span><br><span class="line">app = Flask(__name__) </span><br><span class="line">secert_key = os.urandom(<span class="number">16</span>) </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Task</span>:</span> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, action, param, sign, ip</span>):</span>   <span class="comment">#构造方法self代表对象,其他是对象的属性</span></span><br><span class="line">        self.action = action   <span class="comment">#动作（读取文件动作）</span></span><br><span class="line">        self.param = param     <span class="comment">#文件</span></span><br><span class="line">        self.sign = sign       <span class="comment">#标志</span></span><br><span class="line">        self.sandbox = md5(ip) <span class="comment">#对IP进行MD5加密</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">not</span> os.path.exists(self.sandbox)): <span class="comment">#SandBox For Remote_Addr远程沙盒地址，如果不存在</span></span><br><span class="line">        	os.mkdir(self.sandbox) <span class="comment">#创建该IP路径</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Exec</span>(<span class="params">self</span>):</span> </span><br><span class="line">        result = &#123;&#125; </span><br><span class="line">        result[<span class="string">&#x27;code&#x27;</span>] = <span class="number">500</span> </span><br><span class="line">        <span class="keyword">if</span> (self.checkSign()): </span><br><span class="line">         	<span class="keyword">if</span> <span class="string">&quot;scan&quot;</span> <span class="keyword">in</span> self.action:   <span class="comment">#如果动作中有字符串&quot;scan&quot;</span></span><br><span class="line">                tmpfile = open(<span class="string">&quot;./%s/result.txt&quot;</span> % self.sandbox, <span class="string">&#x27;w&#x27;</span>) <span class="comment">#执行这条语句后将返回结果写到了result.txt下</span></span><br><span class="line">         		resp = scan(self.param)   <span class="comment">#扫描文件</span></span><br><span class="line">               	<span class="keyword">if</span> (resp == <span class="string">&quot;Connection Timeout&quot;</span>): </span><br><span class="line">                    result[<span class="string">&#x27;data&#x27;</span>] = resp </span><br><span class="line">                <span class="keyword">else</span>: </span><br><span class="line">                    <span class="keyword">print</span> resp </span><br><span class="line">                    tmpfile.write(resp) </span><br><span class="line">                    tmpfile.close() </span><br><span class="line">              	result[<span class="string">&#x27;code&#x27;</span>] = <span class="number">200</span> </span><br><span class="line">        	<span class="keyword">if</span> <span class="string">&quot;read&quot;</span> <span class="keyword">in</span> self.action: <span class="comment">#动作中有字符串&quot;read&quot;</span></span><br><span class="line">                f = open(<span class="string">&quot;./%s/result.txt&quot;</span> % self.sandbox, <span class="string">&#x27;r&#x27;</span>)<span class="comment">#读刚才写入IP目录下的result.txt文件的内容  </span></span><br><span class="line">                result[<span class="string">&#x27;code&#x27;</span>] = <span class="number">200</span> <span class="comment">#返回标志，有点类似状态码</span></span><br><span class="line">                result[<span class="string">&#x27;data&#x27;</span>] = f.read() </span><br><span class="line">           	<span class="keyword">if</span> result[<span class="string">&#x27;code&#x27;</span>] == <span class="number">500</span>:          </span><br><span class="line">           		result[<span class="string">&#x27;data&#x27;</span>] = <span class="string">&quot;Action Error&quot;</span></span><br><span class="line">       	<span class="keyword">else</span>: </span><br><span class="line">            result[<span class="string">&#x27;code&#x27;</span>] = <span class="number">500</span> </span><br><span class="line">            result[<span class="string">&#x27;msg&#x27;</span>] = <span class="string">&quot;Sign Error&quot;</span> </span><br><span class="line">       	<span class="keyword">return</span> result </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">checkSign</span>(<span class="params">self</span>):</span> <span class="comment">#定义检测sign函数，判断是否符合读取标准</span></span><br><span class="line">        <span class="keyword">if</span> (getSign(self.action, self.param) == self.sign): <span class="comment">#调用了getSign函数</span></span><br><span class="line">            <span class="comment"># md5加密后的(secert_key + param + action)要和sign相等</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span> </span><br><span class="line">        <span class="keyword">else</span>: </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span> </span><br><span class="line"><span class="comment">#generate Sign For Action Scan. </span></span><br><span class="line"><span class="meta">@app.route(&quot;/geneSign&quot;, methods=[&#x27;GET&#x27;, &#x27;POST&#x27;]) #路径/geneSign</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">geneSign</span>():</span> </span><br><span class="line">    param = urllib.unquote(request.args.get(<span class="string">&quot;param&quot;</span>, <span class="string">&quot;&quot;</span>)) <span class="comment">#get方式上传参数param，同时将文件名被url编码解码</span></span><br><span class="line">    action = <span class="string">&quot;scan&quot;</span> </span><br><span class="line">    <span class="keyword">return</span> getSign(action, param) <span class="comment">#整体最后被传到有两个参数的genesign()函数中</span></span><br><span class="line"><span class="meta">@app.route(&#x27;/De1ta&#x27;,methods=[&#x27;GET&#x27;,&#x27;POST&#x27;])    #路径/De1ta</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">challenge</span>():</span> </span><br><span class="line">    action = urllib.unquote(request.cookies.get(<span class="string">&quot;action&quot;</span>)) <span class="comment">#提取cookie信息中的，名为action的对应值，action属于cookie参数，最后对url进行编码</span></span><br><span class="line">    param = urllib.unquote(request.args.get(<span class="string">&quot;param&quot;</span>, <span class="string">&quot;&quot;</span>)) <span class="comment"># 提取get方法传入的，参数名叫param对应得值</span></span><br><span class="line">    sign = urllib.unquote(request.cookies.get(<span class="string">&quot;sign&quot;</span>)) </span><br><span class="line">    <span class="comment">#sign也作为cookie参数</span></span><br><span class="line">    ip = request.remote_addr </span><br><span class="line">    <span class="keyword">if</span>(waf(param)): </span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;No Hacker!!!!&quot;</span> </span><br><span class="line">    task = Task(action, param, sign, ip) </span><br><span class="line">    <span class="keyword">return</span> json.dumps(task.Exec()) <span class="comment">#Python 对象编码成 JSON 字符串</span></span><br><span class="line"><span class="meta">@app.route(&#x27;/&#x27;) </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span>():</span> </span><br><span class="line">    <span class="keyword">return</span> open(<span class="string">&quot;code.txt&quot;</span>,<span class="string">&quot;r&quot;</span>).read() </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scan</span>(<span class="params">param</span>):</span> </span><br><span class="line">    socket.setdefaulttimeout(<span class="number">1</span>) </span><br><span class="line">    <span class="keyword">try</span>: </span><br><span class="line">        <span class="keyword">return</span> urllib.urlopen(param).read()[:<span class="number">50</span>] <span class="comment">#读取网络文件参数可以是url</span></span><br><span class="line">    <span class="keyword">except</span>: </span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Connection Timeout&quot;</span> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getSign</span>(<span class="params">action, param</span>):</span> </span><br><span class="line">    <span class="keyword">return</span> hashlib.md5(secert_key + param + action).hexdigest() <span class="comment">#md5加密</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">md5</span>(<span class="params">content</span>):</span> </span><br><span class="line">    <span class="keyword">return</span> hashlib.md5(content).hexdigest() <span class="comment">#获取一个md5加密算法对象，hexdigest()是获得加密吼的16进制字符串</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">waf</span>(<span class="params">param</span>):</span> <span class="comment">#定义waf函数</span></span><br><span class="line">    check=param.strip().lower() </span><br><span class="line">    <span class="keyword">if</span> check.startswith(<span class="string">&quot;gopher&quot;</span>) <span class="keyword">or</span> check.startswith(<span class="string">&quot;file&quot;</span>): </span><br><span class="line">        <span class="comment">#如果param这个参数中包含gopher和file这两个字符串</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span> </span><br><span class="line">    <span class="keyword">else</span>: </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>: </span><br><span class="line">   	app.debug = <span class="literal">False</span> </span><br><span class="line">   	app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">80</span>)</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="2-代码审计">
+          <a href="#2-代码审计" class="heading-link"><i class="fas fa-link"></i></a>2. 代码审计</h2>
+      <p>python的flask框架，三个路由<br>index获取源码，geneSign调用了getSign方法生成 md5，<br>De1ta应该是关键的页面！可以看见获取了三个参数，其中两个是从cookie中获取的：</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">action = urllib.unquote(request.cookies.get(<span class="string">&quot;action&quot;</span>))</span><br><span class="line">param = urllib.unquote(request.args.get(<span class="string">&quot;param&quot;</span>, <span class="string">&quot;&quot;</span>))</span><br><span class="line">sign = urllib.unquote(request.cookies.get(<span class="string">&quot;sign&quot;</span>))</span><br></pre></td></tr></table></div></figure>
+
+<p>当做参数传入到Task类中，并调用Task类中的Exec()方法，这应该是关键！！<br>分析下三个参数：<br>第一个参数action是传入read和scan的，<br>第二个参数param看着应该是传入一个文件名，<br>第三个参数sign是一个md5值。</p>
+<p>跟进Task中的Exec()方法，可以发现这里面还有个checkSign()，并且在这里面调用了getSign()方法，结果与sign进行比较；<br>仔细看看getSign()方法，发现有个secert_key我们是未知的。。。<br>看完代码之后就有了一定的了解了！！他的目的应该是要我们读取flag.txt中的内容！<br>所以我们需要构造参数！第一个参数action应该包含read，，第二个param参数应该是文件名<br>最关键就是第三个参数，由于我们不知道secert_key的值，所以不能自己加密，考点应该在这里！</p>
+<p>等号左边为md5(key + ‘flag.txt’ + ‘readscan’)，已被写死，等号右边的未定的参数也可也可确定，即md5(key + ‘flag.txtread’ + ‘scan’)。param1为’flag.txtread’依此传参，可得一个哈希值，这就是我们将传给self.sign的值。</p>
+
+        <h2 id="3-包含">
+          <a href="#3-包含" class="heading-link"><i class="fas fa-link"></i></a>3. 包含</h2>
+      
+        <h3 id="3-1-提取符合sign的md值">
+          <a href="#3-1-提取符合sign的md值" class="heading-link"><i class="fas fa-link"></i></a>3.1 提取符合sign的md值</h3>
+      <p>首先，尝试访问geneSign路径下的</p>
+<p><img src="/2021/03/27/De1CTF-2019-SSRF%E6%88%91/2.png"></p>
+<p>然后进行测试md加密</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;geneSign?param&#x3D;flag.txt</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/2021/03/27/De1CTF-2019-SSRF%E6%88%91/3.png"></p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这样我们就得到了md5(secert_key+flag.txtscan)的值：</span><br><span class="line">6a915df6e775d60fed48b1c0ab9a59a1</span><br></pre></td></tr></table></div></figure>
+
+<p>看了看，发现MD5中是字符拼接，那么这样我们构造param参数为param=flag.txtread就就能够得到(secert_key+flag.txtreadscan)的md5值，那么也就有满足条件中的action包含字符串”read”和”scan”。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;geneSign?param&#x3D;flag.txtread</span><br><span class="line">Cookie: action&#x3D;scan   (这个不加上好像也可以)</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/2021/03/27/De1CTF-2019-SSRF%E6%88%91/4.png"></p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这样我们就得到了md5(secert_key+flag.txt + acion)的值:</span><br><span class="line">5f7c8db26faeaaa424ba739eaa7a3f8e</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="3-2-获得flag">
+          <a href="#3-2-获得flag" class="heading-link"><i class="fas fa-link"></i></a>3.2 获得flag</h3>
+      <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;geneSign?param&#x3D;flag.txt</span><br><span class="line">Cookie: action&#x3D;readscan;sign&#x3D;5f7c8db26faeaaa424ba739eaa7a3f8e</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/2021/03/27/De1CTF-2019-SSRF%E6%88%91/5.png"></p>
+
+        <h2 id="4-方法二">
+          <a href="#4-方法二" class="heading-link"><i class="fas fa-link"></i></a>4. 方法二</h2>
+      <p><strong>Hash扩展攻击：</strong></p>
+<p>kali安装HashPump：</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;bwall&#x2F;HashPump</span><br><span class="line">apt-get install g++ libssl-dev</span><br><span class="line">cd HashPump</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/2021/03/27/De1CTF-2019-SSRF%E6%88%91/6.png"></p>
+<p><img src="/2021/03/27/De1CTF-2019-SSRF%E6%88%91/7.png"></p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MD5加密后的：8cbf1fb89defc1636c9e7a84717efb2e</span><br><span class="line">scan\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xe0\x00\x00\x00\x00\x00\x00\x00read</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/2021/03/27/De1CTF-2019-SSRF%E6%88%91/8.png"></p>
+<p>我没有成功。。。。。</p>
+
+        <h2 id="5-注意">
+          <a href="#5-注意" class="heading-link"><i class="fas fa-link"></i></a>5. 注意</h2>
+      <p>有时候burpsuite不好使，的结合hackbar使用来抓一些cookie或则post之类的。</p>
+
+        <h2 id="6-参考">
+          <a href="#6-参考" class="heading-link"><i class="fas fa-link"></i></a>6. 参考</h2>
+      <p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.jianshu.com/p/eb60c856f2a3">https://www.jianshu.com/p/eb60c856f2a3</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://sculptor-liu.github.io">Sculptor</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://sculptor-liu.github.io/2021/03/27/De1CTF-2019-SSRF%E6%88%91/">https://sculptor-liu.github.io/2021/03/27/De1CTF-2019-SSRF%E6%88%91/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">文件包含</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/ali_pay.png"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/wechat_pay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/03/27/VNCTF-2021-Ez-game/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">VNCTF-2021-Ez-game</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/03/27/BJDCTF2020-ZJCTF-%E4%B8%8D%E8%BF%87%E5%A6%82%E6%AD%A4/"><span class="paginator-prev__text">BJDCTF2020-ZJCTF-不过如此</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A6%96%E9%A1%B5"><span class="toc-number">1.</span> <span class="toc-text">
+          1. 首页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1"><span class="toc-number">2.</span> <span class="toc-text">
+          2. 代码审计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%8C%85%E5%90%AB"><span class="toc-number">3.</span> <span class="toc-text">
+          3. 包含</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%8F%90%E5%8F%96%E7%AC%A6%E5%90%88sign%E7%9A%84md%E5%80%BC"><span class="toc-number">3.1.</span> <span class="toc-text">
+          3.1 提取符合sign的md值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%8E%B7%E5%BE%97flag"><span class="toc-number">3.2.</span> <span class="toc-text">
+          3.2 获得flag</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="toc-number">4.</span> <span class="toc-text">
+          4. 方法二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%B3%A8%E6%84%8F"><span class="toc-number">5.</span> <span class="toc-text">
+          5. 注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">
+          6. 参考</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">51</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">6</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">31</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-md5@latest/src/md5.min.js"></script><script>function loadGitalk () {
+  if (!document.getElementById('gitalk-container')) {
+    return;
+  }
+
+  var gitalk = new Gitalk({
+    id: md5(window.location.pathname.slice(1)),
+    clientID: '28f6b94423100cc8a01d',
+    clientSecret: '812ec412a6abb31e41feedc3fa3ba97eefa1a882',
+    repo: 'Sculptor-liu.github.io',
+    owner: 'Sculptor-liu',
+    admin: ['Sculptor-liu'],
+    distractionFreeMode: 'false',
+    language: 'zh-CN'
+  });
+  gitalk.render('gitalk-container');
+}
+
+if (false) {
+  loadGitalk();
+} else {
+  window.addEventListener('DOMContentLoaded', loadGitalk, false);
+}</script><script src="/js/utils.js?v=2.1.1"></script><script src="/js/stun-boot.js?v=2.1.1"></script><script src="/js/scroll.js?v=2.1.1"></script><script src="/js/header.js?v=2.1.1"></script><script src="/js/sidebar.js?v=2.1.1"></script><script type="application/json" src="/search.xml"></script></body></html>
