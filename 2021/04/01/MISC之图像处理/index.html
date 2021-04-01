@@ -1,0 +1,380 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="16x16"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="32x32"><meta property="og:type" content="article">
+<meta property="og:title" content="MISC之图像处理">
+<meta property="og:url" content="https://sculptor-liu.github.io/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="Sculptor&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/3.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/4.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/5.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/6.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/7.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/8.png">
+<meta property="article:published_time" content="2021-04-01T11:01:21.000Z">
+<meta property="article:modified_time" content="2021-04-01T11:04:02.192Z">
+<meta property="article:author" content="Sculptor">
+<meta property="article:tag" content="图片隐藏">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sculptor-liu.github.io/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/1.png"><title>MISC之图像处理 | Sculptor's blog</title><link ref="canonical" href="https://sculptor-liu.github.io/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.1.1"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于我</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Sculptor's blog</div><div class="header-banner-info__subtitle">不知名的陌生人</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">MISC之图像处理</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-04-01</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-04-01</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body"><p><img src="/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/1.png"></p>
+<a id="more"></a>
+
+
+        <h2 id="1-附加式图片隐写">
+          <a href="#1-附加式图片隐写" class="heading-link"><i class="fas fa-link"></i></a>1. 附加式图片隐写</h2>
+      <p>顾名思义，附加式图片隐写就是使用某种方法在载体文件上附加上需要被隐写的内容，而我们要做的就是根据方法提取出载体文件中被隐藏的内容。在CTF赛事中，常见的附加式图片隐写有两种方式，一种是直接附加字符串，另一种是图片作为其他文件的载体呈现。</p>
+
+        <h3 id="1-1-附加字符串">
+          <a href="#1-1-附加字符串" class="heading-link"><i class="fas fa-link"></i></a>1.1 附加字符串</h3>
+      <p>附加字符串就是直接在图片内容中增加字符串，一般我们可以使用strings命令进行查看，也可以使用十六进制文件编辑工具进行附加内容查看。</p>
+<p>● strings</p>
+<p>strings命令在对象文件或二进制文件中查找可打印的字符串。字符串是4个或更多可打印字符的任意序列，以换行符或空字符结束。strings命令对识别随机对象文件很有用。 </p>
+<p>命令用法：strings + 文件名</p>
+<p>● 十六进制工具</p>
+<p>使用winhex或者010editor也是可以看到图片中附加的内容。</p>
+
+        <h3 id="1-2-文件载体">
+          <a href="#1-2-文件载体" class="heading-link"><i class="fas fa-link"></i></a>1.2 文件载体</h3>
+      <p>图片文件的附加式隐写还会作为其他文件的载体的形式出现，最常见的就是图种了。图种就是利用些特殊的方式将图片文件与压缩包文件结合起来的文件，这类的文件一般保存为图片文件格式，可以正常显示图片。由于操作系统识别的过程中是，从文件头标志，到文件的结束标志位，当系统识别到图片的结束标志位后，默认是不再继续识别的，所以我们在通常情况下只能看到它是只是一张图片。对于这类的隐写，我们可以通过十六进制文件编辑工具进行文件提取也可以使用binwalk分离文件。</p>
+
+        <h2 id="2-基于文件结构的图片隐写">
+          <a href="#2-基于文件结构的图片隐写" class="heading-link"><i class="fas fa-link"></i></a>2. 基于文件结构的图片隐写</h2>
+      <p>下面对PNG图片展开进行介绍 ：</p>
+<p>PNG图像格式文件由一个8字节的文件头和按照特定结构组织的3个以上的数据块（chunk）组成。 </p>
+<p>PNG文件格式：文件头（89 59 4E 47 0D 0A 1A 0A）+数据块+数据块+数据块+…… </p>
+<p>PNG图片定义了两种类型的数据块，一种是称为关键数据块，这是必须的数据块，另一种称为辅助数据块，这是可选的数据块。关键数据块定义了4个标准数据块，分别为IHDR、PLTE、IDAT和IEND，每个PNG文件都必须包含它们，PNG读写软件也都必须要支持这些数据块。每个数据块都会包含长度、数据块类型码、数据块数据和循环冗余校验（CRC）四个部分。这里需要注意的是CRC域的值是数据块类型码和数据域的数据计算而来的。 </p>
+
+        <h3 id="2-1-IHDR">
+          <a href="#2-1-IHDR" class="heading-link"><i class="fas fa-link"></i></a>2.1 IHDR</h3>
+      <p>文件头数据块IHDR是PNG文件中的第一个数据块，而且一个PNG文件中只能有一个文件头数据块，它包含了PNG文件中存储的图像数据的基本信息，包括了图片的宽，高，图像深度，图像类型，压缩方法等。</p>
+<p><img src="/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/2.png"><br>  如图所示，标蓝部分为IHDR数据块，00 09 00 0D代表IHDR头块长13，49 48 44 52代表IHDR标识，00 00 06 76代表图片的宽，00 00 01 F5代表图片的高。其中我们主要关注图片的宽和高。同时，00 09是加密，00 00是未加密。（当存在伪加密时，需要将09改为00）</p>
+<p>在CTF中，经常通过改变宽和高使得图片显示不完整或者无法显示从而达到隐藏信息的目的。对于这种情况，我们不能轻易修改图片的宽或高的值，应该通过CRC的值推算出宽或高的值；或者是修改宽或高的值后，使用CRC计算工具，计算得出新的CRC值替换原本的值，以防图片报错打不开。</p>
+<p><strong>例如：</strong>现有某CTF题目如下，打开为一张图片，可以在Windows下正常打开。</p>
+<p><img src="/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/3.png"></p>
+<p>使用tweakpng打开图片可看到提示报错。</p>
+<p><img src="/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/4.png"></p>
+<p>由于CRC值计算的是数据块类型码及数据块数据，因此可以通过以下脚本计算出图片的原始宽和高。</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line">misc = open(<span class="string">&quot;2.png&quot;</span>,<span class="string">&quot;rb&quot;</span>).read()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1024</span>):</span><br><span class="line">data = misc[<span class="number">12</span>:<span class="number">16</span>] + struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>,i)+ misc[<span class="number">20</span>:<span class="number">29</span>]</span><br><span class="line">crc32 = binascii.crc32(data) &amp; <span class="number">0xffffffff</span></span><br><span class="line"><span class="keyword">if</span> crc32 == <span class="number">0xCBD6DF8A</span>:</span><br><span class="line"><span class="keyword">print</span> i</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/5.png"></p>
+<p>使用十六进制文件编辑器修改图片的宽和高和得出的结果一致，可得出隐藏在图片中的flag。</p>
+
+        <h3 id="2-2-PLTE">
+          <a href="#2-2-PLTE" class="heading-link"><i class="fas fa-link"></i></a>2.2 PLTE</h3>
+      <p>调色板数据块 PLTE（palette chunk）：它包含有与索引彩色图像（indexed-color image）相关的彩色变换数据，它仅与索引彩色图像有关，而且要放在图像数据块（image data chunk）之前。真彩色的 PNG 数据流也可以有调色板数据块，目的是便于非真彩色显示程序用它来量化图像数据，从而显示该图像。</p>
+
+        <h3 id="2-3-IDAT">
+          <a href="#2-3-IDAT" class="heading-link"><i class="fas fa-link"></i></a>2.3 IDAT</h3>
+      <p>图像数据块 IDAT（image data chunk）：它存储实际的数据，在数据流中可包含多个连续顺序的图像数据块。这是一个可以存在多个数据块类型的数据块。它的作用就是存储着图像真正的数据。IDAT采用 LZ77 算法的派生算法进行压缩，可以用 zlib 解压缩。值得注意的是，IDAT 块只有当上一个块充满时，才会继续一个新的块。</p>
+<p><strong>例如：</strong>某CTF题目相关IDAT的部分解题过程： </p>
+<p>使用pngcheck识别PNG图片文件（或者使用Stegsolve.jar、tweakPNG查看），可以看到正常充满的长度应该是65524，而倒数第二个IDAT并没有充满，就又起了一个IDAT，明显最后一个IDAT有问题。</p>
+<p><img src="/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/6.png"></p>
+<p>取出有问题的IDAT块的内容。</p>
+<p><img src="/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/7.png"></p>
+<p>去掉长度、数据块类型码（IDAT）以及CRC，只留取数据部分： </p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">789C5D91011280400802BF04FFFF5C75294B5537738A21A27D1E49CFD17DB3937A92E7E603880A6D485100901FB0410153350DE83112EA2D51C54CE2E585B15A2FC78E8872F51C6FC1881882F93D372DEF78E665B0C36C529622A0A45588138833A170A2071DDCD18219DB8C0D465D8B6989719645ED9C11C36AE3ABDAEFCFC0ACF023E77C17C7897667 </span><br></pre></td></tr></table></div></figure>
+
+<p>可查找到789C是zlib的文件头，使用脚本进行解压缩。</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line">IDAT = <span class="string">&quot;789C5D91011280400802BF04FFFF5C75294B5537738A21A27D1E49CFD17DB3937A92E7E603880A6D485100901FB0410153350DE83112EA2D51C54CE2E585B15A2FC78E8872F51C6FC1881882F93D372DEF78E665B0C36C529622A0A45588138833A170A2071DDCD18219DB8C0D465D8B6989719645ED9C11C36AE3ABDAEFCFC0ACF023E77C17C7897667&quot;</span>.decode(<span class="string">&#x27;hex&#x27;</span>)</span><br><span class="line">result = binascii.hexlify(zlib.decompress(IDAT))</span><br><span class="line"><span class="keyword">print</span> result</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/8.png"></p>
+<p>根据得出的结果在进行分析结合其他内容得出flag。</p>
+
+        <h3 id="2-4-IEND">
+          <a href="#2-4-IEND" class="heading-link"><i class="fas fa-link"></i></a>2.4 IEND</h3>
+      <p>图像结束数据 IEND（image trailer chunk）：它用来标记 PNG 文件或者数据流已经结束，并且必须要放在文件的尾部。IEND 数据块的长度总是 00 00 00 00，数据标识总是 IEND 49 45 4E 44，因此，CRC 码也总是 AE 42 60 82。</p>
+<p>转载来自<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.freebuf.com/">FreeBuf.COM</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://sculptor-liu.github.io">Sculptor</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://sculptor-liu.github.io/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">https://sculptor-liu.github.io/2021/04/01/MISC%E4%B9%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/%E5%9B%BE%E7%89%87%E9%9A%90%E8%97%8F/">图片隐藏</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/ali_pay.png"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/wechat_pay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2021/04/01/DASCTF2021%E4%B8%89%E6%9C%88%E8%B5%9B-%E7%AE%80%E5%8D%95%E7%9A%84png%E9%9A%90%E5%86%99/"><span class="paginator-prev__text">DASCTF2021三月赛-简单的png隐写</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%99%84%E5%8A%A0%E5%BC%8F%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99"><span class="toc-number">1.</span> <span class="toc-text">
+          1. 附加式图片隐写</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E9%99%84%E5%8A%A0%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.1.</span> <span class="toc-text">
+          1.1 附加字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%96%87%E4%BB%B6%E8%BD%BD%E4%BD%93"><span class="toc-number">1.2.</span> <span class="toc-text">
+          1.2 文件载体</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%9F%BA%E4%BA%8E%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E7%9A%84%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99"><span class="toc-number">2.</span> <span class="toc-text">
+          2. 基于文件结构的图片隐写</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-IHDR"><span class="toc-number">2.1.</span> <span class="toc-text">
+          2.1 IHDR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-PLTE"><span class="toc-number">2.2.</span> <span class="toc-text">
+          2.2 PLTE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-IDAT"><span class="toc-number">2.3.</span> <span class="toc-text">
+          2.3 IDAT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-IEND"><span class="toc-number">2.4.</span> <span class="toc-text">
+          2.4 IEND</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">54</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">7</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">34</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-md5@latest/src/md5.min.js"></script><script>function loadGitalk () {
+  if (!document.getElementById('gitalk-container')) {
+    return;
+  }
+
+  var gitalk = new Gitalk({
+    id: md5(window.location.pathname.slice(1)),
+    clientID: '28f6b94423100cc8a01d',
+    clientSecret: '812ec412a6abb31e41feedc3fa3ba97eefa1a882',
+    repo: 'Sculptor-liu.github.io',
+    owner: 'Sculptor-liu',
+    admin: ['Sculptor-liu'],
+    distractionFreeMode: 'false',
+    language: 'zh-CN'
+  });
+  gitalk.render('gitalk-container');
+}
+
+if (false) {
+  loadGitalk();
+} else {
+  window.addEventListener('DOMContentLoaded', loadGitalk, false);
+}</script><script src="/js/utils.js?v=2.1.1"></script><script src="/js/stun-boot.js?v=2.1.1"></script><script src="/js/scroll.js?v=2.1.1"></script><script src="/js/header.js?v=2.1.1"></script><script src="/js/sidebar.js?v=2.1.1"></script><script type="application/json" src="/search.xml"></script></body></html>
